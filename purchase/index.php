@@ -137,7 +137,7 @@ else if ($_GET['nam'] == "PremiumDaily2200")
 				?>
 
 				<main class="col-md-9">
-					<small>(this is using test data, don't enter real credentials)</small>
+					<!-- <small>(this is using test data, don't enter real credentials)</small> -->
 					<p><b>You are logged in as:</b> <?php echo $_SESSION["username"]; ?></p>
 					<h2>You are purchasing <?php echo $nam; ?></h2>	
 					<p><b>Paying: </b>$<?php echo $pri; ?> AUD</p>
@@ -192,10 +192,10 @@ else if ($_GET['nam'] == "PremiumDaily2200")
 							</div>
 						</div>
 					</div>
-					<h4>Test Credit Cards:</h4>
+					<!-- <h4>Test Credit Cards:</h4>
 					<h6>VISA:</h6>
 					<p>4242424242424242 | ANY CVC | ANY FUTURE DATE</p>
-					<a class="btn btn-primary" href="https://stripe.com/docs/testing#cards">Click Here for More</a>
+					<a class="btn btn-primary" href="https://stripe.com/docs/testing#cards">Click Here for More</a> -->
 				</main>
 			</div>
 		</div>

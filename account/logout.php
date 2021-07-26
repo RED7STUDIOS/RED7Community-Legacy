@@ -6,6 +6,8 @@
   Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2021
 */
+
+include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 ?>
 
 <!DOCTYPE html>

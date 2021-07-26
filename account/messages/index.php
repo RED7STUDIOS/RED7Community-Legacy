@@ -63,11 +63,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 				}
 				?>
 				<main class="col-lg-10">
-					<h5>Account created at: <?php echo htmlspecialchars($_SESSION["created_at"]); ?></h5>
-					<h2><?php echo htmlspecialchars($_SESSION["username"]); ?>'s Settings</h2>
+					<h2><?php echo htmlspecialchars($_SESSION["username"]); ?>'s Messages</h2>
 
-					<a href="/account/settings/change-password.php" class="btn btn-warning" role="button"><i class="fas fa-key"></i> Change Password</a>
-					<a href="/account/logout.php" class="btn btn-danger" role="button"><i class="fas fa-sign-out-alt"></i> Logout</a>
+					<p>This feature is not finished yet.</p>
 				</main>
 			</div>
 		</div>

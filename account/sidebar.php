@@ -31,12 +31,13 @@
 					<i class="far fa-backpack"></i> Inventory
 				</a>
 			</li>
-			<h4 class="text-center text-white">Events:</h4>
-			<a href="/events/hackvent.php"><img class="text-center" style="height: 140px; width: 250px;" src="<?php echo $STORAGE_URL ?>/Events/the-hackvent.png"></a>
-			<li class="nav-item bottomdiv">
+			<!-- <h4 class="text-center text-white">Events:</h4>
+			<a href="/events/hackvent.php"><img class="text-center" style="height: 140px; width: 250px;" src="<?php echo $STORAGE_URL ?>/Events/the-hackvent.png"></a> -->
+			<br/>
+			<li class="nav-item">
 				<a href="/terms-of-service.php" class="text-white"><p><i class="far fa-user-secret"></i> Terms & Privacy</p></a>
-				<a href="/bug-hunting.php" class="text-white"><p><i class="far fa-bug"></i> Bug Hunting Program</p></a>
+				<!-- <a href="/bug-hunting.php" class="text-white"><p><i class="far fa-bug"></i> Bug Hunting Program</p></a> -->
 			</li>
-			<p style="color: #212100;">SEBjaw==</p>
+			<!-- <p style="color: #212100;">SEBjaw==</p> -->
         </ul>
     </div>

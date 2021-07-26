@@ -1,7 +1,7 @@
 <?php
 /*
   File Name: play.php
-  Original Location: /gamse/play.php
+  Original Location: /games/play.php
   Description: The actual game playing page.
   Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2021
@@ -14,10 +14,13 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-header("location: ../login.php");
-exit;
+if (!preg_match('/RED7Community[\/\s](\d+\.\d+)/', $_SERVER['HTTP_USER_AGENT']))
+{
+	// Check if the user is logged in, if not then redirect him to login page
+	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+	header("location: ../login.php");
+	exit;
+	}
 }
 
 $data = file_get_contents($API_URL. '/game.php?key='. $API_KEY. '&api=getbyid&id='. $_GET['id']);

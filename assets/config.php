@@ -14,20 +14,24 @@ $API_URL = $ROOT_URL. "/API";
 // The Admin Panel URL.
 $ADMIN_URL = "";
 // The Storage URL.
-$STORAGE_URL = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community@main/CDN";
+$STORAGE_URL = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main";
 // The CDN URL for assets.
-$CDN_URL = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community@main"
+$CDN_URL = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main";
+
+// Purchases system using stripe.
+$STRIPE_SECRET_KEY = "sk_test_51IhCSFHFvvpJx5JTNNYkrdLu3K5Hep0I80wxHc7XR4moFrbW2HfkkPOsT2jixqzXxIc6666SVC1UBIA0uzymfMib00tV9EajIP";
+$STRIPE_PUBLISHABLE_KEY = "pk_test_51IhCSFHFvvpJx5JTi6JC0Gs3vfxkojvppb2T6qnGmMNQgufsGVbeDBGENKZTqaCGMtAijKSgWOealsXfKqzeJbQT00GgXO9hjO";
 
 // Other Options.
 $CUSTOM_SESSION_LOCATION = false;
 $CSL_PATH = "";
-$API_KEY = "CvHKAVEBzGveKVUpLaUZZWgHt";
+$API_KEY = "ThisIsTheSitesKey";
 
 /* Database credentials. */
 define('DB_SERVER', '127.0.0.1');
 define('DB_USERNAME', 'communitysite_main');
 define('DB_PASSWORD', 'c0mmun1tys1te');
-define('DB_NAME', 'communitysite_main');
+define('DB_NAME', 'red7community');
  
 /* Attempt to connect to MySQL database with the credentials. */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

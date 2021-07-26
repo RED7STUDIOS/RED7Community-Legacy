@@ -7,6 +7,8 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
+ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7);
+
 include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 
 if ($CUSTOM_SESSION_LOCATION == true) {

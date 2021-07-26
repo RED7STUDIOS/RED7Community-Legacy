@@ -7,6 +7,7 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
+include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 
 if(!isset($_SESSION)){
@@ -55,8 +56,8 @@ if(!empty($_POST['stripeToken'])){
 		require_once('stripe-php/init.php');    
 		//set stripe secret key and publishable key
 		$stripe = array(
-		  "secret_key"      => "sk_test_51IhCSFHFvvpJx5JTNNYkrdLu3K5Hep0I80wxHc7XR4moFrbW2HfkkPOsT2jixqzXxIc6666SVC1UBIA0uzymfMib00tV9EajIP",
-		  "publishable_key" => "pk_test_51IhCSFHFvvpJx5JTi6JC0Gs3vfxkojvppb2T6qnGmMNQgufsGVbeDBGENKZTqaCGMtAijKSgWOealsXfKqzeJbQT00GgXO9hjO"
+		  "secret_key"      => $STRIPE_SECRET_KEY,
+		  "publishable_key" => $STRIPE_PUBLISHABLE_KEY
 		);    
 		\Stripe\Stripe::setApiKey($stripe['secret_key']);    
 		//add customer to stripe
@@ -184,7 +185,7 @@ exit;
 				?>
 
 				<main class="col-md-9">
-					<p>You found it challenger, here it is: (<b>MUFjMH</b>)</p>
+					<!-- <p>You found it challenger, here it is: (<b>MUFjMH</b>)</p> -->
 					<?php echo $paymentMessage; ?>
 					<a class="btn btn-primary" href="/currency.php">Go Back to Purchasing Page</a>
 				</main>
