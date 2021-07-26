@@ -10,7 +10,13 @@ RED7Community is a community website where you can find new friends and play gam
 **_Requirements:_**
 - PHP version 7 or higher
 - IIS, Nginx or Apache
-- PDO_mysql and mysqli
+
+**_PHP Requirements:_**
+- CURL
+- MBString
+- MySQLi
+- OpenSSL (might be optional)
+- PDO_MySQL
 
 **_Steps:_**
 1. [Download](https://github.com/RED7Studios/RED7Community/releases/latest) the latest release zip file.
