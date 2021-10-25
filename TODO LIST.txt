@@ -1,0 +1,5 @@
+TODO:
+- Remake Admin Panel.
+- Improve loading times :)
+- Use Unity for games.
+- Revamp certain functions.
