@@ -109,7 +109,7 @@ $isVerified = $json_a[0]['data'][0]['isVerified'];
 
 										if ($following_dsp == null || $following_dsp == "")
 										{
-											$following_f = filterwords(htmlspecialchars($followers_dsp));
+											$following_f = filterwords(htmlspecialchars($following_dsp));
 										}
 										else
 										{ 

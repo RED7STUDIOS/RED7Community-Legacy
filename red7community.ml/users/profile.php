@@ -198,39 +198,42 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         $users = $REL->getUsers(); ?>
 
                         <div id="userList"><?php
-                            if ($_SESSION['id'] != $_GET['id'])
+                            if (isset($_SESSION['id']))
                             {
-                                $requests = $REL->getReq($_SESSION['id']);
-                                $friends = $REL->getFriends($_SESSION['id']);
-                                $id = $_GET['id'];
+                                if ($_SESSION['id'] != $_GET['id'])
+                                {
+                                    $requests = $REL->getReq($_SESSION['id']);
+                                    $friends = $REL->getFriends($_SESSION['id']);
+                                    $id = $_GET['id'];
 
-                                echo '&nbsp;';
+                                    echo '&nbsp;';
 
-                                // (C2) BLOCK/UNBLOCK
-                                /*
-                                if (isset($friends['b'][$id])) {
-                                    echo "<a class='btn btn-success' onclick=\"relate('unblock', $id)\">Unblock</a>";
-                                } else {
-                                    echo "<a class='btn btn-danger' onclick=\"relate('block', $id)\">Block</a>";
-                                }
-                                */
+                                    // (C2) BLOCK/UNBLOCK
+                                    /*
+                                    if (isset($friends['b'][$id])) {
+                                        echo "<a class='btn btn-success' onclick=\"relate('unblock', $id)\">Unblock</a>";
+                                    } else {
+                                        echo "<a class='btn btn-danger' onclick=\"relate('block', $id)\">Block</a>";
+                                    }
+                                    */
 
-                                // (C3) FRIEND STATUS
-                                // FRIENDS
-                                if (isset($friends['f'][$id])) {
-                                    echo "<a class='btn btn-danger' onclick=\"relate('unfriend', $id)\">Unfriend</a>";
-                                }
-                                // INCOMING FRIEND REQUEST
-                                else if (isset($requests['in'][$id])) {
-                                    echo "<a class='btn btn-success' onclick=\"relate('accept', $id)\">Accept Friend</a>";
-                                }
-                                // OUTGOING FRIEND REQUEST
-                                else if (isset($requests['out'][$id])) {
-                                    echo "<a class='btn btn-danger' onclick=\"relate('cancel', $id)\">Cancel Add</a>";
-                                }
-                                // STRANGERS
-                                else {
-                                    echo "<a class='btn btn-primary' onclick=\"relate('add', $id)\">Add Friend</a>";
+                                    // (C3) FRIEND STATUS
+                                    // FRIENDS
+                                    if (isset($friends['f'][$id])) {
+                                        echo "<a class='btn btn-danger' onclick=\"relate('unfriend', $id)\">Unfriend</a>";
+                                    }
+                                    // INCOMING FRIEND REQUEST
+                                    else if (isset($requests['in'][$id])) {
+                                        echo "<a class='btn btn-success' onclick=\"relate('accept', $id)\">Accept Friend</a>";
+                                    }
+                                    // OUTGOING FRIEND REQUEST
+                                    else if (isset($requests['out'][$id])) {
+                                        echo "<a class='btn btn-danger' onclick=\"relate('cancel', $id)\">Cancel Add</a>";
+                                    }
+                                    // STRANGERS
+                                    else {
+                                        echo "<a class='btn btn-primary' onclick=\"relate('add', $id)\">Add Friend</a>";
+                                    }
                                 }
                             }
                         ?>
