@@ -23,3 +23,6 @@ RED7Community is a community website where you can find new friends and play gam
 2. Extract it to your website directory.
 3. Edit the assets/config.php file to fit your purposes.
 4. Done!
+
+## Default Credentials
+The default admin user is **RED7Community**, the password to this account is **password**.
