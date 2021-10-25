@@ -15,10 +15,10 @@ $api_key = $_GET['key'];
 
 $api_type = $_GET['api'];
 
-$sql = "SELECT * FROM apikeys WHERE api_key='". $api_key. "'";
+/* $sql = "SELECT * FROM apikeys WHERE api_key='". $api_key. "'";
 $result = mysqli_query($link, $sql);
 
-if (mysqli_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) { */
   if (!empty($api_type)) {
 		if ($api_type == 'getbyid') {
 			if(!empty($_GET['id']))
@@ -127,7 +127,7 @@ if (mysqli_num_rows($result) > 0) {
 			}
 		}
 	}
-}
+/*}
 else
 {
 	header("Content-Type: JSON");
@@ -135,6 +135,6 @@ else
 	$response[0]['result'] = "Invalid Key";
 
 	echo json_encode($response, JSON_PRETTY_PRINT);
-}
+} */
 
 ?>
