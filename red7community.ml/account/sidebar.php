@@ -16,11 +16,11 @@
 					<i class="far fa-users"></i> Avatar Editor
 				</a>
 			</li>
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<a href="/account/messages" class="nav-link<?php if (strpos($selected_page, "/account/messages") !== false) { echo ' active '; } else { echo ' '; } ?>text-white">
 					<i class="far fa-envelope"></i> Messages
 				</a>
-			</li>
+			</li> -->
 			<li class="nav-item">
 				<a href="/users/friends.php?id=<?php echo $_SESSION['id'] ?>" class="nav-link<?php if (strpos($selected_page, "/users/friends.php?id=". $_SESSION['id']) !== false) { echo ' active '; } else { echo ' '; } ?>text-white">
 					<i class="far fa-users"></i> Friends
