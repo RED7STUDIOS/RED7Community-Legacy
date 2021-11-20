@@ -29,24 +29,36 @@ $your_displayname = $your_json_a[0]['data'][0]['displayname'];
 
 $your_email = "";
 
-$sql = "SELECT email FROM users WHERE id=". $_SESSION['id'];
-$result = mysqli_query($link, $sql);
+	$sql = "SELECT email FROM users WHERE id=" . $_SESSION['id'];
+	$result = mysqli_query($link, $sql);
 
-if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-        $your_email = $row['email'];
-    }
-}
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$your_email = $row['email'];
+		}
+	}
 
-$your_description = $your_json_a[0]['data'][0]['description'];
-$your_created_at = $your_json_a[0]['data'][0]['created_at'];
-$your_lastLogin = $your_json_a[0]['data'][0]['lastLogin'];
-$your_lastLoginDate = $your_json_a[0]['data'][0]['lastLoginDate'];
-$your_currency = $your_json_a[0]['data'][0]['currency'];
-$your_badges = $your_json_a[0]['data'][0]['badges'];
-$your_membership = $your_json_a[0]['data'][0]['membership'];
-$your_isBanned = $your_json_a[0]['data'][0]['isBanned'];
-$your_banReason = $your_json_a[0]['data'][0]['bannedReason'];
+
+	$sql = "SELECT * FROM admin_panel WHERE ownerid=" . $_SESSION['id'];
+	$result = mysqli_query($link, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$admin_id = $row['id'];
+			$admin_your_id = $row['ownerid'];
+			$admin_full_name = $row['full_name'];
+		}
+	}
+
+	$your_description = $your_json_a[0]['data'][0]['description'];
+	$your_created_at = $your_json_a[0]['data'][0]['created_at'];
+	$your_lastLogin = $your_json_a[0]['data'][0]['lastLogin'];
+	$your_lastLoginDate = $your_json_a[0]['data'][0]['lastLoginDate'];
+	$your_currency = $your_json_a[0]['data'][0]['currency'];
+	$your_badges = $your_json_a[0]['data'][0]['badges'];
+	$your_membership = $your_json_a[0]['data'][0]['membership'];
+	$your_isBanned = $your_json_a[0]['data'][0]['isBanned'];
+	$your_banReason = $your_json_a[0]['data'][0]['bannedReason'];
 $your_banDate = $your_json_a[0]['data'][0]['bannedDate'];
 $your_isAdmin = $your_json_a[0]['data'][0]['isAdmin'];
 $your_isVerified = $your_json_a[0]['data'][0]['isVerified'];
@@ -156,22 +168,20 @@ mysqli_query($link, $sql);
                         <a class="nav-link" aria-current="page" href="/catalog"><i class="far fa-user-plus"></i> Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/currency.php"><i class="far fa-money-bill-wave"></i> <?php echo $currency_name ?></a>
+                        <a class="nav-link" aria-current="page" href="/currency.php"><i
+                                    class="far fa-money-bill-wave"></i> <?php echo $currency_name ?></a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page"><?php echo $_SESSION["username"] ?></a>
+                            <a class="nav-link" aria-current="page"><?php echo $admin_full_name ?>
+                                <small>(@<?php echo $_SESSION["username"] ?>)</small></a>
                         </li>
-
-                        <a class="nav-link">
-                            <i class="fas fa-money-bill-wave"></i> <?php echo number_format_short($your_currency); ?>
-                        </a>
                     </ul>
                 </form>
             </div>
         </div>
     </nav>
 
-<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/sidebar.php"; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/sidebar.php"; ?>

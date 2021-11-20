@@ -40,29 +40,35 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <?php
 if (isset($your_isBanned))
 {
-    if ($your_isBanned == 1)
-    {
-        echo "<script type='text/javascript'>location.href = '". $ROOT_URL. "/errors/banned.php';</script>";
+    if ($your_isBanned == 1) {
+	    echo "<script type='text/javascript'>location.href = '" . $ROOT_URL . "/errors/banned.php';</script>";
     }
 }
 ?>
 
-<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 
 <div class="page-content-wrapper">
     <div class="d-flex align-items-center border-bottom">
-        <h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 40px; width: 40px;"></img>'; } ?>
-            <h2 class="<?php if( $your_isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) { echo htmlspecialchars($your_displayname); } else { echo $your_username; } ?></h2>&nbsp;<?php if ($your_isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 35px; width: 35px;"></img>'; } ?><small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ( $your_isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>!</h2>
+        <h2>Welcome&nbsp;
+            <h2 class="<?php if ($your_isAdmin == 1) {
+				echo 'title-rainbow-lr';
+			} else {
+			} ?>"> <?php echo $admin_full_name; ?></h2>&nbsp;<small><b>(<a
+                            href="<?php echo $ROOT_URL; ?>/users/profile.php?id=<?php echo $_SESSION['id']; ?>">@<?php echo htmlspecialchars($your_username); ?></a>)</b></small><?php if ($your_isBanned == 1) {
+				echo '<p><strong style="color: red;">*BANNED*</strong></p>';
+			} ?>!
+        </h2>
     </div>
 
     <div class="card" style="width: fit-content; height: fit-content;">
         <div class="card-body">
             <h2 class="card-title">Site Status</h2>
-            <?php
+			<?php
 
-            include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/Parsedown.php";
+				include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/Parsedown.php";
 
-            $Parsedown = new Parsedown();
+				$Parsedown = new Parsedown();
 
             $file = file_get_contents($STATUS_GITHUB_URL. "/raw/master/README.md");
 
