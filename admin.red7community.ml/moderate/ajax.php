@@ -38,6 +38,61 @@
 		}
 	}
 
+	else if ($_POST['action'] == "currencyChange") {
+		// Prepare an insert statement
+		$sql = "UPDATE users SET currency = '" . $_POST["amount"] . "' WHERE id = '" . $_POST['id'] . "'";
+	}
+
+	else if ($_POST['action'] == "updateSiteSettings") {
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["site_name"]. "' WHERE name = 'site_name'";
+		$result = mysqli_query($link, $sql);
+
+		if (isset($_POST['registration'])) {
+			// Prepare an insert statement
+			$sql = "UPDATE site_info SET content = 'on' WHERE name = 'registration'";
+			$result = mysqli_query($link, $sql);
+		}
+		else
+		{
+			// Prepare an insert statement
+			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'registration'";
+			$result = mysqli_query($link, $sql);
+		}
+
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["currency"]. "' WHERE name = 'currency'";
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["premiumIcon"]. "' WHERE name = 'premiumIcon'";
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["verifiedIcon"]. "' WHERE name = 'verifiedIcon'";
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["appealEmail"]. "' WHERE name = 'appealEmail'";
+		$result = mysqli_query($link, $sql);
+
+		if (isset($_POST['maintenance'])) {
+			// Prepare an insert statement
+			$sql = "UPDATE site_info SET content = 'on' WHERE name = 'maintenanceMode'";
+			$result = mysqli_query($link, $sql);
+		}
+		else
+		{
+			// Prepare an insert statement
+			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'maintenanceMode'";
+			$result = mysqli_query($link, $sql);
+		}
+
+		// Prepare an insert statement
+		$sql = "UPDATE site_info SET content = '". $_POST["admin_site_name"]. "' WHERE name = 'admin_site_name'";
+		$result = mysqli_query($link, $sql);
+	}
+
 // lets run our query
 	$result = mysqli_query($link, $sql);
 

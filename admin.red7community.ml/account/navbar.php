@@ -151,7 +151,7 @@ mysqli_query($link, $sql);
     {
     if ($maintenanceMode == "on")
     {
-    echo '<div class="alert alert-danger" role="alert" style="margin-bottom: 0;">The main website is under maintenance.</div>';
+    echo '<div class="alert alert-danger" role="alert" style="margin-bottom: 0;">The main website is under maintenance, functions may be limited.</div>';
     }
     }
     ?>
@@ -165,11 +165,10 @@ mysqli_query($link, $sql);
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/catalog"><i class="far fa-user-plus"></i> Catalog</a>
+                        <a class="nav-link" aria-current="page" href="/moderate"><i class="far fa-user"></i> Moderation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/currency.php"><i
-                                    class="far fa-money-bill-wave"></i> <?php echo $currency_name ?></a>
+                        <a class="nav-link" aria-current="page" href="/site-settings.php"><i class="far fa-cog"></i> Site Settings</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -183,5 +182,3 @@ mysqli_query($link, $sql);
             </div>
         </div>
     </nav>
-
-<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/sidebar.php"; ?>

@@ -97,7 +97,6 @@
 <body onload="init();">
 <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 <div class="page-content-wrapper">
-
     <script type="text/javascript">
         var ajaxSubmit = function(formEl) {
             // fetch the data for the form
@@ -217,6 +216,21 @@
                 <p><b>Display Name: </b><?php echo $real_displayname; ?></p>
                 <p><b>Username: </b><?php echo $username; ?></p>
                 <p><b>Description: </b><?php echo $real_description; ?></p>
+
+                <form method="post" action="/moderate/ajax.php"
+                      onSubmit="return ajaxSubmit(this);">
+                    <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
+                                                    value="<?php $sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
+			                                            $result = mysqli_query($link, $sql);
+			                                            if (mysqli_num_rows($result) > 0) {
+				                                            while ($row = mysqli_fetch_assoc($result)) {
+					                                            echo $row['currency'];
+				                                            }
+			                                            } ?>"/>
+                    <input hidden type="text" name="action" value="currencyChange"/>
+                    <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>"/>
+                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                </form>
             </fieldset>
 
             <hr/>
@@ -249,6 +263,8 @@
                     <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
                 </form>
             </fieldset>
+
+            <hr/>
 
             <h3>About:</h3>
             <textarea
