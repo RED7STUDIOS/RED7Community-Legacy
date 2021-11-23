@@ -1,5 +1,5 @@
 # RED7Community
-### A tool is in the process of being made to make it easier to create a RED7Community environment.
+### Creator tool: #6
 ## Description
 RED7Community is a community website where you can find new friends and play games. This repo is for hosting the source code of RED7Community, no support will be given if you edit the code.
 
