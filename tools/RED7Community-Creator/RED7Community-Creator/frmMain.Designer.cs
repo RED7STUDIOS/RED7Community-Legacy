@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.gbGeneralSettings = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.gs_mainURL = new System.Windows.Forms.TextBox();
-            this.gs_apiURL = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.gs_adminPanelURL = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.gs_storageURL = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.gs_adminPanelURL = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.gs_apiURL = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.gs_mainURL = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbDatabaseSettings = new System.Windows.Forms.GroupBox();
             this.ds_name = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,6 +47,14 @@
             this.ds_server = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.gbSQLSettings = new System.Windows.Forms.GroupBox();
+            this.ss_adminSiteName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.ss_maintenanceMode = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ss_appealEmail = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.ss_verifiedIcon = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.ss_premiumIcon = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.ss_currencyName = new System.Windows.Forms.TextBox();
@@ -55,20 +63,16 @@
             this.label11 = new System.Windows.Forms.Label();
             this.ss_siteName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.ss_verifiedIcon = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.ss_adminSiteName = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.ss_maintenanceMode = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.ss_appealEmail = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.gbMainUser = new System.Windows.Forms.GroupBox();
             this.mu_currency = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.mu_username = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
+            this.gs_statusGithubURL = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.gs_statusURL = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.gbGeneralSettings.SuspendLayout();
             this.gbDatabaseSettings.SuspendLayout();
             this.gbSQLSettings.SuspendLayout();
@@ -77,6 +81,10 @@
             // 
             // gbGeneralSettings
             // 
+            this.gbGeneralSettings.Controls.Add(this.gs_statusGithubURL);
+            this.gbGeneralSettings.Controls.Add(this.label17);
+            this.gbGeneralSettings.Controls.Add(this.gs_statusURL);
+            this.gbGeneralSettings.Controls.Add(this.label18);
             this.gbGeneralSettings.Controls.Add(this.gs_storageURL);
             this.gbGeneralSettings.Controls.Add(this.label4);
             this.gbGeneralSettings.Controls.Add(this.gs_adminPanelURL);
@@ -88,67 +96,10 @@
             this.gbGeneralSettings.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.gbGeneralSettings.Location = new System.Drawing.Point(697, 13);
             this.gbGeneralSettings.Name = "gbGeneralSettings";
-            this.gbGeneralSettings.Size = new System.Drawing.Size(336, 261);
+            this.gbGeneralSettings.Size = new System.Drawing.Size(336, 414);
             this.gbGeneralSettings.TabIndex = 0;
             this.gbGeneralSettings.TabStop = false;
             this.gbGeneralSettings.Text = "General Settings (config.php)";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label1.Location = new System.Drawing.Point(6, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Main URL:";
-            // 
-            // gs_mainURL
-            // 
-            this.gs_mainURL.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gs_mainURL.Location = new System.Drawing.Point(7, 49);
-            this.gs_mainURL.Name = "gs_mainURL";
-            this.gs_mainURL.Size = new System.Drawing.Size(320, 29);
-            this.gs_mainURL.TabIndex = 2;
-            this.gs_mainURL.Text = "http://localhost";
-            // 
-            // gs_apiURL
-            // 
-            this.gs_apiURL.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gs_apiURL.Location = new System.Drawing.Point(7, 105);
-            this.gs_apiURL.Name = "gs_apiURL";
-            this.gs_apiURL.Size = new System.Drawing.Size(320, 29);
-            this.gs_apiURL.TabIndex = 4;
-            this.gs_apiURL.Text = "http://localhost:81";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.Location = new System.Drawing.Point(6, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 21);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "API URL:";
-            // 
-            // gs_adminPanelURL
-            // 
-            this.gs_adminPanelURL.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gs_adminPanelURL.Location = new System.Drawing.Point(7, 161);
-            this.gs_adminPanelURL.Name = "gs_adminPanelURL";
-            this.gs_adminPanelURL.Size = new System.Drawing.Size(320, 29);
-            this.gs_adminPanelURL.TabIndex = 6;
-            this.gs_adminPanelURL.Text = "http://localhost:82";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label3.Location = new System.Drawing.Point(6, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 21);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Admin Panel URL:";
             // 
             // gs_storageURL
             // 
@@ -168,6 +119,63 @@
             this.label4.Size = new System.Drawing.Size(99, 21);
             this.label4.TabIndex = 7;
             this.label4.Text = "Storage URL:";
+            // 
+            // gs_adminPanelURL
+            // 
+            this.gs_adminPanelURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_adminPanelURL.Location = new System.Drawing.Point(7, 161);
+            this.gs_adminPanelURL.Name = "gs_adminPanelURL";
+            this.gs_adminPanelURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_adminPanelURL.TabIndex = 6;
+            this.gs_adminPanelURL.Text = "http://admin.red7community.ml";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label3.Location = new System.Drawing.Point(6, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 21);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Admin Panel URL:";
+            // 
+            // gs_apiURL
+            // 
+            this.gs_apiURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_apiURL.Location = new System.Drawing.Point(7, 105);
+            this.gs_apiURL.Name = "gs_apiURL";
+            this.gs_apiURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_apiURL.TabIndex = 4;
+            this.gs_apiURL.Text = "http://api.red7community.ml";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label2.Location = new System.Drawing.Point(6, 81);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 21);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "API URL:";
+            // 
+            // gs_mainURL
+            // 
+            this.gs_mainURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_mainURL.Location = new System.Drawing.Point(7, 49);
+            this.gs_mainURL.Name = "gs_mainURL";
+            this.gs_mainURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_mainURL.TabIndex = 2;
+            this.gs_mainURL.Text = "http://red7community.ml";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Main URL:";
             // 
             // gbDatabaseSettings
             // 
@@ -289,6 +297,83 @@
             this.gbSQLSettings.TabStop = false;
             this.gbSQLSettings.Text = "SQL Settings:";
             // 
+            // ss_adminSiteName
+            // 
+            this.ss_adminSiteName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ss_adminSiteName.Location = new System.Drawing.Point(7, 441);
+            this.ss_adminSiteName.Name = "ss_adminSiteName";
+            this.ss_adminSiteName.Size = new System.Drawing.Size(320, 29);
+            this.ss_adminSiteName.TabIndex = 16;
+            this.ss_adminSiteName.Text = "RED7Community Admin Panel";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label14.Location = new System.Drawing.Point(6, 417);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(135, 21);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "Admin Site Name:";
+            // 
+            // ss_maintenanceMode
+            // 
+            this.ss_maintenanceMode.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ss_maintenanceMode.Location = new System.Drawing.Point(7, 385);
+            this.ss_maintenanceMode.Name = "ss_maintenanceMode";
+            this.ss_maintenanceMode.Size = new System.Drawing.Size(320, 29);
+            this.ss_maintenanceMode.TabIndex = 14;
+            this.ss_maintenanceMode.Text = "off";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label15.Location = new System.Drawing.Point(6, 361);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(146, 21);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Maintenance Mode:";
+            // 
+            // ss_appealEmail
+            // 
+            this.ss_appealEmail.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ss_appealEmail.Location = new System.Drawing.Point(7, 329);
+            this.ss_appealEmail.Name = "ss_appealEmail";
+            this.ss_appealEmail.Size = new System.Drawing.Size(320, 29);
+            this.ss_appealEmail.TabIndex = 12;
+            this.ss_appealEmail.Text = "appeals@redsevenstudios.com";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label16.Location = new System.Drawing.Point(6, 305);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(103, 21);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "Appeal Email:";
+            // 
+            // ss_verifiedIcon
+            // 
+            this.ss_verifiedIcon.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ss_verifiedIcon.Location = new System.Drawing.Point(7, 273);
+            this.ss_verifiedIcon.Name = "ss_verifiedIcon";
+            this.ss_verifiedIcon.Size = new System.Drawing.Size(320, 29);
+            this.ss_verifiedIcon.TabIndex = 10;
+            this.ss_verifiedIcon.Text = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/assets/images/veri" +
+    "fied.png";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label13.Location = new System.Drawing.Point(6, 249);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 21);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Verified Icon:";
+            // 
             // ss_premiumIcon
             // 
             this.ss_premiumIcon.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -366,83 +451,6 @@
             this.label12.TabIndex = 1;
             this.label12.Text = "Site Name:";
             // 
-            // ss_verifiedIcon
-            // 
-            this.ss_verifiedIcon.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ss_verifiedIcon.Location = new System.Drawing.Point(7, 273);
-            this.ss_verifiedIcon.Name = "ss_verifiedIcon";
-            this.ss_verifiedIcon.Size = new System.Drawing.Size(320, 29);
-            this.ss_verifiedIcon.TabIndex = 10;
-            this.ss_verifiedIcon.Text = "https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/assets/images/veri" +
-    "fied.png";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label13.Location = new System.Drawing.Point(6, 249);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 21);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Verified Icon:";
-            // 
-            // ss_adminSiteName
-            // 
-            this.ss_adminSiteName.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ss_adminSiteName.Location = new System.Drawing.Point(7, 441);
-            this.ss_adminSiteName.Name = "ss_adminSiteName";
-            this.ss_adminSiteName.Size = new System.Drawing.Size(320, 29);
-            this.ss_adminSiteName.TabIndex = 16;
-            this.ss_adminSiteName.Text = "RED7Community Admin Panel";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label14.Location = new System.Drawing.Point(6, 417);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(135, 21);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "Admin Site Name:";
-            // 
-            // ss_maintenanceMode
-            // 
-            this.ss_maintenanceMode.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ss_maintenanceMode.Location = new System.Drawing.Point(7, 385);
-            this.ss_maintenanceMode.Name = "ss_maintenanceMode";
-            this.ss_maintenanceMode.Size = new System.Drawing.Size(320, 29);
-            this.ss_maintenanceMode.TabIndex = 14;
-            this.ss_maintenanceMode.Text = "off";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label15.Location = new System.Drawing.Point(6, 361);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(146, 21);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Maintenance Mode:";
-            // 
-            // ss_appealEmail
-            // 
-            this.ss_appealEmail.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ss_appealEmail.Location = new System.Drawing.Point(7, 329);
-            this.ss_appealEmail.Name = "ss_appealEmail";
-            this.ss_appealEmail.Size = new System.Drawing.Size(320, 29);
-            this.ss_appealEmail.TabIndex = 12;
-            this.ss_appealEmail.Text = "appeals@redsevenstudios.com";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label16.Location = new System.Drawing.Point(6, 305);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(103, 21);
-            this.label16.TabIndex = 11;
-            this.label16.Text = "Appeal Email:";
-            // 
             // gbMainUser
             // 
             this.gbMainUser.Controls.Add(this.mu_currency);
@@ -498,25 +506,66 @@
             // btnGenerate
             // 
             this.btnGenerate.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.btnGenerate.Location = new System.Drawing.Point(698, 286);
+            this.btnGenerate.Location = new System.Drawing.Point(355, 433);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(335, 212);
+            this.btnGenerate.Size = new System.Drawing.Size(678, 65);
             this.btnGenerate.TabIndex = 18;
             this.btnGenerate.Text = "GENERATE";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
+            // gs_statusGithubURL
+            // 
+            this.gs_statusGithubURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_statusGithubURL.Location = new System.Drawing.Point(7, 329);
+            this.gs_statusGithubURL.Name = "gs_statusGithubURL";
+            this.gs_statusGithubURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_statusGithubURL.TabIndex = 12;
+            this.gs_statusGithubURL.Text = "https://github.com/RED7STUDIOS/RED7Community-status";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label17.Location = new System.Drawing.Point(6, 305);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(141, 21);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Status GitHub URL:";
+            // 
+            // gs_statusURL
+            // 
+            this.gs_statusURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_statusURL.Location = new System.Drawing.Point(7, 273);
+            this.gs_statusURL.Name = "gs_statusURL";
+            this.gs_statusURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_statusURL.TabIndex = 10;
+            this.gs_statusURL.Text = "https://status.red7community.ml";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label18.Location = new System.Drawing.Point(6, 249);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(88, 21);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Status URL:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 512);
+            this.ClientSize = new System.Drawing.Size(1044, 511);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.gbMainUser);
             this.Controls.Add(this.gbSQLSettings);
             this.Controls.Add(this.gbDatabaseSettings);
             this.Controls.Add(this.gbGeneralSettings);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMain";
+            this.ShowIcon = false;
             this.Text = "Generate";
             this.gbGeneralSettings.ResumeLayout(false);
             this.gbGeneralSettings.PerformLayout();
@@ -573,6 +622,10 @@
         private System.Windows.Forms.TextBox mu_username;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.TextBox gs_statusGithubURL;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox gs_statusURL;
+        private System.Windows.Forms.Label label18;
     }
 }
 

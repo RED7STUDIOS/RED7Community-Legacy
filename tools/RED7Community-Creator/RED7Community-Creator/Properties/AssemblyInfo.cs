@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RED7Community-Creator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("RED7Community Creator")]
+[assembly: AssemblyDescription("Create your own community site easier than before!")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RED7Community-Creator")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCompany("RED7 STUDIOS")]
+[assembly: AssemblyProduct("RED7Community Creator")]
+[assembly: AssemblyCopyright("Copyright © RED7 STUDIOS 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
