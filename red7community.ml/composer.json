@@ -1,0 +1,5 @@
+{
+  "require": {
+    "visualappeal/php-auto-update": "~1.0.1"
+  }
+}

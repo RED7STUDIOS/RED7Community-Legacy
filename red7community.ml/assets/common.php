@@ -154,7 +154,17 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
+$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'version'";
+$result = mysqli_query($link, $sql_query);
 
+resetSQLVariables();
+
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	while($row = mysqli_fetch_assoc($result)) {
+		$version = $row["content"];
+	}
+}
 
 
 
