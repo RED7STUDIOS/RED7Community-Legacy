@@ -83,28 +83,9 @@ namespace RED7Community_Creator
 
             using (StreamWriter writer = File.CreateText(dbFileName))
             {
-                writer.WriteLine("-- --------------------------------------------------------");
-                writer.WriteLine("-- Host:                         127.0.0.1");
-                writer.WriteLine("-- Server version:               8.0.26 - MySQL Community Server - GPL");
-                writer.WriteLine("-- Server OS:                    Win64");
-                writer.WriteLine("-- HeidiSQL Version:             11.3.0.6369");
-                writer.WriteLine("-- --------------------------------------------------------");
+                writer.WriteLine("CREATE DATABASE IF NOT EXISTS `" + ds_name.Text + "`;");
+                writer.WriteLine("USE `" + ds_name.Text + "`;");
                 writer.WriteLine("");
-                writer.WriteLine("/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;");
-                writer.WriteLine("/*!40101 SET NAMES utf8 */;");
-                writer.WriteLine("/*!50503 SET NAMES utf8mb4 */;");
-                writer.WriteLine("/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;");
-                writer.WriteLine("/*!40103 SET TIME_ZONE='+00:00' */;");
-                writer.WriteLine("/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;");
-                writer.WriteLine("/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;");
-                writer.WriteLine("/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;");
-                writer.WriteLine("");
-                writer.WriteLine("");
-                writer.WriteLine("-- Dumping database structure for red7community");
-                writer.WriteLine("CREATE DATABASE IF NOT EXISTS `red7community` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;");
-                writer.WriteLine("USE `red7community`;");
-                writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.admin_panel");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `admin_panel` (");
                 writer.WriteLine("`id` int NOT NULL AUTO_INCREMENT,");
                 writer.WriteLine("`ownerid` int DEFAULT NULL,");
@@ -112,11 +93,9 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`)");
                 writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.admin_panel: ~0 rows (approximately)");
                 writer.WriteLine("INSERT INTO `admin_panel` (`id`, `ownerid`, `full_name`) VALUES");
                 writer.WriteLine("(1, 1, '" + mu_username.Text + "');");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.avatars");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `avatars` (");
                 writer.WriteLine("`ownerid` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`items` longtext,");
@@ -126,11 +105,9 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`ownerid`)");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.avatars: ~21 rows (approximately)");
                 writer.WriteLine("INSERT INTO `avatars` (`ownerid`, `items`, `shirt`, `pants`, `face`) VALUES");
                 writer.WriteLine("(1, '[1]', 9, 8, 5);");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.badges");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `badges` (");
                 writer.WriteLine("`id` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`name` text NOT NULL,");
@@ -140,14 +117,12 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`) USING BTREE");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.badges: ~4 rows (approximately)");
                 writer.WriteLine("INSERT INTO `badges` (`id`, `name`, `displayname`, `description`, `icon`) VALUES");
                 writer.WriteLine("(1, 'Administrator', 'Administrator', 'The official admin badge.', 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Badges/administrator.png'),");
                 writer.WriteLine("(2, 'Welcome', 'Welcome', 'The official welcome badge.', 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Badges/welcome.png'),");
                 writer.WriteLine("(3, 'Beta-Tester', 'Beta Tester', 'The official beta testing badge.', 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Badges/beta-tester.png'),");
                 writer.WriteLine("(4, 'Bug-Hunter', 'Bug Hunter', 'People with this badge are immune to being banned for finding bugs, however a warning or 3 day ban can still occur if a bug is not reported.', 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Badges/bug-hunter.png');");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.catalog");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `catalog` (");
                 writer.WriteLine("`id` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`name` varchar(50) DEFAULT NULL,");
@@ -170,7 +145,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("UNIQUE KEY `name` (`name`)");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.catalog: ~27 rows (approximately)");
                 writer.WriteLine("INSERT INTO `catalog` (`id`, `name`, `displayname`, `description`, `created`, `membershipRequired`, `owners`, `price`, `type`, `isLimited`, `isEquippable`, `copies`, `icon`, `obj`, `mtl`, `texture`, `creator`) VALUES");
                 writer.WriteLine("(-3, 'pants1', 'Testing Pants', 'This is test pants.', '2021-04-24 22:34:44', 'None', '[1]', -1, 'Pants', 0, 1, NULL, '/Catalog/Pants/Pants.png', NULL, NULL, '/Catalog/Pants/Pants.png', 1),");
                 writer.WriteLine("(-2, 'shirt1', 'Testing Shirt', 'This is a test shirt.', '2021-04-24 22:34:44', 'None', '[1]', -1, 'Shirt', 0, 1, NULL, '/Catalog/Shirts/Shirt.png', NULL, NULL, '/Catalog/Shirts/Shirt.png', 1),");
@@ -200,7 +174,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("(22, 'White-Hat', 'White Hat of Goodness', 'This hat can only be obtained through the Bug Hunting Program.', '2021-06-06 01:00:51', 'None', '[1]', -1, 'Hat', 0, 1, 999999, 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Hats/White-Hat-Render.png', '/Catalog/Hats/Beta-Tester-Hat.obj', '/Catalog/Hats/White-Hat.mtl', NULL, 1),");
                 writer.WriteLine("(23, 'Dominus-Hood', 'Dominus Hood', 'Less expensive dominus hood', '2021-06-06 01:00:51', 'None', '[1,2,3]', -1, 'Hat', 0, 1, 999999, 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Hats/Dominus-Hood-Render.png', '/Catalog/Hats/Dominus-Hood.obj', '/Catalog/Hats/Dominus-Hood.mtl', NULL, 9);");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.codes");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `codes` (");
                 writer.WriteLine("`id` int NOT NULL AUTO_INCREMENT,");
                 writer.WriteLine("`name` text,");
@@ -210,7 +183,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`)");
                 writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.contact");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `contact` (");
                 writer.WriteLine("`id` bigint NOT NULL,");
                 writer.WriteLine("`user_name` varchar(100) NOT NULL,");
@@ -219,9 +191,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("`content` text NOT NULL");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.contact: ~0 rows (approximately)");
-                writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.games");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `games` (");
                 writer.WriteLine("`id` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`name` text NOT NULL,");
@@ -238,7 +207,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`)");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.memberships");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `memberships` (");
                 writer.WriteLine("`id` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`name` varchar(255) DEFAULT 'Premium',");
@@ -249,7 +217,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`)");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.memberships: ~6 rows (approximately)");
                 writer.WriteLine("INSERT INTO `memberships` (`id`, `name`, `payoutAmount`, `isEveryWeek`, `isEveryDay`, `cost`) VALUES");
                 writer.WriteLine("(1, 'Premium450', '450', 1, 0, '6.99'),");
                 writer.WriteLine("(2, 'Premium1000', '1000', 1, 0, '13.99'),");
@@ -258,7 +225,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("(5, 'PremiumDaily2200', '2200', 0, 1, '38.99'),");
                 writer.WriteLine("(6, 'PremiumDaily1000', '1000', 0, 1, '17.99');");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.relation");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `relation` (");
                 writer.WriteLine("`from` bigint NOT NULL DEFAULT '0',");
                 writer.WriteLine("`to` bigint NOT NULL DEFAULT '0',");
@@ -268,7 +234,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("KEY `since` (`since`)");
                 writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.site_info");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `site_info` (");
                 writer.WriteLine("`id` int NOT NULL AUTO_INCREMENT,");
                 writer.WriteLine("`name` text NOT NULL,");
@@ -276,7 +241,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("PRIMARY KEY (`id`)");
                 writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.site_info: ~7 rows (approximately)");
                 writer.WriteLine("INSERT INTO `site_info` (`id`, `name`, `content`) VALUES");
                 writer.WriteLine("(1, 'site_name', '" + ss_siteName.Text + "'),");
                 writer.WriteLine("(2, 'registration', '" + ss_registration.Text + "'),");
@@ -287,7 +251,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("(7, 'maintenanceMode', '" + ss_maintenanceMode.Text + "'),");
                 writer.WriteLine("(8, 'admin_site_name', '" + ss_adminSiteName.Text + "');");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping structure for table red7community.users");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `users` (");
                 writer.WriteLine("`id` bigint NOT NULL AUTO_INCREMENT,");
                 writer.WriteLine("`username` varchar(100) NOT NULL,");
@@ -315,21 +278,17 @@ namespace RED7Community_Creator
                 writer.WriteLine("UNIQUE KEY `username` (`username`)");
                 writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;");
                 writer.WriteLine("");
-                writer.WriteLine("-- Dumping data for table red7community.users: ~17 rows (approximately)");
-                writer.WriteLine("/*!40000 ALTER TABLE `users` DISABLE KEYS */;");
                 writer.WriteLine("INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES");
-                writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '', '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '2021-02-27 22:59:37', '2021-06-10', '2021-06-10 13:48:55', 0, '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g'),                                                                                                                                                                                                                                                                                      (9, 'Not Found', 'Not Found', 'temp@temp.temp', '', 'This account is reserved to make sure that no-one accidentally creates it and gets locked out.', '2021-05-20 21:41:12', NULL, NULL, 0, '[]', '[]', 'None', 1, 'Reserved.', '2021-05-20 21:41:28', 0, 0, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/8f79d54d603c0523c095d7e1e8dd37e5?s=180');");
-                writer.WriteLine("/*!40000 ALTER TABLE `users` ENABLE KEYS */;");
-                writer.WriteLine("");
-                writer.WriteLine("/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;");
-                writer.WriteLine("/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;");
-                writer.WriteLine("/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;");
-                writer.WriteLine("/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;");
-                writer.WriteLine("/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;");
+                writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '', '2021-02-27 22:59:37', '2021-06-10', '2021-06-10 13:48:55', " + mu_currency.Text + ", '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g'),                                                                                                                                                                                                                                                                                      (9, 'Not Found', 'Not Found', 'temp@temp.temp', '', 'This account is reserved to make sure that no-one accidentally creates it and gets locked out.', '2021-05-20 21:41:12', NULL, NULL, 0, '[]', '[]', 'None', 1, 'Reserved.', '2021-05-20 21:41:28', 0, 0, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/8f79d54d603c0523c095d7e1e8dd37e5?s=180');");
 
 
                 MessageBox.Show("DONE! Please check the 'Generated' folder to see if the following files were generated: 'config.php', 'DB.sql'", "Generated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

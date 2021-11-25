@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.gbGeneralSettings = new System.Windows.Forms.GroupBox();
+            this.gs_statusGithubURL = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.gs_statusURL = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.gs_storageURL = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gs_adminPanelURL = new System.Windows.Forms.TextBox();
@@ -69,10 +73,6 @@
             this.mu_username = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.gs_statusGithubURL = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.gs_statusURL = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.gbGeneralSettings.SuspendLayout();
             this.gbDatabaseSettings.SuspendLayout();
             this.gbSQLSettings.SuspendLayout();
@@ -100,6 +100,44 @@
             this.gbGeneralSettings.TabIndex = 0;
             this.gbGeneralSettings.TabStop = false;
             this.gbGeneralSettings.Text = "General Settings (config.php)";
+            // 
+            // gs_statusGithubURL
+            // 
+            this.gs_statusGithubURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_statusGithubURL.Location = new System.Drawing.Point(7, 329);
+            this.gs_statusGithubURL.Name = "gs_statusGithubURL";
+            this.gs_statusGithubURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_statusGithubURL.TabIndex = 12;
+            this.gs_statusGithubURL.Text = "https://github.com/RED7STUDIOS/RED7Community-status";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label17.Location = new System.Drawing.Point(6, 305);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(141, 21);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Status GitHub URL:";
+            // 
+            // gs_statusURL
+            // 
+            this.gs_statusURL.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gs_statusURL.Location = new System.Drawing.Point(7, 273);
+            this.gs_statusURL.Name = "gs_statusURL";
+            this.gs_statusURL.Size = new System.Drawing.Size(320, 29);
+            this.gs_statusURL.TabIndex = 10;
+            this.gs_statusURL.Text = "https://status.red7community.ml";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label18.Location = new System.Drawing.Point(6, 249);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(88, 21);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Status URL:";
             // 
             // gs_storageURL
             // 
@@ -514,44 +552,6 @@
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // gs_statusGithubURL
-            // 
-            this.gs_statusGithubURL.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gs_statusGithubURL.Location = new System.Drawing.Point(7, 329);
-            this.gs_statusGithubURL.Name = "gs_statusGithubURL";
-            this.gs_statusGithubURL.Size = new System.Drawing.Size(320, 29);
-            this.gs_statusGithubURL.TabIndex = 12;
-            this.gs_statusGithubURL.Text = "https://github.com/RED7STUDIOS/RED7Community-status";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label17.Location = new System.Drawing.Point(6, 305);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(141, 21);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Status GitHub URL:";
-            // 
-            // gs_statusURL
-            // 
-            this.gs_statusURL.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gs_statusURL.Location = new System.Drawing.Point(7, 273);
-            this.gs_statusURL.Name = "gs_statusURL";
-            this.gs_statusURL.Size = new System.Drawing.Size(320, 29);
-            this.gs_statusURL.TabIndex = 10;
-            this.gs_statusURL.Text = "https://status.red7community.ml";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label18.Location = new System.Drawing.Point(6, 249);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(88, 21);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Status URL:";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -567,6 +567,7 @@
             this.Name = "frmMain";
             this.ShowIcon = false;
             this.Text = "Generate";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.gbGeneralSettings.ResumeLayout(false);
             this.gbGeneralSettings.PerformLayout();
             this.gbDatabaseSettings.ResumeLayout(false);
