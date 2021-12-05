@@ -26,14 +26,14 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$id = $_GET['id'];
 	$username = $json_a[0]['data'][0]['username'];
 
-	if ($isBanned != 1)
-	{
+	$real_displayname = $json_a[0]['data'][0]['displayname'];
+	$real_description = $json_a[0]['data'][0]['description'];
+
+	if ($isBanned != 1) {
 		$displayname = filterwords($json_a[0]['data'][0]['displayname']);
 		$description = filterwords($json_a[0]['data'][0]['description']);
 		$icon = $json_a[0]['data'][0]['icon'];
-	}
-	else
-	{
+	} else {
 		$displayname = "[ CONTENT REMOVED ]";
 		$description = "[ CONTENT REMOVED ]";
 		$icon = "https://www.gravatar.com/avatar/?s=180";
@@ -94,17 +94,41 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 	</head>
 	<body onload="init();">
 		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
-		<div class="page-content-wrapper">
+        <div class="page-content-wrapper">
+            <script type="text/javascript">
+                var ajaxSubmit = function (formEl) {
+                    // fetch the data for the form
+                    var data = $(formEl).serializeArray();
+                    var url = $(formEl).attr('action');
 
-				<script>
-					
-					var observe;
-					if (window.attachEvent) {
-						observe = function (element, event, handler) {
-							element.attachEvent('on'+event, handler);
-						};
-					}
-					else {
+                    // setup the ajax request
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        dataType: 'json',
+                        success: function (d) {
+                            if (d.success) {
+                                alert('Changed value successfully!');
+                                document.location = document.location;
+                            }
+                        }
+                    });
+
+                    // return false so the form does not actually
+                    // submit to the page
+                    return false;
+                }
+            </script>
+
+            <script>
+
+                var observe;
+                if (window.attachEvent) {
+                    observe = function (element, event, handler) {
+                        element.attachEvent('on' + event, handler);
+                    };
+                } else {
 						observe = function (element, event, handler) {
 							element.addEventListener(event, handler, false);
 						};
@@ -150,15 +174,6 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 					}
 				}
 				?>
-
-            <?php
-
-                //var_dump($_SESSION);
-
-                //$_SESSION['id'] = 1;
-                //$_SESSION['username'] = "RED7Community";
-
-            ?>
 
 				<main class="col-md-9">
 					<div class="d-flex align-items-center border-bottom">
@@ -270,22 +285,79 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 								{
 									echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>'. $banDate. '</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
 								}
-							}
-							else
-							{
-								echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>'. $banReason . '</strong></p><hr/>';
+							} else {
+								echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>' . $banReason . '</strong></p><hr/>';
 							}
 						}
 						?>
 
-						<h3>About:</h3>
-						<textarea style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;" id="text" disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
-						<hr/>
+                        <h3>About:</h3>
+                        <textarea
+                                style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;"
+                                id="text" disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
+                        <hr/>
+						<?php
+							if ($your_isAdmin == 1) {
+								$sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
+								$result = mysqli_query($link, $sql);
+								if (mysqli_num_rows($result) > 0) {
+									while ($row = mysqli_fetch_assoc($result)) {
+										$current_currency = $row['currency'];
+									}
+								}
 
-						<canvas id="c"></canvas>
+								echo '<fieldset>
+                            <h3>Real Data:</h3>
+                            <p><b>Display Name: </b>' . $real_displayname . '</p>
+                            <p><b>Username: </b>' . $username . '</p>
+                            <p><b>Description: </b>' . $real_description . '</p>
+                    
+                            <form method="post" action="/moderate/ajax.php"
+                                  onSubmit="return ajaxSubmit(this);">
+                                <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
+                                                                              value="' . $current_currency . '"/>
+                                <input hidden type="text" name="action" value="currencyChange"/>
+                                <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                            </form>
+                        </fieldset>
+                        <hr/>
+                        ';
 
-						<h4>Currently Wearing:</h4>
-						<div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
+								if ($isBanned == 1) {
+									$checked = 'checked';
+								} else {
+									$checked = "";
+								}
+
+								echo '
+                                <fieldset>
+                <h3>Ban Settings:</h3>
+                <form method="post" action="/moderate/ajax.php"
+                      onSubmit="return ajaxSubmit(this);">
+                    <h5>Is Banned:</h5>
+                    <input type="checkbox" name="isBanned"' . $checked . '/>
+                    <h5>Ban Reason:</h5>
+                    <input maxlength="69420" type="text" name="banReason" style="width: 100%;"
+                           value="' . $banReason . '"/>
+                    <input hidden type="text" name="action" value="banningUser"/>
+                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                    <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
+                </form>
+            </fieldset>
+
+            <hr/>
+                                ';
+
+
+							}
+
+						?>
+
+                        <canvas id="c"></canvas>
+
+                        <h4>Currently Wearing:</h4>
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
 							<?php
 								$total = 0;
 

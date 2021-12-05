@@ -10,9 +10,7 @@
 	// The domain URL.
 	$ROOT_URL = 'http://red7community.ml';
 	// The API URL.
-	$API_URL = 'http://api.red7community.ml';
-	// The Admin Panel URL.
-	$ADMIN_URL = 'http://admin.red7community.ml';
+	$API_URL = $ROOT_URL . '/API';
 
 	// The Storage URL.
 	$STORAGE_URL = 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main';

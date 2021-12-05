@@ -44,23 +44,38 @@ exit;
 				echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
 			}
 		}
-		
-		if (isset($maintenanceMode))
-		{
-			if ($maintenanceMode == "on")
-			{
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+
+			if (isset($maintenanceMode)) {
+				if ($maintenanceMode == "on") {
+					echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+				}
 			}
-		}
+
+			var_dump($_SESSION);
 		?>
 
-		<div class="page-content-wrapper">
-			<div class="d-flex align-items-center border-bottom" style="display: inline;">
+        <div class="page-content-wrapper">
+            <div class="d-flex align-items-center border-bottom" style="display: inline;">
                 <img src="<?php echo $your_icon; ?>" style="height: 128px; width: 128px; border-radius: 50%;"/>
                 &nbsp;
-				<h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 30px; width: 30px; display: inline;"></img>'; } ?>
-				<h2 class="<?php if( $your_isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) { echo htmlspecialchars($your_displayname); } else { echo $your_username; } ?></h2>&nbsp;<?php if ($your_isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 25px; width: 25px; display: inline;"></img>'; } ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ( $your_isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>!</h2>
-			</div>
+                <h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) {
+						echo '<img src="' . $premiumIcon . '" style="height: 30px; width: 30px; display: inline;"></img>';
+					} ?>
+                    <h2 class="<?php if ($your_isAdmin == 1) {
+						echo 'title-rainbow-lr';
+					} else {
+					} ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) {
+							echo htmlspecialchars($your_displayname);
+						} else {
+							echo $your_username;
+						} ?></h2>&nbsp;<?php if ($your_isVerified == 1) {
+						echo '<img src="' . $verifiedIcon . '" style="height: 25px; width: 25px; display: inline;"></img>';
+					} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>
+                            )</b></small><?php if ($your_isBanned == 1) {
+						echo '<p><strong style="color: red;">*BANNED*</strong></p>';
+					} ?>!
+                </h2>
+            </div>
 
             <br/>
 
