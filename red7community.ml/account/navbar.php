@@ -20,6 +20,9 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/"><i class="far fa-house"></i> Home</a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/catalog"><i class="far fa-user-plus"></i> Catalog</a>
 				</li>
@@ -51,7 +54,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	if (!str_contains($selected_page, "/events"))
 	{
 		include_once "navbar-logged-in.php";
-		include_once "sidebar.php";
 	}
 }
 ?>

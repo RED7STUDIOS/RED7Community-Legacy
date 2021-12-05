@@ -1,4 +1,4 @@
-<div id="wrapper">
+<!-- <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="nav-item">
@@ -16,11 +16,11 @@
 					<i class="far fa-users"></i> Avatar Editor
 				</a>
 			</li>
-			<!-- <li class="nav-item">
+			<li class="nav-item">
 				<a href="/account/messages" class="nav-link<?php if (strpos($selected_page, "/account/messages") !== false) { echo ' active '; } else { echo ' '; } ?>text-white">
 					<i class="far fa-envelope"></i> Messages
 				</a>
-			</li> -->
+			</li>
 			<li class="nav-item">
 				<a href="/users/friends.php?id=<?php echo $_SESSION['id'] ?>" class="nav-link<?php if (strpos($selected_page, "/users/friends.php?id=". $_SESSION['id']) !== false) { echo ' active '; } else { echo ' '; } ?>text-white">
 					<i class="far fa-users"></i> Friends
@@ -31,12 +31,13 @@
 					<i class="far fa-backpack"></i> Inventory
 				</a>
 			</li>
-			<!-- <h4 class="text-center text-white">Events:</h4>
-			<a href="/events/hackvent.php"><img class="text-center" style="height: 140px; width: 250px;" src="<?php echo $STORAGE_URL ?>/Events/the-hackvent.png"></a> -->
+			<h4 class="text-center text-white">Events:</h4>
+			<a href="/events/hackvent.php"><img class="text-center" style="height: 140px; width: 250px;" src="<?php echo $STORAGE_URL ?>/Events/the-hackvent.png"></a>
 			<li class="nav-item bottomdiv">
 				<a href="/terms-of-service.php" class="text-white"><p><i class="far fa-user-secret"></i> Terms & Privacy</p></a>
 				<a href="/bug-hunting.php" class="text-white"><p><i class="far fa-bug"></i> Bug Hunting Program</p></a>
 			</li>
-			<!-- <p style="color: #212100;">SEBjaw==</p> -->
+			<p style="color: #212100;">SEBjaw==</p>
         </ul>
     </div>
+-->

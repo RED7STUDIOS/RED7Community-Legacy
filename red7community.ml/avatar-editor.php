@@ -34,6 +34,7 @@ $face = $json_a_avatar[0]['data'][0]['face'];
 if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 ?>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -42,11 +43,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 		<title>Avatar Editor - <?php echo $site_name; ?></title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/css/style.css">
-
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-
-		<script src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/js/fontawesome.js"></script>
+		<link rel="stylesheet" href="/assets/css/style.css">
+		<script src="/assets/js/fontawesome.js"></script>
 		<style>
 		#c {
 			width: 50%;
@@ -151,14 +149,9 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				?>
 			</div>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	</body>
-
-	<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/js/avatar.js.php"; ?>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/js/avatar.js.php"; ?>
+    </body>
 </html>

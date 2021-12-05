@@ -32,8 +32,6 @@ exit;
 
 		<link rel="stylesheet" href="/assets/css/style.css">
 
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-
 		<script src="/assets/js/fontawesome.js"></script>
 	</head>
 	<body>

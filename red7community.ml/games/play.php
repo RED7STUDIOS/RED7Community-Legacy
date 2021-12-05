@@ -43,9 +43,7 @@ else
 
 		<link rel="stylesheet" href="/assets/css/games/style.css">
 
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-
-		<script src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/js/fontawesome.js"></script>
+		<script src="/assets/js/fontawesome.js"></script>
 	</head>
 	<body>
 		<?php

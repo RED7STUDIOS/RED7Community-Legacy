@@ -23,11 +23,10 @@ if(!isset($_SESSION)){
 		<title>THE HACKVENT - <?php echo $site_name; ?></title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/css/style.css">
+		<link rel="stylesheet" href="/assets/css/style.css">
 
 		<link rel="stylesheet" href="/events/assets/css/style.css">
-
-		<script src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/js/fontawesome.js"></script>
+		<script src="/assets/js/fontawesome.js"></script>
 	</head>
 	<body style="background-color: #000;">
 		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>

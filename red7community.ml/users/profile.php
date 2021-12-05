@@ -79,8 +79,6 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 		<link rel="stylesheet" href="/assets/css/style.css">
 
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-
 		<script src="/assets/js/fontawesome.js"></script>
 
 		<script src="/assets/js/relation.js"></script>
@@ -159,12 +157,12 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 								exit;
 							}
 						?>
-						<img src="<?php echo htmlspecialchars($icon) ?>" style="height: 128px; width: 128px;"></img>
+						<img src="<?php echo htmlspecialchars($icon) ?>" style="height: 128px; width: 128px; border-radius: 50%;"></img>
 						&nbsp;
-						<?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 40px; width: 40px;"></img>'; } ?>
+						<?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 30px; width: 30px;"></img>'; } ?>
 						<h2 class="<?php if( $isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo filterwords(htmlspecialchars($displayname)); } else { echo filterwords(htmlspecialchars($username)); } ?></h2>
 						&nbsp;
-						<?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 35px; width: 35px;"></img>'; } ?>
+						<?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 25px; width: 25px;"></img>'; } ?>
 						<small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
 						<?php if ( $isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>
 

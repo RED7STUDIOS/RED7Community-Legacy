@@ -24,9 +24,7 @@ if ($maintenanceMode == "off") {
 		<!-- Styles and Font Awesome. -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="/assets/css/style.css">
-		<link rel="stylesheet" href="/assets/css/space.css">
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-		<script src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/js/fontawesome.js"></script>
+		<link rel="stylesheet" href="/assets/css/space.css">		<script src="/assets/js/fontawesome.js"></script>
 		<!------------------------------>
 	</head>
 	<body>

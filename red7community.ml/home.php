@@ -31,8 +31,6 @@ exit;
 
 		<link rel="stylesheet" href="/assets/css/style.css">
 
-		<link rel="stylesheet" href="/assets/css/sidebar.css">
-
 		<script src="/assets/js/fontawesome.js"></script>
 	</head>
 	<body>
@@ -57,9 +55,9 @@ exit;
 		?>
 
 		<div class="page-content-wrapper">
-			<div class="d-flex align-items-center border-bottom">
-				<h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 40px; width: 40px;"></img>'; } ?>
-				<h2 class="<?php if( $your_isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) { echo htmlspecialchars($your_displayname); } else { echo $your_username; } ?></h2>&nbsp;<?php if ($your_isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 35px; width: 35px;"></img>'; } ?><small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ( $your_isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>!</h2>
+			<div class="d-flex align-items-center border-bottom" style="display: inline;">
+				<h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 30px; width: 30px; display: inline;"></img>'; } ?>
+				<h2 class="<?php if( $your_isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) { echo htmlspecialchars($your_displayname); } else { echo $your_username; } ?></h2>&nbsp;<?php if ($your_isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 25px; width: 25px; display: inline;"></img>'; } ?><small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ( $your_isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>!</h2>
 			</div>
 
 			<a class="btn btn-primary" href="/users/following.php?id=<?php echo $_SESSION['id']; ?>">Following</a>

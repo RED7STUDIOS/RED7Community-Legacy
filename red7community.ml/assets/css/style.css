@@ -6,6 +6,10 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
+body {
+	zoom: 1.2;
+}
+
 .center {
 	/* Set the margin to 0 */
 	margin: 0;

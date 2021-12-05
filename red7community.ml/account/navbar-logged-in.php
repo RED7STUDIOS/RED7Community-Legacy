@@ -133,26 +133,26 @@
 	// END OF COPY FROM login.php ---------------------------- !!! UPDATE BOTH !!!
 ?>
 
-<li class="nav-item">
-	<a class="nav-link" aria-current="page"><?php echo $_SESSION["username"] ?></a>
+<li class="nav-item dropdown pull-left">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img style="width: 20px; height: 20 px; border-radius: 50%;" src="<?php echo $your_icon; ?>"/> <?php echo $_SESSION["username"] ?>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
+        <li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-user"></i> Profile</a></li>
+        <li><a class="dropdown-item" href="/avatar-editor.php"><i class="far fa-user-tag"></i> Avatar Editor</a></li>
+        <li><a class="dropdown-item" href="/users/friends.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-users"></i> Friends</a></li>
+        <li><a class="dropdown-item" href="/users/inventory.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-backpack"></i> Inventory</a></li>
+        <li><a class="dropdown-item" href="/account/settings"><i class="far fa-cog"></i> Settings</a></li>
+        <li><a class="dropdown-item" href="/account/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
 </li>
 
-<li class="nav-item dropdown pull-left">
+<li class="nav-item dropdown pull-right">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-money-bill-wave"></i> <?php echo number_format_short($your_currency); ?>
 	</a>
 	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
 		<li><a class="dropdown-item" href="/account/currency.php"><?php echo number_format_comma($your_currency) ?> <?php echo $currency_name ?></a></li>
 		<li><a class="dropdown-item" href="/currency.php">Buy <?php echo $currency_name ?></a></li>
-	</ul>
-</li>
-
-<li class="nav-item dropdown pull-left">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		<i class="fas fa-cog"></i>
-	</a>
-	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
-		<li><a class="dropdown-item" href="/account/settings">Settings</a></li>
-		<li><a class="dropdown-item" href="/account/logout.php">Logout</a></li>
 	</ul>
 </li>
