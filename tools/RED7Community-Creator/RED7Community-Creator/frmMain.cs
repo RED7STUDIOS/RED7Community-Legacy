@@ -43,9 +43,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("// The domain URL.");
                 writer.WriteLine("$ROOT_URL = '" + gs_mainURL.Text + "';");
                 writer.WriteLine("// The API URL.");
-                writer.WriteLine("$API_URL = '" + gs_apiURL.Text + "';");
-                writer.WriteLine("// The Admin Panel URL.");
-                writer.WriteLine("$ADMIN_URL = '" + gs_adminPanelURL.Text + "';");
+                writer.WriteLine("$API_URL = $ROOT_URL. '" + gs_apiURL.Text + "';");
                 writer.WriteLine("");
                 writer.WriteLine("// The Storage URL.");
                 writer.WriteLine("$STORAGE_URL = '" + gs_storageURL.Text + "';");
@@ -249,7 +247,6 @@ namespace RED7Community_Creator
                 writer.WriteLine("(5, 'verifiedIcon', '" + ss_verifiedIcon.Text + "'),");
                 writer.WriteLine("(6, 'appealEmail', '" + ss_appealEmail.Text + "'),");
                 writer.WriteLine("(7, 'maintenanceMode', '" + ss_maintenanceMode.Text + "'),");
-                writer.WriteLine("(8, 'admin_site_name', '" + ss_adminSiteName.Text + "');");
                 writer.WriteLine("");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `users` (");
                 writer.WriteLine("`id` bigint NOT NULL AUTO_INCREMENT,");

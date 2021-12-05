@@ -50,8 +50,6 @@ exit;
 					echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
 				}
 			}
-
-			var_dump($_SESSION);
 		?>
 
         <div class="page-content-wrapper">
