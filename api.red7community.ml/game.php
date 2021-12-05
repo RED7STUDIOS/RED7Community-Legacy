@@ -11,8 +11,6 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 
 $response = array();
 
-$api_key = $_GET['key'];
-
 $api_type = $_GET['api'];
 
 /* $sql = "SELECT * FROM apikeys WHERE api_key='". $api_key. "'";
