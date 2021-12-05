@@ -50,6 +50,8 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$isAdmin = $json_a[0]['data'][0]['isAdmin'];
 	$isVerified = $json_a[0]['data'][0]['isVerified'];
 	$items = $json_a[0]['data'][0]['items'];
+	$clans = $json_a[0]['data'][0]['clans'];
+	$badges = $json_a[0]['data'][0]['badges'];
 
 	$data_avatar = file_get_contents($API_URL. '/avatar.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $_GET['id']);
 
@@ -273,7 +275,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						<canvas id="c"></canvas>
 
 						<h4>Currently Wearing:</h4>
-						<div class="row row-cols-1 row-cols-md-3 g-4">
+						<div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
 							<?php
 								$total = 0;
 
@@ -305,14 +307,127 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 							?>
 						</div>
 
-						<hr/>
+                        <hr/>
 
-						<a class="btn btn-primary" href="/users/following.php?id=<?php echo $_GET['id'] ?>">Following</a>
-						<a class="btn btn-primary" href="/users/followers.php?id=<?php echo $_GET['id'] ?>">Followers</a>
-						<a class="btn btn-primary" href="/users/friends.php?id=<?php echo $_GET['id'] ?>">Friends</a>
-						<a class="btn btn-primary" href="/users/badges.php?id=<?php echo $_GET['id'] ?>">Badges</a>
-						<a class="btn btn-primary" href="/users/inventory.php?id=<?php echo $_GET['id'] ?>">Inventory</a>
-						<a class="btn btn-primary" href="/users/clans.php?id=<?php echo $_GET['id'] ?>">Clans</a>
+                        <h3>Friends:</h3>
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
+							<?php
+								$friends = $REL->getFriends($_GET['id']);
+
+								if ($friends != "" && $friends != "[]" && !empty($friends)) {
+									foreach ($users as $id=>$name) {
+										if (isset($friends['f'][$id]))
+										{
+											$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $name);
+
+											$json_a = json_decode($data, true);
+
+											$friend_id = $json_a[0]['data'][0]['id'];
+											$friend_name = $json_a[0]['data'][0]['username'];
+											$friend_icon = $json_a[0]['data'][0]['icon'];
+											$friend_dsp = $json_a[0]['data'][0]['displayname'];
+
+											if ($friend_dsp == null || $friend_dsp == "")
+											{
+												$friend_f = htmlspecialchars($name);
+											}
+											else
+											{
+												$friend_f = htmlspecialchars($friend_dsp);
+											}
+
+											echo '<div class="col" style="height:180px; width:180px"><a href="/users/profile.php?id='. $friend_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $friend_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $friend_f . '</h6> <small><b>(@'. htmlspecialchars($name). ')</b></small></div></div></a></div>';
+										}
+									}
+								}
+								else
+								{
+									echo '<p>This user has no friends yet.</p>';
+								}
+							?>
+                        </div>
+
+                        <hr/>
+
+                        <h3>Badges:</h3>
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 180px;">
+							<?php
+								if ($badges != "" && $badges != "[]" && !empty($badges)) {
+									foreach(json_decode($badges) as $mydata)
+									{
+										$data = file_get_contents($API_URL. '/badge.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $mydata);
+
+										$json_a = json_decode($data, true);
+
+										$badge_id = $json_a[0]['data'][0]['id'];
+										$badge_name = $json_a[0]['data'][0]['displayname'];
+										$badge_icon = $json_a[0]['data'][0]['icon'];
+
+										echo '<div class="col" style="height:180px; width:180px"><a href="/catalog/badge.php?id='. $badge_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $badge_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $badge_name . '</h6></div></div></a></div>';
+									}
+								}
+								else
+								{
+									echo '<p>This user has no badges yet.</p>';
+								}
+							?>
+                        </div>
+
+                        <hr/>
+
+                        <h3>Inventory:</h3>
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 210px;">
+							<?php
+								$vals = array_count_values(json_decode($items, true));
+
+								if ($items != "" && $items != "[]" && !empty($items)) {
+									foreach($vals as $key=>$mydata)
+									{
+										$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $key);
+
+										$json_a = json_decode($data, true);
+
+										$item_id = $json_a[0]['data'][0]['id'];
+										$item_propername = $json_a[0]['data'][0]['name'];
+										$item_name = $json_a[0]['data'][0]['displayname'];
+										$item_icon = $json_a[0]['data'][0]['icon'];
+
+										$value = $vals[$key];
+
+										echo '<div class="col" style="height:180px; width:180px"><a href="/catalog/item.php?id='. $item_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $item_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $item_name . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
+									}
+								}
+								else
+								{
+									echo '<p>This user has no items yet.</p>';
+								}
+							?>
+                        </div>
+
+                        <hr/>
+
+                        <h3>Clans:</h3>
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 210px;">
+							<?php
+								if ($clans != "" && $clans != "[]" && !empty($clans)) {
+									foreach(json_decode($clans) as $mydata)
+									{
+										$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $mydata);
+
+										$json_a = json_decode($data, true);
+
+										$group_id = $json_a[0]['data'][0]['id'];
+										$group_icon = $json_a[0]['data'][0]['icon'];
+
+										echo '<div class="col" style="height:180px; width:180px"><a href="/users/profile.php?id='. $group_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $group_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title">'. $mydata . '</h6></div></div></a></div>';
+									}
+								}
+								else
+								{
+									echo '<p>This user has no clans yet.</p>';
+								}
+							?>
+                        </div>
 					</div>
 				</div>
 			</main>
