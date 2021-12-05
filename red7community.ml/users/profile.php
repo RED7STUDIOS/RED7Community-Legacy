@@ -150,6 +150,16 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 					}
 				}
 				?>
+
+            <?php
+
+                //var_dump($_SESSION);
+
+                //$_SESSION['id'] = 1;
+                //$_SESSION['username'] = "RED7Community";
+
+            ?>
+
 				<main class="col-md-9">
 					<div class="d-flex align-items-center border-bottom">
 						<?php
@@ -220,19 +230,19 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     // (C3) FRIEND STATUS
                                     // FRIENDS
                                     if (isset($friends['f'][$id])) {
-                                        echo "<a class='btn btn-danger' onclick=\"relate('unfriend', $id)\">Unfriend</a>";
+                                        echo "<a class='btn btn-danger' onclick=\"relate('unfriend', $id)\"><i class='fas fa-user-times'></i> Unfriend</a>";
                                     }
                                     // INCOMING FRIEND REQUEST
                                     else if (isset($requests['in'][$id])) {
-                                        echo "<a class='btn btn-success' onclick=\"relate('accept', $id)\">Accept Friend</a>";
+                                        echo "<a class='btn btn-success' onclick=\"relate('accept', $id)\"><i class='fas fa-user-plus'></i> Accept Friend</a>";
                                     }
                                     // OUTGOING FRIEND REQUEST
                                     else if (isset($requests['out'][$id])) {
-                                        echo "<a class='btn btn-danger' onclick=\"relate('cancel', $id)\">Cancel Add</a>";
+                                        echo "<a class='btn btn-danger' onclick=\"relate('cancel', $id)\"><i class='fas fa-user-slash'></i> Cancel Request</a>";
                                     }
                                     // STRANGERS
                                     else {
-                                        echo "<a class='btn btn-primary' onclick=\"relate('add', $id)\">Add Friend</a>";
+                                        echo "<a class='btn btn-primary' onclick=\"relate('add', $id)\"><i class='fas fa-user-friends'></i> Friend</a>";
                                     }
                                 }
                             }

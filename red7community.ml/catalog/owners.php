@@ -85,12 +85,12 @@ else
 						<img src="<?php echo $icon ?>" style="height: 128px; width: 128px;"></img>
 						<?php if ($membershipRequired == "Premium") { echo '<img src="'. $premiumIcon . '" style="height: 40px; width: 40px;"></img>'; } ?>
 						&nbsp;
-						<div class="wrapper">
-							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" style="height: 20px; width: 20px;"/></h2>'; } ?>
-							<span>
+                        <div class="wrapper">
+                            <h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" style="height: 20px; width: 20px;"/>'; } ?>
+                                <span>
 								<h6>By <a href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a></h6>
 							</span>
-						</div>
+                        </div>
 					</div>
 					<div>
 						<h3>Owners:</h3>

@@ -176,7 +176,7 @@ else
                               onSubmit="return ajaxSubmit(this);">
                             <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>"/>
                             <input hidden type="text" name="action" value="purchaseItem"/>
-                            <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'hidden'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
+                            <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
                         </form>
 
 						<hr/>
