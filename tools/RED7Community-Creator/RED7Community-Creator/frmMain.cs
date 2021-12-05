@@ -246,7 +246,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("(4, 'premiumIcon', '" + ss_premiumIcon.Text + "'),");
                 writer.WriteLine("(5, 'verifiedIcon', '" + ss_verifiedIcon.Text + "'),");
                 writer.WriteLine("(6, 'appealEmail', '" + ss_appealEmail.Text + "'),");
-                writer.WriteLine("(7, 'maintenanceMode', '" + ss_maintenanceMode.Text + "'),");
+                writer.WriteLine("(7, 'maintenanceMode', '" + ss_maintenanceMode.Text + "');");
                 writer.WriteLine("");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `users` (");
                 writer.WriteLine("`id` bigint NOT NULL AUTO_INCREMENT,");
