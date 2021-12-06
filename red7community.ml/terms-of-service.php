@@ -101,9 +101,9 @@ if(!isset($_SESSION)){
 
 					<p>- Swearing, bigotry or any other forms of insults are strictly prohibited.</p>
 					<p>- No glitching and cheating forms of currency or items under any circumstances.</p>
-					<p>- Sharing accounts is not permitted, you will need seperate accounts if you wish to play.</p>
+					<p>- Sharing accounts is not permitted, you will need separate accounts if you wish to play.</p>
 					<p>- No logging in to other people's accounts even with permission from the owner.</p>
-					<p>- Don't attempt to find or abuse bugs for non-<a href="/bug-hunting.php">bug/bounty hunting</a> purposes.</p>
+					<p>- Don't attempt to find or abuse bugs for non-bug/bounty hunting purposes.</p>
 					<p>- We remain the right to ban/IP-ban anyone at any time with any reason.</p>
 					<p>- Access to the admin panel in anyway is strictly prohibited and will result in ban.</p>
 					<p>- Purchasing currency in illegal ways such as stealing credit cards, etc is prohibited.</p>

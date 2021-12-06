@@ -121,8 +121,8 @@ html, body {
 }
 
 .verified-icon {
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     display: inline;
 }
 
@@ -166,6 +166,20 @@ div .profile-list-card {
 }
 
 /* ------------------------ */
+
+.banned-text {
+    color: red;
+}
+
+.catalog-item-preview {
+    height: 128px;
+    width: 128px;
+}
+
+.item-owned {
+    height: 20px;
+    width: 20px;
+}
 
 .user-img {
     height: 90px;

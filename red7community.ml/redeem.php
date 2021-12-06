@@ -73,6 +73,11 @@
                         alert('Redeemed code successfully!');
                         document.location = document.location;
                     }
+                    else
+                    {
+                        alert("An error occurred while redeeming, please try again later.")
+                        document.location = document.location;
+                    }
                 }
             });
 

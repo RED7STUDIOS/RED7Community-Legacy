@@ -81,6 +81,11 @@ else
                             alert('Bought item successfully!');
                             document.location = document.location;
                         }
+                        else
+                        {
+                            alert("An error occurred while purchasing, please try again later.")
+                            document.location = document.location;
+                        }
                     }
                 });
 
@@ -113,11 +118,11 @@ else
 								exit;
 							}
 						?>
-						<img src="<?php echo $icon ?>" style="height: 128px; width: 128px;"></img>
-						<?php if ($membershipRequired == "Premium") { echo '<img src="'. $premiumIcon . '" style="height: 40px; width: 40px;"></img>'; } ?>
+						<img src="<?php echo $icon ?>" class="catalog-item-preview"></img>
+						<?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
 						&nbsp;
 						<div class="wrapper">
-							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" style="height: 20px; width: 20px;"/>'; } ?>
+							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" class="item-owned"/>'; } ?>
 							<span>
 								<h6>By <a href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a></h6>
 							</span>
@@ -180,8 +185,45 @@ else
                         </form>
 
 						<hr/>
-						
-						<a class="btn btn-primary" href="owners.php?id=<?php echo $_GET['id'] ?>">Owners</a>
+
+                        <h3>Owners:</h3>
+
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+							<?php
+								$vals = array_count_values(json_decode($owners, true));
+
+								if ($owners != "" && $owners != "[]" && !empty($owners)) {
+									foreach($vals as $key=>$mydata)
+									{
+										$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $key);
+
+										$json_a = json_decode($data, true);
+
+										$owner_id = $json_a[0]['data'][0]['id'];
+										$owner_icon = $json_a[0]['data'][0]['icon'];
+										$owner_name = $json_a[0]['data'][0]['username'];
+										$owner_displayname = $json_a[0]['data'][0]['displayname'];
+
+										if ($owner_displayname == null || $owner_displayname == "")
+										{
+											$owner_f = htmlspecialchars($owner_name);
+										}
+										else
+										{
+											$owner_f = htmlspecialchars($owner_displayname);
+										}
+
+										$value = $vals[$key];
+
+										echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $owner_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $owner_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $owner_f . '</h6><p class="card-text"><span class="badge bg-success">x'. $value . '</span></div></div></a></div>';
+									}
+								}
+								else
+								{
+									echo '<p>This item has no owners yet.</p>';
+								}
+							?>
+                        </div>
 					</div>
 				</div>
 			</main>

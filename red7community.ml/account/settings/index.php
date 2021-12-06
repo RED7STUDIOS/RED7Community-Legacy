@@ -54,6 +54,11 @@ exit;
                                     alert('Changed value successfully!');
                                     document.location = document.location;
                                 }
+                                else
+                                {
+                                    alert("An error occurred while changing value, please try again later.")
+                                    document.location = document.location;
+                                }
                             }
                         });
 

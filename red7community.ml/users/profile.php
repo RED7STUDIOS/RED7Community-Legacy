@@ -112,6 +112,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                 alert('Changed value successfully!');
                                 document.location = document.location;
                             }
+                            else
+                            {
+                                alert("An error occurred while changing value, please try again later.")
+                                document.location = document.location;
+                            }
                         }
                     });
 
@@ -185,14 +190,14 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 								exit;
 							}
 						?>
-						<img src="<?php echo htmlspecialchars($icon) ?>" style="height: 128px; width: 128px; border-radius: 50%;"></img>
+						<img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
 						&nbsp;
-						<?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" style="height: 30px; width: 30px;"></img>'; } ?>
+						<?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" class="premium-icon"></img>'; } ?>
 						<h2 class="<?php if( $isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo filterwords(htmlspecialchars($displayname)); } else { echo filterwords(htmlspecialchars($username)); } ?></h2>
 						&nbsp;
-						<?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" style="height: 25px; width: 25px;"></img>'; } ?>
+						<?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" class="verified-icon"></img>'; } ?>
 						<small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
-						<?php if ( $isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>
+						<?php if ( $isBanned == 1 ) { echo '<p><strong class="banned-text">*BANNED*</strong></p>'; } ?>
 
                         <?php
                         // (A) LOAD RELATIONSHIP LIBRARY + SET CURRENT USER
@@ -353,135 +358,142 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						?>
 
                         <canvas id="c"></canvas>
+                        <div title="currently-wearing" id="currently-wearing">
+                            <h4>Currently Wearing:</h4>
+                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                                <?php
+                                    $total = 0;
 
-                        <h4>Currently Wearing:</h4>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-							<?php
-								$total = 0;
+                                    $datatable = "catalog"; // MySQL table name
+                                    $results_per_page = 8; // number of results per page
 
-								$datatable = "catalog"; // MySQL table name
-								$results_per_page = 8; // number of results per page
+                                    $start_from = ($page-1) * $results_per_page;
+                                    $sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
+                                    $result = mysqli_query($link, $sql);
 
-								$start_from = ($page-1) * $results_per_page;
-								$sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
-								$result = mysqli_query($link, $sql);
+                                    while($row = mysqli_fetch_assoc($result)) {
 
-								while($row = mysqli_fetch_assoc($result)) {
+                                        $inventory = json_decode($hats, true);
 
-									$inventory = json_decode($hats, true);
+                                        $inventory[] = $face;
+                                        $inventory[] = $shirt;
+                                        $inventory[] = $pants;
 
-									$inventory[] = $face;
-									$inventory[] = $shirt;
-									$inventory[] = $pants;
+                                        if (in_array($row['id'], $inventory))
+                                        {
+                                            $total = $total + 1;
 
-									if (in_array($row['id'], $inventory))
-									{
-										$total = $total + 1;
+                                            $thingy = " border-success";
+                                            $thingy2 = "/catalog/item.php?id=". $row['id'];
 
-										$thingy = " border-success";
-										$thingy2 = "/catalog/item.php?id=". $row['id'];
-
-										echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
-									}
-								}
-							?>
-						</div>
-
-                        <hr/>
-
-                        <h3>Friends:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-							<?php
-								$friends = $REL->getFriends($_GET['id']);
-
-								if ($friends != "" && $friends != "[]" && !empty($friends)) {
-									foreach ($users as $id=>$name) {
-										if (isset($friends['f'][$id]))
-										{
-											$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $name);
-
-											$json_a = json_decode($data, true);
-
-											$friend_id = $json_a[0]['data'][0]['id'];
-											$friend_name = $json_a[0]['data'][0]['username'];
-											$friend_icon = $json_a[0]['data'][0]['icon'];
-											$friend_dsp = $json_a[0]['data'][0]['displayname'];
-
-											if ($friend_dsp == null || $friend_dsp == "")
-											{
-												$friend_f = htmlspecialchars($name);
-											}
-											else
-											{
-												$friend_f = htmlspecialchars($friend_dsp);
-											}
-
-											echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $friend_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $friend_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
-										}
-									}
-								}
-								else
-								{
-									echo '<p>This user has no friends yet.</p>';
-								}
-							?>
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
+                                        }
+                                    }
+                                ?>
+                            </div>
                         </div>
 
                         <hr/>
 
-                        <h3>Badges:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-							<?php
-								if ($badges != "" && $badges != "[]" && !empty($badges)) {
-									foreach(json_decode($badges) as $mydata)
-									{
-										$data = file_get_contents($API_URL. '/badge.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $mydata);
+                        <div title="friends" id="friends">
+                            <h3>Friends:</h3>
+                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                                <?php
+                                    $friends = $REL->getFriends($_GET['id']);
 
-										$json_a = json_decode($data, true);
+                                    if ($friends != "" && $friends != "[]" && !empty($friends)) {
+                                        foreach ($users as $id=>$name) {
+                                            if (isset($friends['f'][$id]))
+                                            {
+                                                $data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $name);
 
-										$badge_id = $json_a[0]['data'][0]['id'];
-										$badge_name = $json_a[0]['data'][0]['displayname'];
-										$badge_icon = $json_a[0]['data'][0]['icon'];
+                                                $json_a = json_decode($data, true);
 
-										echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. $badge_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $badge_name . '</h6></div></div></a></div>';
-									}
-								}
-								else
-								{
-									echo '<p>This user has no badges yet.</p>';
-								}
-							?>
+                                                $friend_id = $json_a[0]['data'][0]['id'];
+                                                $friend_name = $json_a[0]['data'][0]['username'];
+                                                $friend_icon = $json_a[0]['data'][0]['icon'];
+                                                $friend_dsp = $json_a[0]['data'][0]['displayname'];
+
+                                                if ($friend_dsp == null || $friend_dsp == "")
+                                                {
+                                                    $friend_f = htmlspecialchars($name);
+                                                }
+                                                else
+                                                {
+                                                    $friend_f = htmlspecialchars($friend_dsp);
+                                                }
+
+                                                echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $friend_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $friend_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo '<p>This user has no friends yet.</p>';
+                                    }
+                                ?>
+                            </div>
                         </div>
 
                         <hr/>
 
-                        <h3>Inventory:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-							<?php
-								$vals = array_count_values(json_decode($items, true));
+                        <div title="badges" id="badges">
+                            <h3>Badges:</h3>
+                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                                <?php
+                                    if ($badges != "" && $badges != "[]" && !empty($badges)) {
+                                        foreach(json_decode($badges) as $mydata)
+                                        {
+                                            $data = file_get_contents($API_URL. '/badge.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $mydata);
 
-								if ($items != "" && $items != "[]" && !empty($items)) {
-									foreach($vals as $key=>$mydata)
-									{
-										$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $key);
+                                            $json_a = json_decode($data, true);
 
-										$json_a = json_decode($data, true);
+                                            $badge_id = $json_a[0]['data'][0]['id'];
+                                            $badge_name = $json_a[0]['data'][0]['displayname'];
+                                            $badge_icon = $json_a[0]['data'][0]['icon'];
 
-										$item_id = $json_a[0]['data'][0]['id'];
-										$item_propername = $json_a[0]['data'][0]['name'];
-										$item_name = $json_a[0]['data'][0]['displayname'];
-										$item_icon = $json_a[0]['data'][0]['icon'];
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. $badge_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $badge_name . '</h6></div></div></a></div>';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo '<p>This user has no badges yet.</p>';
+                                    }
+                                ?>
+                            </div>
+                        </div>
 
-										$value = $vals[$key];
+                        <hr/>
 
-										echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. $item_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $item_name . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
-									}
-								}
-								else
-								{
-									echo '<p>This user has no items yet.</p>';
-								}
-							?>
+                        <div title="inventory" id="inventory">
+                            <h3>Inventory:</h3>
+                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                                <?php
+                                    $vals = array_count_values(json_decode($items, true));
+
+                                    if ($items != "" && $items != "[]" && !empty($items)) {
+                                        foreach($vals as $key=>$mydata)
+                                        {
+                                            $data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $key);
+
+                                            $json_a = json_decode($data, true);
+
+                                            $item_id = $json_a[0]['data'][0]['id'];
+                                            $item_propername = $json_a[0]['data'][0]['name'];
+                                            $item_name = $json_a[0]['data'][0]['displayname'];
+                                            $item_icon = $json_a[0]['data'][0]['icon'];
+
+                                            $value = $vals[$key];
+
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. $item_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $item_name . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo '<p>This user has no items yet.</p>';
+                                    }
+                                ?>
+                            </div>
                         </div>
 					</div>
 				</div>

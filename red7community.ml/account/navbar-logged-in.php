@@ -140,10 +140,12 @@
     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
         <li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-user"></i> Profile</a></li>
         <li><a class="dropdown-item" href="/avatar-editor.php"><i class="far fa-user-tag"></i> Avatar Editor</a></li>
-        <li><a class="dropdown-item" href="/users/friends.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-users"></i> Friends</a></li>
-        <li><a class="dropdown-item" href="/users/inventory.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-backpack"></i> Inventory</a></li>
+        <li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#friends"><i class="far fa-users"></i> Friends</a></li>
+        <li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#inventory"><i class="far fa-backpack"></i> Inventory</a></li>
         <li><a class="dropdown-item" href="/account/settings"><i class="far fa-cog"></i> Settings</a></li>
+        <li><a class="dropdown-item" href="/redeem.php"><i class="far fa-clipboard-check"></i> Redeem Code</a></li>
         <li><a class="dropdown-item" href="/account/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a></li>
+        <li><a class="dropdown-item" href="/terms-of-service.php"><i class="far fa-user-check"></i> Terms of Service</a></li>
     </ul>
 </li>
 
