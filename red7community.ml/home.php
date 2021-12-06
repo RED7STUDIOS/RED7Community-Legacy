@@ -54,10 +54,10 @@ exit;
 
         <div class="page-content-wrapper">
             <div class="d-flex align-items-center border-bottom" style="display: inline;">
-                <img src="<?php echo $your_icon; ?>" style="height: 128px; width: 128px; border-radius: 50%;"/>
+                <img src="<?php echo $your_icon; ?>" class="profile-picture"/>
                 &nbsp;
                 <h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) {
-						echo '<img src="' . $premiumIcon . '" style="height: 30px; width: 30px; display: inline;"></img>';
+						echo '<img src="' . $premiumIcon . '" class="premium-icon"></img>';
 					} ?>
                     <h2 class="<?php if ($your_isAdmin == 1) {
 						echo 'title-rainbow-lr';
@@ -67,9 +67,8 @@ exit;
 						} else {
 							echo $your_username;
 						} ?></h2>&nbsp;<?php if ($your_isVerified == 1) {
-						echo '<img src="' . $verifiedIcon . '" style="height: 25px; width: 25px; display: inline;"></img>';
-					} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>
-                            )</b></small><?php if ($your_isBanned == 1) {
+						echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
+					} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
 						echo '<p><strong style="color: red;">*BANNED*</strong></p>';
 					} ?>!
                 </h2>
@@ -78,7 +77,7 @@ exit;
             <br/>
 
             <h3>Friends:</h3>
-            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
+            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 				<?php
 					require $_SERVER['DOCUMENT_ROOT']. "/assets/relation.php";
 
@@ -107,7 +106,7 @@ exit;
 									$friend_f = htmlspecialchars($friend_dsp);
 								}
 
-								echo '<div class="col" style="height:180px; width:180px"><a href="/users/profile.php?id='. $friend_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $friend_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $friend_f . '</h6> <small><b>(@'. htmlspecialchars($name). ')</b></small></div></div></a></div>';
+								echo '<div class="col profile-list-card"><a href="/users/profile.php?id='. $friend_id . '" class="profile-list"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $friend_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
 							}
 						}
 					}

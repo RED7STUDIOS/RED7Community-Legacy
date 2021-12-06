@@ -149,6 +149,74 @@ html, body {
 	text-align: center;
 }
 
+.premium-icon {
+	height: 25px;
+	width: 25px;
+	display: inline;
+}
+
+.verified-icon {
+	height: 30px;
+	width: 30px;
+	display: inline;
+}
+
+.profile-picture {
+	height: 128px;
+	width: 128px;
+	border-radius: 50%;
+}
+
+/* Friend's list related CSS */
+
+.row .profile-list {
+	height: 100%;
+	width: 100%;
+}
+
+div .profile-list {
+	height:180px;
+	width:180px;
+}
+
+a, h6, small, b .profile-list {
+	text-decoration: none;
+}
+
+.profile-list-title {
+	text-align: center;
+	width: 120px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.profile-list-width {
+	width:100%;
+	height:100%;
+}
+
+div .profile-list-card {
+	height:180px;
+	width:180px;
+}
+
+
+/* ------------------------ */
+
+.user-img {
+	height:90px;
+	width:90px;
+	margin-top:15px;
+	border-radius: 50%;
+}
+
+.normal-img {
+	height:90px;
+	width:90px;
+	margin-top:15px;
+}
+
 .rainbow-lr {
 	color: linear-gradient(to right, red, orange , yellow, green, cyan, blue, violet);
 	background-clip: text;

@@ -357,7 +357,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         <canvas id="c"></canvas>
 
                         <h4>Currently Wearing:</h4>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 							<?php
 								$total = 0;
 
@@ -383,7 +383,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 										$thingy = " border-success";
 										$thingy2 = "/catalog/item.php?id=". $row['id'];
 
-										echo '<div class="col" style="height:180px; width:180px"><a href="'. $thingy2. '" style="text-decoration: none;"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top" src="'. $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['type']. '</div></div></a></div>';
+										echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
 									}
 								};
 							?>
@@ -392,7 +392,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         <hr/>
 
                         <h3>Friends:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 190px;">
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 							<?php
 								$friends = $REL->getFriends($_GET['id']);
 
@@ -418,7 +418,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 												$friend_f = htmlspecialchars($friend_dsp);
 											}
 
-											echo '<div class="col" style="height:180px; width:180px"><a href="/users/profile.php?id='. $friend_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $friend_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $friend_f . '</h6> <small><b>(@'. htmlspecialchars($name). ')</b></small></div></div></a></div>';
+											echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $friend_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $friend_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
 										}
 									}
 								}
@@ -432,7 +432,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         <hr/>
 
                         <h3>Badges:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 180px;">
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 							<?php
 								if ($badges != "" && $badges != "[]" && !empty($badges)) {
 									foreach(json_decode($badges) as $mydata)
@@ -445,7 +445,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 										$badge_name = $json_a[0]['data'][0]['displayname'];
 										$badge_icon = $json_a[0]['data'][0]['icon'];
 
-										echo '<div class="col" style="height:180px; width:180px"><a href="/catalog/badge.php?id='. $badge_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $badge_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $badge_name . '</h6></div></div></a></div>';
+										echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. $badge_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $badge_name . '</h6></div></div></a></div>';
 									}
 								}
 								else
@@ -458,7 +458,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         <hr/>
 
                         <h3>Inventory:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 210px;">
+                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 							<?php
 								$vals = array_count_values(json_decode($items, true));
 
@@ -476,37 +476,12 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 										$value = $vals[$key];
 
-										echo '<div class="col" style="height:180px; width:180px"><a href="/catalog/item.php?id='. $item_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $item_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $item_name . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
+										echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. $item_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $item_name . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
 									}
 								}
 								else
 								{
 									echo '<p>This user has no items yet.</p>';
-								}
-							?>
-                        </div>
-
-                        <hr/>
-
-                        <h3>Clans:</h3>
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto" style="height: 210px;">
-							<?php
-								if ($clans != "" && $clans != "[]" && !empty($clans)) {
-									foreach(json_decode($clans) as $mydata)
-									{
-										$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $mydata);
-
-										$json_a = json_decode($data, true);
-
-										$group_id = $json_a[0]['data'][0]['id'];
-										$group_icon = $json_a[0]['data'][0]['icon'];
-
-										echo '<div class="col" style="height:180px; width:180px"><a href="/users/profile.php?id='. $group_id . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $group_icon . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title">'. $mydata . '</h6></div></div></a></div>';
-									}
-								}
-								else
-								{
-									echo '<p>This user has no clans yet.</p>';
 								}
 							?>
                         </div>
