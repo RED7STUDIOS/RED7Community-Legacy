@@ -123,7 +123,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
             <script>
 
-                var observe;
+                let observe;
                 if (window.attachEvent) {
                     observe = function (element, event, handler) {
                         element.attachEvent('on' + event, handler);
@@ -135,7 +135,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 					}
 
 					function init () {
-						var text = document.getElementById('text');
+						let text = document.getElementById('text');
 						function resize () {
 							text.style.height = 'auto';
 							text.style.height = text.scrollHeight+'px';
@@ -144,6 +144,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						function delayedResize () {
 							window.setTimeout(resize, 0);
 						}
+
 						observe(text, 'change',  resize);
 						observe(text, 'cut',     delayedResize);
 						observe(text, 'paste',   delayedResize);
@@ -194,7 +195,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						<?php if ( $isBanned == 1 ) { echo '<p><strong style="color: red;">*BANNED*</strong></p>'; } ?>
 
                         <?php
-                        // (A) LOAD RELATIOSHIP LIBRARY + SET CURRENT USER
+                        // (A) LOAD RELATIONSHIP LIBRARY + SET CURRENT USER
                         require $_SERVER['DOCUMENT_ROOT']. "/assets/relation.php";
 
                         // (B) PROCESS RELATIONSHIP REQUEST
@@ -281,9 +282,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 								if ($banReason != "") {
 									echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>'. $banDate. '</strong> with the following reason: <strong>'. $banReason. '</strong></p><hr/>';
 								}
-								else
-								{
-									echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>'. $banDate. '</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
+								else {
+									echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>' . $banDate . '</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
 								}
 							} else {
 								echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>' . $banReason . '</strong></p><hr/>';
@@ -292,9 +292,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						?>
 
                         <h3>About:</h3>
-                        <textarea
-                                style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;"
-                                id="text" disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
+                        <textarea class="description" id="text"
+                                  disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
                         <hr/>
 						<?php
 							if ($your_isAdmin == 1) {
@@ -338,8 +337,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                     <h5>Is Banned:</h5>
                     <input type="checkbox" name="isBanned"' . $checked . '/>
                     <h5>Ban Reason:</h5>
-                    <input maxlength="69420" type="text" name="banReason" style="width: 100%;"
-                           value="' . $banReason . '"/>
+                    <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . $banReason . '"/>
                     <input hidden type="text" name="action" value="banningUser"/>
                     <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
                     <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
@@ -385,7 +383,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 										echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
 									}
-								};
+								}
 							?>
 						</div>
 

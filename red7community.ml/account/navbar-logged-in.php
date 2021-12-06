@@ -135,7 +135,7 @@
 
 <li class="nav-item dropdown pull-left">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img style="width: 20px; height: 20 px; border-radius: 50%;" src="<?php echo $your_icon; ?>"/> <?php echo $_SESSION["username"] ?>
+        <img class="profile-picture" style="width: 20px; height: 20px;" src="<?php echo $your_icon; ?>"/> <?php echo $_SESSION["username"] ?>
     </a>
     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
         <li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-user"></i> Profile</a></li>
