@@ -13,45 +13,30 @@ $response = array();
 
 $api_type = $_GET['api'];
 
-/* $sql = "SELECT * FROM apikeys WHERE api_key='". $api_key. "'";
-$result = mysqli_query($link, $sql);
+if (!empty($api_type)) {
+	if ($api_type == 'getbyid') {
+		if (!empty($_GET['id'])) {
+			$id = $_GET['id'];
 
-if (mysqli_num_rows($result) > 0) { */
-  if (!empty($api_type)) {
-		if ($api_type == 'getbyid') {
-			if(!empty($_GET['id']))
-			{
-				$id = $_GET['id'];
+			if ($link) {
+				$sql = "SELECT * FROM avatars WHERE ownerid=" . $id;
+				$result = mysqli_query($link, $sql);
 
-				if ($link) {
-					$sql = "SELECT * FROM avatars WHERE ownerid=". $id;
-					$result = mysqli_query($link, $sql);
-
-					if ($result) {
-						header("Content-Type: JSON");
-						$i = 0;
-						while ($row = mysqli_fetch_assoc($result)) {
-							$response[$i]['data'][0]['ownerid'] = $row['ownerid'];
-							$response[$i]['data'][0]['items'] = $row['items'];
-							$response[$i]['data'][0]['shirt'] = $row['shirt'];
-							$response[$i]['data'][0]['pants'] = $row['pants'];
-							$response[$i]['data'][0]['face'] = $row['face'];
-						}
-
-						echo json_encode($response, JSON_PRETTY_PRINT);
+				if ($result) {
+					header("Content-Type: JSON");
+					$i = 0;
+					while ($row = mysqli_fetch_assoc($result)) {
+						$response[$i]['data'][0]['ownerid'] = $row['ownerid'];
+						$response[$i]['data'][0]['items'] = $row['items'];
+						$response[$i]['data'][0]['shirt'] = $row['shirt'];
+						$response[$i]['data'][0]['pants'] = $row['pants'];
+						$response[$i]['data'][0]['face'] = $row['face'];
 					}
+
+					echo json_encode($response, JSON_PRETTY_PRINT);
 				}
 			}
 		}
 	}
-/*}
-else
-{
-	header("Content-Type: JSON");
-	$response[0]['code'] = '1';
-	$response[0]['result'] = "Invalid Key";
-
-	echo json_encode($response, JSON_PRETTY_PRINT);
-}*/
-
+}
 ?>
