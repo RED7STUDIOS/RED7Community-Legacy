@@ -42,11 +42,11 @@ else if ($_POST['action'] == "purchaseItem")
     $your_id = $_SESSION['id'];
 
     // Get the user so an interceptor cannot be used to modify currency.
-    $data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $your_id);
+    $data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $your_id);
     $json_a = json_decode($data, true);
     $currency = $json_a[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $_POST['value']);
+    $data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_POST['value']);
     $json_a = json_decode($data, true);
     $price = $json_a[0]['data'][0]['price'];
     $owners = $json_a[0]['data'][0]['owners'];

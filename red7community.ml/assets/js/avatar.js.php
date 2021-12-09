@@ -62,7 +62,7 @@
 		}
 
 		<?php
-			$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $face);
+			$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $face);
 
 			$json_a = json_decode($data, true);
 
@@ -70,7 +70,7 @@
 			$name = $json_a[0]['data'][0]['displayname'];
 			$icon = $json_a[0]['data'][0]['texture'];
 
-			$data_shirt = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $shirt);
+			$data_shirt = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $shirt);
 
 			$json_a_shirt = json_decode($data_shirt, true);
 
@@ -78,7 +78,7 @@
 			$shirtname = $json_a_shirt[0]['data'][0]['displayname'];
 			$shirticon = $json_a_shirt[0]['data'][0]['texture'];
 
-			$data_pants = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $pants);
+			$data_pants = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $pants);
 
 			$json_a_pants = json_decode($data_pants, true);
 
@@ -131,7 +131,7 @@
 			<?php
 			$armthingy = $STORAGE_URL. "/Avatar/LeftArm.obj";
 			foreach(json_decode($hats, true) as $hat) {
-				$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $hat);
+				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
 				$json_a = json_decode($data, true);
 
@@ -255,7 +255,7 @@
 
 		<?php
 		foreach(json_decode($hats, true) as $hat) {
-			$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $hat);
+			$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
 			$json_a = json_decode($data, true);
 

@@ -88,7 +88,7 @@ exit;
 						foreach ($users as $id=>$name) {
 							if (isset($friends['f'][$id]))
 							{
-								$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $name);
+								$data = file_get_contents($API_URL. '/user.php?api=getbyname&name='. $name);
 
 								$json_a = json_decode($data, true);
 

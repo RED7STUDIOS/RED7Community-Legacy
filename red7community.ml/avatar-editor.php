@@ -22,7 +22,7 @@ exit;
 
 $id = $_SESSION['id'];
 
-$data_avatar = file_get_contents($API_URL. '/avatar.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $id);
+$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $id);
 
 $json_a_avatar = json_decode($data_avatar, true);
 

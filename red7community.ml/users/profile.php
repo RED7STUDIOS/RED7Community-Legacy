@@ -14,7 +14,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $_GET['id']);
+$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $_GET['id']);
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted"))
@@ -53,7 +53,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$clans = $json_a[0]['data'][0]['clans'];
 	$badges = $json_a[0]['data'][0]['badges'];
 
-	$data_avatar = file_get_contents($API_URL. '/avatar.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $_GET['id']);
+	$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $_GET['id']);
 
 	$json_a_avatar = json_decode($data_avatar, true);
 
@@ -405,7 +405,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         foreach ($users as $id=>$name) {
                                             if (isset($friends['f'][$id]))
                                             {
-                                                $data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $name);
+                                                $data = file_get_contents($API_URL. '/user.php?api=getbyname&name='. $name);
 
                                                 $json_a = json_decode($data, true);
 
@@ -444,7 +444,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     if ($badges != "" && $badges != "[]" && !empty($badges)) {
                                         foreach(json_decode($badges) as $mydata)
                                         {
-                                            $data = file_get_contents($API_URL. '/badge.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $mydata);
+                                            $data = file_get_contents($API_URL. '/badge.php?api=getbyid&id='. $mydata);
 
                                             $json_a = json_decode($data, true);
 
@@ -474,7 +474,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     if ($items != "" && $items != "[]" && !empty($items)) {
                                         foreach($vals as $key=>$mydata)
                                         {
-                                            $data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $key);
+                                            $data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $key);
 
                                             $json_a = json_decode($data, true);
 
@@ -569,7 +569,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 			}
 
 			<?php
-				$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $face);
+				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $face);
 
 				$json_a = json_decode($data, true);
 
@@ -577,7 +577,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				$name = $json_a[0]['data'][0]['displayname'];
 				$icon = $json_a[0]['data'][0]['texture'];
 
-				$data_shirt = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $shirt);
+				$data_shirt = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $shirt);
 
 				$json_a_shirt = json_decode($data_shirt, true);
 
@@ -595,7 +595,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 					$shirticon = $json_a_shirt[0]['data'][0]['texture'];
 				}
 
-				$data_pants = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $pants);
+				$data_pants = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $pants);
 
 				$json_a_pants = json_decode($data_pants, true);
 
@@ -657,7 +657,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				<?php
 				$armthingy = $STORAGE_URL. "/Avatar/LeftArm.obj";
 				foreach(json_decode($hats, true) as $hat) {
-					$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $hat);
+					$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
 					$json_a = json_decode($data, true);
 
@@ -801,7 +801,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 			<?php
 			foreach(json_decode($hats, true) as $hat) {
-				$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $hat);
+				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
 				$json_a = json_decode($data, true);
 

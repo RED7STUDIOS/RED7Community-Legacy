@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			
 			// Attempt to execute the prepared statement
 			if(mysqli_stmt_execute($stmt)){
-				$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $username);
+				$data = file_get_contents($API_URL. '/user.php?api=getbyname&name='. $username);
 				$json_a = json_decode($data, true);
 				$id = $json_a[0]['data'][0]['id'];
 

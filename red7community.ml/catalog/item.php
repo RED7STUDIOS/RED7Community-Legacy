@@ -11,7 +11,7 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $_GET['id']);
+$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_GET['id']);
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted"))
@@ -38,7 +38,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted"))
 	$icon = $json_a[0]['data'][0]['icon'];
 	$creator = $json_a[0]['data'][0]['creator'];
 
-	$data_u = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $creator);
+	$data_u = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $creator);
 
 	$json_a = json_decode($data_u, true);
 
@@ -195,7 +195,7 @@ else
 								if ($owners != "" && $owners != "[]" && !empty($owners)) {
 									foreach($vals as $key=>$mydata)
 									{
-										$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $key);
+										$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $key);
 
 										$json_a = json_decode($data, true);
 

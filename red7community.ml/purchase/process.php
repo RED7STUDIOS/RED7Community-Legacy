@@ -16,7 +16,7 @@ if(!isset($_SESSION)){
 
 $allowGifts = "";
 
-$your_data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $_SESSION['id']);
+$your_data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $_SESSION['id']);
 $your_json_a = json_decode($your_data, true);
 $your_currency = $your_json_a[0]['data'][0]['currency'];
 $your_membership = $your_json_a[0]['data'][0]['membership'];
@@ -29,7 +29,7 @@ if ($_POST["giftUser"] == "" && empty($_POST["giftUser"]))
 }
 else
 {
-	$data = file_get_contents($API_URL. '/user.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyname&name='. $_POST["giftUser"]);
+	$data = file_get_contents($API_URL. '/user.php?api=getbyname&name='. $_POST["giftUser"]);
 
 	$json_a = json_decode($data, true);
 

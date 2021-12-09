@@ -20,7 +20,7 @@ header("location: ../login.php");
 exit;
 }
 
-$data_main = file_get_contents($API_URL. '/avatar.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getbyid&id='. $_SESSION['id']);
+$data_main = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $_SESSION['id']);
 
 $json_a_main = json_decode($data_main, true);
 
@@ -63,7 +63,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 					<h2>Avatar Editor Action</h2>
 					<?php
 						
-						$data = file_get_contents($API_URL. '/catalog.php?key=CvHKAVEBzGveKVUpLaUZZWgHt&api=getitembyid&id='. $_GET['id']);
+						$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_GET['id']);
 
 						$json_a = json_decode($data, true);
 
