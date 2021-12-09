@@ -13,7 +13,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 else
 {
-	header("location: login.php");
+	header("location: login.ph6p");
 	exit;
 }
 ?>

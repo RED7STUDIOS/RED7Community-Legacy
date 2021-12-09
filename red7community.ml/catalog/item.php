@@ -122,7 +122,7 @@ else
 						<?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
 						&nbsp;
 						<div class="wrapper">
-							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" class="item-owned"/>'; } ?>
+							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
 							<span>
 								<h6>By <a href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a></h6>
 							</span>

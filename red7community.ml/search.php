@@ -80,7 +80,7 @@
 				while($row = mysqli_fetch_assoc($result)) {
 					if (in_array($row['id'], $items))
 					{
-						$item_owned = ' <img src="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/images/item-owned.png" style="height: 20px; width: 20px;"/></h2>';
+						$item_owned = ' <img src="/assets/images/item-owned.png" style="height: 20px; width: 20px;"/></h2>';
 					}
 					else
 					{
