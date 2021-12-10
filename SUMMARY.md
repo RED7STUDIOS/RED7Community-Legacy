@@ -4,7 +4,7 @@
 
 ## Guides
 
-* [Creating your first project](guides/creating-your-first-project.md)
+* [Installation](guides/installation.md)
 * [Creating your first task](guides/creating-your-first-task.md)
 * [Advanced permissions](guides/advanced-permissions.md)
 
@@ -27,3 +27,9 @@
 ## Extras
 
 * [Keyboard Shortcuts](extras/keyboard-shortcuts.md)
+
+***
+
+* [Installing IIS on Windows 10/11](installing-iis-on-windows-10-11.md)
+* [Downloading & Updating](downloading-and-updating.md)
+* [Using the RED7Community Generator tool](using-the-red7community-generator-tool.md)
