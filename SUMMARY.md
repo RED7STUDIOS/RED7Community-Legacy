@@ -1,6 +1,6 @@
 # Table of contents
 
-* [What is MyProduct?](README.md)
+* [What is RED7Community?](README.md)
 
 ## Guides
 
