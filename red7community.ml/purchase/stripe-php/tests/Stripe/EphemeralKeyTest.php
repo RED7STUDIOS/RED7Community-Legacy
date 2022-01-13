@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use InvalidArgumentException;
+
 class EphemeralKeyTest extends TestCase
 {
     public function testIsCreatable()
@@ -19,7 +21,7 @@ class EphemeralKeyTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testIsNotCreatableWithoutAnExplicitApiVersion()
     {

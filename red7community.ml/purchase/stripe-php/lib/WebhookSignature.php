@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use Stripe\Error\SignatureVerification;
+
 abstract class WebhookSignature
 {
     const EXPECTED_SCHEME = "v1";
@@ -17,8 +19,8 @@ abstract class WebhookSignature
      * @param string $secret secret used to generate the signature.
      * @param int $tolerance maximum difference allowed between the header's
      *  timestamp and the current time
-     * @throws \Stripe\Error\SignatureVerification if the verification fails.
      * @return bool
+     * @throws SignatureVerification if the verification fails.
      */
     public static function verifyHeader($payload, $header, $secret, $tolerance = null)
     {

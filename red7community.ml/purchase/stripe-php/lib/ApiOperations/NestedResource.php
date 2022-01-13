@@ -2,6 +2,8 @@
 
 namespace Stripe\ApiOperations;
 
+use Stripe\Util\Util;
+
 /**
  * Trait for resources that have nested resources.
  *
@@ -10,21 +12,17 @@ namespace Stripe\ApiOperations;
 trait NestedResource
 {
     /**
-     * @param string $method
-     * @param string $url
+     * @param string $id
+     * @param string $nestedPath
      * @param array|null $params
      * @param array|string|null $options
      *
      * @return Stripe\StripeObject
      */
-    protected static function _nestedResourceOperation($method, $url, $params = null, $options = null)
+    protected static function _createNestedResource($id, $nestedPath, $params = null, $options = null)
     {
-        self::_validateParams($params);
-
-        list($response, $opts) = static::_staticRequest($method, $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
-        $obj->setLastResponse($response);
-        return $obj;
+        $url = static::_nestedResourceUrl($id, $nestedPath);
+        return self::_nestedResourceOperation('post', $url, $params, $options);
     }
 
     /**
@@ -44,17 +42,21 @@ trait NestedResource
     }
 
     /**
-     * @param string $id
-     * @param string $nestedPath
+     * @param string $method
+     * @param string $url
      * @param array|null $params
      * @param array|string|null $options
      *
      * @return Stripe\StripeObject
      */
-    protected static function _createNestedResource($id, $nestedPath, $params = null, $options = null)
+    protected static function _nestedResourceOperation($method, $url, $params = null, $options = null)
     {
-        $url = static::_nestedResourceUrl($id, $nestedPath);
-        return self::_nestedResourceOperation('post', $url, $params, $options);
+        self::_validateParams($params);
+
+        list($response, $opts) = static::_staticRequest($method, $url, $params, $options);
+        $obj = Util::convertToStripeObject($response->json, $opts);
+        $obj->setLastResponse($response);
+        return $obj;
     }
 
     /**

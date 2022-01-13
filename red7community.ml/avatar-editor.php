@@ -7,22 +7,22 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
-if(!isset($_SESSION)){
-	// Initialize the session
-	session_start();
+if (!isset($_SESSION)) {
+    // Initialize the session
+    session_start();
 }
 
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-header("location: login.php");
-exit;
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: login.php");
+    exit;
 }
 
 $id = $_SESSION['id'];
 
-$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $id);
+$data_avatar = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . $id);
 
 $json_a_avatar = json_decode($data_avatar, true);
 
@@ -31,127 +31,125 @@ $shirt = $json_a_avatar[0]['data'][0]['shirt'];
 $pants = $json_a_avatar[0]['data'][0]['pants'];
 $face = $json_a_avatar[0]['data'][0]['face'];
 
-if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];
+} else {
+    $page = 1;
+}
 ?>
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="The avatar editor.">
-		<title>Avatar Editor - <?php echo $site_name; ?></title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The avatar editor.">
+    <title>Avatar Editor - <?php echo $site_name; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="/assets/css/style.css">
-		<script src="/assets/js/fontawesome.js"></script>
-		<style>
-		#c {
-			width: 50%;
-			height: 50%;
-		}
-		</style>
-	</head>
-	<body>
-		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="/assets/css/paper-kit.css?v=2.2.0" rel="stylesheet"/>
+    <script src="/assets/js/fontawesome.js"></script>
+    <style>
+        #c {
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 
-		<?php
-		if (isset($your_isBanned))
-		{
-			if ($your_isBanned == 1)
-			{
-				echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-			}
-		}
-		
-		if (isset($maintenanceMode))
-		{
-			if ($maintenanceMode == "on")
-			{
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-		?>
+<?php
+if (isset($your_isBanned)) {
+    if ($your_isBanned == 1) {
+        echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
+    }
+}
 
-		<div class="page-content-wrapper">
-			<canvas id="c"></canvas>
+if (isset($maintenanceMode)) {
+    if ($maintenanceMode == "on") {
+        echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+    }
+}
+?>
 
-			<div class="row row-cols-1 row-cols-md-3 g-4">
-				<?php
-					$total = 0;
+<div class="page-content-wrapper">
+    <canvas id="c"></canvas>
 
-					$datatable = "catalog"; // MySQL table name
-					$results_per_page = 21; // number of results per page
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php
+        $total = 0;
 
-					$start_from = ($page-1) * $results_per_page;
-					$sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
-					$result = mysqli_query($link, $sql);
+        $datatable = "catalog"; // MySQL table name
+        $results_per_page = 21; // number of results per page
 
-					while($row = mysqli_fetch_assoc($result)) {
+        $start_from = ($page - 1) * $results_per_page;
+        $sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
+        $result = mysqli_query($link, $sql);
 
-						$your_inventory = json_decode($your_items, true);
+        while ($row = mysqli_fetch_assoc($result)) {
 
-						if (in_array($row['id'], $your_inventory))
-						{
-							$total =+ 1;
+            $your_inventory = json_decode($your_items, true);
 
-							if (strtolower($row['type']) != "shirt" && strtolower($row['type']) != "pants" && strtolower($row['type']) != "face")
-							{
-								$thingy = "";
-								$thingy2 = "";
+            if (in_array($row['id'], $your_inventory)) {
+                $total = +1;
 
-								if (!in_array($row['id'], json_decode($hats, true)))
-								{
-									$thingy = "";
-									$thingy2 = "/equip-item.php?api=equip&id=". $row['id'];
-								}
-								else
-								{
-									$thingy = " border-success";
-									$thingy2 = "/equip-item.php?api=unequip&id=". $row['id'];
-								}
+                if (strtolower($row['type']) != "shirt" && strtolower($row['type']) != "pants" && strtolower($row['type']) != "face") {
+                    $thingy = "";
+                    $thingy2 = "";
 
-								echo '<div class="col" style="height:180px; width:180px"><a href="'. $thingy2. '" style="text-decoration: none;"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top" src="'. $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['type']. '</div></div></a></div>';
-							}
-							else
-							{
-								$total =+ 1;
+                    if (!in_array($row['id'], json_decode($hats, true))) {
+                        $thingy = "";
+                        $thingy2 = "/equip-item.php?api=equip&id=" . $row['id'];
+                    } else {
+                        $thingy = " border-success";
+                        $thingy2 = "/equip-item.php?api=unequip&id=" . $row['id'];
+                    }
 
-								$thingy = "";
-								$type = "1";
+                    echo '<div class="col" style="height:180px; width:180px"><a href="' . $thingy2 . '" style="text-decoration: none;"><div class="align-items-center card text-center' . $thingy . '"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['type'] . '</div></div></a></div>';
+                } else {
+                    $total = +1;
 
-								if (strtolower($row['type']) == "shirt")
-								{
-									$type = $shirt;
-								}
-								else if (strtolower($row['type']) == "pants")
-								{
-									$type = $pants;
-								}
-								else if (strtolower($row['type']) == "face")
-								{
-									$type = $face;
-								}
+                    $thingy = "";
+                    $type = "1";
 
-								if ($type != $row['id'])
-								{
-									$thingy = "";
-								}
-								else
-								{
-									$thingy = " border-success";
-								}
+                    if (strtolower($row['type']) == "shirt") {
+                        $type = $shirt;
+                    } else if (strtolower($row['type']) == "pants") {
+                        $type = $pants;
+                    } else if (strtolower($row['type']) == "face") {
+                        $type = $face;
+                    }
 
-								echo '<div class="col" style="height:180px; width:180px"><a href="/equip-item.php?api=change'. strtolower($row['type']). '&id='. $row['id']. '" style="text-decoration: none;"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top" src="'. $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['type']. '</div></div></a></div>';
-							}
-						}
-					};
-				?>
-			</div>
-		</div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/js/avatar.js.php"; ?>
-    </body>
+                    if ($type != $row['id']) {
+                        $thingy = "";
+                    } else {
+                        $thingy = " border-success";
+                    }
+
+                    echo '<div class="col" style="height:180px; width:180px"><a href="/equip-item.php?api=change' . strtolower($row['type']) . '&id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center' . $thingy . '"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['type'] . '</div></div></a></div>';
+                }
+            }
+        }
+        ?>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="./assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="./assets/js/plugins/moment.min.js"></script>
+<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
+<script src="./assets/js/paper-kit.js?v=2.2.0" type="text/javascript"></script>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/js/avatar.js.php"; ?>
+</body>
 </html>

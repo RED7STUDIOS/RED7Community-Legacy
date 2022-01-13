@@ -2,6 +2,7 @@
 
 namespace Stripe;
 
+use ReflectionClass;
 use Stripe\HttpClient\CurlClient;
 
 class CurlClientTest extends TestCase
@@ -21,7 +22,7 @@ class CurlClientTest extends TestCase
      */
     public function setUpReflectors()
     {
-        $stripeReflector = new \ReflectionClass('\Stripe\Stripe');
+        $stripeReflector = new ReflectionClass('\Stripe\Stripe');
 
         $this->maxNetworkRetryDelayProperty = $stripeReflector->getProperty('maxNetworkRetryDelay');
         $this->maxNetworkRetryDelayProperty->setAccessible(true);
@@ -29,7 +30,7 @@ class CurlClientTest extends TestCase
         $this->initialNetworkRetryDelayProperty = $stripeReflector->getProperty('initialNetworkRetryDelay');
         $this->initialNetworkRetryDelayProperty->setAccessible(true);
 
-        $curlClientReflector = new \ReflectionClass('Stripe\HttpClient\CurlClient');
+        $curlClientReflector = new ReflectionClass('Stripe\HttpClient\CurlClient');
 
         $this->shouldRetryMethod = $curlClientReflector->getMethod('shouldRetry');
         $this->shouldRetryMethod->setAccessible(true);
@@ -56,13 +57,6 @@ class CurlClientTest extends TestCase
     private function setInitialNetworkRetryDelay($initialNetworkRetryDelay)
     {
         $this->initialNetworkRetryDelayProperty->setValue(null, $initialNetworkRetryDelay);
-    }
-
-    private function createFakeRandomGenerator($returnValue = 1.0)
-    {
-        $fakeRandomGenerator = $this->getMock('Stripe\Util\RandomGenetator', ['randFloat']);
-        $fakeRandomGenerator->method('randFloat')->willReturn($returnValue);
-        return $fakeRandomGenerator;
     }
 
     public function testTimeout()
@@ -191,6 +185,13 @@ class CurlClientTest extends TestCase
             Stripe::getInitialNetworkRetryDelay() * 8,
             $this->sleepTimeMethod->invoke($curlClient, 4)
         );
+    }
+
+    private function createFakeRandomGenerator($returnValue = 1.0)
+    {
+        $fakeRandomGenerator = $this->getMock('Stripe\Util\RandomGenetator', ['randFloat']);
+        $fakeRandomGenerator->method('randFloat')->willReturn($returnValue);
+        return $fakeRandomGenerator;
     }
 
     public function testSleepTimeShouldEnforceMaxNetworkRetryDelay()

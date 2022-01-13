@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use Stripe\Error\Authentication;
+
 class OAuthTest extends TestCase
 {
     public function testAuthorizeUrl()
@@ -31,7 +33,7 @@ class OAuthTest extends TestCase
     }
 
     /**
-     * @expectedException \Stripe\Error\Authentication
+     * @expectedException Authentication
      * @expectedExceptionMessageRegExp #No client_id provided#
      */
     public function testRaisesAuthenticationErrorWhenNoClientId()
@@ -90,7 +92,7 @@ class OAuthTest extends TestCase
         );
 
         $resp = OAuth::deauthorize([
-                'stripe_user_id' => 'acct_test_deauth',
+            'stripe_user_id' => 'acct_test_deauth',
         ]);
         $this->assertSame('acct_test_deauth', $resp->stripe_user_id);
     }

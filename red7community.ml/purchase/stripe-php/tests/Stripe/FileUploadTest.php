@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use CurlFile;
+
 class FileUploadTest extends TestCase
 {
     const TEST_RESOURCE_ID = 'file_123';
@@ -94,7 +96,7 @@ class FileUploadTest extends TestCase
             200,
             Stripe::$apiUploadBase
         );
-        $curlFile = new \CurlFile(dirname(__FILE__) . '/../data/test.png');
+        $curlFile = new CurlFile(dirname(__FILE__) . '/../data/test.png');
         $resource = FileUpload::create([
             "purpose" => "dispute_evidence",
             "file" => $curlFile,

@@ -41,18 +41,6 @@ class RequestOptions
     }
 
     /**
-     * Discards all headers that we don't want to persist across requests.
-     */
-    public function discardNonPersistentHeaders()
-    {
-        foreach ($this->headers as $k => $v) {
-            if (!in_array($k, self::$HEADERS_TO_PERSIST)) {
-                unset($this->headers[$k]);
-            }
-        }
-    }
-
-    /**
      * Unpacks an options array into an RequestOptions object
      * @param array|string|null $options a key => value array
      *
@@ -91,9 +79,21 @@ class RequestOptions
         }
 
         $message = 'The second argument to Stripe API method calls is an '
-           . 'optional per-request apiKey, which must be a string, or '
-           . 'per-request options, which must be an array. (HINT: you can set '
-           . 'a global apiKey by "Stripe::setApiKey(<apiKey>)")';
+            . 'optional per-request apiKey, which must be a string, or '
+            . 'per-request options, which must be an array. (HINT: you can set '
+            . 'a global apiKey by "Stripe::setApiKey(<apiKey>)")';
         throw new Error\Api($message);
+    }
+
+    /**
+     * Discards all headers that we don't want to persist across requests.
+     */
+    public function discardNonPersistentHeaders()
+    {
+        foreach ($this->headers as $k => $v) {
+            if (!in_array($k, self::$HEADERS_TO_PERSIST)) {
+                unset($this->headers[$k]);
+            }
+        }
     }
 }

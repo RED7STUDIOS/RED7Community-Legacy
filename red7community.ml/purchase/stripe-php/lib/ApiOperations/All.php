@@ -2,6 +2,8 @@
 
 namespace Stripe\ApiOperations;
 
+use Stripe\Util\Util;
+
 /**
  * Trait for listable resources. Adds a `all()` static method to the class.
  *
@@ -21,7 +23,7 @@ trait All
         $url = static::classUrl();
 
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = Util::convertToStripeObject($response->json, $opts);
         if (!is_a($obj, 'Stripe\\Collection')) {
             $class = get_class($obj);
             $message = "Expected type \"Stripe\\Collection\", got \"$class\" instead";

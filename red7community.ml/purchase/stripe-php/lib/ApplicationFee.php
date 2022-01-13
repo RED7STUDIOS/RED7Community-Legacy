@@ -42,19 +42,6 @@ class ApplicationFee extends ApiResource
     }
 
     /**
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApplicationFee The refunded application fee.
-     */
-    public function refund($params = null, $opts = null)
-    {
-        $this->refunds->create($params, $opts);
-        $this->refresh();
-        return $this;
-    }
-
-    /**
      * @param array|null $id The ID of the application fee on which to create the refund.
      * @param array|null $params
      * @param array|string|null $opts
@@ -102,5 +89,18 @@ class ApplicationFee extends ApiResource
     public static function allRefunds($id, $params = null, $opts = null)
     {
         return self::_allNestedResources($id, static::PATH_REFUNDS, $params, $opts);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApplicationFee The refunded application fee.
+     */
+    public function refund($params = null, $opts = null)
+    {
+        $this->refunds->create($params, $opts);
+        $this->refresh();
+        return $this;
     }
 }

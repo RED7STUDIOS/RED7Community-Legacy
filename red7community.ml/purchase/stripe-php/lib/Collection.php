@@ -40,6 +40,24 @@ class Collection extends StripeObject
         return Util\Util::convertToStripeObject($response, $opts);
     }
 
+    private function extractPathAndUpdateParams($params)
+    {
+        $url = parse_url($this->url);
+        if (!isset($url['path'])) {
+            throw new Error\Api("Could not parse list url into parts: $url");
+        }
+
+        if (isset($url['query'])) {
+            // If the URL contains a query param, parse it out into $params so they
+            // don't interact weirdly with each other.
+            $query = [];
+            parse_str($url['query'], $query);
+            $params = array_merge($params ?: [], $query);
+        }
+
+        return [$url['path'], $params];
+    }
+
     public function create($params = null, $opts = null)
     {
         list($url, $params) = $this->extractPathAndUpdateParams($params);
@@ -74,23 +92,5 @@ class Collection extends StripeObject
     public function autoPagingIterator()
     {
         return new Util\AutoPagingIterator($this, $this->_requestParams);
-    }
-
-    private function extractPathAndUpdateParams($params)
-    {
-        $url = parse_url($this->url);
-        if (!isset($url['path'])) {
-            throw new Error\Api("Could not parse list url into parts: $url");
-        }
-
-        if (isset($url['query'])) {
-            // If the URL contains a query param, parse it out into $params so they
-            // don't interact weirdly with each other.
-            $query = [];
-            parse_str($url['query'], $query);
-            $params = array_merge($params ?: [], $query);
-        }
-
-        return [$url['path'], $params];
     }
 }

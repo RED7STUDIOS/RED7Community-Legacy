@@ -83,9 +83,9 @@ class Charge extends ApiResource
      * @param array|null $params
      * @param array|string|null $options
      *
+     * @return array The updated dispute.
      * @deprecated Use the `save` method on the Dispute object
      *
-     * @return array The updated dispute.
      */
     public function updateDispute($params = null, $options = null)
     {
@@ -98,9 +98,9 @@ class Charge extends ApiResource
     /**
      * @param array|string|null $options
      *
+     * @return Charge The updated charge.
      * @deprecated Use the `close` method on the Dispute object
      *
-     * @return Charge The updated charge.
      */
     public function closeDispute($options = null)
     {

@@ -7,13 +7,11 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-	header("location: home.php");
-	exit;
-}
-else
-{
-	header("location: login.ph6p");
-	exit;
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: home.php");
+    exit;
+} else {
+    header("location: login.php");
+    exit;
 }
 ?>

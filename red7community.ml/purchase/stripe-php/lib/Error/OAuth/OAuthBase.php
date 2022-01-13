@@ -2,7 +2,9 @@
 
 namespace Stripe\Error\OAuth;
 
-class OAuthBase extends \Stripe\Error\Base
+use Stripe\Error\Base;
+
+class OAuthBase extends Base
 {
     public function __construct(
         $code,
@@ -11,7 +13,8 @@ class OAuthBase extends \Stripe\Error\Base
         $httpBody = null,
         $jsonBody = null,
         $httpHeaders = null
-    ) {
+    )
+    {
         parent::__construct($description, $httpStatus, $httpBody, $jsonBody, $httpHeaders);
         $this->code = $code;
     }

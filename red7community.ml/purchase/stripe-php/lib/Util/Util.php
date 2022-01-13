@@ -10,28 +10,6 @@ abstract class Util
     private static $isHashEqualsAvailable = null;
 
     /**
-     * Whether the provided array (or other) is a list rather than a dictionary.
-     * A list is defined as an array for which all the keys are consecutive
-     * integers starting at 0. Empty arrays are considered to be lists.
-     *
-     * @param array|mixed $array
-     * @return boolean true if the given object is a list.
-     */
-    public static function isList($array)
-    {
-        if (!is_array($array)) {
-            return false;
-        }
-        if ($array === []) {
-            return true;
-        }
-        if (array_keys($array) !== range(0, count($array) - 1)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Recursively converts the PHP Stripe object to an array.
      *
      * @param array $values The PHP Stripe object to convert.
@@ -131,6 +109,28 @@ abstract class Util
     }
 
     /**
+     * Whether the provided array (or other) is a list rather than a dictionary.
+     * A list is defined as an array for which all the keys are consecutive
+     * integers starting at 0. Empty arrays are considered to be lists.
+     *
+     * @param array|mixed $array
+     * @return boolean true if the given object is a list.
+     */
+    public static function isList($array)
+    {
+        if (!is_array($array)) {
+            return false;
+        }
+        if ($array === []) {
+            return true;
+        }
+        if (array_keys($array) !== range(0, count($array) - 1)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * @param string|mixed $value A string to UTF8-encode.
      *
      * @return string|mixed The UTF8-encoded string, or the object passed in if
@@ -205,9 +205,9 @@ abstract class Util
 
             if ($prefix) {
                 if ($k !== null && (!is_int($k) || is_array($v))) {
-                    $k = $prefix."[".$k."]";
+                    $k = $prefix . "[" . $k . "]";
                 } else {
-                    $k = $prefix."[]";
+                    $k = $prefix . "[]";
                 }
             }
 
@@ -217,7 +217,7 @@ abstract class Util
                     $r[] = $enc;
                 }
             } else {
-                $r[] = urlencode($k)."=".urlencode($v);
+                $r[] = urlencode($k) . "=" . urlencode($v);
             }
         }
 

@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use Stripe\Error\Api;
+
 class SourceTest extends TestCase
 {
     const TEST_RESOURCE_ID = 'src_123';
@@ -101,7 +103,7 @@ class SourceTest extends TestCase
     }
 
     /**
-     * @expectedException \Stripe\Error\Api
+     * @expectedException Api
      */
     public function testIsNotDetachableWhenUnattached()
     {

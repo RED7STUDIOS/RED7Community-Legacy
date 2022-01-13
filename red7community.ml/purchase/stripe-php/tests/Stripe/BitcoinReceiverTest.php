@@ -8,6 +8,16 @@ class BitcoinReceiverTest extends TestCase
 
     // Because of the wildcard nature of sources, stripe-mock cannot currently
     // reliably return sources of a given type, so we create a fixture manually
+
+    public function testHasCorrectStandaloneUrl()
+    {
+        $resource = $this->createFixture();
+        $this->assertSame(
+            "/v1/bitcoin/receivers/" . self::TEST_RESOURCE_ID,
+            $resource->instanceUrl()
+        );
+    }
+
     public function createFixture($params = [])
     {
         $base = [
@@ -18,15 +28,6 @@ class BitcoinReceiverTest extends TestCase
         return BitcoinReceiver::constructFrom(
             array_merge($params, $base),
             new Util\RequestOptions()
-        );
-    }
-
-    public function testHasCorrectStandaloneUrl()
-    {
-        $resource = $this->createFixture();
-        $this->assertSame(
-            "/v1/bitcoin/receivers/" . self::TEST_RESOURCE_ID,
-            $resource->instanceUrl()
         );
     }
 

@@ -2,8 +2,8 @@
 
 namespace Stripe\HttpClient;
 
-use Stripe\Stripe;
 use Stripe\Error;
+use Stripe\Stripe;
 use Stripe\Util;
 
 // cURL constants are not defined in PHP < 5.5
@@ -20,23 +20,18 @@ if (!defined('CURL_SSLVERSION_TLSv1')) {
 if (!defined('CURL_SSLVERSION_TLSv1_2')) {
     define('CURL_SSLVERSION_TLSv1_2', 6);
 }
+
 // @codingStandardsIgnoreEnd
 
 class CurlClient implements ClientInterface
 {
+    const DEFAULT_TIMEOUT = 80;
+    const DEFAULT_CONNECT_TIMEOUT = 30;
     private static $instance;
-
-    public static function instance()
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
     protected $defaultOptions;
-
     protected $userAgentInfo;
+    private $timeout = self::DEFAULT_TIMEOUT;
+    private $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT;
 
     /**
      * CurlClient constructor.
@@ -58,13 +53,23 @@ class CurlClient implements ClientInterface
         $this->initUserAgentInfo();
     }
 
+    // USER DEFINED TIMEOUTS
+
     public function initUserAgentInfo()
     {
         $curlVersion = curl_version();
         $this->userAgentInfo = [
-            'httplib' =>  'curl ' . $curlVersion['version'],
+            'httplib' => 'curl ' . $curlVersion['version'],
             'ssllib' => $curlVersion['ssl_version'],
         ];
+    }
+
+    public static function instance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public function getDefaultOptions()
@@ -77,34 +82,26 @@ class CurlClient implements ClientInterface
         return $this->userAgentInfo;
     }
 
-    // USER DEFINED TIMEOUTS
-
-    const DEFAULT_TIMEOUT = 80;
-    const DEFAULT_CONNECT_TIMEOUT = 30;
-
-    private $timeout = self::DEFAULT_TIMEOUT;
-    private $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT;
-
-    public function setTimeout($seconds)
-    {
-        $this->timeout = (int) max($seconds, 0);
-        return $this;
-    }
-
-    public function setConnectTimeout($seconds)
-    {
-        $this->connectTimeout = (int) max($seconds, 0);
-        return $this;
-    }
-
     public function getTimeout()
     {
         return $this->timeout;
     }
 
+    public function setTimeout($seconds)
+    {
+        $this->timeout = (int)max($seconds, 0);
+        return $this;
+    }
+
     public function getConnectTimeout()
     {
         return $this->connectTimeout;
+    }
+
+    public function setConnectTimeout($seconds)
+    {
+        $this->connectTimeout = (int)max($seconds, 0);
+        return $this;
     }
 
     // END OF USER DEFINED TIMEOUTS
@@ -238,46 +235,6 @@ class CurlClient implements ClientInterface
     }
 
     /**
-     * @param string $url
-     * @param number $errno
-     * @param string $message
-     * @param int $numRetries
-     * @throws Error\ApiConnection
-     */
-    private function handleCurlError($url, $errno, $message, $numRetries)
-    {
-        switch ($errno) {
-            case CURLE_COULDNT_CONNECT:
-            case CURLE_COULDNT_RESOLVE_HOST:
-            case CURLE_OPERATION_TIMEOUTED:
-                $msg = "Could not connect to Stripe ($url).  Please check your "
-                 . "internet connection and try again.  If this problem persists, "
-                 . "you should check Stripe's service status at "
-                 . "https://twitter.com/stripestatus, or";
-                break;
-            case CURLE_SSL_CACERT:
-            case CURLE_SSL_PEER_CERTIFICATE:
-                $msg = "Could not verify Stripe's SSL certificate.  Please make sure "
-                 . "that your network is not intercepting certificates.  "
-                 . "(Try going to $url in your browser.)  "
-                 . "If this problem persists,";
-                break;
-            default:
-                $msg = "Unexpected error communicating with Stripe.  "
-                 . "If this problem persists,";
-        }
-        $msg .= " let us know at support@stripe.com.";
-
-        $msg .= "\n\n(Network error [errno $errno]: $message)";
-
-        if ($numRetries > 0) {
-            $msg .= "\n\nRequest was retried $numRetries times.";
-        }
-
-        throw new Error\ApiConnection($msg);
-    }
-
-    /**
      * Checks if an error is a problem that we should retry on. This includes both
      * socket errors that may represent an intermittent problem and some special
      * HTTP statuses.
@@ -330,5 +287,45 @@ class CurlClient implements ClientInterface
         $sleepSeconds = max(Stripe::getInitialNetworkRetryDelay(), $sleepSeconds);
 
         return $sleepSeconds;
+    }
+
+    /**
+     * @param string $url
+     * @param number $errno
+     * @param string $message
+     * @param int $numRetries
+     * @throws Error\ApiConnection
+     */
+    private function handleCurlError($url, $errno, $message, $numRetries)
+    {
+        switch ($errno) {
+            case CURLE_COULDNT_CONNECT:
+            case CURLE_COULDNT_RESOLVE_HOST:
+            case CURLE_OPERATION_TIMEOUTED:
+                $msg = "Could not connect to Stripe ($url).  Please check your "
+                    . "internet connection and try again.  If this problem persists, "
+                    . "you should check Stripe's service status at "
+                    . "https://twitter.com/stripestatus, or";
+                break;
+            case CURLE_SSL_CACERT:
+            case CURLE_SSL_PEER_CERTIFICATE:
+                $msg = "Could not verify Stripe's SSL certificate.  Please make sure "
+                    . "that your network is not intercepting certificates.  "
+                    . "(Try going to $url in your browser.)  "
+                    . "If this problem persists,";
+                break;
+            default:
+                $msg = "Unexpected error communicating with Stripe.  "
+                    . "If this problem persists,";
+        }
+        $msg .= " let us know at support@stripe.com.";
+
+        $msg .= "\n\n(Network error [errno $errno]: $message)";
+
+        if ($numRetries > 0) {
+            $msg .= "\n\nRequest was retried $numRetries times.";
+        }
+
+        throw new Error\ApiConnection($msg);
     }
 }

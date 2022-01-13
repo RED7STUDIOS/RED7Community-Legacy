@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use Stripe\Error\InvalidRequest;
+
 /**
  * Class Card
  *
@@ -37,6 +39,37 @@ class Card extends ApiResource
     use ApiOperations\Update;
 
     /**
+     * @param array|string $_id
+     * @param array|string|null $_opts
+     *
+     * @throws InvalidRequest
+     */
+    public static function retrieve($_id, $_opts = null)
+    {
+        $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
+            "Retrieve a card using \$customer->sources->retrieve('card_id'), " .
+            "\$recipient->cards->retrieve('card_id'), or";
+        "\$account->external_accounts->retrieve('card_id') instead.";
+        throw new Error\InvalidRequest($msg, null);
+    }
+
+    /**
+     * @param string $_id
+     * @param array|null $_params
+     * @param array|string|null $_options
+     *
+     * @throws InvalidRequest
+     */
+    public static function update($_id, $_params = null, $_options = null)
+    {
+        $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
+            "Call save() on \$customer->sources->retrieve('card_id'), " .
+            "\$recipient->cards->retrieve('card_id'), or";
+        "\$account->external_accounts->retrieve('card_id') instead.";
+        throw new Error\InvalidRequest($msg, null);
+    }
+
+    /**
      * @return string The instance URL for this resource. It needs to be special
      *    cased because cards are nested resources that may belong to different
      *    top-level resources.
@@ -62,36 +95,5 @@ class Card extends ApiResource
         $parentExtn = urlencode(Util\Util::utf8($parent));
         $extn = urlencode(Util\Util::utf8($this['id']));
         return "$base/$parentExtn/$path/$extn";
-    }
-
-    /**
-     * @param array|string $_id
-     * @param array|string|null $_opts
-     *
-     * @throws \Stripe\Error\InvalidRequest
-     */
-    public static function retrieve($_id, $_opts = null)
-    {
-        $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
-               "Retrieve a card using \$customer->sources->retrieve('card_id'), " .
-               "\$recipient->cards->retrieve('card_id'), or";
-               "\$account->external_accounts->retrieve('card_id') instead.";
-        throw new Error\InvalidRequest($msg, null);
-    }
-
-    /**
-     * @param string $_id
-     * @param array|null $_params
-     * @param array|string|null $_options
-     *
-     * @throws \Stripe\Error\InvalidRequest
-     */
-    public static function update($_id, $_params = null, $_options = null)
-    {
-        $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
-               "Call save() on \$customer->sources->retrieve('card_id'), " .
-               "\$recipient->cards->retrieve('card_id'), or";
-               "\$account->external_accounts->retrieve('card_id') instead.";
-        throw new Error\InvalidRequest($msg, null);
     }
 }

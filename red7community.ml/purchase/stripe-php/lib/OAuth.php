@@ -27,6 +27,25 @@ abstract class OAuth
         return $base . '/oauth/authorize?' . $query;
     }
 
+    private static function _getClientId($params = null)
+    {
+        $clientId = ($params && array_key_exists('client_id', $params)) ? $params['client_id'] : null;
+        if ($clientId === null) {
+            $clientId = Stripe::getClientId();
+        }
+        if ($clientId === null) {
+            $msg = 'No client_id provided.  (HINT: set your client_id using '
+                . '"Stripe::setClientId(<CLIENT-ID>)".  You can find your client_ids '
+                . 'in your Stripe dashboard at '
+                . 'https://dashboard.stripe.com/account/applications/settings, '
+                . 'after registering your account as a platform. See '
+                . 'https://stripe.com/docs/connect/standard-accounts for details, '
+                . 'or email support@stripe.com if you have any questions.';
+            throw new Error\Authentication($msg);
+        }
+        return $clientId;
+    }
+
     /**
      * Use an authoriztion code to connect an account to your platform and
      * fetch the user's credentials.
@@ -70,24 +89,5 @@ abstract class OAuth
             null
         );
         return Util\Util::convertToStripeObject($response->json, $opts);
-    }
-
-    private static function _getClientId($params = null)
-    {
-        $clientId = ($params && array_key_exists('client_id', $params)) ? $params['client_id'] : null;
-        if ($clientId === null) {
-            $clientId = Stripe::getClientId();
-        }
-        if ($clientId === null) {
-            $msg = 'No client_id provided.  (HINT: set your client_id using '
-              . '"Stripe::setClientId(<CLIENT-ID>)".  You can find your client_ids '
-              . 'in your Stripe dashboard at '
-              . 'https://dashboard.stripe.com/account/applications/settings, '
-              . 'after registering your account as a platform. See '
-              . 'https://stripe.com/docs/connect/standard-accounts for details, '
-              . 'or email support@stripe.com if you have any questions.';
-            throw new Error\Authentication($msg);
-        }
-        return $clientId;
     }
 }

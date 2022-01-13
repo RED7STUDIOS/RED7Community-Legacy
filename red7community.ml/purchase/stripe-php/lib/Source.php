@@ -36,6 +36,19 @@ class Source extends ApiResource
      * @param array|string|null $options
      *
      * @return Source The detached source.
+     *
+     * @deprecated Use the `detach` method instead.
+     */
+    public function delete($params = null, $options = null)
+    {
+        $this->detach($params, $options);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Source The detached source.
      */
     public function detach($params = null, $options = null)
     {
@@ -45,7 +58,7 @@ class Source extends ApiResource
         if (!$id) {
             $class = get_class($this);
             $msg = "Could not determine which URL to request: $class instance "
-             . "has invalid ID: $id";
+                . "has invalid ID: $id";
             throw new Error\InvalidRequest($msg, null);
         }
 
@@ -60,22 +73,9 @@ class Source extends ApiResource
             return $this;
         } else {
             $message = "This source object does not appear to be currently attached "
-               . "to a customer object.";
+                . "to a customer object.";
             throw new Error\Api($message);
         }
-    }
-
-    /**
-     * @param array|null $params
-     * @param array|string|null $options
-     *
-     * @return Source The detached source.
-     *
-     * @deprecated Use the `detach` method instead.
-     */
-    public function delete($params = null, $options = null)
-    {
-        $this->detach($params, $options);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use InvalidArgumentException;
+
 /**
  * Class EphemeralKey
  *
@@ -42,7 +44,7 @@ class EphemeralKey extends ApiResource
     public static function create($params = null, $opts = null)
     {
         if (!$opts['stripe_version']) {
-            throw new \InvalidArgumentException('stripe_version must be specified to create an ephemeral key');
+            throw new InvalidArgumentException('stripe_version must be specified to create an ephemeral key');
         }
         return self::_create($params, $opts);
     }

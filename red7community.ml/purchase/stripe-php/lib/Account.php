@@ -2,6 +2,8 @@
 
 namespace Stripe;
 
+use InvalidArgumentException;
+
 /**
  * Class Account
  *
@@ -47,6 +49,9 @@ class Account extends ApiResource
     }
     use ApiOperations\Update;
 
+    const PATH_EXTERNAL_ACCOUNTS = '/external_accounts';
+    const PATH_LOGIN_LINKS = '/login_links';
+
     public static function getSavedNestedResources()
     {
         static $savedNestedResources = null;
@@ -57,18 +62,6 @@ class Account extends ApiResource
             ]);
         }
         return $savedNestedResources;
-    }
-
-    const PATH_EXTERNAL_ACCOUNTS = '/external_accounts';
-    const PATH_LOGIN_LINKS = '/login_links';
-
-    public function instanceUrl()
-    {
-        if ($this['id'] === null) {
-            return '/v1/account';
-        } else {
-            return parent::instanceUrl();
-        }
     }
 
     /**
@@ -85,35 +78,6 @@ class Account extends ApiResource
             $id = null;
         }
         return self::_retrieve($id, $opts);
-    }
-
-    /**
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return Account The rejected account.
-     */
-    public function reject($params = null, $opts = null)
-    {
-        $url = $this->instanceUrl() . '/reject';
-        list($response, $opts) = $this->_request('post', $url, $params, $opts);
-        $this->refreshFrom($response, $opts);
-        return $this;
-    }
-
-    /**
-     * @param array|null $clientId
-     * @param array|string|null $opts
-     *
-     * @return StripeObject Object containing the response from the API.
-     */
-    public function deauthorize($clientId = null, $opts = null)
-    {
-        $params = [
-            'client_id' => $clientId,
-            'stripe_user_id' => $this->id,
-        ];
-        OAuth::deauthorize($params, $opts);
     }
 
     /**
@@ -191,6 +155,44 @@ class Account extends ApiResource
         return self::_createNestedResource($id, static::PATH_LOGIN_LINKS, $params, $opts);
     }
 
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Account The rejected account.
+     */
+    public function reject($params = null, $opts = null)
+    {
+        $url = $this->instanceUrl() . '/reject';
+        list($response, $opts) = $this->_request('post', $url, $params, $opts);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    public function instanceUrl()
+    {
+        if ($this['id'] === null) {
+            return '/v1/account';
+        } else {
+            return parent::instanceUrl();
+        }
+    }
+
+    /**
+     * @param array|null $clientId
+     * @param array|string|null $opts
+     *
+     * @return StripeObject Object containing the response from the API.
+     */
+    public function deauthorize($clientId = null, $opts = null)
+    {
+        $params = [
+            'client_id' => $clientId,
+            'stripe_user_id' => $this->id,
+        ];
+        OAuth::deauthorize($params, $opts);
+    }
+
     public function serializeParameters($force = false)
     {
         $update = parent::serializeParameters($force);
@@ -214,7 +216,7 @@ class Account extends ApiResource
             $originalValue = [];
         }
         if (($originalValue) && (count($originalValue) > count($additionalOwners))) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "You cannot delete an item from an array, you must instead set a new array"
             );
         }

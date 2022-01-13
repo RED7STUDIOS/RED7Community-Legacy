@@ -24,15 +24,15 @@ window.FontAwesomeKitConfig = {
     },
     "version": "5.15.2"
 };
-! function(t) {
+!function (t) {
     "function" == typeof define && define.amd ? define("kit-loader", t) : t()
-}((function() {
+}((function () {
     "use strict";
 
     function t(e) {
-        return (t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+        return (t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
             return typeof t
-        } : function(t) {
+        } : function (t) {
             return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
         })(e)
     }
@@ -50,7 +50,7 @@ window.FontAwesomeKitConfig = {
         var n = Object.keys(t);
         if (Object.getOwnPropertySymbols) {
             var r = Object.getOwnPropertySymbols(t);
-            e && (r = r.filter((function(e) {
+            e && (r = r.filter((function (e) {
                 return Object.getOwnPropertyDescriptor(t, e).enumerable
             }))), n.push.apply(n, r)
         }
@@ -60,9 +60,9 @@ window.FontAwesomeKitConfig = {
     function r(t) {
         for (var r = 1; r < arguments.length; r++) {
             var o = null != arguments[r] ? arguments[r] : {};
-            r % 2 ? n(Object(o), !0).forEach((function(n) {
+            r % 2 ? n(Object(o), !0).forEach((function (n) {
                 e(t, n, o[n])
-            })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(o)) : n(Object(o)).forEach((function(e) {
+            })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(o)) : n(Object(o)).forEach((function (e) {
                 Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(o, e))
             }))
         }
@@ -70,16 +70,16 @@ window.FontAwesomeKitConfig = {
     }
 
     function o(t, e) {
-        return function(t) {
+        return function (t) {
             if (Array.isArray(t)) return t
-        }(t) || function(t, e) {
+        }(t) || function (t, e) {
             if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(t))) return;
             var n = [],
                 r = !0,
                 o = !1,
                 i = void 0;
             try {
-                for (var c, a = t[Symbol.iterator](); !(r = (c = a.next()).done) && (n.push(c.value), !e || n.length !== e); r = !0);
+                for (var c, a = t[Symbol.iterator](); !(r = (c = a.next()).done) && (n.push(c.value), !e || n.length !== e); r = !0) ;
             } catch (t) {
                 o = !0, i = t
             } finally {
@@ -90,14 +90,14 @@ window.FontAwesomeKitConfig = {
                 }
             }
             return n
-        }(t, e) || function(t, e) {
+        }(t, e) || function (t, e) {
             if (!t) return;
             if ("string" == typeof t) return i(t, e);
             var n = Object.prototype.toString.call(t).slice(8, -1);
             "Object" === n && t.constructor && (n = t.constructor.name);
             if ("Map" === n || "Set" === n) return Array.from(t);
             if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return i(t, e)
-        }(t, e) || function() {
+        }(t, e) || function () {
             throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
@@ -125,7 +125,7 @@ window.FontAwesomeKitConfig = {
         var n = e || ["fa"],
             r = "." + Array.prototype.join.call(n, ",."),
             o = t.querySelectorAll(r);
-        Array.prototype.forEach.call(o, (function(e) {
+        Array.prototype.forEach.call(o, (function (e) {
             var n = e.getAttribute("title");
             e.setAttribute("aria-hidden", "true");
             var r = !e.nextElementSibling || !e.nextElementSibling.classList.contains("sr-only");
@@ -135,7 +135,9 @@ window.FontAwesomeKitConfig = {
             }
         }))
     }
-    var f, s = function() {},
+
+    var f, s = function () {
+        },
         d = "undefined" != typeof global && void 0 !== global.process && "function" == typeof global.process.emit,
         l = "undefined" == typeof setImmediate ? setTimeout : setImmediate,
         h = [];
@@ -172,9 +174,9 @@ window.FontAwesomeKitConfig = {
             if (e === n) throw new TypeError("A promises callback cannot return that same promise.");
             if (n && ("function" == typeof n || "object" === t(n))) {
                 var o = n.then;
-                if ("function" == typeof o) return o.call(n, (function(t) {
+                if ("function" == typeof o) return o.call(n, (function (t) {
                     r || (r = !0, n === t ? g(e, t) : v(e, t))
-                }), (function(t) {
+                }), (function (t) {
                     r || (r = !0, w(e, t))
                 })), !0
             }
@@ -216,12 +218,13 @@ window.FontAwesomeKitConfig = {
         if ("function" != typeof t) throw new TypeError("Promise resolver " + t + " is not a function");
         if (this instanceof E == !1) throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
         this._then = [],
-            function(t, e) {
+            function (t, e) {
                 function n(t) {
                     w(e, t)
                 }
+
                 try {
-                    t((function(t) {
+                    t((function (t) {
                         v(e, t)
                     }), n)
                 } catch (t) {
@@ -229,13 +232,14 @@ window.FontAwesomeKitConfig = {
                 }
             }(t, this)
     }
+
     E.prototype = {
         constructor: E,
         _state: "pending",
         _then: null,
         _data: void 0,
         _handled: !1,
-        then: function(t, e) {
+        then: function (t, e) {
             var n = {
                 owner: this,
                 then: new this.constructor(s),
@@ -244,35 +248,36 @@ window.FontAwesomeKitConfig = {
             };
             return !e && !t || this._handled || (this._handled = !0, "rejected" === this._state && d && p(j, this)), "fulfilled" === this._state || "rejected" === this._state ? p(y, n) : this._then.push(n), n.then
         },
-        catch: function(t) {
+        catch: function (t) {
             return this.then(null, t)
         }
-    }, E.all = function(t) {
+    }, E.all = function (t) {
         if (!Array.isArray(t)) throw new TypeError("You must pass an array to Promise.all().");
-        return new E((function(e, n) {
+        return new E((function (e, n) {
             var r = [],
                 o = 0;
 
             function i(t) {
                 return o++,
-                    function(n) {
+                    function (n) {
                         r[t] = n, --o || e(r)
                     }
             }
-            for (var c, a = 0; a < t.length; a++)(c = t[a]) && "function" == typeof c.then ? c.then(i(a), n) : r[a] = c;
+
+            for (var c, a = 0; a < t.length; a++) (c = t[a]) && "function" == typeof c.then ? c.then(i(a), n) : r[a] = c;
             o || e(r)
         }))
-    }, E.race = function(t) {
+    }, E.race = function (t) {
         if (!Array.isArray(t)) throw new TypeError("You must pass an array to Promise.race().");
-        return new E((function(e, n) {
-            for (var r, o = 0; o < t.length; o++)(r = t[o]) && "function" == typeof r.then ? r.then(e, n) : e(r)
+        return new E((function (e, n) {
+            for (var r, o = 0; o < t.length; o++) (r = t[o]) && "function" == typeof r.then ? r.then(e, n) : e(r)
         }))
-    }, E.resolve = function(e) {
-        return e && "object" === t(e) && e.constructor === E ? e : new E((function(t) {
+    }, E.resolve = function (e) {
+        return e && "object" === t(e) && e.constructor === E ? e : new E((function (t) {
             t(e)
         }))
-    }, E.reject = function(t) {
-        return new E((function(e, n) {
+    }, E.reject = function (t) {
+        return new E((function (e, n) {
             n(t)
         }))
     };
@@ -283,23 +288,23 @@ window.FontAwesomeKitConfig = {
             r = e.XMLHttpRequest,
             o = e.token,
             i = t;
-        return "URLSearchParams" in window ? (i = new URL(t)).searchParams.set("token", o) : i = i + "?token=" + encodeURIComponent(o), i = i.toString(), new _((function(t, e) {
+        return "URLSearchParams" in window ? (i = new URL(t)).searchParams.set("token", o) : i = i + "?token=" + encodeURIComponent(o), i = i.toString(), new _((function (t, e) {
             if ("function" == typeof n) n(i, {
                 mode: "cors",
                 cache: "default"
-            }).then((function(t) {
+            }).then((function (t) {
                 if (t.ok) return t.text();
                 throw new Error("")
-            })).then((function(e) {
+            })).then((function (e) {
                 t(e)
             })).catch(e);
             else if ("function" == typeof r) {
                 var o = new r;
-                o.addEventListener("loadend", (function() {
+                o.addEventListener("loadend", (function () {
                     this.responseText ? t(this.responseText) : e(new Error(""))
                 }));
-                ["abort", "error", "timeout"].map((function(t) {
-                    o.addEventListener(t, (function() {
+                ["abort", "error", "timeout"].map((function (t) {
+                    o.addEventListener(t, (function () {
                         e(new Error(""))
                     }))
                 })), o.open("GET", i), o.send()
@@ -312,16 +317,16 @@ window.FontAwesomeKitConfig = {
     function C(t, e, n) {
         var r = t;
         return [
-            [/(url\("?)\.\.\/\.\.\/\.\./g, function(t, n) {
+            [/(url\("?)\.\.\/\.\.\/\.\./g, function (t, n) {
                 return "".concat(n).concat(e)
             }],
-            [/(url\("?)\.\.\/webfonts/g, function(t, r) {
+            [/(url\("?)\.\.\/webfonts/g, function (t, r) {
                 return "".concat(r).concat(e, "/releases/v").concat(n, "/webfonts")
             }],
-            [/(url\("?)https:\/\/kit-free([^.])*\.fontawesome\.com/g, function(t, n) {
+            [/(url\("?)https:\/\/kit-free([^.])*\.fontawesome\.com/g, function (t, n) {
                 return "".concat(n).concat(e)
             }]
-        ].forEach((function(t) {
+        ].forEach((function (t) {
             var e = o(t, 2),
                 n = e[0],
                 i = e[1];
@@ -330,7 +335,8 @@ window.FontAwesomeKitConfig = {
     }
 
     function F(t, e) {
-        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : function() {},
+        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : function () {
+            },
             o = e.document || o,
             i = u.bind(u, o, ["fa", "fab", "fas", "far", "fal", "fad", "fak"]),
             f = Object.keys(t.iconUploads || {}).length > 0;
@@ -349,17 +355,17 @@ window.FontAwesomeKitConfig = {
             id: "fa-kit-upload",
             customCss: !0
         });
-        var d = s.map((function(n) {
-            return new _((function(o, i) {
+        var d = s.map((function (n) {
+            return new _((function (o, i) {
                 P(n.customCss ? a(t) : c(t, {
                     addOn: n.addOn,
                     minify: t.minify.enabled
-                }), e).then((function(i) {
+                }), e).then((function (i) {
                     o(U(i, r(r({}, e), {}, {
                         baseUrl: t.baseUrl,
                         version: t.version,
                         id: n.id,
-                        contentFilter: function(t, e) {
+                        contentFilter: function (t, e) {
                             return C(t, e.baseUrl, e.version)
                         }
                     })))
@@ -370,7 +376,7 @@ window.FontAwesomeKitConfig = {
     }
 
     function U(t, e) {
-        var n = e.contentFilter || function(t, e) {
+        var n = e.contentFilter || function (t, e) {
                 return t
             },
             r = document.createElement("style"),
@@ -381,23 +387,23 @@ window.FontAwesomeKitConfig = {
     function k(t, e) {
         e.autoA11y = t.autoA11y.enabled, "pro" === t.license && (e.autoFetchSvg = !0, e.fetchSvgFrom = t.baseUrl + "/releases/" + ("latest" === t.version ? "latest" : "v".concat(t.version)) + "/svgs", e.fetchUploadedSvgFrom = t.uploadsUrl);
         var n = [];
-        return t.v4shim.enabled && n.push(new _((function(n, o) {
+        return t.v4shim.enabled && n.push(new _((function (n, o) {
             P(c(t, {
                 addOn: "-v4-shims",
                 minify: t.minify.enabled
-            }), e).then((function(t) {
+            }), e).then((function (t) {
                 n(I(t, r(r({}, e), {}, {
                     id: "fa-v4-shims"
                 })))
             })).catch(o)
-        }))), n.push(new _((function(n, o) {
+        }))), n.push(new _((function (n, o) {
             P(c(t, {
                 minify: t.minify.enabled
-            }), e).then((function(t) {
+            }), e).then((function (t) {
                 var o = I(t, r(r({}, e), {}, {
                     id: "fa-main"
                 }));
-                n(function(t, e) {
+                n(function (t, e) {
                     var n = e && void 0 !== e.autoFetchSvg ? e.autoFetchSvg : void 0,
                         r = e && void 0 !== e.autoA11y ? e.autoA11y : void 0;
                     void 0 !== r && t.setAttribute("data-auto-a11y", r ? "true" : "false");
@@ -419,7 +425,7 @@ window.FontAwesomeKitConfig = {
             r = document,
             o = r.documentElement.doScroll,
             i = (o ? /^loaded|^c/ : /^loaded|^i|^c/).test(r.readyState);
-        i || r.addEventListener("DOMContentLoaded", e = function() {
+        i || r.addEventListener("DOMContentLoaded", e = function () {
             for (r.removeEventListener("DOMContentLoaded", e), i = 1; e = n.shift();) e()
         }), i ? setTimeout(t, 0) : n.push(t)
     }
@@ -430,6 +436,7 @@ window.FontAwesomeKitConfig = {
             subtree: !0
         })
     }
+
     try {
         if (window.FontAwesomeKitConfig) {
             var x = window.FontAwesomeKitConfig,
@@ -443,22 +450,22 @@ window.FontAwesomeKitConfig = {
                 },
                 D = document.currentScript,
                 N = D ? D.parentElement : document.head;
-            (function() {
+            (function () {
                 var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                     e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                return "js" === t.method ? k(t, e) : "css" === t.method ? F(t, e, (function(t) {
+                return "js" === t.method ? k(t, e) : "css" === t.method ? F(t, e, (function (t) {
                     L(t), T(t)
                 })) : void 0
-            })(x, M).then((function(t) {
-                t.map((function(t) {
+            })(x, M).then((function (t) {
+                t.map((function (t) {
                     try {
                         N.insertBefore(t, D ? D.nextSibling : null)
                     } catch (e) {
                         N.appendChild(t)
                     }
-                })), M.detectingConflicts && D && L((function() {
+                })), M.detectingConflicts && D && L((function () {
                     D.setAttributeNode(document.createAttribute(M.detectionIgnoreAttr));
-                    var t = function(t, e) {
+                    var t = function (t, e) {
                         var n = document.createElement("script");
                         return e && e.detectionIgnoreAttr && n.setAttributeNode(document.createAttribute(e.detectionIgnoreAttr)), n.src = c(t, {
                             baseFilename: "conflict-detection",
@@ -469,7 +476,7 @@ window.FontAwesomeKitConfig = {
                     }(x, M);
                     document.body.appendChild(t)
                 }))
-            })).catch((function(t) {
+            })).catch((function (t) {
                 console.error("".concat("Font Awesome Kit:", " ").concat(t))
             }))
         }

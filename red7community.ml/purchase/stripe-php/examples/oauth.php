@@ -1,9 +1,12 @@
 <?php
 
+use Stripe\Error\OAuth\OAuthBase;
+use Stripe\Stripe;
+
 require('../init.php');
 
-\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
-\Stripe\Stripe::setClientId(getenv('STRIPE_CLIENT_ID'));
+Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+Stripe::setClientId(getenv('STRIPE_CLIENT_ID'));
 
 
 if (isset($_GET['code'])) {
@@ -15,7 +18,7 @@ if (isset($_GET['code'])) {
             'grant_type' => 'authorization_code',
             'code' => $code,
         ]);
-    } catch (\Stripe\Error\OAuth\OAuthBase $e) {
+    } catch (OAuthBase $e) {
         exit("Error: " . $e->getMessage());
     }
 
@@ -40,7 +43,7 @@ if (isset($_GET['code'])) {
         \Stripe\OAuth::deauthorize([
             'stripe_user_id' => $accountId,
         ]);
-    } catch (\Stripe\Error\OAuth\OAuthBase $e) {
+    } catch (OAuthBase $e) {
         exit("Error: " . $e->getMessage());
     }
 
