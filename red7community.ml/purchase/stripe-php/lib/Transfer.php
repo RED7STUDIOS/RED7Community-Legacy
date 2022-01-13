@@ -35,6 +35,28 @@ class Transfer extends ApiResource
     const PATH_REVERSALS = '/reversals';
 
     /**
+     * @return TransferReversal The created transfer reversal.
+     */
+    public function reverse($params = null, $opts = null)
+    {
+        $url = $this->instanceUrl() . '/reversals';
+        list($response, $opts) = $this->_request('post', $url, $params, $opts);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * @return Transfer The canceled transfer.
+     */
+    public function cancel()
+    {
+        $url = $this->instanceUrl() . '/cancel';
+        list($response, $opts) = $this->_request('post', $url);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
      * @param array|null $id The ID of the transfer on which to create the reversal.
      * @param array|null $params
      * @param array|string|null $opts
@@ -82,27 +104,5 @@ class Transfer extends ApiResource
     public static function allReversals($id, $params = null, $opts = null)
     {
         return self::_allNestedResources($id, static::PATH_REVERSALS, $params, $opts);
-    }
-
-    /**
-     * @return TransferReversal The created transfer reversal.
-     */
-    public function reverse($params = null, $opts = null)
-    {
-        $url = $this->instanceUrl() . '/reversals';
-        list($response, $opts) = $this->_request('post', $url, $params, $opts);
-        $this->refreshFrom($response, $opts);
-        return $this;
-    }
-
-    /**
-     * @return Transfer The canceled transfer.
-     */
-    public function cancel()
-    {
-        $url = $this->instanceUrl() . '/cancel';
-        list($response, $opts) = $this->_request('post', $url);
-        $this->refreshFrom($response, $opts);
-        return $this;
     }
 }

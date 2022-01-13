@@ -4,9 +4,7 @@
 // `error_log` below.
 namespace Stripe\Util;
 
-use Stripe\TestCase;
-
-class UtilLoggerTest extends TestCase
+class UtilLoggerTest extends \Stripe\TestCase
 {
     public function testDefaultLogger()
     {

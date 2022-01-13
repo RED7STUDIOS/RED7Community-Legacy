@@ -2,8 +2,6 @@
 
 namespace Stripe\ApiOperations;
 
-use Stripe\Util\Util;
-
 /**
  * Trait for updatable resources. Adds an `update()` static method and a
  * `save()` method to the class.
@@ -25,7 +23,7 @@ trait Update
         $url = static::resourceUrl($id);
 
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = Util::convertToStripeObject($response->json, $opts);
+        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
         return $obj;
     }

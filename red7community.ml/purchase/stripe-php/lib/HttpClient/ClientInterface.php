@@ -2,9 +2,6 @@
 
 namespace Stripe\HttpClient;
 
-use Stripe\Error\Api;
-use Stripe\Error\ApiConnection;
-
 interface ClientInterface
 {
     /**
@@ -14,8 +11,8 @@ interface ClientInterface
      * @param array $params KV pairs for parameters. Can be nested for arrays and hashes
      * @param boolean $hasFile Whether or not $params references a file (via an @ prefix or
      *                         CurlFile)
+     * @throws \Stripe\Error\Api & \Stripe\Error\ApiConnection
      * @return [$rawBody, $httpStatusCode, $httpHeader]
-     * @throws Api & ApiConnection
      */
     public function request($method, $absUrl, $headers, $params, $hasFile);
 }

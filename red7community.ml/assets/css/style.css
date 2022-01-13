@@ -41,19 +41,15 @@ body {
     margin-right: 20px;
     border: 1px solid #ccc;
 }
-
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     background: #ddd;
 }
-
-.nav-tabs > li {
+.nav-tabs>li {
     float: none;
 }
-
-.nav-tabs > li > a {
+.nav-tabs>li>a {
     margin-right: 0;
 }
-
 .tab-content {
     border-top: 1px solid #ccc;
 }
@@ -63,9 +59,7 @@ html, body {
     height: 100%;
 }
 
-.dropdown-toggle {
-    outline: 0;
-}
+.dropdown-toggle { outline: 0; }
 
 .nav-flush .nav-link {
     border-radius: 0;
@@ -80,7 +74,6 @@ html, body {
     background-color: transparent;
     border: 0;
 }
-
 .btn-toggle:hover,
 .btn-toggle:focus {
     color: rgba(0, 0, 0, .85);
@@ -98,7 +91,6 @@ html, body {
 .btn-toggle[aria-expanded="true"] {
     color: rgba(0, 0, 0, .85);
 }
-
 .btn-toggle[aria-expanded="true"]::before {
     transform: rotate(90deg);
 }
@@ -110,7 +102,6 @@ html, body {
     margin-left: 1.25rem;
     text-decoration: none;
 }
-
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
     background-color: #d2f4ea;
@@ -262,7 +253,6 @@ div .profile-list-card {
     padding: 10px;
     font-size: 16px;
 }
-
 .form-signin .form-control:focus {
     z-index: 2;
 }
@@ -273,11 +263,9 @@ div .profile-list-card {
     padding: 15px;
     margin: auto;
 }
-
 .form-register .checkbox {
     font-weight: 400;
 }
-
 .form-register .form-control {
     position: relative;
     box-sizing: border-box;
@@ -285,7 +273,6 @@ div .profile-list-card {
     padding: 10px;
     font-size: 16px;
 }
-
 .form-register .form-control:focus {
     z-index: 2;
 }

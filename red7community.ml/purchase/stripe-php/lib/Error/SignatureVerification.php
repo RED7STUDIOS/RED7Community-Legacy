@@ -8,8 +8,7 @@ class SignatureVerification extends Base
         $message,
         $sigHeader,
         $httpBody = null
-    )
-    {
+    ) {
         parent::__construct($message, null, $httpBody, null, null);
         $this->sigHeader = $sigHeader;
     }

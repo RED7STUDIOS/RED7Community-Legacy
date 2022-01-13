@@ -2,9 +2,6 @@
 
 namespace Stripe\ApiOperations;
 
-use Stripe\ApiRequestor;
-use Stripe\Util\RequestOptions;
-
 /**
  * Trait for resources that need to make API requests.
  *
@@ -21,9 +18,9 @@ trait Request
     {
         if ($params && !is_array($params)) {
             $message = "You must pass an array as the first argument to Stripe API "
-                . "method calls.  (HINT: an example call to create a charge "
-                . "would be: \"Stripe\\Charge::create(['amount' => 100, "
-                . "'currency' => 'usd', 'source' => 'tok_1234'])\")";
+               . "method calls.  (HINT: an example call to create a charge "
+               . "would be: \"Stripe\\Charge::create(['amount' => 100, "
+               . "'currency' => 'usd', 'source' => 'tok_1234'])\")";
             throw new Error\Api($message);
         }
     }
@@ -54,8 +51,8 @@ trait Request
      */
     protected static function _staticRequest($method, $url, $params, $options)
     {
-        $opts = RequestOptions::parse($options);
-        $requestor = new ApiRequestor($opts->apiKey, static::baseUrl());
+        $opts = \Stripe\Util\RequestOptions::parse($options);
+        $requestor = new \Stripe\ApiRequestor($opts->apiKey, static::baseUrl());
         list($response, $opts->apiKey) = $requestor->request($method, $url, $params, $opts->headers);
         $opts->discardNonPersistentHeaders();
         return [$response, $opts];

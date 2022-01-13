@@ -2,8 +2,6 @@
 
 namespace Stripe\ApiOperations;
 
-use Stripe\Util\RequestOptions;
-
 /**
  * Trait for retrievable resources. Adds a `retrieve()` static method to the
  * class.
@@ -21,7 +19,7 @@ trait Retrieve
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = RequestOptions::parse($opts);
+        $opts = \Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
         return $instance;

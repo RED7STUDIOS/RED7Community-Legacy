@@ -2,24 +2,12 @@
 
 namespace Stripe;
 
-use Stripe\Error\InvalidRequest;
-
 class CardTest extends TestCase
 {
     const TEST_RESOURCE_ID = 'card_123';
 
     // Because of the wildcard nature of sources, stripe-mock cannot currently
     // reliably return sources of a given type, so we create a fixture manually
-
-    public function testHasCorrectUrlForCustomer()
-    {
-        $resource = $this->createFixture(['customer' => 'cus_123']);
-        $this->assertSame(
-            "/v1/customers/cus_123/sources/" . self::TEST_RESOURCE_ID,
-            $resource->instanceUrl()
-        );
-    }
-
     public function createFixture($params = [])
     {
         if (empty($params)) {
@@ -33,6 +21,15 @@ class CardTest extends TestCase
         return Card::constructFrom(
             array_merge($params, $base),
             new Util\RequestOptions()
+        );
+    }
+
+    public function testHasCorrectUrlForCustomer()
+    {
+        $resource = $this->createFixture(['customer' => 'cus_123']);
+        $this->assertSame(
+            "/v1/customers/cus_123/sources/" . self::TEST_RESOURCE_ID,
+            $resource->instanceUrl()
         );
     }
 
@@ -55,7 +52,7 @@ class CardTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidRequest
+     * @expectedException \Stripe\Error\InvalidRequest
      */
     public function testIsNotDirectlyRetrievable()
     {
@@ -75,7 +72,7 @@ class CardTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidRequest
+     * @expectedException \Stripe\Error\InvalidRequest
      */
     public function testIsNotDirectlyUpdatable()
     {

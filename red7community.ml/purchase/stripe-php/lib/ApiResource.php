@@ -12,6 +12,22 @@ abstract class ApiResource extends StripeObject
     use ApiOperations\Request;
 
     /**
+     * @return Stripe\Util\Set A list of fields that can be their own type of
+     * API resource (say a nested card under an account for example), and if
+     * that resource is set, it should be transmitted to the API on a create or
+     * update. Doing so is not the default behavior because API resources
+     * should normally be persisted on their own RESTful endpoints.
+     */
+    public static function getSavedNestedResources()
+    {
+        static $savedNestedResources = null;
+        if ($savedNestedResources === null) {
+            $savedNestedResources = new Util\Set();
+        }
+        return $savedNestedResources;
+    }
+
+    /**
      * @var boolean A flag that can be set a behavior that will cause this
      * resource to be encoded and sent up along with an update of its parent
      * resource. This is usually not desirable because resources are updated
@@ -32,22 +48,6 @@ abstract class ApiResource extends StripeObject
     }
 
     /**
-     * @return Stripe\Util\Set A list of fields that can be their own type of
-     * API resource (say a nested card under an account for example), and if
-     * that resource is set, it should be transmitted to the API on a create or
-     * update. Doing so is not the default behavior because API resources
-     * should normally be persisted on their own RESTful endpoints.
-     */
-    public static function getSavedNestedResources()
-    {
-        static $savedNestedResources = null;
-        if ($savedNestedResources === null) {
-            $savedNestedResources = new Util\Set();
-        }
-        return $savedNestedResources;
-    }
-
-    /**
      * @return ApiResource The refreshed resource.
      */
     public function refresh()
@@ -64,48 +64,6 @@ abstract class ApiResource extends StripeObject
         $this->setLastResponse($response);
         $this->refreshFrom($response->json, $this->_opts);
         return $this;
-    }
-
-    /**
-     * @return string The base URL for the given class.
-     */
-    public static function baseUrl()
-    {
-        return Stripe::$apiBase;
-    }
-
-    /**
-     * @return string The full API URL for this API resource.
-     */
-    public function instanceUrl()
-    {
-        return static::resourceUrl($this['id']);
-    }
-
-    /**
-     * @return string The instance endpoint URL for the given class.
-     */
-    public static function resourceUrl($id)
-    {
-        if ($id === null) {
-            $class = get_called_class();
-            $message = "Could not determine which URL to request: "
-                . "$class instance has invalid ID: $id";
-            throw new Error\InvalidRequest($message, null);
-        }
-        $id = Util\Util::utf8($id);
-        $base = static::classUrl();
-        $extn = urlencode($id);
-        return "$base/$extn";
-    }
-
-    /**
-     * @return string The endpoint URL for the given class.
-     */
-    public static function classUrl()
-    {
-        $base = static::className();
-        return "/v1/${base}s";
     }
 
     /**
@@ -130,5 +88,47 @@ abstract class ApiResource extends StripeObject
         $name = urlencode($class);
         $name = strtolower($name);
         return $name;
+    }
+
+    /**
+     * @return string The base URL for the given class.
+     */
+    public static function baseUrl()
+    {
+        return Stripe::$apiBase;
+    }
+
+    /**
+     * @return string The endpoint URL for the given class.
+     */
+    public static function classUrl()
+    {
+        $base = static::className();
+        return "/v1/${base}s";
+    }
+
+    /**
+     * @return string The instance endpoint URL for the given class.
+     */
+    public static function resourceUrl($id)
+    {
+        if ($id === null) {
+            $class = get_called_class();
+            $message = "Could not determine which URL to request: "
+               . "$class instance has invalid ID: $id";
+            throw new Error\InvalidRequest($message, null);
+        }
+        $id = Util\Util::utf8($id);
+        $base = static::classUrl();
+        $extn = urlencode($id);
+        return "$base/$extn";
+    }
+
+    /**
+     * @return string The full API URL for this API resource.
+     */
+    public function instanceUrl()
+    {
+        return static::resourceUrl($this['id']);
     }
 }

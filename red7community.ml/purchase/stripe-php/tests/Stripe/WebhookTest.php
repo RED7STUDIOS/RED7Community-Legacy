@@ -2,9 +2,6 @@
 
 namespace Stripe;
 
-use Stripe\Error\SignatureVerification;
-use UnexpectedValueException;
-
 class WebhookTest extends TestCase
 {
     const EVENT_PAYLOAD = "{
@@ -12,13 +9,6 @@ class WebhookTest extends TestCase
   \"object\": \"event\"
 }";
     const SECRET = "whsec_test_secret";
-
-    public function testValidJsonAndHeader()
-    {
-        $sigHeader = $this->generateHeader();
-        $event = Webhook::constructEvent(self::EVENT_PAYLOAD, $sigHeader, self::SECRET);
-        $this->assertEquals("evt_test_webhook", $event->id);
-    }
 
     private function generateHeader($opts = [])
     {
@@ -34,8 +24,15 @@ class WebhookTest extends TestCase
         return "t=$timestamp,$scheme=$signature";
     }
 
+    public function testValidJsonAndHeader()
+    {
+        $sigHeader = $this->generateHeader();
+        $event = Webhook::constructEvent(self::EVENT_PAYLOAD, $sigHeader, self::SECRET);
+        $this->assertEquals("evt_test_webhook", $event->id);
+    }
+
     /**
-     * @expectedException UnexpectedValueException
+     * @expectedException \UnexpectedValueException
      */
     public function testInvalidJson()
     {
@@ -45,7 +42,7 @@ class WebhookTest extends TestCase
     }
 
     /**
-     * @expectedException SignatureVerification
+     * @expectedException \Stripe\Error\SignatureVerification
      */
     public function testValidJsonAndInvalidHeader()
     {
@@ -54,7 +51,7 @@ class WebhookTest extends TestCase
     }
 
     /**
-     * @expectedException SignatureVerification
+     * @expectedException \Stripe\Error\SignatureVerification
      * @expectedExceptionMessage Unable to extract timestamp and signatures from header
      */
     public function testMalformedHeader()
@@ -64,7 +61,7 @@ class WebhookTest extends TestCase
     }
 
     /**
-     * @expectedException SignatureVerification
+     * @expectedException \Stripe\Error\SignatureVerification
      * @expectedExceptionMessage No signatures found with expected scheme
      */
     public function testNoSignaturesWithExpectedScheme()
@@ -74,7 +71,7 @@ class WebhookTest extends TestCase
     }
 
     /**
-     * @expectedException SignatureVerification
+     * @expectedException \Stripe\Error\SignatureVerification
      * @expectedExceptionMessage No signatures found matching the expected signature for payload
      */
     public function testNoValidSignatureForPayload()
@@ -84,7 +81,7 @@ class WebhookTest extends TestCase
     }
 
     /**
-     * @expectedException SignatureVerification
+     * @expectedException \Stripe\Error\SignatureVerification
      * @expectedExceptionMessage Timestamp outside the tolerance zone
      */
     public function testTimestampOutsideTolerance()

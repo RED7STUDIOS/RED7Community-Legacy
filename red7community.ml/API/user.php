@@ -7,108 +7,108 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
+include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 
 $response = array();
 
 $api_type = $_GET['api'];
 
 if (!empty($api_type)) {
-    if ($api_type == 'getbyid') {
-        if (!empty($_GET['id'])) {
-            $id = $_GET['id'];
+	if ($api_type == 'getbyid') {
+		if (!empty($_GET['id'])) {
+			$id = $_GET['id'];
 
-            if ($link) {
-                $sql = "SELECT * FROM users WHERE id=" . $id;
-                $result = mysqli_query($link, $sql);
+			if ($link) {
+				$sql = "SELECT * FROM users WHERE id=" . $id;
+				$result = mysqli_query($link, $sql);
 
-                if ($result) {
-                    header("Content-Type: JSON");
-                    $i = 0;
+				if ($result) {
+					header("Content-Type: JSON");
+					$i = 0;
 
-                    if ($result->num_rows == 0 || $result->num_rows == null) {
-                        header("Content-Type: JSON");
+					if ($result->num_rows == 0 || $result->num_rows == null) {
+						header("Content-Type: JSON");
 
-                        $response[0]['code'] = '2';
-                        $response[0]['result'] = "This user doesn't exist or has been deleted.";
+						$response[0]['code'] = '2';
+						$response[0]['result'] = "This user doesn't exist or has been deleted.";
 
-                        echo json_encode($response, JSON_PRETTY_PRINT);
-                    } else {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $response[$i]['data'][0]['id'] = $row['id'];
-                            $response[$i]['data'][0]['username'] = $row['username'];
-                            $response[$i]['data'][0]['displayname'] = $row['displayname'];
-                            $response[$i]['data'][0]['description'] = $row['description'];
-                            $response[$i]['data'][0]['created_at'] = $row['created_at'];
-                            $response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
-                            $response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
-                            $response[$i]['data'][0]['currency'] = $row['currency'];
-                            $response[$i]['data'][0]['badges'] = $row['badges'];
-                            $response[$i]['data'][0]['items'] = $row['items'];
-                            $response[$i]['data'][0]['membership'] = $row['membership'];
-                            $response[$i]['data'][0]['isBanned'] = $row['isBanned'];
-                            $response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
-                            $response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
-                            $response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
-                            $response[$i]['data'][0]['isVerified'] = $row['isVerified'];
-                            $response[$i]['data'][0]['followers'] = $row['followers'];
-                            $response[$i]['data'][0]['following'] = $row['following'];
-                            $response[$i]['data'][0]['clans'] = $row['clans'];
-                            $response[$i]['data'][0]['icon'] = $row['icon'];
-                        }
+						echo json_encode($response, JSON_PRETTY_PRINT);
+					} else {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$response[$i]['data'][0]['id'] = $row['id'];
+							$response[$i]['data'][0]['username'] = $row['username'];
+							$response[$i]['data'][0]['displayname'] = $row['displayname'];
+							$response[$i]['data'][0]['description'] = $row['description'];
+							$response[$i]['data'][0]['created_at'] = $row['created_at'];
+							$response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
+							$response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
+							$response[$i]['data'][0]['currency'] = $row['currency'];
+							$response[$i]['data'][0]['badges'] = $row['badges'];
+							$response[$i]['data'][0]['items'] = $row['items'];
+							$response[$i]['data'][0]['membership'] = $row['membership'];
+							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
+							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
+							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
+							$response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
+							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
+							$response[$i]['data'][0]['followers'] = $row['followers'];
+							$response[$i]['data'][0]['following'] = $row['following'];
+							$response[$i]['data'][0]['clans'] = $row['clans'];
+							$response[$i]['data'][0]['icon'] = $row['icon'];
+						}
 
-                        echo json_encode($response, JSON_PRETTY_PRINT);
-                    }
-                }
-            }
-        }
-    } else if ($api_type == 'getbyname') {
-        if (!empty($_GET['name'])) {
-            $username = $_GET['name'];
+						echo json_encode($response, JSON_PRETTY_PRINT);
+					}
+				}
+			}
+		}
+	} else if ($api_type == 'getbyname') {
+		if (!empty($_GET['name'])) {
+			$username = $_GET['name'];
 
-            if ($link) {
-                $sql = "SELECT * FROM users WHERE username='" . $username . "'";
-                $result = mysqli_query($link, $sql);
-                if ($result) {
-                    header("Content-Type: JSON");
-                    $i = 0;
+			if ($link) {
+				$sql = "SELECT * FROM users WHERE username='" . $username . "'";
+				$result = mysqli_query($link, $sql);
+				if ($result) {
+					header("Content-Type: JSON");
+					$i = 0;
 
-                    if ($result->num_rows == 0 || $result->num_rows == null) {
-                        header("Content-Type: JSON");
+					if ($result->num_rows == 0 || $result->num_rows == null) {
+						header("Content-Type: JSON");
 
-                        $response[0]['code'] = '2';
-                        $response[0]['result'] = "This user doesn't exist or has been deleted.";
+						$response[0]['code'] = '2';
+						$response[0]['result'] = "This user doesn't exist or has been deleted.";
 
-                        echo json_encode($response, JSON_PRETTY_PRINT);
-                    } else {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $response[$i]['data'][0]['id'] = $row['id'];
-                            $response[$i]['data'][0]['username'] = $row['username'];
-                            $response[$i]['data'][0]['displayname'] = $row['displayname'];
-                            $response[$i]['data'][0]['description'] = $row['description'];
-                            $response[$i]['data'][0]['created_at'] = $row['created_at'];
-                            $response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
-                            $response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
-                            $response[$i]['data'][0]['currency'] = $row['currency'];
-                            $response[$i]['data'][0]['badges'] = $row['badges'];
-                            $response[$i]['data'][0]['items'] = $row['items'];
-                            $response[$i]['data'][0]['membership'] = $row['membership'];
-                            $response[$i]['data'][0]['isBanned'] = $row['isBanned'];
-                            $response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
-                            $response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
-                            $response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
-                            $response[$i]['data'][0]['isVerified'] = $row['isVerified'];
-                            $response[$i]['data'][0]['followers'] = $row['followers'];
-                            $response[$i]['data'][0]['following'] = $row['following'];
-                            $response[$i]['data'][0]['clans'] = $row['clans'];
-                            $response[$i]['data'][0]['icon'] = $row['icon'];
-                        }
+						echo json_encode($response, JSON_PRETTY_PRINT);
+					} else {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$response[$i]['data'][0]['id'] = $row['id'];
+							$response[$i]['data'][0]['username'] = $row['username'];
+							$response[$i]['data'][0]['displayname'] = $row['displayname'];
+							$response[$i]['data'][0]['description'] = $row['description'];
+							$response[$i]['data'][0]['created_at'] = $row['created_at'];
+							$response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
+							$response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
+							$response[$i]['data'][0]['currency'] = $row['currency'];
+							$response[$i]['data'][0]['badges'] = $row['badges'];
+							$response[$i]['data'][0]['items'] = $row['items'];
+							$response[$i]['data'][0]['membership'] = $row['membership'];
+							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
+							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
+							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
+							$response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
+							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
+							$response[$i]['data'][0]['followers'] = $row['followers'];
+							$response[$i]['data'][0]['following'] = $row['following'];
+							$response[$i]['data'][0]['clans'] = $row['clans'];
+							$response[$i]['data'][0]['icon'] = $row['icon'];
+						}
 
-                        echo json_encode($response, JSON_PRETTY_PRINT);
-                    }
-                }
-            }
-        }
-    }
+						echo json_encode($response, JSON_PRETTY_PRINT);
+					}
+				}
+			}
+		}
+	}
 }
 ?>

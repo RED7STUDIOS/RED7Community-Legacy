@@ -2,9 +2,6 @@
 
 namespace Stripe;
 
-use Stripe\Error\SignatureVerification;
-use UnexpectedValueException;
-
 abstract class Webhook
 {
     const DEFAULT_TOLERANCE = 300;
@@ -21,9 +18,9 @@ abstract class Webhook
      * @param string $secret secret used to generate the signature.
      * @param int $tolerance maximum difference allowed between the header's
      *  timestamp and the current time
-     * @return Event the Event instance
-     * @throws UnexpectedValueException if the payload is not valid JSON,
-     * @throws SignatureVerification if the verification fails.
+     * @return \Stripe\Event the Event instance
+     * @throws \UnexpectedValueException if the payload is not valid JSON,
+     * @throws \Stripe\Error\SignatureVerification if the verification fails.
      */
     public static function constructEvent($payload, $sigHeader, $secret, $tolerance = self::DEFAULT_TOLERANCE)
     {
@@ -31,8 +28,8 @@ abstract class Webhook
         $jsonError = json_last_error();
         if ($data === null && $jsonError !== JSON_ERROR_NONE) {
             $msg = "Invalid payload: $payload "
-                . "(json_last_error() was $jsonError)";
-            throw new UnexpectedValueException($msg);
+              . "(json_last_error() was $jsonError)";
+            throw new \UnexpectedValueException($msg);
         }
         $event = Event::constructFrom($data);
 

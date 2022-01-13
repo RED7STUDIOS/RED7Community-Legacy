@@ -2,8 +2,6 @@
 
 namespace Stripe;
 
-use InvalidArgumentException;
-
 class AccountTest extends TestCase
 {
     const TEST_RESOURCE_ID = 'acct_123';
@@ -271,7 +269,7 @@ class AccountTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testSerializeAdditionalOwnersDeletedItem()
     {

@@ -2,9 +2,7 @@
 
 namespace Stripe\Util;
 
-use Iterator;
-
-class AutoPagingIterator implements Iterator
+class AutoPagingIterator implements \Iterator
 {
     private $lastId = null;
     private $page = null;

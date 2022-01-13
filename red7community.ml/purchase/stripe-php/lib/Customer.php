@@ -33,8 +33,6 @@ class Customer extends ApiResource
     use ApiOperations\Retrieve;
     use ApiOperations\Update;
 
-    const PATH_SOURCES = '/sources';
-
     public static function getSavedNestedResources()
     {
         static $savedNestedResources = null;
@@ -46,68 +44,7 @@ class Customer extends ApiResource
         return $savedNestedResources;
     }
 
-    /**
-     * @param array|null $id The ID of the customer on which to create the source.
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApiResource
-     */
-    public static function createSource($id, $params = null, $opts = null)
-    {
-        return self::_createNestedResource($id, static::PATH_SOURCES, $params, $opts);
-    }
-
-    /**
-     * @param array|null $id The ID of the customer to which the source belongs.
-     * @param array|null $sourceId The ID of the source to retrieve.
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApiResource
-     */
-    public static function retrieveSource($id, $sourceId, $params = null, $opts = null)
-    {
-        return self::_retrieveNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
-    }
-
-    /**
-     * @param array|null $id The ID of the customer to which the source belongs.
-     * @param array|null $sourceId The ID of the source to update.
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApiResource
-     */
-    public static function updateSource($id, $sourceId, $params = null, $opts = null)
-    {
-        return self::_updateNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
-    }
-
-    /**
-     * @param array|null $id The ID of the customer to which the source belongs.
-     * @param array|null $sourceId The ID of the source to delete.
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApiResource
-     */
-    public static function deleteSource($id, $sourceId, $params = null, $opts = null)
-    {
-        return self::_deleteNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
-    }
-
-    /**
-     * @param array|null $id The ID of the customer on which to retrieve the sources.
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ApiResource
-     */
-    public static function allSources($id, $params = null, $opts = null)
-    {
-        return self::_allNestedResources($id, static::PATH_SOURCES, $params, $opts);
-    }
+    const PATH_SOURCES = '/sources';
 
     /**
      * @param array|null $params
@@ -195,5 +132,68 @@ class Customer extends ApiResource
         $url = $this->instanceUrl() . '/discount';
         list($response, $opts) = $this->_request('delete', $url);
         $this->refreshFrom(['discount' => null], $opts, true);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer on which to create the source.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApiResource
+     */
+    public static function createSource($id, $params = null, $opts = null)
+    {
+        return self::_createNestedResource($id, static::PATH_SOURCES, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to retrieve.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApiResource
+     */
+    public static function retrieveSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_retrieveNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to update.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApiResource
+     */
+    public static function updateSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_updateNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to delete.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApiResource
+     */
+    public static function deleteSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_deleteNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer on which to retrieve the sources.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ApiResource
+     */
+    public static function allSources($id, $params = null, $opts = null)
+    {
+        return self::_allNestedResources($id, static::PATH_SOURCES, $params, $opts);
     }
 }

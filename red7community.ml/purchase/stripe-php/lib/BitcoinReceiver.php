@@ -16,6 +16,15 @@ class BitcoinReceiver extends ApiResource
     use ApiOperations\Retrieve;
 
     /**
+     * @return string The class URL for this resource. It needs to be special
+     *    cased because it doesn't fit into the standard resource pattern.
+     */
+    public static function classUrl()
+    {
+        return "/v1/bitcoin/receivers";
+    }
+
+    /**
      * @return string The instance URL for this resource. It needs to be special
      *    cased because it doesn't fit into the standard resource pattern.
      */
@@ -33,14 +42,5 @@ class BitcoinReceiver extends ApiResource
             $extn = urlencode(Util\Util::utf8($this['id']));
             return "$base/$extn";
         }
-    }
-
-    /**
-     * @return string The class URL for this resource. It needs to be special
-     *    cased because it doesn't fit into the standard resource pattern.
-     */
-    public static function classUrl()
-    {
-        return "/v1/bitcoin/receivers";
     }
 }

@@ -2,11 +2,6 @@
 
 namespace Stripe;
 
-use Exception;
-use InvalidArgumentException;
-use ReflectionMethod;
-use ReflectionProperty;
-
 class StripeObjectTest extends TestCase
 {
     /**
@@ -18,11 +13,11 @@ class StripeObjectTest extends TestCase
         // private attributes.
 
         // This is used to invoke the `deepCopy` protected function
-        $this->deepCopyReflector = new ReflectionMethod('Stripe\\StripeObject', 'deepCopy');
+        $this->deepCopyReflector = new \ReflectionMethod('Stripe\\StripeObject', 'deepCopy');
         $this->deepCopyReflector->setAccessible(true);
 
         // This is used to access the `_opts` protected variable
-        $this->optsReflector = new ReflectionProperty('Stripe\\StripeObject', '_opts');
+        $this->optsReflector = new \ReflectionProperty('Stripe\\StripeObject', '_opts');
         $this->optsReflector->setAccessible(true);
     }
 
@@ -159,7 +154,7 @@ EOS;
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testSetPermanentAttribute()
     {
@@ -168,7 +163,7 @@ EOS;
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testSetEmptyStringValue()
     {
@@ -340,13 +335,13 @@ EOS;
         try {
             $serialized = $obj->serializeParameters();
             $this->fail("Did not raise error");
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertSame(
                 "Cannot save property `customer` containing an API resource of type Stripe\Customer. " .
                 "It doesn't appear to be persisted and is not marked as `saveWithParent`.",
                 $e->getMessage()
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail("Unexpected exception: " . get_class($e));
         }
     }
