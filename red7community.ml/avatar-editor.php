@@ -1,4 +1,7 @@
 <?php
+
+// TODO: Make UI look alot nicer.
+
 /*
   File Name: avatar-editor.php
   Original Location: /avatar-editor.php

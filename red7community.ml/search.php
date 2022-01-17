@@ -1,4 +1,8 @@
 <?php
+    // TODO: Make this feature work properly.
+    // TODO: Add a filter section.
+    // TODO: Add in next major release :)
+
 	if(isset($_GET['search'])) {
 		$key = $_GET["search"];  //key=pattern to be searched
 	}

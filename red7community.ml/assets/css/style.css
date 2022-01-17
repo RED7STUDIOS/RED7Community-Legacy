@@ -297,3 +297,7 @@ fieldset {
     display: flex;
     align-self: center;
 }
+
+.redeem-form .btn-success {
+    margin-top: 10px;
+}

@@ -67,7 +67,8 @@
                 url: url,
                 data: data,
                 dataType: 'json',
-                success: function(d) {
+                error: function(d) {
+                    console.log(d.success);
                     if (d.success)
                     {
                         alert('Redeemed code successfully!');
@@ -75,7 +76,20 @@
                     }
                     else
                     {
-                        alert("An error occurred while redeeming, please try again later.")
+                        alert("An error occurred while redeeming or the code is invalid, please try again later.")
+                        document.location = document.location;
+                    }
+                },
+                success: function(d) {
+                    console.log(d.success);
+                    if (d.success)
+                    {
+                        alert('Redeemed code successfully!');
+                        document.location = document.location;
+                    }
+                    else
+                    {
+                        alert("An error occurred while redeeming or the code is invalid, please try again later.")
                         document.location = document.location;
                     }
                 }
@@ -87,15 +101,15 @@
         }
     </script>
 
-	<fieldset>
+	<div class="center redeem-form">
 		<legend>Redeem Code:</legend>
 		<form method="post" action="/ajax/process.php"
 		      onSubmit="return ajaxSubmit(this);">
 			<input maxlength="6969" type="text" name="value" style="width: 100%;"/>
 			<input hidden type="text" name="action" value="redeemCode"/>
-			<input class="btn btn-success" type="submit" name="form_submit" value="Redeem Code"/>
+			<button class="btn btn-success" type="submit" name="form_submit"><i class="far fa-clipboard-check"></i> Redeem Code</button>
 		</form>
-	</fieldset>
+	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>

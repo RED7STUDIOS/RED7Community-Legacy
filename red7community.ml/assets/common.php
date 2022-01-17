@@ -166,6 +166,29 @@ if (mysqli_num_rows($result) > 0) {
 	}
 }
 
+$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'termsOfService'";
+$result = mysqli_query($link, $sql_query);
+
+resetSQLVariables();
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $termsOfService = $row["content"];
+    }
+}
+
+$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'privacyPolicy'";
+$result = mysqli_query($link, $sql_query);
+
+resetSQLVariables();
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $privacyPolicy = $row["content"];
+    }
+}
 
 
 /**
