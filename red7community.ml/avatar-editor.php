@@ -1,5 +1,4 @@
 <?php
-
 // TODO: Make UI look alot nicer.
 
 /*
