@@ -76,6 +76,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 		?>
 
 		<div class="page-content-wrapper">
+            <h1>Avatar Editor</h1>
+
 			<canvas id="c"></canvas>
 
 			<div class="row row-cols-1 row-cols-md-3 g-4">
