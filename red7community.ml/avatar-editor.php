@@ -1,5 +1,6 @@
 <?php
 // TODO: Make UI look alot nicer.
+// TODO: Make the equipping of items use ajax instead.
 
 /*
   File Name: avatar-editor.php
@@ -24,7 +25,7 @@ exit;
 
 $id = $_SESSION['id'];
 
-$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $id);
+$data_avatar = file_get_contents(htmlspecialchars($API_URL). '/avatar.php?api=getbyid&id='.htmlspecialchars( $id));
 
 $json_a_avatar = json_decode($data_avatar, true);
 

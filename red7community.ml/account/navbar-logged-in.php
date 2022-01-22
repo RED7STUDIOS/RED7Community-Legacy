@@ -17,7 +17,7 @@
 
 	// START OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 
-	$your_data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $_SESSION['id']);
+	$your_data = file_get_contents(htmlspecialchars($API_URL). '/user.php?api=getbyid&id='. htmlspecialchars($_SESSION['id']));
 
 	$your_json_a = json_decode($your_data, true);
 

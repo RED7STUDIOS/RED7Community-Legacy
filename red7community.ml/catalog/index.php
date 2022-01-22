@@ -13,9 +13,9 @@ session_start();
 
 include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 
-if (isset($_GET["tab"])) { $tab = $_GET["tab"]; } else { $tab="all"; };
+if (isset($_GET["tab"])) { $tab = htmlspecialchars($_GET["tab"]); } else { $tab="all"; };
 
-if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
+if (isset($_GET["page"])) { $page = htmlspecialchars($_GET["page"]); } else { $page=1; };
 ?>
 
 <!DOCTYPE html>

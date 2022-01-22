@@ -14,24 +14,24 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $_GET['id']);
+$data = file_get_contents(htmlspecialchars($API_URL). '/user.php?api=getbyid&id='. htmlspecialchars($_GET['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted"))
 {
 	$json_a = json_decode($data, true);
 
-	$isBanned = $json_a[0]['data'][0]['isBanned'];
+	$isBanned = htmlspecialchars($json_a[0]['data'][0]['isBanned']);
 
-	$id = $_GET['id'];
-	$username = $json_a[0]['data'][0]['username'];
+	$id = htmlspecialchars($_GET['id']);
+	$username = htmlspecialchars($json_a[0]['data'][0]['username']);
 
-	$real_displayname = $json_a[0]['data'][0]['displayname'];
-	$real_description = $json_a[0]['data'][0]['description'];
+	$real_displayname = htmlspecialchars($json_a[0]['data'][0]['displayname']);
+	$real_description = htmlspecialchars($json_a[0]['data'][0]['description']);
 
 	if ($isBanned != 1) {
-		$displayname = filterwords($json_a[0]['data'][0]['displayname']);
-		$description = filterwords($json_a[0]['data'][0]['description']);
+		$displayname = htmlspecialchars(filterwords($json_a[0]['data'][0]['displayname']));
+		$description = htmlspecialchars(filterwords($json_a[0]['data'][0]['description']));
 		$icon = $json_a[0]['data'][0]['icon'];
 	} else {
 		$displayname = "[ CONTENT REMOVED ]";
@@ -45,7 +45,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 
 	$created_at = $json_a[0]['data'][0]['created_at'];
 	$membership = $json_a[0]['data'][0]['membership'];
-	$banReason = $json_a[0]['data'][0]['bannedReason'];
+	$banReason = htmlspecialchars($json_a[0]['data'][0]['bannedReason']);
 	$banDate = $json_a[0]['data'][0]['bannedDate'];
 	$isAdmin = $json_a[0]['data'][0]['isAdmin'];
 	$isVerified = $json_a[0]['data'][0]['isVerified'];
@@ -53,7 +53,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$clans = $json_a[0]['data'][0]['clans'];
 	$badges = $json_a[0]['data'][0]['badges'];
 
-	$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $_GET['id']);
+	$data_avatar = file_get_contents(htmlspecialchars($API_URL). '/avatar.php?api=getbyid&id='. htmlspecialchars($_GET['id']));
 
 	$json_a_avatar = json_decode($data_avatar, true);
 
@@ -67,7 +67,7 @@ else
 	$username = "Not Found";
 }
 
-if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
+if (isset($_GET["page"])) { $page = htmlspecialchars($_GET["page"]); } else { $page=1; };
 ?>
 
 <!DOCTYPE html>
@@ -344,7 +344,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                     <h5>Ban Reason:</h5>
                     <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . $banReason . '"/>
                     <input hidden type="text" name="action" value="banningUser"/>
-                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                    <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                     <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
                 </form>
             </fieldset>
@@ -379,12 +379,12 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         $inventory[] = $shirt;
                                         $inventory[] = $pants;
 
-                                        if (in_array($row['id'], $inventory))
+                                        if (in_array(htmlspecialchars($row['id']), $inventory))
                                         {
                                             $total = $total + 1;
 
                                             $thingy = " border-success";
-                                            $thingy2 = "/catalog/item.php?id=". $row['id'];
+                                            $thingy2 = "/catalog/item.php?id=". htmlspecialchars($row['id']);
 
                                             echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
                                         }
@@ -399,20 +399,20 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                             <h3>Friends:</h3>
                             <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
                                 <?php
-                                    $friends = $REL->getFriends($_GET['id']);
+                                    $friends = $REL->getFriends(htmlspecialchars($_GET['id']));
 
                                     if ($friends != "" && $friends != "[]" && !empty($friends)) {
                                         foreach ($users as $id=>$name) {
-                                            if (isset($friends['f'][$id]))
+                                            if (isset($friends['f'][htmlspecialchars($id)]))
                                             {
                                                 $data = file_get_contents($API_URL. '/user.php?api=getbyname&name='. $name);
 
                                                 $json_a = json_decode($data, true);
 
-                                                $friend_id = $json_a[0]['data'][0]['id'];
-                                                $friend_name = $json_a[0]['data'][0]['username'];
+                                                $friend_id = htmlspecialchars($json_a[0]['data'][0]['id']);
+                                                $friend_name = htmlspecialchars($json_a[0]['data'][0]['username']);
                                                 $friend_icon = $json_a[0]['data'][0]['icon'];
-                                                $friend_dsp = $json_a[0]['data'][0]['displayname'];
+                                                $friend_dsp = htmlspecialchars($json_a[0]['data'][0]['displayname']);
 
                                                 if ($friend_dsp == null || $friend_dsp == "")
                                                 {
@@ -448,8 +448,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
                                             $json_a = json_decode($data, true);
 
-                                            $badge_id = $json_a[0]['data'][0]['id'];
-                                            $badge_name = $json_a[0]['data'][0]['displayname'];
+                                            $badge_id = htmlspecialchars($json_a[0]['data'][0]['id']);
+                                            $badge_name = htmlspecialchars($json_a[0]['data'][0]['displayname']);
                                             $badge_icon = $json_a[0]['data'][0]['icon'];
 
                                             echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. $badge_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $badge_name . '</h6></div></div></a></div>';
@@ -474,16 +474,16 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     if ($items != "" && $items != "[]" && !empty($items)) {
                                         foreach($vals as $key=>$mydata)
                                         {
-                                            $data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $key);
+                                            $data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. htmlspecialchars($key));
 
                                             $json_a = json_decode($data, true);
 
-                                            $item_id = $json_a[0]['data'][0]['id'];
-                                            $item_propername = $json_a[0]['data'][0]['name'];
-                                            $item_name = $json_a[0]['data'][0]['displayname'];
+                                            $item_id = htmlspecialchars($json_a[0]['data'][0]['id']);
+                                            $item_propername = htmlspecialchars($json_a[0]['data'][0]['name']);
+                                            $item_name = htmlspecialchars($json_a[0]['data'][0]['displayname']);
                                             $item_icon = $json_a[0]['data'][0]['icon'];
 
-                                            $value = $vals[$key];
+                                            $value = htmlspecialchars($vals[$key]);
 
                                             echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. $item_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $item_name . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
                                         }
@@ -569,19 +569,19 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 			}
 
 			<?php
-				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $face);
+				$data = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($face));
 
 				$json_a = json_decode($data, true);
 
-				$id = $face;
-				$name = $json_a[0]['data'][0]['displayname'];
+				$id = htmlspecialchars($face);
+				$name = htmlspecialchars($json_a[0]['data'][0]['displayname']);
 				$icon = $json_a[0]['data'][0]['texture'];
 
-				$data_shirt = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $shirt);
+				$data_shirt = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($shirt));
 
 				$json_a_shirt = json_decode($data_shirt, true);
 
-				$shirtid = $shirt;
+				$shirtid = htmlspecialchars($shirt);
 
 				$shirticon = "";
 				
@@ -591,15 +591,15 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				}
 				else
 				{
-					$shirtname = $json_a_shirt[0]['data'][0]['displayname'];
+					$shirtname = htmlspecialchars($json_a_shirt[0]['data'][0]['displayname']);
 					$shirticon = $json_a_shirt[0]['data'][0]['texture'];
 				}
 
-				$data_pants = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $pants);
+				$data_pants = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($pants));
 
 				$json_a_pants = json_decode($data_pants, true);
 
-				$pantsid = $pants;
+				$pantsid = htmlspecialchars($pants);
 				$pantsicon = "";
 				
 				if ($pantsid == 0 || $pantsid = 0)
@@ -608,30 +608,30 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				}
 				else
 				{
-					$pantsname = $json_a_shirt[0]['data'][0]['displayname'];
+					$pantsname = htmlspecialchars($json_a_shirt[0]['data'][0]['displayname']);
 					$pantsicon = $json_a_shirt[0]['data'][0]['texture'];
 				}
 			?>
 
 			var shirtTextureLoader = new THREE.TextureLoader();
-			var shirtMap = shirtTextureLoader.load('<?php echo $STORAGE_URL; echo $shirticon; ?>');
+			var shirtMap = shirtTextureLoader.load('<?php echo htmlspecialchars($STORAGE_URL); echo $shirticon; ?>');
 			var shirtMaterial = new THREE.MeshPhongMaterial({map: shirtMap});
 
 			var pantsTextureLoader = new THREE.TextureLoader();
-			var pantsMap = pantsTextureLoader.load('<?php echo $STORAGE_URL; echo $pantsicon; ?>');
+			var pantsMap = pantsTextureLoader.load('<?php echo htmlspecialchars($STORAGE_URL); echo $pantsicon; ?>');
 			var pantsMaterial = new THREE.MeshPhongMaterial({map: pantsMap});
 
 			// HEAD MODEL
 			{
 				// Create a material
 				var textureLoader = new THREE.TextureLoader();
-				var map = textureLoader.load('<?php echo $STORAGE_URL; echo $icon; ?>');
+				var map = textureLoader.load('<?php echo htmlspecialchars($STORAGE_URL); echo $icon; ?>');
 				var material = new THREE.MeshPhongMaterial({map: map});
 
 				// Create a new OBJ loader.
 				var loader = new OBJLoader();
 				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Head.obj', function ( object )
+				loader.load( '<?php echo htmlspecialchars($STORAGE_URL) ?>/Avatar/Head.obj', function ( object )
 				{
 					// For any meshes in the model, add our material.
 					object.traverse( function ( node ) {
@@ -655,17 +655,17 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				var loader = new OBJLoader();
 				// Load the model into memory.
 				<?php
-				$armthingy = $STORAGE_URL. "/Avatar/LeftArm.obj";
+				$armthingy = htmlspecialchars($STORAGE_URL). "/Avatar/LeftArm.obj";
 				foreach(json_decode($hats, true) as $hat) {
-					$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
+					$data = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($hat));
 
 					$json_a = json_decode($data, true);
 
-					$id = $hat;
-					$type = $json_a[0]['data'][0]['type'];
+					$id = htmlspecialchars($hat);
+					$type = htmlspecialchars($json_a[0]['data'][0]['type']);
 					if ($type == "Gear")
 					{
-						$armthingy = $STORAGE_URL. "/Avatar/LeftArmUp.obj";
+						$armthingy = htmlspecialchars($STORAGE_URL). "/Avatar/LeftArmUp.obj";
 					}
 				}
 				?>
@@ -696,7 +696,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				// Create a new OBJ loader.
 				var loader = new OBJLoader();
 				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Torso.obj', function ( object )
+				loader.load( '<?php echo htmlspecialchars($STORAGE_URL) ?>/Avatar/Torso.obj', function ( object )
 				{
 					// For any meshes in the model, add our material.
 					object.traverse( function ( node ) {
@@ -723,7 +723,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				// Create a new OBJ loader.
 				var loader = new OBJLoader();
 				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightArm.obj', function ( object )
+				loader.load( '<?php echo htmlspecialchars($STORAGE_URL) ?>/Avatar/RightArm.obj', function ( object )
 				{
 					// For any meshes in the model, add our material.
 					object.traverse( function ( node ) {
@@ -750,7 +750,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				// Create a new OBJ loader.
 				var loader = new OBJLoader();
 				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/LeftLeg.obj', function ( object )
+				loader.load( '<?php echo htmlspecialchars($STORAGE_URL) ?>/Avatar/LeftLeg.obj', function ( object )
 				{
 					// For any meshes in the model, add our material.
 					object.traverse( function ( node ) {
@@ -777,7 +777,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				// Create a new OBJ loader.
 				var loader = new OBJLoader();
 				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightLeg.obj', function ( object )
+				loader.load( '<?php echo htmlspecialchars($STORAGE_URL) ?>/Avatar/RightLeg.obj', function ( object )
 				{
 					// For any meshes in the model, add our material.
 					object.traverse( function ( node ) {
@@ -801,22 +801,22 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 			<?php
 			foreach(json_decode($hats, true) as $hat) {
-				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
+				$data = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($hat));
 
 				$json_a = json_decode($data, true);
 
-				$id = $hat;
-				$name = $json_a[0]['data'][0]['displayname'];
-				$obj = $json_a[0]['data'][0]['obj'];
-				$mtl = $json_a[0]['data'][0]['mtl'];
+				$id = htmlspecialchars($hat);
+				$name = htmlspecialchars($json_a[0]['data'][0]['displayname']);
+				$obj = htmlspecialchars($json_a[0]['data'][0]['obj']);
+				$mtl = htmlspecialchars($json_a[0]['data'][0]['mtl']);
 
 				echo '{
 				const mtlLoader = new MTLLoader();
-				mtlLoader.load("'. $STORAGE_URL. $mtl. '", (mtl) => {
+				mtlLoader.load("'. htmlspecialchars($STORAGE_URL). $mtl. '", (mtl) => {
 					mtl.preload();
 					const objLoader = new OBJLoader();
 					objLoader.setMaterials(mtl);
-					objLoader.load("'. $STORAGE_URL. $obj. '", (root) => {
+					objLoader.load("'. htmlspecialchars($STORAGE_URL). $obj. '", (root) => {
 						scene.add(root);
 					});
 				});
