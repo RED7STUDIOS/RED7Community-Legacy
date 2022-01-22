@@ -302,7 +302,7 @@ if (isset($_GET["page"])) { $page = htmlspecialchars($_GET["page"]); } else { $p
                         <hr/>
 						<?php
 							if ($your_isAdmin == 1) {
-								$sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
+								$sql = "SELECT currency FROM users WHERE id=" . htmlspecialchars($_GET['id']);
 								$result = mysqli_query($link, $sql);
 								if (mysqli_num_rows($result) > 0) {
 									while ($row = mysqli_fetch_assoc($result)) {
