@@ -20,7 +20,7 @@ header("location: ../login.php");
 exit;
 }
 
-$data_main = file_get_contents(htmlspecialchars($API_URL). '/avatar.php?api=getbyid&id='. htmlspecialchars($_SESSION['id']));
+$data_main = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $_SESSION['id']);
 
 $json_a_main = json_decode($data_main, true);
 
@@ -67,18 +67,18 @@ $items = $json_a_main[0]['data'][0]['items'];
 
 						$json_a = json_decode($data, true);
 
-						$id = htmlspecialchars($json_a[0]['data'][0]['id']);
+						$id = $json_a[0]['data'][0]['id'];
 
 						$items_before = json_decode($items, true);
 
-						if (htmlspecialchars($_GET['api') == "equip")
+						if ($_GET['api'] == "equip")
 						{
-							if (!in_array(htmlspecialchars($_GET['id']), $items_before))
+							if (!in_array($_GET['id'], $items_before))
 							{
-								if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true)))
+								if (in_array($_GET['id'], json_decode($your_items, true)))
 								{
 									array_push($items_before, intval($_GET['id']));
-									$items_final = htmlspecialchars(json_encode($items_before));
+									$items_final = json_encode($items_before);
 
 									$sql = "UPDATE avatars SET items = '". $items_final . "' WHERE ownerid = '". $your_id . "'";
 
@@ -102,12 +102,12 @@ $items = $json_a_main[0]['data'][0]['items'];
 								echo '<p>You are already wearing this item.</p>';
 							}
 						}
-						else if (htmlspecialchars($_GET['api']) == "unequip")
+						else if ($_GET['api'] == "unequip")
 						{
-							if (htmlspecialchars(in_array($_GET['id']), $items_before))
+							if (in_array($_GET['id'], $items_before))
 							{
 								unset($items_before[array_search($_GET['id'], $items_before)]);
-								$items_final = htmlspecialchars(json_encode($items_before));
+								$items_final = json_encode($items_before);
 
 								$sql = "UPDATE avatars SET items = '". $items_final . "' WHERE ownerid = '". $your_id . "'";
 
@@ -126,24 +126,11 @@ $items = $json_a_main[0]['data'][0]['items'];
 								echo '<p>You are not wearing this item.</p>';
 							}
 						}
-						else if (htmlspecialchars($_GET['api']) == "changeshirt")
-						{
-							if (htmlspecialchars(in_array($_GET['id']), json_decode($your_items, true)))
-							{
-								$sql = "UPDATE avatars SET shirt = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
-
-								if (mysqli_query($link, $sql)) {
-								  
-								} else {
-								  echo "Error: " . $sql . "<br>" . mysqli_error($link);
-								}
-							}
-						}
-						else if (htmlspecialchars($_GET['api']) == "changepants")
+						else if ($_GET['api'] == "changeshirt")
 						{
 							if (in_array($_GET['id'], json_decode($your_items, true)))
 							{
-								$sql = "UPDATE avatars SET pants = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
+								$sql = "UPDATE avatars SET shirt = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
 
 								if (mysqli_query($link, $sql)) {
 								  
@@ -152,11 +139,24 @@ $items = $json_a_main[0]['data'][0]['items'];
 								}
 							}
 						}
-						else if (htmlspecialchars($_GET['api']) == "changeface")
+						else if ($_GET['api'] == "changepants")
 						{
-							if (htmlspecialchars(in_array($_GET['id']), json_decode($your_items, true)))
+							if (in_array($_GET['id'], json_decode($your_items, true)))
 							{
-								$sql = "UPDATE avatars SET face = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
+								$sql = "UPDATE avatars SET pants = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
+
+								if (mysqli_query($link, $sql)) {
+								  
+								} else {
+								  echo "Error: " . $sql . "<br>" . mysqli_error($link);
+								}
+							}
+						}
+						else if ($_GET['api'] == "changeface")
+						{
+							if (in_array($_GET['id'], json_decode($your_items, true)))
+							{
+								$sql = "UPDATE avatars SET face = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
 
 								if (mysqli_query($link, $sql)) {
 								  
