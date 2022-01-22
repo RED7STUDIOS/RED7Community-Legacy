@@ -23,7 +23,7 @@ function filterwords($text) {
 	for ($i = 0; $i < $filterCount; $i++) {
 		$text = preg_replace_callback('/\b' . $filterWords[$i] . '\b/i', function($matches){return str_repeat('#', strlen($matches[0]));}, $text);
 	}
-	return htmlspecialchars($text);
+	return $text;
 }
 
 // Shorten down numbers to make them look nicer :)
@@ -39,14 +39,14 @@ function number_format_short($n) {
 	elseif ($n > 1000000) return round(($n/1000000), 2).'M+';
 	elseif ($n > 1000) return round(($n/1000), 2).'K+';
 
-	return htmlspecialchars(number_format($n));
+	return number_format($n);
 }
 
 // Add commas to big numbers to look nicer.
 // Usage: number_format_comma(1000000);
 function number_format_comma($n) {
 	$english_format_number = number_format($n);
-	return htmlspecialchars($english_format_number);
+	return $english_format_number;
 }
 
 // Add the str_contains function.
@@ -78,7 +78,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$site_name = htmlspecialchars($row["content"]);
+		$site_name = $row["content"];
 	}
 }
 
@@ -90,7 +90,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$currency_name = htmlspecialchars($row["content"]);
+		$currency_name = $row["content"];
 	}
 }
 
@@ -102,7 +102,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$premiumIcon = htmlspecialchars($row["content"]);
+		$premiumIcon = $row["content"];
 	}
 }
 
@@ -114,7 +114,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$verifiedIcon = htmlspecialchars($row["content"]);
+		$verifiedIcon = $row["content"];
 	}
 }
 
@@ -126,7 +126,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$appealEmail = htmlspecialchars($row["content"]);
+		$appealEmail = $row["content"];
 	}
 }
 
@@ -138,7 +138,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$maintenanceMode = htmlspecialchars($row["content"]);
+		$maintenanceMode = $row["content"];
 	}
 }
 
@@ -150,7 +150,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        $registration = htmlspecialchars($row["content"]);
+        $registration = $row["content"];
     }
 }
 
@@ -162,7 +162,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
 	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
-		$version = htmlspecialchars($row["content"]);
+		$version = $row["content"];
 	}
 }
 
@@ -174,7 +174,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        $termsOfService = htmlspecialchars($row["content"]);
+        $termsOfService = $row["content"];
     }
 }
 
@@ -186,7 +186,7 @@ resetSQLVariables();
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        $privacyPolicy = htmlspecialchars($row["content"]);
+        $privacyPolicy = $row["content"];
     }
 }
 

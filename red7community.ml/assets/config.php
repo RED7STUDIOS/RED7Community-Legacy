@@ -8,20 +8,20 @@
 */
 
 // The domain URL.
-$ROOT_URL = htmlspecialchars('http://red7community.ml');
+$ROOT_URL = 'http://red7community.ml';
 // The API URL.
-$API_URL = $ROOT_URL . htmlspecialchars('/API');
+$API_URL = $ROOT_URL . '/API';
 
 // The Storage URL.
-$STORAGE_URL = htmlspecialchars('https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main');
+$STORAGE_URL = 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main';
 
 // The status URL.
-$TATUS_URL = htmlspecialchars('https://status.red7community.ml');
-$STATUS_GITHUB_URL = htmlspecialchars('https://github.com/RED7STUDIOS/RED7Community-status');
+$TATUS_URL = 'https://status.red7community.ml';
+$STATUS_GITHUB_URL = 'https://github.com/RED7STUDIOS/RED7Community-status';
 
 // Other Options.
 $CUSTOM_SESSION_LOCATION = false;
-$CSL_PATH = htmlspecialchars('D:\OneDrive - redsevenstudios.com\Users\Mitchell\Desktop\CommunitySite\Sessions\Main');
+$CSL_PATH = 'D:\OneDrive - redsevenstudios.com\Users\Mitchell\Desktop\CommunitySite\Sessions\Main';
 
 /* Database credentials. */
 define('DB_SERVER', '127.0.0.1');

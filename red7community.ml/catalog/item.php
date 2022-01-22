@@ -11,7 +11,7 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents(htmlspecialchars($API_URL). '/catalog.php?api=getitembyid&id='. htmlspecialchars($_GET['id']));
+$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_GET['id']);
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted"))

@@ -36,14 +36,6 @@ exit;
 	<body>
 		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
 
-        <?php
-
-        if ($your_isBanned !== 1 ) {
-            header("location: /");
-        }
-
-        ?>
-
 		<div class="page-content-wrapper">
 				<main class="col-md-9">
 					<div class="d-flex align-items-center border-bottom">

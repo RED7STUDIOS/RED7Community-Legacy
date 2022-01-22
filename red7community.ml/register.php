@@ -1,6 +1,4 @@
 <?php
-// TODO: Add invite links :)
-
 /*
   File Name: register.php
   Original Location: /register.php
