@@ -15,14 +15,29 @@ include_once $_SERVER['DOCUMENT_ROOT']. '/assets/config.php';
 
 if ($_POST['action'] == "changeDisplayName")
 {
-    // Prepare an insert statement
-    $sql = "UPDATE users SET displayname = '". $_POST["value"] . "' WHERE id = '". $_SESSION['id'] . "'";
+    if (strlen($_POST["value"]) > 14)
+    {
+        $sql = null;
+    }
+    else
+    {
+        // Prepare an insert statement
+        $sql = "UPDATE users SET displayname = '". $_POST["value"] . "' WHERE id = '". $_SESSION['id'] . "'";
+    }
+    
 }
 
 else if ($_POST['action'] == "changeDescription")
 {
-    // Prepare an insert statement
-    $sql = "UPDATE users SET description = '". $_POST["value"] . "' WHERE id = '". $_SESSION['id'] . "'";
+    if (strlen($_POST["value"]) > 200)
+    {
+        $sql = null;
+    }
+    else
+    {
+        // Prepare an insert statement
+        $sql = "UPDATE users SET description = '". $_POST["value"] . "' WHERE id = '". $_SESSION['id'] . "'";
+    }
 }
 
 else if ($_POST['action'] == "changeEmail")

@@ -203,6 +203,10 @@ if (mysqli_num_rows($result) > 0) {
  * @return String containing either just a URL or a complete image tag
  * @source https://gravatar.com/site/implement/images/php/
  */
+
+ // THIS IS A TEMPORARY FIX
+error_reporting(E_ALL ^ E_DEPRECATED);
+
 function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
     $url = 'https://www.gravatar.com/avatar/';
     $url .= md5( strtolower( trim( $email ) ) );

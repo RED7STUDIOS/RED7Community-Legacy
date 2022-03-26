@@ -42,28 +42,31 @@ exit;
                         var data = $(formEl).serializeArray();
                         var url = $(formEl).attr('action');
 
-                        // setup the ajax request
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            success: function(d) {
-                                if (d.success)
-                                {
-                                    alert('Changed value successfully!');
-                                    document.location = document.location;
+                            // setup the ajax request
+                            $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data: data,
+                                dataType: 'json',
+                                success: function(d) {
+                                    if (d.success)
+                                    {
+                                        alert('Changed value successfully!');
+                                        document.location = document.location;
+                                    }
+                                    else
+                                    {
+                                        alert("An error occurred while changing value, please try again later.")
+                                        document.location = document.location;
+                                    }
                                 }
-                                else
-                                {
-                                    alert("An error occurred while changing value, please try again later.")
-                                    document.location = document.location;
-                                }
-                            }
-                        });
+                            });
+                            
+                        document.location = document.location;
 
+                        
                         // return false so the form does not actually
-                        // submit to the page
+                            // submit to the page
                         return false;
                     }
                 </script>
@@ -110,7 +113,7 @@ exit;
                         <legend>Change Display Name:</legend>
                         <form method="post" action="/ajax/process.php"
                               onSubmit="return ajaxSubmit(this);">
-                            <input maxlength="12" type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT displayname FROM users WHERE id=". $_SESSION['id']; $result = mysqli_query($link, $sql); if (mysqli_num_rows($result) > 0) { while($row = mysqli_fetch_assoc($result)) { echo filterwords($row['displayname']); }}?>"/>
+                            <input maxlength="14" type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT displayname FROM users WHERE id=". $_SESSION['id']; $result = mysqli_query($link, $sql); if (mysqli_num_rows($result) > 0) { while($row = mysqli_fetch_assoc($result)) { echo filterwords($row['displayname']); }}?>"/>
                             <input hidden type="text" name="action" value="changeDisplayName"/>
                             <input class="btn btn-success" type="submit" name="form_submit" value="Change Display Name"/>
                         </form>
