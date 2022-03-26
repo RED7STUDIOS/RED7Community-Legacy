@@ -53,6 +53,12 @@
 	} else if ($_POST['action'] == "currencyChange") {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET currency = '" . $_POST["amount"] . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if ($_POST['action'] == "displayNameChange") {
+			// Prepare an insert statement
+			$sql = "UPDATE users SET displayName = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
+		} else if ($_POST['action'] == "descriptionChange") {
+			// Prepare an insert statement
+			$sql = "UPDATE users SET description = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if ($_POST['action'] == "updateSiteSettings") {
 		// Prepare an insert statement
 		$sql = "UPDATE site_info SET content = '" . $_POST["site_name"] . "' WHERE name = 'site_name'";

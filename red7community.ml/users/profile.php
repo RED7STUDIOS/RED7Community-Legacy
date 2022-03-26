@@ -72,98 +72,98 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="The profile page for <?php echo htmlspecialchars($username) ?>.">
-		<title><?php echo htmlspecialchars($username) ?> - <?php echo $site_name; ?></title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="/assets/css/style.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The profile page for <?php echo htmlspecialchars($username) ?>.">
+    <title><?php echo htmlspecialchars($username) ?> - <?php echo $site_name; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<script src="/assets/js/fontawesome.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
 
-		<script src="/assets/js/relation.js"></script>
+    <script src="/assets/js/fontawesome.js"></script>
 
-		<style>
-		#c {
-			width: 50%; 
-			height: 50%;
-		}
-		</style>
-	</head>
-	<body onload="init();">
-		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
-        <div class="page-content-wrapper">
-            <script type="text/javascript">
-                var ajaxSubmit = function (formEl) {
-                    // fetch the data for the form
-                    var data = $(formEl).serializeArray();
-                    var url = $(formEl).attr('action');
+    <script src="/assets/js/relation.js"></script>
 
-                    // setup the ajax request
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: data,
-                        dataType: 'json',
-                        success: function (d) {
-                            if (d.success) {
-                                alert('Changed value successfully!');
-                                document.location = document.location;
-                            }
-                            else
-                            {
-                                alert("An error occurred while changing value, please try again later.")
-                                document.location = document.location;
-                            }
-                        }
-                    });
+    <style>
+    #c {
+        width: 50%;
+        height: 50%;
+    }
+    </style>
+</head>
 
-                    // return false so the form does not actually
-                    // submit to the page
-                    return false;
+<body onload="init();">
+    <?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
+    <div class="page-content-wrapper">
+        <script type="text/javascript">
+        var ajaxSubmit = function(formEl) {
+            // fetch the data for the form
+            var data = $(formEl).serializeArray();
+            var url = $(formEl).attr('action');
+
+            // setup the ajax request
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function(d) {
+                    if (d.success) {
+                        alert('Changed value successfully!');
+                        document.location = document.location;
+                    } else {
+                        alert("An error occurred while changing value, please try again later.")
+                        document.location = document.location;
+                    }
                 }
-            </script>
+            });
 
-            <script>
+            // return false so the form does not actually
+            // submit to the page
+            return false;
+        }
+        </script>
 
-                let observe;
-                if (window.attachEvent) {
-                    observe = function (element, event, handler) {
-                        element.attachEvent('on' + event, handler);
-                    };
-                } else {
-						observe = function (element, event, handler) {
-							element.addEventListener(event, handler, false);
-						};
-					}
+        <script>
+        let observe;
+        if (window.attachEvent) {
+            observe = function(element, event, handler) {
+                element.attachEvent('on' + event, handler);
+            };
+        } else {
+            observe = function(element, event, handler) {
+                element.addEventListener(event, handler, false);
+            };
+        }
 
-					function init () {
-						let text = document.getElementById('text');
-						function resize () {
-							text.style.height = 'auto';
-							text.style.height = text.scrollHeight+'px';
-						}
-						/* 0-timeout to get the already changed text */
-						function delayedResize () {
-							window.setTimeout(resize, 0);
-						}
+        function init() {
+            let text = document.getElementById('text');
 
-						observe(text, 'change',  resize);
-						observe(text, 'cut',     delayedResize);
-						observe(text, 'paste',   delayedResize);
-						observe(text, 'drop',    delayedResize);
-						observe(text, 'keydown', delayedResize);
+            function resize() {
+                text.style.height = 'auto';
+                text.style.height = text.scrollHeight + 'px';
+            }
+            /* 0-timeout to get the already changed text */
+            function delayedResize() {
+                window.setTimeout(resize, 0);
+            }
 
-						text.focus();
-						text.select();
-						resize();
-					}
+            observe(text, 'change', resize);
+            observe(text, 'cut', delayedResize);
+            observe(text, 'paste', delayedResize);
+            observe(text, 'drop', delayedResize);
+            observe(text, 'keydown', delayedResize);
 
-				</script>
+            text.focus();
+            text.select();
+            resize();
+        }
+        </script>
 
-				<?php
+        <?php
 				if (isset($your_isBanned))
 				{
 					if ($your_isBanned == 1)
@@ -181,25 +181,27 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				}
 				?>
 
-				<main class="col-md-9">
-					<div class="d-flex align-items-center border-bottom">
-						<?php
+        <main class="col-md-9">
+            <div class="d-flex align-items-center border-bottom">
+                <?php
 							if ($username == "Not Found")
 							{
 								echo "<h2>This user could not be found!</h2></div><p>This user could possibly not be found due to a bug/glitch or has been removed (not banned).";
 								exit;
 							}
 						?>
-						<img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
-						&nbsp;
-						<?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" class="premium-icon"></img>'; } ?>
-						<h2 class="<?php if( $isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>"> <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo filterwords(htmlspecialchars($displayname)); } else { echo filterwords(htmlspecialchars($username)); } ?></h2>
-						&nbsp;
-						<?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" class="verified-icon"></img>'; } ?>
-						<small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
-						<?php if ( $isBanned == 1 ) { echo '<p><strong class="banned-text">*BANNED*</strong></p>'; } ?>
+                <img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
+                &nbsp;
+                <?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" class="premium-icon"></img>'; } ?>
+                <h2 class="<?php if( $isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>">
+                    <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo filterwords(htmlspecialchars($displayname)); } else { echo filterwords(htmlspecialchars($username)); } ?>
+                </h2>
+                &nbsp;
+                <?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" class="verified-icon"></img>'; } ?>
+                <small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
+                <?php if ( $isBanned == 1 ) { echo '<p><strong class="banned-text">*BANNED*</strong></p>'; } ?>
 
-                        <?php
+                <?php
                         // (A) LOAD RELATIONSHIP LIBRARY + SET CURRENT USER
                         require $_SERVER['DOCUMENT_ROOT']. "/assets/relation.php";
 
@@ -228,7 +230,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                         // (C) GET + SHOW ALL USERS
                         $users = $REL->getUsers(); ?>
 
-                        <div id="userList"><?php
+                <div id="userList"><?php
                             if (isset($_SESSION['id']))
                             {
                                 if ($_SESSION['id'] != $_GET['id'])
@@ -268,17 +270,17 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                 }
                             }
                         ?>
-                        </div>
+                </div>
 
 
-                        <!-- (D) NINJA RELATIONSHIP FORM -->
-						<form id="ninform" method="post" target="_self">
-						  <input type="hidden" name="req" id="ninreq"/>
-						  <input type="hidden" name="id" id="ninid"/>
-						</form>
-					</div>
-					<div>
-						<?php
+                <!-- (D) NINJA RELATIONSHIP FORM -->
+                <form id="ninform" method="post" target="_self">
+                    <input type="hidden" name="req" id="ninreq" />
+                    <input type="hidden" name="id" id="ninid" />
+                </form>
+            </div>
+            <div>
+                <?php
 						if ($isBanned == 1) {
 							if ($banDate == "" && $banReason == "") {
 								echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
@@ -296,11 +298,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 						}
 						?>
 
-                        <h3>About:</h3>
-                        <textarea class="description" id="text"
-                                  disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
-                        <hr/>
-						<?php
+                <h3>About:</h3>
+                <textarea class="description" id="text"
+                    disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
+                <hr />
+                <?php
 							if ($your_isAdmin == 1) {
 								$sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
 								$result = mysqli_query($link, $sql);
@@ -312,9 +314,20 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 								echo '<fieldset>
                             <h3>Real Data:</h3>
-                            <p><b>Display Name: </b>' . $real_displayname . '</p>
+                            <form method="post" action="/moderate/ajax.php"
+                                  onSubmit="return ajaxSubmit(this);"><p><b>Display Name: </b> <input maxlength="69420" type="text" name="value"
+								  value="' . $real_displayname . '"/>
+<input hidden type="text" name="action" value="displayNameChange"/>
+<input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+<input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+</form></p>
                             <p><b>Username: </b>' . $username . '</p>
-                            <p><b>Description: </b>' . $real_description . '</p>
+                            <form method="post" action="/moderate/ajax.php"
+                                  onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $real_description. '
+								  </textarea><input hidden type="text" name="action" value="descriptionChange"/>
+								  <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+								  <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+								  </form></p>
                     
                             <form method="post" action="/moderate/ajax.php"
                                   onSubmit="return ajaxSubmit(this);">
@@ -357,11 +370,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 						?>
 
-                        <canvas id="c"></canvas>
-                        <div title="currently-wearing" id="currently-wearing">
-                            <h4>Currently Wearing:</h4>
-                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-                                <?php
+                <canvas id="c"></canvas>
+                <div title="currently-wearing" id="currently-wearing">
+                    <h4>Currently Wearing:</h4>
+                    <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                        <?php
                                     $total = 0;
 
                                     $datatable = "catalog"; // MySQL table name
@@ -390,15 +403,15 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         }
                                     }
                                 ?>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <hr/>
+                <hr />
 
-                        <div title="friends" id="friends">
-                            <h3>Friends:</h3>
-                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-                                <?php
+                <div title="friends" id="friends">
+                    <h3>Friends:</h3>
+                    <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                        <?php
                                     $friends = $REL->getFriends($_GET['id']);
 
                                     if ($friends != "" && $friends != "[]" && !empty($friends)) {
@@ -432,15 +445,15 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         echo '<p>This user has no friends yet.</p>';
                                     }
                                 ?>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <hr/>
+                <hr />
 
-                        <div title="badges" id="badges">
-                            <h3>Badges:</h3>
-                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-                                <?php
+                <div title="badges" id="badges">
+                    <h3>Badges:</h3>
+                    <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                        <?php
                                     if ($badges != "" && $badges != "[]" && !empty($badges)) {
                                         foreach(json_decode($badges) as $mydata)
                                         {
@@ -460,15 +473,15 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         echo '<p>This user has no badges yet.</p>';
                                     }
                                 ?>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <hr/>
+                <hr />
 
-                        <div title="inventory" id="inventory">
-                            <h3>Inventory:</h3>
-                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-                                <?php
+                <div title="inventory" id="inventory">
+                    <h3>Inventory:</h3>
+                    <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                        <?php
                                     $vals = array_count_values(json_decode($items, true));
 
                                     if ($items != "" && $items != "[]" && !empty($items)) {
@@ -493,82 +506,92 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                         echo '<p>This user has no items yet.</p>';
                                     }
                                 ?>
-                            </div>
-                        </div>
-					</div>
-				</div>
-			</main>
-		</div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+    </div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+</body>
 
-	<script type="module">
-		import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js';
-		import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js';
-		import {OBJLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js';
-		import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
+<script type="module">
+import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js';
+import {
+    OrbitControls
+} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js';
+import {
+    OBJLoader
+} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js';
+import {
+    MTLLoader
+} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
 
-		function main() {
-			const canvas = document.querySelector('#c');
-			const renderer = new THREE.WebGLRenderer({canvas});
+function main() {
+    const canvas = document.querySelector('#c');
+    const renderer = new THREE.WebGLRenderer({
+        canvas
+    });
 
-			const fov = 45;
-			const aspect = 2;  // the canvas default
-			const near = 0.1;
-			const far = 100;
-			const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-			camera.position.set(0, 10, 20);
+    const fov = 45;
+    const aspect = 2; // the canvas default
+    const near = 0.1;
+    const far = 100;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 10, 20);
 
-			const controls = new OrbitControls(camera, canvas);
-			controls.target.set(0, 5, 0);
-			controls.update();
+    const controls = new OrbitControls(camera, canvas);
+    controls.target.set(0, 5, 0);
+    controls.update();
 
-			const scene = new THREE.Scene();
-			scene.background = new THREE.Color('black');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('black');
 
-			{
-				const planeSize = 40;
+    {
+        const planeSize = 40;
 
-				const loader = new THREE.TextureLoader();
-				const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
-				texture.wrapS = THREE.RepeatWrapping;
-				texture.wrapT = THREE.RepeatWrapping;
-				texture.magFilter = THREE.NearestFilter;
-				const repeats = planeSize / 2;
-				texture.repeat.set(repeats, repeats);
+        const loader = new THREE.TextureLoader();
+        const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.magFilter = THREE.NearestFilter;
+        const repeats = planeSize / 2;
+        texture.repeat.set(repeats, repeats);
 
-				const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
-				const planeMat = new THREE.MeshPhongMaterial({
-					map: texture,
-					side: THREE.DoubleSide,
-				});
-				const mesh = new THREE.Mesh(planeGeo, planeMat);
-				mesh.rotation.x = Math.PI * -.5;
-				scene.add(mesh);
-			}
+        const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+        const planeMat = new THREE.MeshPhongMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+        });
+        const mesh = new THREE.Mesh(planeGeo, planeMat);
+        mesh.rotation.x = Math.PI * -.5;
+        scene.add(mesh);
+    }
 
-			{
-				const skyColor = 0xB1E1FF;  // light blue
-				const groundColor = 0xB97A20;  // brownish orange
-				const intensity = 1;
-				const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-				scene.add(light);
-			}
+    {
+        const skyColor = 0xB1E1FF; // light blue
+        const groundColor = 0xB97A20; // brownish orange
+        const intensity = 1;
+        const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+        scene.add(light);
+    }
 
-			{
-				const color = 0xFFFFFF;
-				const intensity = 1;
-				const light = new THREE.DirectionalLight(color, intensity);
-				light.position.set(0, 10, 0);
-				light.target.position.set(-5, 0, 0);
-				scene.add(light);
-				scene.add(light.target);
-			}
+    {
+        const color = 0xFFFFFF;
+        const intensity = 1;
+        const light = new THREE.DirectionalLight(color, intensity);
+        light.position.set(0, 10, 0);
+        light.target.position.set(-5, 0, 0);
+        scene.add(light);
+        scene.add(light.target);
+    }
 
-			<?php
+    <?php
 				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $face);
 
 				$json_a = json_decode($data, true);
@@ -613,48 +636,53 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 				}
 			?>
 
-			var shirtTextureLoader = new THREE.TextureLoader();
-			var shirtMap = shirtTextureLoader.load('<?php echo $STORAGE_URL; echo $shirticon; ?>');
-			var shirtMaterial = new THREE.MeshPhongMaterial({map: shirtMap});
+    var shirtTextureLoader = new THREE.TextureLoader();
+    var shirtMap = shirtTextureLoader.load('<?php echo $STORAGE_URL; echo $shirticon; ?>');
+    var shirtMaterial = new THREE.MeshPhongMaterial({
+        map: shirtMap
+    });
 
-			var pantsTextureLoader = new THREE.TextureLoader();
-			var pantsMap = pantsTextureLoader.load('<?php echo $STORAGE_URL; echo $pantsicon; ?>');
-			var pantsMaterial = new THREE.MeshPhongMaterial({map: pantsMap});
+    var pantsTextureLoader = new THREE.TextureLoader();
+    var pantsMap = pantsTextureLoader.load('<?php echo $STORAGE_URL; echo $pantsicon; ?>');
+    var pantsMaterial = new THREE.MeshPhongMaterial({
+        map: pantsMap
+    });
 
-			// HEAD MODEL
-			{
-				// Create a material
-				var textureLoader = new THREE.TextureLoader();
-				var map = textureLoader.load('<?php echo $STORAGE_URL; echo $icon; ?>');
-				var material = new THREE.MeshPhongMaterial({map: map});
+    // HEAD MODEL
+    {
+        // Create a material
+        var textureLoader = new THREE.TextureLoader();
+        var map = textureLoader.load('<?php echo $STORAGE_URL; echo $icon; ?>');
+        var material = new THREE.MeshPhongMaterial({
+            map: map
+        });
 
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Head.obj', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						if ( node.isMesh ) node.material = material;
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        loader.load('<?php echo $STORAGE_URL ?>/Avatar/Head.obj', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                if (node.isMesh) node.material = material;
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0xFFFF00);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0xFFFF00);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			// LEFT ARM MODEL
-			{
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				<?php
+    // LEFT ARM MODEL
+    {
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        <?php
 				$armthingy = $STORAGE_URL. "/Avatar/LeftArm.obj";
 				foreach(json_decode($hats, true) as $hat) {
 					$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
@@ -669,137 +697,132 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 					}
 				}
 				?>
-				loader.load( '<?php echo $armthingy ?>', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						<?php
+        loader.load('<?php echo $armthingy ?>', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                <?php
 						if ($shirticon != null || $shirticon != "") {
 							echo 'if ( node.isMesh ) node.material = shirtMaterial;';
 						}
 						?>
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0x66CCFF);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0x66CCFF);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			// TORSO MODEL
-			{
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Torso.obj', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						<?php
+    // TORSO MODEL
+    {
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        loader.load('<?php echo $STORAGE_URL ?>/Avatar/Torso.obj', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                <?php
 						if ($shirticon != null || $shirticon != "") {
 							echo 'if ( node.isMesh ) node.material = shirtMaterial;';
 						}
 						?>
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0x66CCFF);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0x66CCFF);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			// RIGHT ARM MODEL
-			{
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightArm.obj', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						<?php
+    // RIGHT ARM MODEL
+    {
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        loader.load('<?php echo $STORAGE_URL ?>/Avatar/RightArm.obj', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                <?php
 						if ($shirticon != null || $shirticon != "") {
 							echo 'if ( node.isMesh ) node.material = shirtMaterial;';
 						}
 						?>
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0x66CCFF);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0x66CCFF);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			// LEFT LEG MODEL
-			{
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/LeftLeg.obj', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						<?php
+    // LEFT LEG MODEL
+    {
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        loader.load('<?php echo $STORAGE_URL ?>/Avatar/LeftLeg.obj', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                <?php
 						if ($pantsicon != null || $pantsicon != "") {
 							echo 'if ( node.isMesh ) node.material = pantsMaterial;';
 						}
 						?>
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0x66CCFF);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0x66CCFF);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			// RIGHT LEG MODEL
-			{
-				// Create a new OBJ loader.
-				var loader = new OBJLoader();
-				// Load the model into memory.
-				loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightLeg.obj', function ( object )
-				{
-					// For any meshes in the model, add our material.
-					object.traverse( function ( node ) {
-						// Set the face image.
-						<?php
+    // RIGHT LEG MODEL
+    {
+        // Create a new OBJ loader.
+        var loader = new OBJLoader();
+        // Load the model into memory.
+        loader.load('<?php echo $STORAGE_URL ?>/Avatar/RightLeg.obj', function(object) {
+            // For any meshes in the model, add our material.
+            object.traverse(function(node) {
+                // Set the face image.
+                <?php
 						if ($pantsicon != null || $pantsicon != "") {
 							echo 'if ( node.isMesh ) node.material = pantsMaterial;';
 						}
 						?>
 
-						if ( node instanceof THREE.Mesh ) {
-							// Set the color to Yellow.
-							node.material.color.setHex(0x66CCFF);
-						}
-					});
+                if (node instanceof THREE.Mesh) {
+                    // Set the color to Yellow.
+                    node.material.color.setHex(0x66CCFF);
+                }
+            });
 
-					// Add the model to the scene.
-					scene.add( object );
-				});
-			}
+            // Add the model to the scene.
+            scene.add(object);
+        });
+    }
 
-			<?php
+    <?php
 			foreach(json_decode($hats, true) as $hat) {
 				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
@@ -824,33 +847,34 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 			}
 			?>
 
-			function resizeRendererToDisplaySize(renderer) {
-				const canvas = renderer.domElement;
-				const width = canvas.clientWidth;
-				const height = canvas.clientHeight;
-				const needResize = canvas.width !== width || canvas.height !== height;
-				if (needResize) {
-					renderer.setSize(width, height, false);
-				}
-				return needResize;
-			}
+    function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
 
-			function render() {
+    function render() {
 
-				if (resizeRendererToDisplaySize(renderer)) {
-					const canvas = renderer.domElement;
-					camera.aspect = canvas.clientWidth / canvas.clientHeight;
-					camera.updateProjectionMatrix();
-				}
+        if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
 
-				renderer.render(scene, camera);
+        renderer.render(scene, camera);
 
-				requestAnimationFrame(render);
-			}
+        requestAnimationFrame(render);
+    }
 
-			requestAnimationFrame(render);
-		}
+    requestAnimationFrame(render);
+}
 
-		main();
-	</script>
+main();
+</script>
+
 </html>

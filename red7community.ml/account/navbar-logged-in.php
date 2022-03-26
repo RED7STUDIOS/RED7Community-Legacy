@@ -151,10 +151,10 @@
 
 <li class="nav-item dropdown pull-right">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		<i class="fas fa-money-bill-wave"></i> <?php echo number_format_short($your_currency); ?>
+		<i class="fas fa-money-bill-wave"></i> <?php echo htmlspecialchars(number_format_short($your_currency)); ?>
 	</a>
 	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
-		<li><a class="dropdown-item" href="/account/currency.php"><?php echo number_format_comma($your_currency) ?> <?php echo $currency_name ?></a></li>
-		<li><a class="dropdown-item" href="/currency.php">Buy <?php echo $currency_name ?></a></li>
+		<li><a class="dropdown-item" href="/account/currency.php"><?php echo htmlspecialchars(number_format_comma($your_currency)) ?> <?php echo htmlspecialchars($currency_name) ?></a></li>
+		<li><a class="dropdown-item" href="/currency.php">Buy <?php echo htmlspecialchars($currency_name) ?></a></li>
 	</ul>
 </li>
