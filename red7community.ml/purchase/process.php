@@ -91,13 +91,11 @@ if(!empty($_POST['stripeToken'])){
 			$paymentStatus = $paymenyResponse['status'];
 			$paymentDate = date("Y-m-d H:i:s");        
 			//insert tansaction details into database
-			include_once("db_connect.php");
-			$insertTransactionSQL = "INSERT INTO transaction(cust_name, cust_email, item_name, item_number, item_price, item_price_currency, paid_amount, paid_amount_currency, txn_id, payment_status, created, modified) 
-			VALUES('".$custName."','".$custEmail."','".$itemName."','".$itemNumber."','".$itemPrice."','".$paidCurrency."','".$amountPaid."','".$paidCurrency."','".$balanceTransaction."','".$paymentStatus."','".$paymentDate."','".$paymentDate."')";
-			mysqli_query($conn, $insertTransactionSQL) or die("database error: ". mysqli_error($conn));
-			$lastInsertId = mysqli_insert_id($conn);
-
 			include_once($_SERVER["DOCUMENT_ROOT"]. "/assets/config.php");
+			$insertTransactionSQL = "INSERT INTO transactions(cust_name, cust_email, item_name, item_number, item_price, item_price_currency, paid_amount, paid_amount_currency, txn_id, payment_status, created, modified) 
+			VALUES('".$custName."','".$custEmail."','".$itemName."','".$itemNumber."','".$itemPrice."','".$paidCurrency."','".$amountPaid."','".$paidCurrency."','".$balanceTransaction."','".$paymentStatus."','".$paymentDate."','".$paymentDate."')";
+			mysqli_query($link, $insertTransactionSQL) or die("database error: ". mysqli_error($link));
+			$lastInsertId = mysqli_insert_id($link);
 
 			if (!str_contains($_GET['nam'], "Premium"))
 			{
@@ -182,7 +180,6 @@ exit;
 				?>
 
 				<main class="col-md-9">
-					<p>You found it challenger, here it is: (<b>MUFjMH</b>)</p>
 					<?php echo $paymentMessage; ?>
 					<a class="btn btn-primary" href="/currency.php">Go Back to Purchasing Page</a>
 				</main>
