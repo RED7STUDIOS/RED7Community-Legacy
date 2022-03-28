@@ -1,4 +1,4 @@
-#### :warning: Keep in mind that RED7Community is still in development. Please repot any bugs that occur. :warning:
+#### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
 # RED7Community
 ### Creator tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6)
 ## Description
