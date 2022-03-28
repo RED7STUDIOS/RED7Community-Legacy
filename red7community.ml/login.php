@@ -212,7 +212,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		<!-- Styles and Font Awesome -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-Items@main/assets/css/style.css" rel="stylesheet">		<script src="/assets/js/fontawesome.js"></script>
+		<link href="/assets/css/style.css" rel="stylesheet">
+		<script src="/assets/js/fontawesome.js"></script>
 		<!----------------------------->
 	</head>
 	<body>
