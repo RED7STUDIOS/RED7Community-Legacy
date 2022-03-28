@@ -72,6 +72,8 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 		<div class="page-content-wrapper">
 					<div class="d-flex align-items-center border-bottom">
 						<h1>Page <?php echo $page ?> - Catalog</h1>
+						&nbsp;
+						<a class="btn btn-primary btn-sm" href="/catalog/search.php"><i class="fa-regular fa-magnifying-glass"></i></a>
 					</div>
 
 					<a class="btn btn-primary" href="/catalog/?tab=all">All</a>

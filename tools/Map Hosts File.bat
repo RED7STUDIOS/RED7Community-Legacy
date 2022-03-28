@@ -41,8 +41,6 @@ xcopy /y "C:\Windows\System32\drivers\etc\hosts" "%~dp0/hosts.bak.*"
 
 REM the hosts mapping part
 echo 127.0.0.1   red7community.ml >> C:\Windows\System32\drivers\etc\hosts
-echo 127.0.0.1   api.red7community.ml >> C:\Windows\System32\drivers\etc\hosts
-echo 127.0.0.1   admin.red7community.ml >> C:\Windows\System32\drivers\etc\hosts
 REM -----------------------
 
 echo Done!

@@ -314,7 +314,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
 								echo '<fieldset>
                             <h3>Real Data:</h3>
-                            <form method="post" action="/moderate/ajax.php"
+                            <form method="post" action="/ajax/moderate.php"
                                   onSubmit="return ajaxSubmit(this);"><p><b>Display Name: </b> <input maxlength="69420" type="text" name="value"
 								  value="' . $real_displayname . '"/>
 <input hidden type="text" name="action" value="displayNameChange"/>
@@ -322,14 +322,14 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
 </form></p>
                             <p><b>Username: </b>' . $username . '</p>
-                            <form method="post" action="/moderate/ajax.php"
+                            <form method="post" action="/ajax/moderate.php"
                                   onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $real_description. '
 								  </textarea><input hidden type="text" name="action" value="descriptionChange"/>
 								  <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
 								  <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
 								  </form></p>
                     
-                            <form method="post" action="/moderate/ajax.php"
+                            <form method="post" action="/ajax/moderate.php"
                                   onSubmit="return ajaxSubmit(this);">
                                 <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
                                                                               value="' . $current_currency . '"/>
@@ -350,7 +350,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 								echo '
                                 <fieldset>
                 <h3>Ban Settings:</h3>
-                <form method="post" action="/moderate/ajax.php"
+                <form method="post" action="/ajax/moderate.php"
                       onSubmit="return ajaxSubmit(this);">
                     <h5>Is Banned:</h5>
                     <input type="checkbox" name="isBanned"' . $checked . '/>

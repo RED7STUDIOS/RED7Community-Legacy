@@ -6,6 +6,10 @@
 	if(isset($_GET['search'])) {
 		$key = $_GET["search"];  //key=pattern to be searched
 	}
+	else
+	{
+		$key = "";
+	}
 
 ?>
 
@@ -23,8 +27,6 @@
 	session_start();
 
 	include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
-
-	if (isset($_GET["tab"])) { $tab = $_GET["tab"]; } else { $tab="all"; };
 
 	if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 ?>
@@ -66,40 +68,45 @@
 ?>
 
 <div class="page-content-wrapper">
-	<div class="d-flex align-items-center border-bottom">
+
+	<div class="d-flex align-items-center">
 		<h1>Page <?php echo $page ?> - Catalog Search</h1>
+	</div>
+
+	<div class="d-flex align-items-center border-bottom">
+		<form method="get">
+			<input class="form-control" type="text" name="search" value="<?php echo $key; ?>" />
+			<input class="btn btn-success" type="submit" value="Search" />
+		</form>
 	</div>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		<?php
-			if ($tab == "all")
-			{
-				$datatable = "catalog"; // MySQL table name
-				$results_per_page = 21; // number of results per page
+			$datatable = "catalog"; // MySQL table name
+			$results_per_page = 21; // number of results per page
 
-				$start_from = ($page-1) * $results_per_page;
-				$sql = "SELECT * FROM catalog WHERE `displayname` like '%$key%'";
-				$result = mysqli_query($link, $sql);
+			$start_from = ($page-1) * $results_per_page;
+			$sql = "SELECT * FROM catalog WHERE `displayname` like '%$key%' AND price != '-1'";
+			$result = mysqli_query($link, $sql);
 
-				while($row = mysqli_fetch_assoc($result)) {
-					if (in_array($row['id'], $items))
-					{
-						$item_owned = ' <img src="/assets/images/item-owned.png" style="height: 20px; width: 20px;"/></h2>';
-					}
-					else
-					{
-						$item_owned = "";
-					}
+			while($row = mysqli_fetch_assoc($result)) {
+				if (in_array($row['id'], $items))
+				{
+					$item_owned = ' <img src="/assets/images/item-owned.png" style="height: 20px; width: 20px;"/></h2>';
+				}
+				else
+				{
+					$item_owned = "";
+				}
 
-					echo '<div class="col" style="height:180px; width:180px;"><a href="/catalog/item.php?id='. $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'; if( $row['price'] == "0" ) { echo '<b>Free'. $item_owned. '</b>'; } else { echo '<b>'. number_format_short($row['price']) . '</b> '. $currency_name. $item_owned; } echo '</div></div></a></div>';
-				};
-			}
+				echo '<div class="col" style="height:180px; width:180px;"><a href="/catalog/item.php?id='. $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="'. $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'. $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">'; if( $row['price'] == "0" ) { echo '<b>Free'. $item_owned. '</b>'; } else { echo '<b>'. number_format_short($row['price']) . '</b> '. $currency_name. $item_owned; } echo '</div></div></a></div>';
+			};
 		?>
 	</div>
 	<div class="d-flex justify-content flex-wrap flex-md align-items-center pt-3 mb-3">
 		<a><b>Page Selector:&nbsp;</b></a>
 		<?php
-			$sql = "SELECT COUNT(ID) AS total FROM ".$datatable;
+			$sql = "SELECT COUNT(ID) AS total FROM ".$datatable." WHERE price != -1";
 			$result = mysqli_query($link, $sql);
 			$row = mysqli_fetch_assoc($result);
 			$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
