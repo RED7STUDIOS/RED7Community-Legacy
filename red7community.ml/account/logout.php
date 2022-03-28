@@ -41,17 +41,14 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-// If the loggedin variable is not true.
-if ($_SESSION['loggedin'] != true) {
-	// Redirect to login page
-	header("location: ../login.php");
-}
-
-// Unset all of the session variables
-$_SESSION = array();
+if (isset($_SESSION))
+{
+	// Unset all of the session variables
+	$_SESSION = array();
  
-// Destroy the session.
-session_destroy();
+	// Destroy the session.
+	session_destroy();
+}
 
 // Redirect to login page
 header("location: ../login.php");

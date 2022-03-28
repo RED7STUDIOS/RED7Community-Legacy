@@ -276,7 +276,22 @@ namespace RED7Community_Creator
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES");
                 writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '', '2021-02-27 22:59:37', '2021-06-10', '2021-06-10 13:48:55', " + mu_currency.Text + ", '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g'),                                                                                                                                                                                                                                                                                      (9, 'Not Found', 'Not Found', 'temp@temp.temp', '', 'This account is reserved to make sure that no-one accidentally creates it and gets locked out.', '2021-05-20 21:41:12', NULL, NULL, 0, '[]', '[]', 'None', 1, 'Reserved.', '2021-05-20 21:41:28', 0, 0, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/8f79d54d603c0523c095d7e1e8dd37e5?s=180');");
-
+                writer.WriteLine("CREATE TABLE IF NOT EXISTS `transactions` (");
+                writer.WriteLine("  `id` int NOT NULL AUTO_INCREMENT,");
+                writer.WriteLine("  `cust_name` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `cust_email` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `item_name` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `item_number` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `item_price` int NOT NULL DEFAULT '0',");
+                writer.WriteLine("  `item_price_currency` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `paid_amount` int NOT NULL DEFAULT '0',");
+                writer.WriteLine("  `paid_amount_currency` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `txn_id` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `payment_status` varchar(50) NOT NULL DEFAULT '',");
+                writer.WriteLine("  `created` datetime NOT NULL,");
+                writer.WriteLine("  `modified` datetime NOT NULL,");
+                writer.WriteLine("  PRIMARY KEY (`id`)");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;");
 
                 MessageBox.Show("DONE! Please check the 'Generated' folder to see if the following files were generated: 'config.php', 'DB.sql'", "Generated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

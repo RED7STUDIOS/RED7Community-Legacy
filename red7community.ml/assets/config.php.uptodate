@@ -1,4 +1,7 @@
 <?php
+// Use the RED7Coummity generator tool to generate this file with your own variable values.
+// If you wish to not use the generator tool then rename this file to config.php and change the options below to fit your liking.
+
 /*
   File Name: config.php
   Original Location: /assets/config.php
