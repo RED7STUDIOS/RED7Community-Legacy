@@ -29,6 +29,9 @@
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/currency.php"><i class="far fa-money-bill-wave"></i> <?php echo $currency_name ?></a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="/users/search.php"><i class="far fa-user"></i> Users</a>
+				</li>
 			</ul>
 			<form class="d-flex">
 				<ul class="navbar-nav">
