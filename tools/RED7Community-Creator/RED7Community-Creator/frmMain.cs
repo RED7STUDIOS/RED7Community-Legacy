@@ -82,7 +82,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`ownerid` int DEFAULT NULL,");
                 writer.WriteLine("`full_name` text,");
                 writer.WriteLine("PRIMARY KEY (`id`)");
-                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `admin_panel` (`id`, `ownerid`, `full_name`) VALUES");
                 writer.WriteLine("(1, 1, '" + mu_username.Text + "');");
@@ -94,7 +94,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`pants` int DEFAULT NULL,");
                 writer.WriteLine("`face` int DEFAULT NULL,");
                 writer.WriteLine("PRIMARY KEY (`ownerid`)");
-                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `avatars` (`ownerid`, `items`, `shirt`, `pants`, `face`) VALUES");
                 writer.WriteLine("(1, '[1]', 9, 8, 5);");
@@ -106,7 +106,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`description` text,");
                 writer.WriteLine("`icon` text,");
                 writer.WriteLine("PRIMARY KEY (`id`) USING BTREE");
-                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `badges` (`id`, `name`, `displayname`, `description`, `icon`) VALUES");
                 writer.WriteLine("(1, 'Administrator', 'Administrator', 'The official admin badge.', 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main/Catalog/Badges/administrator.png'),");
@@ -134,7 +134,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`creator` int DEFAULT '1',");
                 writer.WriteLine("PRIMARY KEY (`id`),");
                 writer.WriteLine("UNIQUE KEY `name` (`name`)");
-                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `catalog` (`id`, `name`, `displayname`, `description`, `created`, `membershipRequired`, `owners`, `price`, `type`, `isLimited`, `isEquippable`, `copies`, `icon`, `obj`, `mtl`, `texture`, `creator`) VALUES");
                 writer.WriteLine("(-3, 'pants1', 'Testing Pants', 'This is test pants.', '2021-04-24 22:34:44', 'None', '[]', -1, 'Pants', 0, 1, NULL, '/Catalog/Pants/Pants.png', NULL, NULL, '/Catalog/Pants/Pants.png', 1),");
@@ -172,7 +172,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`currency` bigint DEFAULT NULL,");
                 writer.WriteLine("`items` longtext,");
                 writer.WriteLine("PRIMARY KEY (`id`)");
-                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `contact` (");
                 writer.WriteLine("`id` bigint NOT NULL,");
@@ -180,7 +180,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`user_email` varchar(255) NOT NULL,");
                 writer.WriteLine("`subject` varchar(255) NOT NULL,");
                 writer.WriteLine("`content` text NOT NULL");
-                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `memberships` (");
                 writer.WriteLine("`id` bigint NOT NULL DEFAULT '0',");
@@ -190,7 +190,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`isEveryDay` bigint DEFAULT NULL,");
                 writer.WriteLine("`cost` varchar(255) DEFAULT '6.99',");
                 writer.WriteLine("PRIMARY KEY (`id`)");
-                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `memberships` (`id`, `name`, `payoutAmount`, `isEveryWeek`, `isEveryDay`, `cost`) VALUES");
                 writer.WriteLine("(1, 'Premium450', '450', 1, 0, '6.99'),");
@@ -214,7 +214,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`name` text NOT NULL,");
                 writer.WriteLine("`content` text NOT NULL,");
                 writer.WriteLine("PRIMARY KEY (`id`)");
-                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `site_info` (`id`, `name`, `content`) VALUES");
                 writer.WriteLine("(1, 'site_name', '" + ss_siteName.Text + "'),");
@@ -250,10 +250,10 @@ namespace RED7Community_Creator
                 writer.WriteLine("`icon` varchar(255) DEFAULT '/assets/images/users/default.png',");
                 writer.WriteLine("PRIMARY KEY (`id`),");
                 writer.WriteLine("UNIQUE KEY `username` (`username`)");
-                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
                 writer.WriteLine("INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES");
-                writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '', '2021-02-27 22:59:37', '2021-06-10', '2021-06-10 13:48:55', " + mu_currency.Text + ", '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g'),                                                                                                                                                                                                                                                                                      (9, 'Not Found', 'Not Found', 'temp@temp.temp', '', 'This account is reserved to make sure that no-one accidentally creates it and gets locked out.', '2021-05-20 21:41:12', NULL, NULL, 0, '[]', '[]', 'None', 1, 'Reserved.', '2021-05-20 21:41:28', 0, 0, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/8f79d54d603c0523c095d7e1e8dd37e5?s=180');");
+                writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '', '2021-02-27 22:59:37', '2021-06-10', '2021-06-10 13:48:55', " + mu_currency.Text + ", '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g');");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `transactions` (");
                 writer.WriteLine("  `id` int NOT NULL AUTO_INCREMENT,");
                 writer.WriteLine("  `cust_name` varchar(50) NOT NULL DEFAULT '',");
@@ -269,7 +269,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("  `created` datetime NOT NULL,");
                 writer.WriteLine("  `modified` datetime NOT NULL,");
                 writer.WriteLine("  PRIMARY KEY (`id`)");
-                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;");
+                writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;");
 
                 MessageBox.Show("DONE! Please check the 'Generated' folder to see if the following files were generated: 'config.php', 'DB.sql'", "Generated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

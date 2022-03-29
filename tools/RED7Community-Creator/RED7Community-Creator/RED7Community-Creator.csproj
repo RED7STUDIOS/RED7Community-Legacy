@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>RED7Community_Creator</RootNamespace>
     <AssemblyName>RED7Community-Creator</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
