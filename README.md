@@ -26,10 +26,10 @@ RED7Community is a community website where you can find new friends and play gam
 3. Edit the assets/config.php file to fit your purposes.
 4. Done!
 
-## Default Credentials
+~~## Default Credentials
 The default admin user is **RED7Community**, the password to this account is **password**.
 Please make sure to change this password before the website goes into production otherwise the users will be able to gain access to administration privileges.
-#### ~~NOTE: If you are using the Creator Tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6) (which is recommended), then just use the username you used there and the same password which is: "**password**".~~
+#### NOTE: If you are using the Creator Tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6) (which is recommended), then just use the username you used there and the same password which is: "**password**".~~
 
 ## Credits
 Installer by apPHP | https://www.apphp.com/customer/index.php?page=free-products
