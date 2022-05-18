@@ -1,4 +1,5 @@
 #### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
+#### MAKE SURE TO REMOVE THE "install" DIRECTORY AFTER FINISHING THE INSTALLATION.
 # RED7Community
 ### ~~Creator tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6)~~ Use built in installer instead.
 ## Description
