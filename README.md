@@ -1,6 +1,6 @@
 #### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
 # RED7Community
-### Creator tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6)
+### ~~Creator tool: [#6](https://github.com/RED7Studios/RED7Community/issues/6)~~ Use built in installer instead.
 ## Description
 RED7Community is a community website where you can find new friends and play games. This repo is for hosting the source code of RED7Community, no support will be given if you edit the code.
 
