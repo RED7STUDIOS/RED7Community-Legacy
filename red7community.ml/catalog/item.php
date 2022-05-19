@@ -52,52 +52,52 @@ else
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php echo $name ?> - <?php echo $site_name; ?></title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="/assets/css/style.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $name ?> - <?php echo $site_name; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-		<script src="/assets/js/fontawesome.js"></script>
-	</head>
-	<body>
-        <script type="text/javascript">
-            var ajaxSubmit = function(formEl) {
-                // fetch the data for the form
-                var data = $(formEl).serializeArray();
-                var url = $(formEl).attr('action');
+    <link rel="stylesheet" href="/assets/css/style.css">
 
-                // setup the ajax request
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    success: function(d) {
-                        if (d.success)
-                        {
-                            alert('Bought item successfully!');
-                            document.location = document.location;
-                        }
-                        else
-                        {
-                            alert("An error occurred while purchasing, please try again later.")
-                            document.location = document.location;
-                        }
-                    }
-                });
+    <script src="/assets/js/fontawesome.js"></script>
+</head>
 
-                // return false so the form does not actually
-                // submit to the page
-                return false;
+<body>
+    <script type="text/javascript">
+    var ajaxSubmit = function(formEl) {
+        // fetch the data for the form
+        var data = $(formEl).serializeArray();
+        var url = $(formEl).attr('action');
+
+        // setup the ajax request
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function(d) {
+                if (d.success) {
+                    alert('Bought item successfully!');
+                    document.location = document.location;
+                } else {
+                    alert("An error occurred while purchasing, please try again later.")
+                    document.location = document.location;
+                }
             }
-        </script>
+        });
 
-		<?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
+        // return false so the form does not actually
+        // submit to the page
+        return false;
+    }
+    </script>
 
-		<?php
+    <?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
+
+    <?php
 		if (isset($your_items))
 		{
 			$items = json_decode($your_items, true);
@@ -108,40 +108,71 @@ else
 		}
 		?>
 
-		<div class="page-content-wrapper">
-				<main class="col-md-9">
-					<div class="d-flex align-items-center border-bottom">
-						<?php
+    <div class="page-content-wrapper">
+	<script type="text/javascript">
+        var ajaxSubmit2 = function(formEl) {
+            // fetch the data for the form
+            var data = $(formEl).serializeArray();
+            var url = $(formEl).attr('action');
+
+            // setup the ajax request
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function(d) {
+                    if (d.success) {
+                        alert('Changed value successfully!');
+                        document.location = document.location;
+                    } else {
+                        alert("An error occurred while changing value, please try again later.")
+                        document.location = document.location;
+                    }
+                }
+            });
+
+            // return false so the form does not actually
+            // submit to the page
+            return false;
+        }
+        </script>
+        <main class="col-md-9">
+            <div class="d-flex align-items-center border-bottom">
+                <?php
 							if ($name == "Not Found")
 							{
 								echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
 								exit;
 							}
 						?>
-						<img src="<?php echo $icon ?>" class="catalog-item-preview"></img>
-						<?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
-						&nbsp;
-						<div class="wrapper">
-							<h2><?php echo $name ?> <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
-							<span>
-								<h6>By <a href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a></h6>
-							</span>
-						</div>
-					</div>
+                <img src="<?php echo $icon ?>" class="catalog-item-preview"></img>
+                <?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
+                &nbsp;
+                <div class="wrapper">
+                    <h2><?php echo $name ?>
+                        <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
+                        <span>
+                            <h6>By <a
+                                    href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
+                            </h6>
+                        </span>
+                </div>
+            </div>
 
-					<div>
-						<?php
+            <div>
+                <?php
 							if ($limited == 1)
 							{
 								echo '<p><strong><i>LIMITED</i></strong></p>';
 							}
 						?>
 
-						<h3>About:</h3>
-						<p><strong>Description:</strong> <?php echo $description ?></p>
-						<p><strong>Created:</strong> <?php echo $created ?></p>
+                <h3>About:</h3>
+                <p><strong>Description:</strong> <?php echo $description ?></p>
+                <p><strong>Created:</strong> <?php echo $created ?></p>
 
-						<?php
+                <?php
 						if ($price != "-1")
 						{
 							if ($price == "0" || $price == 0)
@@ -154,17 +185,17 @@ else
 							}
 						}
 						?>
-						
-						<p><strong>Type:</strong> <?php echo $type ?></p>
 
-						<?php
+                <p><strong>Type:</strong> <?php echo $type ?></p>
+
+                <?php
 							if ($limited == 1)
 							{
 								echo '<p><strong>Copies:</strong> '. $copies. '</p>';
 							}
 						?>
 
-						<?php
+                <?php
 
 						if (in_array($_GET['id'], $items))
 						{
@@ -177,19 +208,18 @@ else
 
 						?>
 
-                        <form method="post" action="/ajax/process.php"
-                              onSubmit="return ajaxSubmit(this);">
-                            <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>"/>
-                            <input hidden type="text" name="action" value="purchaseItem"/>
-                            <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
-                        </form>
+                <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
+                    <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>" />
+                    <input hidden type="text" name="action" value="purchaseItem" />
+                    <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
+                </form>
 
-						<hr/>
+                <hr />
 
-                        <h3>Owners:</h3>
+                <h3>Owners:</h3>
 
-                        <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-							<?php
+                <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                    <?php
 								$vals = array_count_values(json_decode($owners, true));
 
 								if ($owners != "" && $owners != "[]" && !empty($owners)) {
@@ -223,14 +253,60 @@ else
 									echo '<p>This item has no owners yet.</p>';
 								}
 							?>
-                        </div>
-					</div>
-				</div>
-			</main>
-		</div>
+                </div>
+				
+				<?php
+				if ($your_isAdmin == 1)
+				{
+					echo '
+					<h3>Item Settings:</h3>
+                <fieldset>
+                    <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
+                        <h5>Name:</h5>
+                        <input maxlength="69420" type="text" name="name" class="moderate-input"
+                            value="'. $name. '" />
+                        <h5>Creator:</h5>
+                        <input maxlength="69420" type="text" name="creator" class="moderate-input"
+                            value="'. $creator_name. '" />
+                        <h5>Description:</h5>
+                        <textarea maxlength="200" type="text" name="description"
+                            style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $description. '</textarea>
+                        <h5>Price:</h5>
+                        <input maxlength="69420" type="text" name="price" class="moderate-input"
+                            value="'. $price. '" />
+                        <h5>Type:</h5>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	</body>
+                        <select name="type" id="type">
+                            <option value="back">Back</option>
+                            <option value="front">Front</option>
+                            <option value="face">Face</option>
+                            <option value="shirt">Shirt</option>
+							<option value="pants">Pants</option>
+                            <option value="t-shirt">T-Shirt</option>
+                            <option value="cosmetic">Cosmetic</option>
+                            <option value="hat">Hat</option>
+							<option value="faceaccessory">Face Accessory</option>
+                            <option value="gear">Gear</option>
+                        </select>
+                        </br>
+                        </br>
+                        <input hidden type="text" name="action" value="updateItemSettings" />
+						<input hidden type="text" name="id" value="'. $_GET['id']. '"/>
+                        <input class="btn btn-success" type="submit" name="form_submit" value="Update Item Settings" />
+                    </form>
+                </fieldset>';
+				}
+                ?>
+            </div>
+    </div>
+    </main>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>

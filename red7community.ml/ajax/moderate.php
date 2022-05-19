@@ -100,6 +100,35 @@
 			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'maintenanceMode'";
 			$result = mysqli_query($link, $sql);
 		}
+	} else if ($_POST['action'] == "updateItemSettings") {
+		// Prepare an insert statement
+		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = ". $_POST["id"];
+		$result = mysqli_query($link, $sql);
+
+		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
+
+	// Decode the json response.
+	if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+		$json_a = json_decode($data, true);
+
+		$creator = $json_a[0]['data'][0]['displayname'];
+	}
+
+		// Prepare an insert statement
+		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = ". $_POST["id"];
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE catalog SET description = '" . $_POST["description"] . "' WHERE id = ". $_POST["id"];
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = ". $_POST["id"];
+		$result = mysqli_query($link, $sql);
+
+		// Prepare an insert statement
+		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = ". $_POST["id"];
+		$result = mysqli_query($link, $sql);
 	}
 
 // lets run our query
