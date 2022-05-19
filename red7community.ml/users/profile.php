@@ -30,8 +30,8 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$real_description = $json_a[0]['data'][0]['description'];
 
 	if ($isBanned != 1) {
-		$displayname = filterwords($json_a[0]['data'][0]['displayname']);
-		$description = filterwords($json_a[0]['data'][0]['description']);
+		$displayname = $filterwords($json_a[0]['data'][0]['displayname']);
+		$description = $filterwords($json_a[0]['data'][0]['description']);
 		$icon = $json_a[0]['data'][0]['icon'];
 	} else {
 		$displayname = "[ CONTENT REMOVED ]";
@@ -194,7 +194,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                 &nbsp;
                 <?php if (str_contains($membership, "Premium")) { echo '<img src="'. $premiumIcon . '" class="premium-icon"></img>'; } ?>
                 <h2 class="<?php if( $isAdmin == 1 ) { echo 'title-rainbow-lr'; } else {  } ?>">
-                    <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo filterwords(htmlspecialchars($displayname)); } else { echo filterwords(htmlspecialchars($username)); } ?>
+                    <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) { echo $filterwords(htmlspecialchars($displayname)); } else { echo $filterwords(htmlspecialchars($username)); } ?>
                 </h2>
                 &nbsp;
                 <?php if ($isVerified == 1) { echo '<img src="'. $verifiedIcon . '" class="verified-icon"></img>'; } ?>
@@ -300,7 +300,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 
                 <h3>About:</h3>
                 <textarea class="description" id="text"
-                    disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
+                    disabled><?php echo $filterwords(htmlspecialchars($description)); ?></textarea>
                 <hr />
                 <?php
                             if (isset($your_isAdmin))
