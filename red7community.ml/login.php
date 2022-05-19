@@ -15,10 +15,34 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 if(!isset($_SESSION)){
     session_start();
 }
+
+$url_components = parse_url($_SERVER["REQUEST_URI"]);
+parse_str($url_components['query'], $params);
+
+if (!isset($params['u']))
+{
+	$u = "/home.php";
+}
+else
+{
+	$u = $params['u'];
+	if ($u == "/")
+	{
+		$u = "/home.php";
+	}
+}
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-	header("location: home.php");
+	if (isset($params['u']))
+	{
+		header("Location: ". $u);
+	}
+	else
+	{
+		header("location: home.php");
+	}
+	
 	exit;
 }
 
@@ -181,7 +205,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							mysqli_query($link, $sql);
 
 							// Redirect user to welcome page
-							header("location: home.php");
+							if (isset($params['u']))
+							{
+								header("Location: ". $params['u']);
+							}
+							else
+							{
+								header("location: home.php");
+							}
 						} else{
 							// Display an error message if password is not valid
 							$password_err = "The password you entered was not valid.";
@@ -231,7 +262,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				?>
 
 				<main class="form-signin">
-					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); echo "?u=". $u; ?>" method="post">
 						<h3 class="fw-normal">Login to <?php echo $site_name; ?></h3>
 
 						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">

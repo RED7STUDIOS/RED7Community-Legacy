@@ -7,7 +7,7 @@ if (file_exists("assets/config.php"))
 	}
 	else
 	{
-		header("location: login.php");
+		header("location: login.php?u=". $_SERVER["REQUEST_URI"]);
 		exit;
 	}
 }

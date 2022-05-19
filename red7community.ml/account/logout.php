@@ -51,6 +51,6 @@ if (isset($_SESSION))
 }
 
 // Redirect to login page
-header("location: ../login.php");
+header("location: ../login.php?u=/home.php");
 exit;
 ?>

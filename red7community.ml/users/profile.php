@@ -303,71 +303,73 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                     disabled><?php echo filterwords(htmlspecialchars($description)); ?></textarea>
                 <hr />
                 <?php
-							if ($your_isAdmin == 1) {
-								$sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
-								$result = mysqli_query($link, $sql);
-								if (mysqli_num_rows($result) > 0) {
-									while ($row = mysqli_fetch_assoc($result)) {
-										$current_currency = $row['currency'];
-									}
-								}
+                            if (isset($your_isAdmin))
+                                if ($your_isAdmin == 1) {
+                                    $sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
+                                    $result = mysqli_query($link, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $current_currency = $row['currency'];
+                                        }
+                                    }
 
-								echo '<fieldset>
-                            <h3>Real Data:</h3>
-                            <form method="post" action="/ajax/moderate.php"
-                                  onSubmit="return ajaxSubmit(this);"><p><b>Display Name: </b> <input maxlength="69420" type="text" name="value"
-								  value="' . $real_displayname . '"/>
-<input hidden type="text" name="action" value="displayNameChange"/>
-<input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
-<input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
-</form></p>
-                            <p><b>Username: </b>' . $username . '</p>
-                            <form method="post" action="/ajax/moderate.php"
-                                  onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $real_description. '
-								  </textarea><input hidden type="text" name="action" value="descriptionChange"/>
-								  <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
-								  <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
-								  </form></p>
-                    
-                            <form method="post" action="/ajax/moderate.php"
-                                  onSubmit="return ajaxSubmit(this);">
-                                <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
-                                                                              value="' . $current_currency . '"/>
-                                <input hidden type="text" name="action" value="currencyChange"/>
-                                <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
-                                <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
-                            </form>
-                        </fieldset>
-                        <hr/>
-                        ';
+                                    echo '<fieldset>
+                                <h3>Real Data:</h3>
+                                <form method="post" action="/ajax/moderate.php"
+                                    onSubmit="return ajaxSubmit(this);"><p><b>Display Name: </b> <input maxlength="69420" type="text" name="value"
+                                    value="' . $real_displayname . '"/>
+    <input hidden type="text" name="action" value="displayNameChange"/>
+    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+    </form></p>
+                                <p><b>Username: </b>' . $username . '</p>
+                                <form method="post" action="/ajax/moderate.php"
+                                    onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $real_description. '
+                                    </textarea><input hidden type="text" name="action" value="descriptionChange"/>
+                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                    </form></p>
+                        
+                                <form method="post" action="/ajax/moderate.php"
+                                    onSubmit="return ajaxSubmit(this);">
+                                    <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
+                                                                                value="' . $current_currency . '"/>
+                                    <input hidden type="text" name="action" value="currencyChange"/>
+                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                </form>
+                            </fieldset>
+                            <hr/>
+                            ';
 
-								if ($isBanned == 1) {
-									$checked = 'checked';
-								} else {
-									$checked = "";
-								}
+                                    if ($isBanned == 1) {
+                                        $checked = 'checked';
+                                    } else {
+                                        $checked = "";
+                                    }
 
-								echo '
-                                <fieldset>
-                <h3>Ban Settings:</h3>
-                <form method="post" action="/ajax/moderate.php"
-                      onSubmit="return ajaxSubmit(this);">
-                    <h5>Is Banned:</h5>
-                    <input type="checkbox" name="isBanned"' . $checked . '/>
-                    <h5>Ban Reason:</h5>
-                    <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . $banReason . '"/>
-                    <input hidden type="text" name="action" value="banningUser"/>
-                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
-                    <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
-                </form>
-            </fieldset>
+                                    echo '
+                                    <fieldset>
+                    <h3>Ban Settings:</h3>
+                    <form method="post" action="/ajax/moderate.php"
+                        onSubmit="return ajaxSubmit(this);">
+                        <h5>Is Banned:</h5>
+                        <input type="checkbox" name="isBanned"' . $checked . '/>
+                        <h5>Ban Reason:</h5>
+                        <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . $banReason . '"/>
+                        <input hidden type="text" name="action" value="banningUser"/>
+                        <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                        <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
+                    </form>
+                </fieldset>
 
-            <hr/>
-                                ';
+                <hr/>
+                                    ';
 
 
-							}
-
+                                }
+                            
+                
 						?>
 
                 <canvas id="c"></canvas>
