@@ -12,6 +12,7 @@
 	}
 
 	include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/common.php';
 
 	$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
 
