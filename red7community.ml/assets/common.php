@@ -191,18 +191,17 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
-function getAdminName($id)
-{
+$getAdminName = function($id) use ($link) {
 	$sql_query = "SELECT full_name FROM admin_panel WHERE ownerid = ". $id;
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while($row = mysqli_fetch_assoc($result)) {
-			return $row["content"];
+			return $row["full_name"];
 		}
 	}
-}
+};
 
 // Filter certain words out.
 // Usage: filterwords("blah blah");

@@ -56,7 +56,7 @@
         <div class="page-content-wrapper">
             <div class="d-flex align-items-center border-bottom" style="display: inline;">
                 <h2>Welcome&nbsp;
-                    <h2><?php getAdminName($your_id); ?></h2>&nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
+                    <h2><?php echo $getAdminName($your_id); ?></h2>&nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
 						echo '<p><strong style="color: red;">*BANNED*</strong></p>';
 					} ?>!
                 </h2>
