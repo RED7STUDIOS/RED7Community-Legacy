@@ -54,20 +54,67 @@
 		?>
 
         <div class="page-content-wrapper">
+		<script type="text/javascript">
+        var ajaxSubmit = function(formEl) {
+            // fetch the data for the form
+            var data = $(formEl).serializeArray();
+            var url = $(formEl).attr('action');
+
+            // setup the ajax request
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function(d) {
+                    if (d.success) {
+                        alert('Changed value successfully!');
+                        document.location = document.location;
+                    } else {
+                        alert("An error occurred while changing value, please try again later.")
+                        document.location = document.location;
+                    }
+                }
+            });
+
+            // return false so the form does not actually
+            // submit to the page
+            return false;
+        }
+        </script>
             <div class="d-flex align-items-center border-bottom" style="display: inline;">
                 <h2>Welcome&nbsp;
                     <h2><?php echo $getAdminName($your_id); ?></h2>&nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
 						echo '<p><strong style="color: red;">*BANNED*</strong></p>';
 					} ?>!
                 </h2>
-            </div>
-
-            <br/>
+				</div>
 
             <h3>Site Settings:</h3>
-            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-				
-            </div>
+            <fieldset>
+                    <form method="post" action="/ajax/moderate.php"
+                        onSubmit="return ajaxSubmit(this);">
+                        <h5>Site Name:</h5>
+                        <input maxlength="69420" type="text" name="site_name" class="moderate-input" value="<?php echo $site_name; ?>"/>
+						<h5>Currency:</h5>
+                        <input maxlength="69420" type="text" name="currency" class="moderate-input" value="<?php echo $currency_name; ?>"/>
+						<h5>Premium Icon:</h5>
+                        <input maxlength="69420" type="text" name="premiumIcon" class="moderate-input" value="<?php echo $premiumIcon; ?>"/>
+						<h5>Verified Icon:</h5>
+                        <input maxlength="69420" type="text" name="verifiedIcon" class="moderate-input" value="<?php echo $verifiedIcon; ?>"/>
+						<h5>Appeal Email:</h5>
+                        <input maxlength="69420" type="text" name="appealEmail" class="moderate-input" value="<?php echo $appealEmail; ?>"/>
+						<h5>Registration:</h5>
+                        <input type="checkbox" name="registration" <?php if ($registration == "on") { echo "checked"; } ?> />
+						<h5>Maintenance Mode:</h5>
+                        <input type="checkbox" name="maintenance" <?php if ($maintenanceMode == "on") { echo "checked"; } ?>/>
+				</br>
+                        <input hidden type="text" name="action" value="updateSiteSettings"/>
+                        <input class="btn btn-success" type="submit" name="form_submit" value="Update Site Settings"/>
+                    </form>
+                </fieldset>
+
+                <hr/>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>

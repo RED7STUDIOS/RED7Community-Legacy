@@ -100,10 +100,6 @@
 			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'maintenanceMode'";
 			$result = mysqli_query($link, $sql);
 		}
-
-		// Prepare an insert statement
-		$sql = "UPDATE site_info SET content = '" . $_POST["admin_site_name"] . "' WHERE name = 'admin_site_name'";
-		$result = mysqli_query($link, $sql);
 	}
 
 // lets run our query

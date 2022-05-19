@@ -146,6 +146,14 @@
         <li><a class="dropdown-item" href="/redeem.php"><i class="far fa-clipboard-check"></i> Redeem Code</a></li>
         <li><a class="dropdown-item" href="/account/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a></li>
         <li><a class="dropdown-item" href="/terms-of-service.php"><i class="far fa-user-check"></i> Terms of Service</a></li>
+		<?php
+
+		if ($your_isAdmin == 1)
+		{
+			echo '<li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="/admin"><i class="far fa-screwdriver-wrench"></i> Admin Panel</a></li>';
+		}
+
+		?>
     </ul>
 </li>
 
