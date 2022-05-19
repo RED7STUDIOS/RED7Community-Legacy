@@ -77,7 +77,7 @@
     // *** check for database engine minimum version number (true, false) -
     //     checks if a minimum required version of database engine runs on a server
     define('EI_CHECK_DB_MINIMUM_VERSION', true);
-    define('EI_DB_MINIMUM_VERSION', '10.0.0');    
+    define('EI_DB_MINIMUM_VERSION', '8.0.0');    
         
     // *** admin username and password (true, false) - get admin username and password
     define('EI_USE_ADMIN_ACCOUNT', true);
