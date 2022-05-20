@@ -180,15 +180,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `isBanned` int DEFAULT '0',
   `bannedReason` text,
   `bannedDate` datetime DEFAULT NULL,
-  `isAdmin` int DEFAULT '0',
   `isVerified` int DEFAULT '0',
   `followers` longtext,
   `following` longtext,
   `clans` longtext,
   `icon` varchar(255) DEFAULT '/assets/images/users/default.png',
+  `role` int DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES
-	(1, '<USER_NAME>', '<USER_NAME>', NULL, <PASSWORD>, '', '2021-02-27 22:59:37', '2022-05-02', '2022-05-02 21:48:48', 1000000000000, '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g');
+	(1, '<USER_NAME>', '<USER_NAME>', NULL, <PASSWORD>, '', '2021-02-27 22:59:37', '2022-05-02', '2022-05-02 21:48:48', 1000000000000, '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g', 3);

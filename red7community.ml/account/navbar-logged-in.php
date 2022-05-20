@@ -54,6 +54,7 @@
 	$your_clans = $your_json_a[0]['data'][0]['clans'];
 	$your_items = $your_json_a[0]['data'][0]['items'];
 	$your_icon = $your_json_a[0]['data'][0]['icon'];
+	$your_role = $your_json_a[0]['data'][0]['role'];
 
 	// END OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 

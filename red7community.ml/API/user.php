@@ -49,12 +49,31 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
 							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
-							$response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
+							// WARNING: Please use the role API response value instead!
+							// This API call may be deprecated in the next releases.
+							if ($row['role'] >= 2)
+							{
+								$response[$i]['data'][0]['isAdmin'] = "1";
+							}
+							else
+							{
+								$response[$i]['data'][0]['isAdmin'] = "0";
+							}
+
+							if ($row['role'] > 2)
+							{
+								$response[$i]['data'][0]['isSuperAdmin'] = "1";
+							}
+							else
+							{
+								$response[$i]['data'][0]['isSuperAdmin'] = "0";
+							}
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];
 							$response[$i]['data'][0]['clans'] = $row['clans'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
+							$response[$i]['data'][0]['role'] = $row['role'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);
@@ -96,12 +115,31 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
 							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
-							$response[$i]['data'][0]['isAdmin'] = $row['isAdmin'];
+							// WARNING: Please use the role API response value instead!
+							// This API call may be deprecated in the next releases.
+							if ($row['role'] >= 2)
+							{
+								$response[$i]['data'][0]['isAdmin'] = "1";
+							}
+							else
+							{
+								$response[$i]['data'][0]['isAdmin'] = "0";
+							}
+
+							if ($row['role'] > 2)
+							{
+								$response[$i]['data'][0]['isSuperAdmin'] = "1";
+							}
+							else
+							{
+								$response[$i]['data'][0]['isSuperAdmin'] = "0";
+							}
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];
 							$response[$i]['data'][0]['clans'] = $row['clans'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
+							$response[$i]['data'][0]['role'] = $row['role'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);

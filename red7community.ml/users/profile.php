@@ -61,6 +61,18 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$shirt = $json_a_avatar[0]['data'][0]['shirt'];
 	$pants = $json_a_avatar[0]['data'][0]['pants'];
 	$face = $json_a_avatar[0]['data'][0]['face'];
+
+    $role = $json_a[0]['data'][0]['role'];
+
+    if ($role == 0) {
+        $role = "User";
+    } else if ($role == 1) {
+        $role = "Moderator";
+    } else if ($role == 2) {
+        $role = "Admin";
+    } else if ($role == 3) {
+        $role = "Super Admin";
+    }
 }
 else
 {
@@ -337,7 +349,23 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     <input hidden type="text" name="action" value="currencyChange"/>
                                     <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
                                     <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
-                                </form>
+                                </form>';
+                                if ($your_role == 3)
+                                {
+                                    echo '<form method="post" action="/ajax/moderate.php"
+                                    onSubmit="return ajaxSubmit(this);">
+                                    <label><b>Role:</b></label> <select name="value" id="value">
+                                    <option value="user">User</option>
+                                    <option value="moderator">Moderator</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="super_admin">Super Admin</option>
+                                </select>
+                                    <input hidden type="text" name="action" value="roleChange"/>
+                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                </form>';
+                                }
+                                echo '
                             </fieldset>
                             <hr/>
                             ';

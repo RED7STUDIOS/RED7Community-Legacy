@@ -275,7 +275,7 @@ else
                         <input maxlength="69420" type="text" name="price" class="moderate-input"
                             value="'. $price. '" />
                         <h5>Type:</h5>
-
+                    
                         <select name="type" id="type">
                             <option value="back">Back</option>
                             <option value="front">Front</option>
