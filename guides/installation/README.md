@@ -11,7 +11,7 @@
 ### Steps
 
 1. [Download the latest release from GitHub.](downloading-and-updating.md)
-2. [Use the RED7Community Generator tool.](using-the-red7community-generator-tool.md)
+2. [Use the RED7Community Generator tool.](deprecated-using-the-red7community-generator-tool.md)
 3. [Import the database file using HeidiSQL.](https://docs.red7community.ml/using-the-red7community-generator-tool#heidisql-import)
 
 ## For Linux
