@@ -47,6 +47,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
+							$response[$i]['data'][0]['isSpecial'] = $row['isSpecial'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);
@@ -86,6 +87,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
+							$response[$i]['data'][0]['isSpecial'] = $row['isSpecial'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);

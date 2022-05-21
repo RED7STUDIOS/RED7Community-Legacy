@@ -47,6 +47,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $banDate = $json_a[0]['data'][0]['bannedDate'];
     $members = $json_a[0]['data'][0]['members'];
     $isVerified = $json_a[0]['data'][0]['isVerified'];
+    $isSpecial = $json_a[0]['data'][0]['isSpecial'];
 } else {
     $name = "Not Found";
 }
@@ -174,7 +175,7 @@ if (isset($_GET["page"])) {
                 ?>
                 <img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
                 &nbsp;
-                <h2 class="<?php if ($isAdmin == 1) {
+                <h2 class="<?php if ($isSpecial == 1) {
                                 echo 'title-rainbow-lr';
                             } else {
                             } ?>">
@@ -183,15 +184,19 @@ if (isset($_GET["page"])) {
                     } else {
                         echo $filterwords(htmlspecialchars($name));
                     } ?>
+                    <?php if ($isVerified == 1) {
+                        echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
+                    } ?>
+                    <small style="font-size: 15px;"><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
+                    <?php if ($isBanned == 1) {
+                        echo '<p><strong class="banned-text">*BANNED*</strong></p>';
+                    } ?>
+                    <span>
+                        <h6>By <a href="/users/profile.php?id=1">@RED7Community</a>
+                        </h6>
+                    </span>
                 </h2>
-                &nbsp;
-                <?php if ($isVerified == 1) {
-                    echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
-                } ?>
-                <small><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
-                <?php if ($isBanned == 1) {
-                    echo '<p><strong class="banned-text">*BANNED*</strong></p>';
-                } ?>
+
             </div>
             <div>
                 <?php
