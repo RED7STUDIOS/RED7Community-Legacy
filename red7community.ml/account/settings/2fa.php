@@ -22,19 +22,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
 require_once $_SERVER["DOCUMENT_ROOT"]. "/assets/classes/GoogleAuthenticator.php";
 
-if ($getSecret($_SESSION["id"]) != null)
+$start = date_create($getLastLogin($_SESSION["id"]));
+$end = date_create(date('m/d/Y h:i:s a', time()));
+$diff = date_diff($end, $start);
+$hours   = $diff->format('%h'); 
+$minutes = $diff->format('%i');
+$diff = $hours * 60 + $minutes;
+if ($diff > 2)
 {
-    $start = date_create($getLastLogin($_SESSION["id"]));
-    $end = date_create(date('m/d/Y h:i:s a', time()));
-    $diff = date_diff($end, $start);
-    $hours   = $diff->format('%h'); 
-    $minutes = $diff->format('%i');
-    $diff = $hours * 60 + $minutes;
-    if ($diff > 5)
-    {
-        header("Location: /account/logout.php?u=". $_SERVER["REQUEST_URI"]);
-        exit;
-    }
+    header("Location: /account/logout.php?u=". $_SERVER["REQUEST_URI"]);
+    exit;
 }
 
 // Processing form data when form is submitted
