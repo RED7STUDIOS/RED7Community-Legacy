@@ -15,9 +15,9 @@
 
 	if (!empty($api_type)) {
 		if ($api_type == 'getbyid') {
-			if(!empty($_GET['id']))
+			if(!empty(htmlspecialchars($_GET['id'])))
 			{
-				$id = $_GET['id'];
+				$id = htmlspecialchars($_GET['id']);
 
 				if ($link) {
 					$sql = "SELECT * FROM codes WHERE id=". $id;

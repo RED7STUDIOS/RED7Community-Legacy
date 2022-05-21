@@ -63,7 +63,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 					<h2>Avatar Editor Action</h2>
 					<?php
 						
-						$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_GET['id']);
+						$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. htmlspecialchars($_GET['id']));
 
 						$json_a = json_decode($data, true);
 
@@ -73,11 +73,11 @@ $items = $json_a_main[0]['data'][0]['items'];
 
 						if ($_GET['api'] == "equip")
 						{
-							if (!in_array($_GET['id'], $items_before))
+							if (!in_array(htmlspecialchars($_GET['id']), $items_before))
 							{
-								if (in_array($_GET['id'], json_decode($your_items, true)))
+								if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true)))
 								{
-									array_push($items_before, intval($_GET['id']));
+									array_push($items_before, intval(htmlspecialchars($_GET['id'])));
 									$items_final = json_encode($items_before);
 
 									$sql = "UPDATE avatars SET items = '". $items_final . "' WHERE ownerid = '". $your_id . "'";
@@ -104,9 +104,9 @@ $items = $json_a_main[0]['data'][0]['items'];
 						}
 						else if ($_GET['api'] == "unequip")
 						{
-							if (in_array($_GET['id'], $items_before))
+							if (in_array(htmlspecialchars($_GET['id']), $items_before))
 							{
-								unset($items_before[array_search($_GET['id'], $items_before)]);
+								unset($items_before[array_search(htmlspecialchars($_GET['id']), $items_before)]);
 								$items_final = json_encode($items_before);
 
 								$sql = "UPDATE avatars SET items = '". $items_final . "' WHERE ownerid = '". $your_id . "'";
@@ -128,9 +128,9 @@ $items = $json_a_main[0]['data'][0]['items'];
 						}
 						else if ($_GET['api'] == "changeshirt")
 						{
-							if (in_array($_GET['id'], json_decode($your_items, true)))
+							if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true)))
 							{
-								$sql = "UPDATE avatars SET shirt = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
+								$sql = "UPDATE avatars SET shirt = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
 
 								if (mysqli_query($link, $sql)) {
 								  
@@ -141,9 +141,9 @@ $items = $json_a_main[0]['data'][0]['items'];
 						}
 						else if ($_GET['api'] == "changepants")
 						{
-							if (in_array($_GET['id'], json_decode($your_items, true)))
+							if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true)))
 							{
-								$sql = "UPDATE avatars SET pants = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
+								$sql = "UPDATE avatars SET pants = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
 
 								if (mysqli_query($link, $sql)) {
 								  
@@ -154,9 +154,9 @@ $items = $json_a_main[0]['data'][0]['items'];
 						}
 						else if ($_GET['api'] == "changeface")
 						{
-							if (in_array($_GET['id'], json_decode($your_items, true)))
+							if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true)))
 							{
-								$sql = "UPDATE avatars SET face = '". $_GET['id'] . "' WHERE ownerid = '". $your_id . "'";
+								$sql = "UPDATE avatars SET face = '". htmlspecialchars($_GET['id']) . "' WHERE ownerid = '". $your_id . "'";
 
 								if (mysqli_query($link, $sql)) {
 								  

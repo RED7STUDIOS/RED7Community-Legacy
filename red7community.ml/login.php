@@ -311,7 +311,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<p>Don't have an account? <a href="register.php">Register here</a>.</p>
 						<p>Forgot your password? <a href="forgot-password.php">Reset it here</a>.</p>
 
-						<p class="mt-5 mb-3 text-muted">&copy; <?php echo $site_name. " ". date("Y") ?></p>
+						<p class="mt-5 mb-3 text-muted">&copy; <?php echo htmlspecialchars($site_name). " ". date("Y") ?></p>
 					</form>
 				</main>
 			</div>

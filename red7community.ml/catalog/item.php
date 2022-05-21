@@ -11,14 +11,14 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $_GET['id']);
+$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. htmlspecialchars($_GET['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted"))
 {
 	$json_a = json_decode($data, true);
 
-	$id = $_GET['id'];
+	$id = htmlspecialchars($_GET['id']);
 	$fullname = $json_a[0]['data'][0]['name'];
 	$name = $json_a[0]['data'][0]['displayname'];
 
@@ -161,7 +161,7 @@ else
                             &nbsp;
                             <div class="wrapper">
                                 <h2><?php echo htmlspecialchars($name); ?>
-                                    <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
+                                    <?php if (in_array(htmlspecialchars($_GET['id']), $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
                                     <span>
                                         <h6>By <a
                                                 href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
@@ -207,7 +207,7 @@ else
 
                             <?php
 
-						if (in_array($_GET['id'], $items))
+						if (in_array(htmlspecialchars($_GET['id']), $items))
 						{
 							echo '<p><strong>You own this item.</strong></p>';
 						}
@@ -219,7 +219,7 @@ else
 						?>
 
                             <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                                <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>" />
+                                <input hidden type="text" name="value" value="<?php echo htmlspecialchars($_GET['id']); ?>" />
                                 <input hidden type="text" name="action" value="purchaseItem" />
                                 <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
                             </form>
@@ -301,7 +301,7 @@ else
                         </br>
                         </br>
                         <input hidden type="text" name="action" value="updateItemSettings" />
-						<input hidden type="text" name="id" value="'. $_GET['id']. '"/>
+						<input hidden type="text" name="id" value="'. htmlspecialchars($_GET['id']). '"/>
                         <input class="btn btn-success" type="submit" name="form_submit" value="Update Item Settings" />
                     </form>
                 </fieldset>';

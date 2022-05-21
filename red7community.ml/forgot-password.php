@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 						<button class="w-100 btn btn-lg btn-primary" type="submit">Reset Password</button>
 
-						<p class="mt-5 mb-3 text-muted">&copy; <?php echo $site_name. " ". date("Y") ?></p>
+						<p class="mt-5 mb-3 text-muted">&copy; <?php echo htmlspecialchars($site_name). " ". date("Y") ?></p>
 					</form>
 				</main>
 			</div>

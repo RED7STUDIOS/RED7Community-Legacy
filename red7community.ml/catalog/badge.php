@@ -11,14 +11,14 @@ include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents($API_URL. '/badge.php?api=getbyid&id='. $_GET['id']);
+$data = file_get_contents($API_URL. '/badge.php?api=getbyid&id='. htmlspecialchars($_GET['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted"))
 {
 	$json_a = json_decode($data, true);
 
-	$id = $_GET['id'];
+	$id = htmlspecialchars($_GET['id']);
 	$name = $json_a[0]['data'][0]['displayname'];
 
 	$description = $json_a[0]['data'][0]['description'];

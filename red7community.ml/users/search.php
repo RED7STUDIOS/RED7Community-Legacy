@@ -4,7 +4,7 @@
     // TODO: Add in next major release :)
 
 	if(isset($_GET['search'])) {
-		$key = $_GET["search"];  //key=pattern to be searched
+		$key = htmlspecialchars($_GET["search"]);  //key=pattern to be searched
 	}
 	else
 	{
@@ -27,8 +27,8 @@
 	session_start();
 
 	include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
-
-	if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
+htmlspecialchars(
+	if (isset($_GET["page"])) { $page = htmlspecialchars($_GET["page"]); } else { $page=1; };
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +75,7 @@
 
 	<div class="d-flex align-items-center border-bottom">
 		<form method="get">
-			<input class="form-control" type="text" name="search" value="<?php echo $key; ?>" />
+			<input class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($key); ?>" />
 			<input class="btn btn-success" type="submit" value="Search" />
 		</form>
 	</div>
@@ -98,7 +98,7 @@
                 {
                     $owner_f = htmlspecialchars($row["displayname"]);
                 }
-				echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $row["id"] . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $row["icon"] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $owner_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($row["username"]). '</small>)</b></small></div></div></a></div>';
+				echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. htmlspecialchars($row["id"]) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $row["icon"] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($owner_f) . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($row["username"]). '</small>)</b></small></div></div></a></div>';
 			};
 		?>
 	</div>

@@ -14,7 +14,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $_GET['id']);
+$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. htmlspecialchars($_GET['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted"))
@@ -23,7 +23,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 
 	$isBanned = $json_a[0]['data'][0]['isBanned'];
 
-	$id = $_GET['id'];
+	$id = htmlspecialchars($_GET['id']);
 	$username = $json_a[0]['data'][0]['username'];
 
 	$real_displayname = $json_a[0]['data'][0]['displayname'];
@@ -53,7 +53,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted"))
 	$clans = $json_a[0]['data'][0]['clans'];
 	$badges = $json_a[0]['data'][0]['badges'];
 
-	$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. $_GET['id']);
+	$data_avatar = file_get_contents($API_URL. '/avatar.php?api=getbyid&id='. htmlspecialchars($_GET['id']));
 
 	$json_a_avatar = json_decode($data_avatar, true);
 
@@ -245,11 +245,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                 <div id="userList"><?php
                             if (isset($_SESSION['id']))
                             {
-                                if ($_SESSION['id'] != $_GET['id'])
+                                if ($_SESSION['id'] != htmlspecialchars($_GET['id']))
                                 {
                                     $requests = $REL->getReq($_SESSION['id']);
                                     $friends = $REL->getFriends($_SESSION['id']);
-                                    $id = $_GET['id'];
+                                    $id = htmlspecialchars($_GET['id']);
 
                                     echo '&nbsp;';
 
@@ -317,11 +317,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                 <?php
                             if (isset($your_isAdmin))
                                 if ($your_isAdmin == 1) {
-                                    $sql = "SELECT currency FROM users WHERE id=" . $_GET['id'];
+                                    $sql = "SELECT currency FROM users WHERE id=" . htmlspecialchars($_GET['id']);
                                     $result = mysqli_query($link, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $current_currency = $row['currency'];
+                                            $current_currency = htmlspecialchars($row['currency']);
                                         }
                                     }
 
@@ -331,14 +331,14 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     onSubmit="return ajaxSubmit(this);"><p><b>Display Name: </b> <input maxlength="69420" type="text" name="value"
                                     value="' . $real_displayname . '"/>
     <input hidden type="text" name="action" value="displayNameChange"/>
-    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+    <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
     <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
     </form></p>
                                 <p><b>Username: </b>' . $username . '</p>
                                 <form method="post" action="/ajax/moderate.php"
                                     onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $real_description. '
                                     </textarea><input hidden type="text" name="action" value="descriptionChange"/>
-                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                                     <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
                                     </form></p>
                         
@@ -347,7 +347,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
                                                                                 value="' . $current_currency . '"/>
                                     <input hidden type="text" name="action" value="currencyChange"/>
-                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                                     <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
                                 </form>';
                                 if ($your_role == 3)
@@ -361,7 +361,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                     <option value="super_admin">Super Admin</option>
                                 </select>
                                     <input hidden type="text" name="action" value="roleChange"/>
-                                    <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                                    <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                                     <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
                                 </form>';
                                 }
@@ -382,11 +382,11 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                     <form method="post" action="/ajax/moderate.php"
                         onSubmit="return ajaxSubmit(this);">
                         <h5>Is Banned:</h5>
-                        <input type="checkbox" name="isBanned"' . $checked . '/>
+                        <input type="checkbox" name="isBanned"' . htmlspecialchars($checked) . '/>
                         <h5>Ban Reason:</h5>
-                        <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . $banReason . '"/>
+                        <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . htmlspecialchars($banReason) . '"/>
                         <input hidden type="text" name="action" value="banningUser"/>
-                        <input hidden type="text" name="id" value="' . $_GET['id'] . '"/>
+                        <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                         <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
                     </form>
                 </fieldset>
@@ -427,9 +427,9 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                             $total = $total + 1;
 
                                             $thingy = " border-success";
-                                            $thingy2 = "/catalog/item.php?id=". $row['id'];
+                                            $thingy2 = "/catalog/item.php?id=". htmlspecialchars($row['id']);
 
-                                            echo '<div class="col profile-list-card"><a class="profile-list" href="'. $thingy2. '"><div class="align-items-center card text-center'. $thingy. '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $row['displayname'] . '</h6><p class="card-text">'. $row['type']. '</div></div></a></div>';
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="'. htmlspecialchars($thingy2). '"><div class="align-items-center card text-center'. htmlspecialchars($thingy). '"><img class="card-img-top normal-img" src="'. $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($row['displayname']) . '</h6><p class="card-text">'. htmlspecialchars($row['type']). '</div></div></a></div>';
                                         }
                                     }
                                 ?>
@@ -442,7 +442,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                     <h3>Friends:</h3>
                     <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
                         <?php
-                                    $friends = $REL->getFriends($_GET['id']);
+                                    $friends = $REL->getFriends(htmlspecialchars($_GET['id']));
 
                                     if ($friends != "" && $friends != "[]" && !empty($friends)) {
                                         foreach ($users as $id=>$name) {
@@ -466,7 +466,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                                     $friend_f = htmlspecialchars($friend_dsp);
                                                 }
 
-                                                echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $friend_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $friend_f . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
+                                                echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. htmlspecialchars($friend_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($friend_f) . '</h6> <small><b>(@<small class="profile-list-title">'. htmlspecialchars($name). '</small>)</b></small></div></div></a></div>';
                                             }
                                         }
                                     }
@@ -495,7 +495,7 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                             $badge_name = $json_a[0]['data'][0]['displayname'];
                                             $badge_icon = $json_a[0]['data'][0]['icon'];
 
-                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. $badge_id . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $badge_name . '</h6></div></div></a></div>';
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id='. htmlspecialchars($badge_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="'. $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($badge_name) . '</h6></div></div></a></div>';
                                         }
                                     }
                                     else
@@ -526,9 +526,9 @@ if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
                                             $item_name = $json_a[0]['data'][0]['displayname'];
                                             $item_icon = $json_a[0]['data'][0]['icon'];
 
-                                            $value = $vals[$key];
+                                            $value = htmlspecialchars($vals[$key]);
 
-                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. $item_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $item_name . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
+                                            echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id='. htmlspecialchars($item_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($item_name) . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x'. number_format_short($value) . '</span></div></div></a></div>';
                                         }
                                     }
                                     else
