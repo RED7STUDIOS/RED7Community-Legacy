@@ -17,7 +17,9 @@ if(!isset($_SESSION)){
 }
 
 $url_components = parse_url($_SERVER["REQUEST_URI"]);
-parse_str($url_components['query'], $params);
+if (isset($url_components['query']))
+{
+	parse_str($url_components['query'], $params);
 
 if (!isset($params['u']))
 {
@@ -30,6 +32,8 @@ else
 	{
 		$u = "/home.php";
 	}
+}
+
 }
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -71,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	// Validate credentials
 	if(empty($username_err) && empty($password_err)){
 		// Prepare a select statement
-		$sql = "SELECT id, username, password, created_at, lastlogin, lastloginDate, membership, currency, badges, items, followers, following, isAdmin FROM users WHERE username = ?";
+		$sql = "SELECT id, username, password, created_at, lastlogin, lastloginDate, membership, currency, badges, items, followers, following, role, auth_secret FROM users WHERE username = ?";
 		
 		if($stmt = mysqli_prepare($link, $sql)){
 			// Bind variables to the prepared statement as parameters
@@ -88,21 +92,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				// Check if username exists, if yes then verify password
 				if(mysqli_stmt_num_rows($stmt) == 1){                    
 					// Bind result variables
-					mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $created_at, $lastlogin, $lastloginDate, $membershipTemp, $currencyTemp, $badges, $items, $followers, $following, $isAdmin);
+					mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $created_at, $lastlogin, $lastloginDate, $membershipTemp, $currencyTemp, $badges, $items, $followers, $following, $role, $auth_secret);
 					if(mysqli_stmt_fetch($stmt)){
 						if(password_verify($password, $hashed_password)){
 							session_destroy();
 
 							// Password is correct, so start a new session
 							session_start();
+
+							if ($auth_secret != null)
+							{
+								$_SESSION["loggedin"] = false;
+								$_SESSION["loggedin_b2fa"] = true;
+							}
+							else
+							{
+								$_SESSION["loggedin"] = true;
+							}
 							
 							// Store data in session variables
-							$_SESSION["loggedin"] = true;
+							
 							$_SESSION["id"] = $id;
 							$_SESSION["username"] = $username;
 							$_SESSION["created_at"] = $created_at;
 							$_SESSION["lastlogin"] = $lastlogin;
-							$_SESSION["isAdmin"] = $isAdmin;
+							$_SESSION["role"] = $role;
+
+							if ($role >= 1) {
+								$_SESSION["isAdmin"] = 1;
+							}
+							else
+							{
+								$_SESSION["isAdmin"] = 0;
+							}
 							
 							if ($badges == null || $badges == "") {
 								$sql = "UPDATE users SET badges='[1]' WHERE id=". $id;
@@ -207,7 +229,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							// Redirect user to welcome page
 							if (isset($params['u']))
 							{
-								header("Location: ". $params['u']);
+								if ($_SESSION["loggedin_b2fa"] == true)
+								{
+									header("Location: /2fa.php?u=". $params['u']);
+								}
+								else
+								{
+									header("Location: ". $params['u']);
+								}
 							}
 							else
 							{

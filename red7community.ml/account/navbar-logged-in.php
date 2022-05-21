@@ -127,9 +127,9 @@
 
 	mysqli_query($link, $sql);
 
-	$sql = "UPDATE users SET lastlogin='". $todayTime . "' WHERE id=". $your_id;
+	//$sql = "UPDATE users SET lastlogin='". $todayTime . "' WHERE id=". $your_id;
 
-	mysqli_query($link, $sql);
+	//mysqli_query($link, $sql);
 
 	// END OF COPY FROM login.php ---------------------------- !!! UPDATE BOTH !!!
 ?>

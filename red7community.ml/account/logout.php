@@ -50,7 +50,35 @@ if (isset($_SESSION))
 	session_destroy();
 }
 
-// Redirect to login page
-header("location: ../login.php?u=/home.php");
+$url_components = parse_url($_SERVER["REQUEST_URI"]);
+if (isset($url_components['query']))
+{
+	parse_str($url_components['query'], $params);
+
+if (!isset($params['u']))
+{
+	$u = "/home.php";
+}
+else
+{
+	$u = $params['u'];
+	if ($u == "/")
+	{
+		$u = "/home.php";
+	}
+}
+
+}
+
+// Redirect user to welcome page
+if (isset($params['u']))
+{
+	header("Location: /login.php?u=". $params['u']);
+}
+else
+{
+	header("location: /login.php?u=/home.php");
+}
+
 exit;
 ?>

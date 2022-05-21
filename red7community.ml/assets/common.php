@@ -203,6 +203,55 @@ $getAdminName = function($id) use ($link) {
 	}
 };
 
+$getEmail = function($id) use ($link) {
+	$sql_query = "SELECT email FROM users WHERE id = ". $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			return $row["email"];
+		}
+	}
+};
+
+$getSecret = function($id) use ($link) {
+	$sql_query = "SELECT auth_secret FROM users WHERE id = ". $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			return $row["auth_secret"];
+		}
+	}
+};
+
+$getLastLogin = function($id) use ($link) {
+	$sql_query = "SELECT lastLogin FROM users WHERE id = ". $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			return $row["lastLogin"];
+		}
+	}
+};
+
+$setSecret = function($id, $secret) use ($link) {
+	$sql_query = "UPDATE users SET auth_secret='". $secret."' WHERE id = ". $id;
+
+	if (mysqli_query($link, $sql_query))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
+
 // Filter certain words out.
 // Usage: filterwords("blah blah");
 $filterwords = function($text) use ($bannedWords) {
