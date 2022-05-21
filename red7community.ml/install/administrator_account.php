@@ -205,7 +205,7 @@
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
 				<td width="250px">&nbsp;Site Name&nbsp;<span class="star">*</span></td>
-				<td><input name="site_name" id="site_name" class="form_text" size="28" maxlength="22" value="<?php echo $site_name; ?>" onblur="textboxOnBlur('notes_admin_username')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="site_name" id="site_name" class="form_text" size="28" maxlength="22" value="<?php echo htmlspecialchars($site_name); ?>" onblur="textboxOnBlur('notes_admin_username')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>

@@ -39,7 +39,7 @@ else
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php echo $name ?> - <?php echo $site_name; ?></title>
+		<title><?php echo htmlspecialchars($name); ?> - <?php echo htmlspecialchars($site_name); ?></title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 		<link rel="stylesheet" href="/assets/css/style.css">
@@ -69,11 +69,11 @@ else
 						?>
 						<img src="<?php echo $icon ?>" style="height: 128px; width: 128px;"></img>
 						&nbsp;
-						<h2><?php echo $name ?></h2>
+						<h2><?php echo htmlspecialchars($name); ?></h2>
 					</div>
 					<div>
 						<h3>About:</h3>
-						<p><?php echo $description ?></p>
+						<p><?php echo htmlspecialchars($description); ?></p>
 					</div>
 				</div>
 			</main>

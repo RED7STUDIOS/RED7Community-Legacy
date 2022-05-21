@@ -58,7 +58,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $name ?> - <?php echo $site_name; ?></title>
+    <title><?php echo htmlspecialchars($name); ?> - <?php echo htmlspecialchars($site_name); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
@@ -160,7 +160,7 @@ else
                             <?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
                             &nbsp;
                             <div class="wrapper">
-                                <h2><?php echo $name ?>
+                                <h2><?php echo htmlspecialchars($name); ?>
                                     <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
                                     <span>
                                         <h6>By <a
@@ -179,8 +179,8 @@ else
 						?>
 
                             <h3>About:</h3>
-                            <p><strong>Description:</strong> <?php echo $description ?></p>
-                            <p><strong>Created:</strong> <?php echo $created ?></p>
+                            <p><strong>Description:</strong> <?php echo htmlspecialchars($description); ?></p>
+                            <p><strong>Created:</strong> <?php echo htmlspecialchars($created); ?></p>
 
                             <?php
 						if ($price != "-1")
@@ -196,7 +196,7 @@ else
 						}
 						?>
 
-                            <p><strong>Type:</strong> <?php echo $type ?></p>
+                            <p><strong>Type:</strong> <?php echo htmlspecialchars($type); ?></p>
 
                             <?php
 							if ($limited == 1)
@@ -255,7 +255,7 @@ else
 
 										$value = $vals[$key];
 
-										echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. $owner_id . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $owner_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. $owner_f . '</h6><p class="card-text"><span class="badge bg-success">x'. $value . '</span></div></div></a></div>';
+										echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. htmlspecialchars($owner_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $owner_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($owner_f) . '</h6><p class="card-text"><span class="badge bg-success">x'. htmlspecialchars($value) . '</span></div></div></a></div>';
 									}
 								}
 								else
@@ -274,16 +274,16 @@ else
                     <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
                         <h5>Name:</h5>
                         <input maxlength="69420" type="text" name="name" class="moderate-input"
-                            value="'. $name. '" />
+                            value="'. htmlspecialchars($name). '" />
                         <h5>Creator:</h5>
                         <input maxlength="69420" type="text" name="creator" class="moderate-input"
-                            value="'. $creator_name. '" />
+                            value="'. htmlspecialchars($creator_name). '" />
                         <h5>Description:</h5>
                         <textarea maxlength="200" type="text" name="description"
-                            style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. $description. '</textarea>
+                            style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. htmlspecialchars($description). '</textarea>
                         <h5>Price:</h5>
                         <input maxlength="69420" type="text" name="price" class="moderate-input"
-                            value="'. $price. '" />
+                            value="'. htmlspecialchars($price). '" />
                         <h5>Type:</h5>
                     
                         <select name="type" id="type">

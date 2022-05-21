@@ -267,8 +267,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="The login page for <?php echo $site_name; ?>.">
-		<title>Login - <?php echo $site_name; ?></title>
+		<meta name="description" content="The login page for <?php echo htmlspecialchars($site_name); ?>.">
+		<title>Login - <?php echo htmlspecialchars($site_name); ?></title>
 
 		<!-- Styles and Font Awesome -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -292,7 +292,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 				<main class="form-signin">
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); echo "?u=". $u; ?>" method="post">
-						<h3 class="fw-normal">Login to <?php echo $site_name; ?></h3>
+						<h3 class="fw-normal">Login to <?php echo htmlspecialchars($site_name); ?></h3>
 
 						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
 							<label><i class="fas fa-user"></i> Username</label>
