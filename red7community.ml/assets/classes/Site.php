@@ -11,4 +11,5 @@ $site_name = function() use ($link) {
 			return $row["content"];
 		}
 	}
-}
+};
+?>
