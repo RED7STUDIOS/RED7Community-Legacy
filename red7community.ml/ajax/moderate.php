@@ -64,6 +64,31 @@
 			} else if ($_POST['action'] == "descriptionChange") {
 				// Prepare an insert statement
 				$sql = "UPDATE users SET description = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
+		} else if ($_POST['action'] == "banningClan") {
+			if (isset($_POST['isBanned'])) {
+				// Prepare an insert statement
+				$sql = "UPDATE clans SET isBanned = 1 WHERE id = '" . $_POST['id'] . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$sql = "UPDATE clans SET bannedReason = '" . $_POST["banReason"] . "' WHERE id = '" . $_POST['id'] . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$todayTime = date("Y-m-d H:i:s");
+				$sql = "UPDATE clans SET bannedDate = '" . $todayTime . "' WHERE id = '" . $_POST['id'] . "'";
+				$result = mysqli_query($link, $sql);
+			} else {
+				// Prepare an insert statement
+				$sql = "UPDATE clans SET isBanned = 0 WHERE id = '" . $_POST['id'] . "'";
+			}
+		} else if ($_POST['action'] == "currencyChangeClan") {
+			// Prepare an insert statement
+			$sql = "UPDATE clans SET currency = '" . $_POST["amount"] . "' WHERE id = '" . $_POST['id'] . "'";
+		} else if ($_POST['action'] == "displayNameChangeClan") {
+				// Prepare an insert statement
+				$sql = "UPDATE clans SET displayName = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
+			} else if ($_POST['action'] == "descriptionChangeClan") {
+				// Prepare an insert statement
+				$sql = "UPDATE clans SET description = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
 		} else if ($_POST['action'] == "updateSiteSettings") {
 			// Prepare an insert statement
 			$sql = "UPDATE site_info SET content = '" . $_POST["site_name"] . "' WHERE name = 'site_name'";
