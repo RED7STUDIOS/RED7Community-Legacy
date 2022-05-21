@@ -7,48 +7,45 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/common.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. htmlspecialchars($_GET['id']));
+$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
 
 // Decode the json response.
-if (!str_contains($data, "This item doesn't exist or has been deleted"))
-{
-	$json_a = json_decode($data, true);
+if (!str_contains($data, "This item doesn't exist or has been deleted")) {
+    $json_a = json_decode($data, true);
 
-	$id = htmlspecialchars($_GET['id']);
-	$fullname = $json_a[0]['data'][0]['name'];
-	$name = $json_a[0]['data'][0]['displayname'];
+    $id = htmlspecialchars($_GET['id']);
+    $fullname = $json_a[0]['data'][0]['name'];
+    $name = $json_a[0]['data'][0]['displayname'];
 
-	$description = $json_a[0]['data'][0]['description'];
+    $description = $json_a[0]['data'][0]['description'];
 
-	if ($description == "") {
-		$description = "This catalog item does not have a description.";
-	}
+    if ($description == "") {
+        $description = "This catalog item does not have a description.";
+    }
 
-	$created = $json_a[0]['data'][0]['created'];
-	$limited = $json_a[0]['data'][0]['isLimited'];
-	$copies = $json_a[0]['data'][0]['copies'];
-	$membershipRequired = $json_a[0]['data'][0]['membershipRequired'];
-	$owners = $json_a[0]['data'][0]['owners'];
-	$price = $json_a[0]['data'][0]['price'];
-	$type = $json_a[0]['data'][0]['type'];
-	$icon = $json_a[0]['data'][0]['icon'];
-	$creator = $json_a[0]['data'][0]['creator'];
+    $created = $json_a[0]['data'][0]['created'];
+    $limited = $json_a[0]['data'][0]['isLimited'];
+    $copies = $json_a[0]['data'][0]['copies'];
+    $membershipRequired = $json_a[0]['data'][0]['membershipRequired'];
+    $owners = $json_a[0]['data'][0]['owners'];
+    $price = $json_a[0]['data'][0]['price'];
+    $type = $json_a[0]['data'][0]['type'];
+    $icon = $json_a[0]['data'][0]['icon'];
+    $creator = $json_a[0]['data'][0]['creator'];
     $obj = $json_a[0]['data'][0]['obj'];
     $mtl = $json_a[0]['data'][0]['mtl'];
 
-	$data_u = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $creator);
+    $data_u = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $creator);
 
-	$json_a = json_decode($data_u, true);
+    $json_a = json_decode($data_u, true);
 
-	$creator_name = $json_a[0]['data'][0]['username'];
-}
-else
-{
-	$name = "Not Found";
+    $creator_name = $json_a[0]['data'][0]['username'];
+} else {
+    $name = "Not Found";
 }
 ?>
 
@@ -59,8 +56,7 @@ else
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo htmlspecialchars($name); ?> - <?php echo htmlspecialchars($site_name); ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/assets/css/style.css">
 
@@ -69,50 +65,7 @@ else
 
 <body>
     <script type="text/javascript">
-    var ajaxSubmit = function(formEl) {
-        // fetch the data for the form
-        var data = $(formEl).serializeArray();
-        var url = $(formEl).attr('action');
-
-        // setup the ajax request
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            dataType: 'json',
-            success: function(d) {
-                if (d.success) {
-                    alert('Bought item successfully!');
-                    document.location = document.location;
-                } else {
-                    alert("An error occurred while purchasing, please try again later.")
-                    document.location = document.location;
-                }
-            }
-        });
-
-        // return false so the form does not actually
-        // submit to the page
-        return false;
-    }
-    </script>
-
-    <?php include_once $_SERVER["DOCUMENT_ROOT"]. "/account/navbar.php" ?>
-
-    <?php
-		if (isset($your_items))
-		{
-			$items = json_decode($your_items, true);
-		}
-		else
-		{
-			$items = array();
-		}
-		?>
-
-    <div class="page-content-wrapper">
-        <script type="text/javascript">
-        var ajaxSubmit2 = function(formEl) {
+        var ajaxSubmit = function(formEl) {
             // fetch the data for the form
             var data = $(formEl).serializeArray();
             var url = $(formEl).attr('action');
@@ -125,10 +78,10 @@ else
                 dataType: 'json',
                 success: function(d) {
                     if (d.success) {
-                        alert('Changed value successfully!');
+                        alert('Bought item successfully!');
                         document.location = document.location;
                     } else {
-                        alert("An error occurred while changing value, please try again later.")
+                        alert("An error occurred while purchasing, please try again later.")
                         document.location = document.location;
                     }
                 }
@@ -138,6 +91,46 @@ else
             // submit to the page
             return false;
         }
+    </script>
+
+    <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
+
+    <?php
+    if (isset($your_items)) {
+        $items = json_decode($your_items, true);
+    } else {
+        $items = array();
+    }
+    ?>
+
+    <div class="page-content-wrapper">
+        <script type="text/javascript">
+            var ajaxSubmit2 = function(formEl) {
+                // fetch the data for the form
+                var data = $(formEl).serializeArray();
+                var url = $(formEl).attr('action');
+
+                // setup the ajax request
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    dataType: 'json',
+                    success: function(d) {
+                        if (d.success) {
+                            alert('Changed value successfully!');
+                            document.location = document.location;
+                        } else {
+                            alert("An error occurred while changing value, please try again later.")
+                            document.location = document.location;
+                        }
+                    }
+                });
+
+                // return false so the form does not actually
+                // submit to the page
+                return false;
+            }
         </script>
         <main class="page-content-wrapper">
             <div class="container">
@@ -148,23 +141,25 @@ else
                     <div class="col">
                         <div class="d-flex align-items-center border-bottom">
                             <?php
-							if ($name == "Not Found")
-							{
-								echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
-								exit;
-							}
-						?>
+                            if ($name == "Not Found") {
+                                echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
+                                exit;
+                            }
+                            ?>
                             <!-- <img src="<?php echo $icon ?>" class="catalog-item-preview"></img> -->
 
 
-                            <?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
+                            <?php if ($membershipRequired == "Premium") {
+                                echo '<img class="premium-icon" src="' . $premiumIcon . '"</img>';
+                            } ?>
                             &nbsp;
                             <div class="wrapper">
                                 <h2><?php echo htmlspecialchars($name); ?>
-                                    <?php if (in_array(htmlspecialchars($_GET['id']), $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
+                                    <?php if (in_array(htmlspecialchars($_GET['id']), $items)) {
+                                        echo '<img src="/assets/images/item-owned.png" class="item-owned"/>';
+                                    } ?>
                                     <span>
-                                        <h6>By <a
-                                                href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
+                                        <h6>By <a href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
                                         </h6>
                                     </span>
                             </div>
@@ -172,56 +167,59 @@ else
 
                         <div>
                             <?php
-							if ($limited == 1)
-							{
-								echo '<p><strong><i>LIMITED</i></strong></p>';
-							}
-						?>
+                            if ($limited == 1) {
+                                echo '<p><strong><i>LIMITED</i></strong></p>';
+                            }
+                            ?>
 
                             <h3>About:</h3>
                             <p><strong>Description:</strong> <?php echo htmlspecialchars($description); ?></p>
                             <p><strong>Created:</strong> <?php echo htmlspecialchars($created); ?></p>
 
                             <?php
-						if ($price != "-1")
-						{
-							if ($price == "0" || $price == 0)
-							{
-								echo '<p><strong>Price: </strong>Free</p>';
-							}
-							else
-							{
-								echo '<p><strong>Price: </strong>'. $price. ' '. $currency_name. '</p>';
-							}
-						}
-						?>
+                            if ($price != "-1") {
+                                if ($price == "0" || $price == 0) {
+                                    echo '<p><strong>Price: </strong>Free</p>';
+                                } else {
+                                    echo '<p><strong>Price: </strong>' . $price . ' ' . $currency_name . '</p>';
+                                }
+                            }
+                            ?>
 
                             <p><strong>Type:</strong> <?php echo htmlspecialchars($type); ?></p>
 
                             <?php
-							if ($limited == 1)
-							{
-								echo '<p><strong>Copies:</strong> '. $copies. '</p>';
-							}
-						?>
+                            if ($limited == 1) {
+                                echo '<p><strong>Copies:</strong> ' . $copies . '</p>';
+                            }
+                            ?>
 
                             <?php
 
-						if (in_array(htmlspecialchars($_GET['id']), $items))
-						{
-							echo '<p><strong>You own this item.</strong></p>';
-						}
-						else
-						{
-							echo '<p><strong>You do not own this item yet.</strong></p>';
-						}
+                            if (in_array(htmlspecialchars($_GET['id']), $items)) {
+                                echo '<p><strong>You own this item.</strong></p>';
+                            } else {
+                                echo '<p><strong>You do not own this item yet.</strong></p>';
+                            }
 
-						?>
+                            ?>
 
                             <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
                                 <input hidden type="text" name="value" value="<?php echo htmlspecialchars($_GET['id']); ?>" />
                                 <input hidden type="text" name="action" value="purchaseItem" />
-                                <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
+                                <?php if (isset($_SESSION['id'])) {
+                                    if ($price === "-1") {
+                                        echo 'This item is not for sale.';
+                                    } else {
+                                        if ($your_currency >= $price) {
+                                            echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>';
+                                        } else {
+                                            echo 'You do not have enough money to buy this item!';
+                                        }
+                                    }
+                                } else {
+                                    echo 'Create a free account to purchase this item!';
+                                } ?>
                             </form>
 
                             <hr />
@@ -230,60 +228,53 @@ else
 
                             <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
                                 <?php
-								$vals = array_count_values(json_decode($owners, true));
+                                $vals = array_count_values(json_decode($owners, true));
 
-								if ($owners != "" && $owners != "[]" && !empty($owners)) {
-									foreach($vals as $key=>$mydata)
-									{
-										$data = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $key);
+                                if ($owners != "" && $owners != "[]" && !empty($owners)) {
+                                    foreach ($vals as $key => $mydata) {
+                                        $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $key);
 
-										$json_a = json_decode($data, true);
+                                        $json_a = json_decode($data, true);
 
-										$owner_id = $json_a[0]['data'][0]['id'];
-										$owner_icon = $json_a[0]['data'][0]['icon'];
-										$owner_name = $json_a[0]['data'][0]['username'];
-										$owner_displayname = $json_a[0]['data'][0]['displayname'];
+                                        $owner_id = $json_a[0]['data'][0]['id'];
+                                        $owner_icon = $json_a[0]['data'][0]['icon'];
+                                        $owner_name = $json_a[0]['data'][0]['username'];
+                                        $owner_displayname = $json_a[0]['data'][0]['displayname'];
 
-										if ($owner_displayname == null || $owner_displayname == "")
-										{
-											$owner_f = htmlspecialchars($owner_name);
-										}
-										else
-										{
-											$owner_f = htmlspecialchars($owner_displayname);
-										}
+                                        if ($owner_displayname == null || $owner_displayname == "") {
+                                            $owner_f = htmlspecialchars($owner_name);
+                                        } else {
+                                            $owner_f = htmlspecialchars($owner_displayname);
+                                        }
 
-										$value = $vals[$key];
+                                        $value = $vals[$key];
 
-										echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id='. htmlspecialchars($owner_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="'. $owner_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">'. htmlspecialchars($owner_f) . '</h6><p class="card-text"><span class="badge bg-success">x'. htmlspecialchars($value) . '</span></div></div></a></div>';
-									}
-								}
-								else
-								{
-									echo '<p>This item has no owners yet.</p>';
-								}
-							?>
+                                        echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id=' . htmlspecialchars($owner_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="' . $owner_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($owner_f) . '</h6><p class="card-text"><span class="badge bg-success">x' . htmlspecialchars($value) . '</span></div></div></a></div>';
+                                    }
+                                } else {
+                                    echo '<p>This item has no owners yet.</p>';
+                                }
+                                ?>
                             </div>
 
                             <?php
-				if ($your_isAdmin == 1)
-				{
-					echo '
+                            if ($your_isAdmin == 1) {
+                                echo '
 					<h3>Item Settings:</h3>
                 <fieldset>
                     <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
                         <h5>Name:</h5>
                         <input maxlength="69420" type="text" name="name" class="moderate-input"
-                            value="'. htmlspecialchars($name). '" />
+                            value="' . htmlspecialchars($name) . '" />
                         <h5>Creator:</h5>
                         <input maxlength="69420" type="text" name="creator" class="moderate-input"
-                            value="'. htmlspecialchars($creator_name). '" />
+                            value="' . htmlspecialchars($creator_name) . '" />
                         <h5>Description:</h5>
                         <textarea maxlength="200" type="text" name="description"
-                            style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">'. htmlspecialchars($description). '</textarea>
+                            style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">' . htmlspecialchars($description) . '</textarea>
                         <h5>Price:</h5>
                         <input maxlength="69420" type="text" name="price" class="moderate-input"
-                            value="'. htmlspecialchars($price). '" />
+                            value="' . htmlspecialchars($price) . '" />
                         <h5>Type:</h5>
                     
                         <select name="type" id="type">
@@ -301,12 +292,12 @@ else
                         </br>
                         </br>
                         <input hidden type="text" name="action" value="updateItemSettings" />
-						<input hidden type="text" name="id" value="'. htmlspecialchars($_GET['id']). '"/>
+						<input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
                         <input class="btn btn-success" type="submit" name="form_submit" value="Update Item Settings" />
                     </form>
                 </fieldset>';
-				}
-                ?>
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -318,10 +309,9 @@ else
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
-    <?php include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/js/catalog.js.php"; ?>
+    <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/js/catalog.js.php"; ?>
 </body>
 
 </html>

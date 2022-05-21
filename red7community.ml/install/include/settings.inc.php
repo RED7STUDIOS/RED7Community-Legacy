@@ -152,5 +152,3 @@
    
     // *** additional text after successful installation
     define('EI_POST_INSTALLATION_TEXT', '');
-    
-?>

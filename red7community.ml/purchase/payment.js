@@ -1,7 +1,7 @@
 // set your stripe publishable key
 Stripe.setPublishableKey('pk_test_51IhCSFHFvvpJx5JTi6JC0Gs3vfxkojvppb2T6qnGmMNQgufsGVbeDBGENKZTqaCGMtAijKSgWOealsXfKqzeJbQT00GgXO9hjO');
-$(document).ready(function() {
-    $("#paymentForm").submit(function(event) {
+$(document).ready(function () {
+    $("#paymentForm").submit(function (event) {
         $('#makePayment').attr("disabled", "disabled");
         // create stripe token to make payment
         Stripe.createToken({
@@ -9,22 +9,22 @@ $(document).ready(function() {
             cvc: $('#cardCVC').val(),
             exp_month: $('#cardExpMonth').val(),
             exp_year: $('#cardExpYear').val()
-        }, handleStripeResponse); 
+        }, handleStripeResponse);
         return false;
     });
 });
 // handle the response from stripe
 function handleStripeResponse(status, response) {
-	console.log(JSON.stringify(response));
+    console.log(JSON.stringify(response));
     if (response.error) {
         $('#makePayment').removeAttr("disabled");
         $(".paymentErrors").html(response.error.message);
     } else {
-		var payForm = $("#paymentForm");
+        var payForm = $("#paymentForm");
         //get stripe token id from response
         var stripeToken = response['id'];
         //set the token into the form hidden input to make payment
         payForm.append("<input type='hidden' name='stripeToken' value='" + stripeToken + "' />");
-		payForm.get(0).submit();			
+        payForm.get(0).submit();
     }
 }

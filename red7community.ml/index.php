@@ -16,4 +16,3 @@ else
 	header("location: install/start.php");
 	exit;
 }
-?>

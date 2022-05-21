@@ -12,4 +12,3 @@ $site_name = function() use ($link) {
 		}
 	}
 }
-?>

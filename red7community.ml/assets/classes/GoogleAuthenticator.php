@@ -48,7 +48,7 @@ class GoogleAuthenticator
         $secretkey = $this->_base32Decode($secret);
 
         // Pack time into binary string
-        $time = chr(0).chr(0).chr(0).chr(0).pack('N*', $timeSlice);
+        $time = chr(0) . chr(0) . chr(0) . chr(0) . pack('N*', $timeSlice);
         // Hash it with users secret key
         $hm = hash_hmac('SHA1', $time, $secretkey, true);
         // Use last nipple of result as index/offset
@@ -74,12 +74,13 @@ class GoogleAuthenticator
      * @param string $title
      * @return string
      */
-    public function getQRCodeGoogleUrl($name, $secret, $title = null) {
-        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
-	if(isset($title)) {
-                $urlencoded .= urlencode('&issuer='.urlencode($title));
+    public function getQRCodeGoogleUrl($name, $secret, $title = null)
+    {
+        $urlencoded = urlencode('otpauth://totp/' . $name . '?secret=' . $secret . '');
+        if (isset($title)) {
+            $urlencoded .= urlencode('&issuer=' . urlencode($title));
         }
-        return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl='.$urlencoded.'';
+        return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=' . $urlencoded . '';
     }
 
     /**
@@ -99,7 +100,7 @@ class GoogleAuthenticator
 
         for ($i = -$discrepancy; $i <= $discrepancy; $i++) {
             $calculatedCode = $this->getCode($secret, $currentTimeSlice + $i);
-            if ($calculatedCode == $code ) {
+            if ($calculatedCode == $code) {
                 return true;
             }
         }
@@ -135,14 +136,16 @@ class GoogleAuthenticator
         $paddingCharCount = substr_count($secret, $base32chars[32]);
         $allowedValues = array(6, 4, 3, 1, 0);
         if (!in_array($paddingCharCount, $allowedValues)) return false;
-        for ($i = 0; $i < 4; $i++){
-            if ($paddingCharCount == $allowedValues[$i] &&
-                substr($secret, -($allowedValues[$i])) != str_repeat($base32chars[32], $allowedValues[$i])) return false;
+        for ($i = 0; $i < 4; $i++) {
+            if (
+                $paddingCharCount == $allowedValues[$i] &&
+                substr($secret, - ($allowedValues[$i])) != str_repeat($base32chars[32], $allowedValues[$i])
+            ) return false;
         }
-        $secret = str_replace('=','', $secret);
+        $secret = str_replace('=', '', $secret);
         $secret = str_split($secret);
         $binaryString = "";
-        for ($i = 0; $i < count($secret); $i = $i+8) {
+        for ($i = 0; $i < count($secret); $i = $i + 8) {
             $x = "";
             if (!in_array($secret[$i], $base32chars)) return false;
             for ($j = 0; $j < 8; $j++) {
@@ -150,7 +153,7 @@ class GoogleAuthenticator
             }
             $eightBits = str_split($x, 8);
             for ($z = 0; $z < count($eightBits); $z++) {
-                $binaryString .= ( ($y = chr(base_convert($eightBits[$z], 2, 10))) || ord($y) == 48 ) ? $y:"";
+                $binaryString .= (($y = chr(base_convert($eightBits[$z], 2, 10))) || ord($y) == 48) ? $y : "";
             }
         }
         return $binaryString;

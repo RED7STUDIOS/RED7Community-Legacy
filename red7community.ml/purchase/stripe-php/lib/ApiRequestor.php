@@ -57,7 +57,7 @@ class ApiRequestor
         $params = $params ?: [];
         $headers = $headers ?: [];
         list($rbody, $rcode, $rheaders, $myApiKey) =
-        $this->_requestRaw($method, $url, $params, $headers);
+            $this->_requestRaw($method, $url, $params, $headers);
         $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
         $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
         return [$resp, $myApiKey];
@@ -85,7 +85,7 @@ class ApiRequestor
     {
         if (!is_array($resp) || !isset($resp['error'])) {
             $msg = "Invalid response object from API: $rbody "
-              . "(HTTP response code was $rcode)";
+                . "(HTTP response code was $rcode)";
             throw new Error\Api($msg, $rcode, $rbody, $resp, $rheaders);
         }
 
@@ -214,9 +214,9 @@ class ApiRequestor
 
         if (!$myApiKey) {
             $msg = 'No API key provided.  (HINT: set your API key using '
-              . '"Stripe::setApiKey(<API-KEY>)".  You can generate API keys from '
-              . 'the Stripe web interface.  See https://stripe.com/api for '
-              . 'details, or email support@stripe.com if you have any questions.';
+                . '"Stripe::setApiKey(<API-KEY>)".  You can generate API keys from '
+                . 'the Stripe web interface.  See https://stripe.com/api for '
+                . 'details, or email support@stripe.com if you have any questions.';
             throw new Error\Authentication($msg);
         }
 
@@ -228,7 +228,7 @@ class ApiRequestor
             $clientUAInfo = $this->httpClient()->getUserAgentInfo();
         }
 
-        $absUrl = $this->_apiBase.$url;
+        $absUrl = $this->_apiBase . $url;
         $params = self::_encodeObjects($params);
         $defaultHeaders = $this->_defaultHeaders($myApiKey, $clientUAInfo);
         if (Stripe::$apiVersion) {
@@ -292,7 +292,7 @@ class ApiRequestor
             // We don't have the filename or mimetype, but the API doesn't care
             return new \CURLFile($metaData['uri']);
         } else {
-            return '@'.$metaData['uri'];
+            return '@' . $metaData['uri'];
         }
     }
 
@@ -302,7 +302,7 @@ class ApiRequestor
         $jsonError = json_last_error();
         if ($resp === null && $jsonError !== JSON_ERROR_NONE) {
             $msg = "Invalid response body from API: $rbody "
-              . "(HTTP response code was $rcode, json_last_error() was $jsonError)";
+                . "(HTTP response code was $rcode, json_last_error() was $jsonError)";
             throw new Error\Api($msg, $rcode, $rbody);
         }
 

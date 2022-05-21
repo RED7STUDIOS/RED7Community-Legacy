@@ -9,5 +9,4 @@ namespace Stripe;
  */
 class LoginLink extends ApiResource
 {
-
 }

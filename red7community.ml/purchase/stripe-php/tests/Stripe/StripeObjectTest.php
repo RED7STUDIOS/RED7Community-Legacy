@@ -338,7 +338,7 @@ EOS;
         } catch (\InvalidArgumentException $e) {
             $this->assertSame(
                 "Cannot save property `customer` containing an API resource of type Stripe\Customer. " .
-                "It doesn't appear to be persisted and is not marked as `saveWithParent`.",
+                    "It doesn't appear to be persisted and is not marked as `saveWithParent`.",
                 $e->getMessage()
             );
         } catch (\Exception $e) {

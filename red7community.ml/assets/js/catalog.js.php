@@ -1,15 +1,23 @@
 <script type="module">
 	import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js';
-	import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js';
-	import {OBJLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js';
-	import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
+	import {
+		OrbitControls
+	} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js';
+	import {
+		OBJLoader
+	} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js';
+	import {
+		MTLLoader
+	} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
 
 	function main() {
 		const canvas = document.querySelector('#c-catalog');
-		const renderer = new THREE.WebGLRenderer({canvas});
+		const renderer = new THREE.WebGLRenderer({
+			canvas
+		});
 
 		const fov = 45;
-		const aspect = 2;  // the canvas default
+		const aspect = 2; // the canvas default
 		const near = 0.1;
 		const far = 100;
 		const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -44,8 +52,8 @@
 		}
 
 		{
-			const skyColor = 0xB1E1FF;  // light blue
-			const groundColor = 0xB97A20;  // brownish orange
+			const skyColor = 0xB1E1FF; // light blue
+			const groundColor = 0xB97A20; // brownish orange
 			const intensity = 1;
 			const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
 			scene.add(light);
@@ -89,37 +97,42 @@
 
 		var shirtTextureLoader = new THREE.TextureLoader();
 		var shirtMap = shirtTextureLoader.load("");
-		var shirtMaterial = new THREE.MeshPhongMaterial({map: shirtMap});
+		var shirtMaterial = new THREE.MeshPhongMaterial({
+			map: shirtMap
+		});
 
 		var pantsTextureLoader = new THREE.TextureLoader();
 		var pantsMap = pantsTextureLoader.load("");
-		var pantsMaterial = new THREE.MeshPhongMaterial({map: pantsMap});
+		var pantsMaterial = new THREE.MeshPhongMaterial({
+			map: pantsMap
+		});
 
 		// HEAD MODEL
 		{
 			// Create a material
 			var textureLoader = new THREE.TextureLoader();
 			var map = textureLoader.load("");
-			var material = new THREE.MeshPhongMaterial({map: map});
+			var material = new THREE.MeshPhongMaterial({
+				map: map
+			});
 
 			// Create a new OBJ loader.
 			var loader = new OBJLoader();
 			// Load the model into memory.
-			loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Head.obj', function ( object )
-			{
+			loader.load('<?php echo $STORAGE_URL ?>/Avatar/Head.obj', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = material;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0xFFFF00);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
@@ -129,8 +142,8 @@
 			var loader = new OBJLoader();
 			// Load the model into memory.
 			<?php
-			$armthingy = $STORAGE_URL. "/Avatar/LeftArm.obj";
-            /*
+			$armthingy = $STORAGE_URL . "/Avatar/LeftArm.obj";
+			/*
 			foreach(json_decode($hats, true) as $hat) {
                 
 				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
@@ -146,21 +159,20 @@
 			}
             */
 			?>
-			loader.load( '<?php echo $armthingy ?>', function ( object )
-			{
+			loader.load('<?php echo $armthingy ?>', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = shirtMaterial;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0xFFFF00);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
@@ -169,21 +181,20 @@
 			// Create a new OBJ loader.
 			var loader = new OBJLoader();
 			// Load the model into memory.
-			loader.load( '<?php echo $STORAGE_URL ?>/Avatar/Torso.obj', function ( object )
-			{
+			loader.load('<?php echo $STORAGE_URL ?>/Avatar/Torso.obj', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = shirtMaterial;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0x66CCFF);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
@@ -192,21 +203,20 @@
 			// Create a new OBJ loader.
 			var loader = new OBJLoader();
 			// Load the model into memory.
-			loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightArm.obj', function ( object )
-			{
+			loader.load('<?php echo $STORAGE_URL ?>/Avatar/RightArm.obj', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = shirtMaterial;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0xFFFF00);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
@@ -215,21 +225,20 @@
 			// Create a new OBJ loader.
 			var loader = new OBJLoader();
 			// Load the model into memory.
-			loader.load( '<?php echo $STORAGE_URL ?>/Avatar/LeftLeg.obj', function ( object )
-			{
+			loader.load('<?php echo $STORAGE_URL ?>/Avatar/LeftLeg.obj', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = pantsMaterial;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0xFFFF00);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
@@ -238,26 +247,25 @@
 			// Create a new OBJ loader.
 			var loader = new OBJLoader();
 			// Load the model into memory.
-			loader.load( '<?php echo $STORAGE_URL ?>/Avatar/RightLeg.obj', function ( object )
-			{
+			loader.load('<?php echo $STORAGE_URL ?>/Avatar/RightLeg.obj', function(object) {
 				// For any meshes in the model, add our material.
-				object.traverse( function ( node ) {
+				object.traverse(function(node) {
 					// Set the face image.
 					//if ( node.isMesh ) node.material = pantsMaterial;
 
-					if ( node instanceof THREE.Mesh ) {
+					if (node instanceof THREE.Mesh) {
 						// Set the color to Yellow.
 						node.material.color.setHex(0xFFFF00);
 					}
 				});
 
 				// Add the model to the scene.
-				scene.add( object );
+				scene.add(object);
 			});
 		}
 
 		<?php echo '';
-        /*
+		/*
 		foreach(json_decode($hats, true) as $hat) {
 			$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
 
@@ -280,14 +288,13 @@
 			});
 		}';
 		} */
-		?>
-        {
+		?> {
 			const mtlLoader = new MTLLoader();
-			mtlLoader.load("<?php echo $STORAGE_URL. $mtl; ?>", (mtl) => {
+			mtlLoader.load("<?php echo $STORAGE_URL . $mtl; ?>", (mtl) => {
 				mtl.preload();
 				const objLoader = new OBJLoader();
 				objLoader.setMaterials(mtl);
-				objLoader.load("<?php echo $STORAGE_URL. $obj; ?>", (root) => {
+				objLoader.load("<?php echo $STORAGE_URL . $obj; ?>", (root) => {
 					scene.add(root);
 				});
 			});
@@ -298,7 +305,7 @@
 			const width = canvas.clientWidth;
 			const height = canvas.clientHeight;
 			const needResize = canvas.width !== width || canvas.height !== height;
-		    if (needResize) {
+			if (needResize) {
 				renderer.setSize(width, height, false);
 			}
 			return needResize;

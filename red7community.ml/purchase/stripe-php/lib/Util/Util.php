@@ -205,9 +205,9 @@ abstract class Util
 
             if ($prefix) {
                 if ($k !== null && (!is_int($k) || is_array($v))) {
-                    $k = $prefix."[".$k."]";
+                    $k = $prefix . "[" . $k . "]";
                 } else {
-                    $k = $prefix."[]";
+                    $k = $prefix . "[]";
                 }
             }
 
@@ -217,7 +217,7 @@ abstract class Util
                     $r[] = $enc;
                 }
             } else {
-                $r[] = urlencode($k)."=".urlencode($v);
+                $r[] = urlencode($k) . "=" . urlencode($v);
             }
         }
 

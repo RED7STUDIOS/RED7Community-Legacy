@@ -6,21 +6,22 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-html, body {
-	width:100%;
-	height:100%;
-	margin:0;
-	padding:0;
-	overflow:hidden;
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 #game {
-	background:url(https://forum.unity3d.com/attachments/screenshot03-png.69025/) no-repeat center center fixed;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	width:100%;
-	height:100%;
-	position:relative;
+	background: url(https://forum.unity3d.com/attachments/screenshot03-png.69025/) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	position: relative;
 }

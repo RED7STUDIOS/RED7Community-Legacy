@@ -175,4 +175,3 @@ if($result) {
 //echo($link -> error);
 
 print json_encode($resp);
-?>

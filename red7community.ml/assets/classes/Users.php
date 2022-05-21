@@ -95,4 +95,3 @@ $setSecret = function($id, $secret) use ($link) {
 		return false;
 	}
 };
-?>

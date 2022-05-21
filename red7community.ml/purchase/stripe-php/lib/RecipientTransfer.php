@@ -34,5 +34,4 @@ namespace Stripe;
  */
 class RecipientTransfer extends ApiResource
 {
-
 }

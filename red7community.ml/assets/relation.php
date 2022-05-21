@@ -7,31 +7,43 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-class Relation {
+class Relation
+{
 	// (A) CONSTRUCTOR - CONNECT TO DATABASE
 	private $pdo = null;
 	private $stmt = null;
 	public $error = "";
-	function __construct () {
+	function __construct()
+	{
 		try {
 			$this->pdo = new PDO(
-				"mysql:host=".DB_SERVER.";dbname=".DB_NAME, 
-				DB_USERNAME, DB_PASSWORD, [
+				"mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME,
+				DB_USERNAME,
+				DB_PASSWORD,
+				[
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 				]
 			);
-		} catch (Exception $ex) { die($ex->getMessage()); }
+		} catch (Exception $ex) {
+			die($ex->getMessage());
+		}
 	}
 
 	// (B) DESTRUCTOR - CLOSE DATABASE CONNECTION
-	function __destruct () {
-		if ($this->stmt!==null) { $this->stmt = null; }
-		if ($this->pdo!==null) { $this->pdo = null; }
+	function __destruct()
+	{
+		if ($this->stmt !== null) {
+			$this->stmt = null;
+		}
+		if ($this->pdo !== null) {
+			$this->pdo = null;
+		}
 	}
 
 	// (C) HELPER FUNCTION - EXECUTE SQL QUERY
-	function query ($sql, $data=null) {
+	function query($sql, $data = null)
+	{
 		try {
 			$this->stmt = $this->pdo->prepare($sql);
 			$this->stmt->execute($data);
@@ -43,7 +55,8 @@ class Relation {
 	}
 
 	// (D) SEND FRIEND REQUEST
-	function request ($from, $to) {
+	function request($from, $to)
+	{
 		// (D1) CHECK IF ALREADY FRIENDS
 		$this->query(
 			"SELECT * FROM `relation` WHERE `from`=? AND `to`=? AND `status`='F'",
@@ -57,9 +70,9 @@ class Relation {
 
 		// (D2) CHECK FOR PENDING REQUESTS
 		$this->query(
-			"SELECT * FROM `relation` WHERE ".
-			"(`status`='P' AND `from`=? AND `to`=?) OR ".
-			"(`status`='P' AND `from`=? AND `to`=?)",
+			"SELECT * FROM `relation` WHERE " .
+				"(`status`='P' AND `from`=? AND `to`=?) OR " .
+				"(`status`='P' AND `from`=? AND `to`=?)",
 			[$from, $to, $to, $from]
 		);
 		$result = $this->stmt->fetch();
@@ -76,13 +89,14 @@ class Relation {
 	}
 
 	// (E) ACCEPT FRIEND REQUEST
-	function acceptReq ($from, $to) {
+	function acceptReq($from, $to)
+	{
 		// (E1) UPGRADE STATUS TO "F"RIENDS
 		$this->query(
 			"UPDATE `relation` SET `status`='F' WHERE `status`='P' AND `from`=? AND `to`=?",
 			[$from, $to]
 		);
-		if ($this->stmt->rowCount()==0) {
+		if ($this->stmt->rowCount() == 0) {
 			$this->error = "Invalid friend request";
 			return false;
 		}
@@ -95,7 +109,8 @@ class Relation {
 	}
 
 	// (F) CANCEL FRIEND REQUEST
-	function cancelReq ($from, $to) {
+	function cancelReq($from, $to)
+	{
 		return $this->query(
 			"DELETE FROM `relation` WHERE `status`='P' AND `from`=? AND `to`=?",
 			[$from, $to]
@@ -103,70 +118,92 @@ class Relation {
 	}
 
 	// (G) UNFRIEND
-	function unfriend ($from, $to) {
+	function unfriend($from, $to)
+	{
 		return $this->query(
-			"DELETE FROM `relation` WHERE ".
-			"(`status`='F' AND `from`=? AND `to`=?) OR ".
-			"(`status`='F' AND `from`=? AND `to`=?)",
+			"DELETE FROM `relation` WHERE " .
+				"(`status`='F' AND `from`=? AND `to`=?) OR " .
+				"(`status`='F' AND `from`=? AND `to`=?)",
 			[$from, $to, $to, $from]
 		);
 	}
 
 	// (H) BLOCK & UNBLOCK
-	function block ($from, $to, $blocked=true) {
+	function block($from, $to, $blocked = true)
+	{
 		// (H1) BLOCK
-		if ($blocked) { return $this->query(
-			"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'B')",
-			[$from, $to]
-		); }
+		if ($blocked) {
+			return $this->query(
+				"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'B')",
+				[$from, $to]
+			);
+		}
 
 		// (H2) UNBLOCK
-		else { return $this->query(
-			"DELETE FROM `relation` WHERE `from`=? AND `to`=? AND `status`='B'",
-			[$from, $to]
-		); }
+		else {
+			return $this->query(
+				"DELETE FROM `relation` WHERE `from`=? AND `to`=? AND `status`='B'",
+				[$from, $to]
+			);
+		}
 	}
 
 	// (I) GET FRIEND REQUESTS
-	function getReq ($uid) {
+	function getReq($uid)
+	{
 		// (I1) GET OUTGOING FRIEND REQUESTS (FROM USER TO OTHER PEOPLE)
-		$req = ["in"=>[], "out"=>[]];
+		$req = ["in" => [], "out" => []];
 		$this->query(
 			"SELECT * FROM `relation` WHERE `status`='P' AND `from`=?",
 			[$uid]
 		);
-		while ($row = $this->stmt->fetch()) { $req['out'][$row['to']] = $row['since']; }
+		while ($row = $this->stmt->fetch()) {
+			$req['out'][$row['to']] = $row['since'];
+		}
 
 		// (I2) GET INCOMING FRIEND REQUESTS (FROM OTHER PEOPLE TO USER)
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='P' AND `to`=?", [$uid]
+			"SELECT * FROM `relation` WHERE `status`='P' AND `to`=?",
+			[$uid]
 		);
-		while ($row = $this->stmt->fetch()) { $req['in'][$row['from']] = $row['since']; }
+		while ($row = $this->stmt->fetch()) {
+			$req['in'][$row['from']] = $row['since'];
+		}
 		return $req;
 	}
 
 	// (J) GET FRIENDS & FOES (BLOCKED)
-	function getFriends ($uid) {
+	function getFriends($uid)
+	{
 		// (J1) GET FRIENDS
-		$friends = ["f"=>[], "b"=>[]];
+		$friends = ["f" => [], "b" => []];
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='F' AND `from`=?", [$uid]
+			"SELECT * FROM `relation` WHERE `status`='F' AND `from`=?",
+			[$uid]
 		);
-		while ($row = $this->stmt->fetch()) { $friends["f"][$row['to']] = $row['since']; }
+		while ($row = $this->stmt->fetch()) {
+			$friends["f"][$row['to']] = $row['since'];
+		}
 
 		// (J2) GET FOES
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='B' AND `from`=?", [$uid]
+			"SELECT * FROM `relation` WHERE `status`='B' AND `from`=?",
+			[$uid]
 		);
-		while ($row = $this->stmt->fetch()) { $friends["b"][$row['to']] = $row['since']; }
+		while ($row = $this->stmt->fetch()) {
+			$friends["b"][$row['to']] = $row['since'];
+		}
 		return $friends;
 	}
 
 	// (K) GET ALL USERS
-	function getUsers () {
+	function getUsers()
+	{
 		$this->query("SELECT * FROM `users`");
 		$users = [];
-		while ($row = $this->stmt->fetch()) { $users[$row['id']] = $row['username']; }
+		while ($row = $this->stmt->fetch()) {
+			$users[$row['id']] = $row['username'];
+		}
 		return $users;
 	}
 }

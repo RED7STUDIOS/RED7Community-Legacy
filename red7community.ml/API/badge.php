@@ -61,4 +61,3 @@ if (!empty($api_type)) {
 		}
 	}
 }
-?>

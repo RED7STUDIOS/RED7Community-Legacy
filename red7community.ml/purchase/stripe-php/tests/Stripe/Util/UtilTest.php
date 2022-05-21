@@ -75,7 +75,7 @@ class UtilTest extends TestCase
 
         $enc = Util\Util::urlEncode($a);
         $expected = 'my=value&that%5Byour%5D%5B%5D=cheese'
-              . '&that%5Byour%5D%5B%5D=whiz&bar=1';
+            . '&that%5Byour%5D%5B%5D=whiz&bar=1';
         $this->assertSame($expected, $enc);
 
         // Ignores an empty array

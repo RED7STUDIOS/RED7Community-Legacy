@@ -60,8 +60,8 @@ class BankAccount extends ApiResource
     public static function retrieve($_id, $_opts = null)
     {
         $msg = "Bank accounts cannot be accessed without a customer ID or account ID. " .
-               "Retrieve a bank account using \$customer->sources->retrieve('bank_account_id') or " .
-               "\$account->external_accounts->retrieve('bank_account_id') instead.";
+            "Retrieve a bank account using \$customer->sources->retrieve('bank_account_id') or " .
+            "\$account->external_accounts->retrieve('bank_account_id') instead.";
         throw new Error\InvalidRequest($msg, null);
     }
 
@@ -75,12 +75,12 @@ class BankAccount extends ApiResource
     public static function update($_id, $_params = null, $_options = null)
     {
         $msg = "Bank accounts cannot be accessed without a customer ID or account ID. " .
-               "Call save() on \$customer->sources->retrieve('bank_account_id') or " .
-               "\$account->external_accounts->retrieve('bank_account_id') instead.";
+            "Call save() on \$customer->sources->retrieve('bank_account_id') or " .
+            "\$account->external_accounts->retrieve('bank_account_id') instead.";
         throw new Error\InvalidRequest($msg, null);
     }
 
-   /**
+    /**
      * @param array|null $params
      * @param array|string|null $options
      *

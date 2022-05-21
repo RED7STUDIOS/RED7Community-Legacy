@@ -73,9 +73,9 @@ class Card extends ApiResource
     public static function retrieve($_id, $_opts = null)
     {
         $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
-               "Retrieve a card using \$customer->sources->retrieve('card_id'), " .
-               "\$recipient->cards->retrieve('card_id'), or";
-               "\$account->external_accounts->retrieve('card_id') instead.";
+            "Retrieve a card using \$customer->sources->retrieve('card_id'), " .
+            "\$recipient->cards->retrieve('card_id'), or";
+        "\$account->external_accounts->retrieve('card_id') instead.";
         throw new Error\InvalidRequest($msg, null);
     }
 
@@ -89,9 +89,9 @@ class Card extends ApiResource
     public static function update($_id, $_params = null, $_options = null)
     {
         $msg = "Cards cannot be accessed without a customer, recipient or account ID. " .
-               "Call save() on \$customer->sources->retrieve('card_id'), " .
-               "\$recipient->cards->retrieve('card_id'), or";
-               "\$account->external_accounts->retrieve('card_id') instead.";
+            "Call save() on \$customer->sources->retrieve('card_id'), " .
+            "\$recipient->cards->retrieve('card_id'), or";
+        "\$account->external_accounts->retrieve('card_id') instead.";
         throw new Error\InvalidRequest($msg, null);
     }
 }
