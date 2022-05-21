@@ -76,6 +76,7 @@ if (isset($_GET["page"])) {
 			<form method="get">
 				<input class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($key); ?>" />
 				<input class="btn btn-success" type="submit" value="Search" />
+				<a class="btn btn-warning" href="/clans/create.php">Create</a>
 			</form>
 		</div>
 
