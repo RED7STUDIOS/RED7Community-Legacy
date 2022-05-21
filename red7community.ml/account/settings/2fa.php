@@ -52,7 +52,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         else
         {
-            header("Location ". $_SERVER["REQUEST_URI"]);
+            echo '<script>alert("Invalid 2FA Code!")</script>';
+            header("Refresh:0");
             exit;
         }
     }
@@ -101,8 +102,9 @@ $qrCodeUrl 	= $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
 					}
 				}
 				?>
-        <main class="col-lg-10">
-            <h2>Enter Code</h2>
+        <main class="centered">
+            <h1><i class="fa-solid fa-mobile"></i></h1>
+            <h2>2 Factor Authentication</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
                 <input type="hidden" name="secret" value="<?php echo $secret; ?>">
 
@@ -111,12 +113,11 @@ $qrCodeUrl 	= $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
                 </div>
 
                 <div class="form-group">
-                    <h5>Enter Google Authenticator Code</h5>
-                    <input type="text" name="code" id="code" autocomplete="off" value="" required>
+                    <h5>Enter Authentication Code</h5>
+                    <input type="text" maxlength="6" name="code" id="code" autocomplete="off" value="" required>
                 </div>
 
-                <btn class="btn btn-success" type="submit">Submit</button>
-
+                <button class="btn btn-success" type="submit">Submit</button>
             </form>
         </main>
     </div>
