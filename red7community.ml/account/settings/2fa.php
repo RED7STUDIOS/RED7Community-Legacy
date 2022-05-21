@@ -46,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if ($checkResult){
             $setSecret($_SESSION["id"], $secret);
+            $sendEmail($_SESSION["id"], "", "2fa-enabled");
 
             header("Location: /account/logout.php");
             exit;

@@ -34,6 +34,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		while($row = mysqli_fetch_assoc($result)) {
 			if (mysqli_query($link, "UPDATE users SET password='" . $password . "', reset_link_token='" . NULL . "', reset_link_exp='1970-01-01 00:00:00' WHERE email='" . $emailId . "'"))
 			{
+                $token = md5($email).rand(10,9999);
+				$expFormat = mktime(
+				date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+				);
+				$expDate = date("Y-m-d H:i:s",$expFormat);
+				$update = mysqli_query($link,"UPDATE users SET reset_link_token='" . $token . "', reset_link_exp='" . $expDate . "' WHERE email='" . $emailId . "'");
+				$url = "http://". $_SERVER["HTTP_HOST"]. "/reset-password.php?key=".$emailId."&token=".$token;
+
+                $sendEmail($getIdFromEmail($emailId), $url, "changed-password");
                 header("Location: /");
 				$password_err = "This reset link has been used already or expired.";
 			}

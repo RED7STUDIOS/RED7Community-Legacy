@@ -62,6 +62,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			
 			// Attempt to execute the prepared statement
 			if(mysqli_stmt_execute($stmt)){
+				$token = md5($email).rand(10,9999);
+				$expFormat = mktime(
+				date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+				);
+				$expDate = date("Y-m-d H:i:s",$expFormat);
+				$update = mysqli_query($link,"UPDATE users SET reset_link_token='" . $token . "', reset_link_exp='" . $expDate . "' WHERE email='" . $your_email . "'");
+				$url = "http://". $_SERVER["HTTP_HOST"]. "/reset-password.php?key=".$your_email."&token=".$token;
+
+				$sendEmail($param_id, $url, "changed-password");
 				header("location: /account/settings");
 				exit();
 			} else{

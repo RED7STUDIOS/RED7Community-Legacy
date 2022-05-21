@@ -19,8 +19,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $row = mysqli_fetch_array($result);
         if($row)
         {
-            echo $getIdFromEmail($email);
-            
             $token = md5($email).rand(10,9999);
             $expFormat = mktime(
             date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
@@ -78,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<span class="help-block"><?php echo $email_err; ?></span>
 						</div>  
 
-						<button class="w-100 btn btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+						<button class="w-100 btn btn-lg btn-primary" type="submit">Reset Password</button>
 
 						<p class="mt-5 mb-3 text-muted">&copy; <?php echo $site_name. " ". date("Y") ?></p>
 					</form>

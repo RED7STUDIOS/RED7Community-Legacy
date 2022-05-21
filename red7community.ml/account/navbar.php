@@ -38,7 +38,7 @@
 					<?php
 					// Check if the user is logged in, if not then redirect him to login page
 					if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-						echo '<div class="btn-group" role="group"><li class=nav-item><a aria-current=page class="btn btn-primary"href=/login.php>Login</a><li class=nav-item>&nbsp;<a aria-current=page class="btn btn-primary"href=/register.php>Register</a></div>';
+						echo '<div class="btn-group" role="group"><li class=nav-item><a aria-current=page class="btn btn-primary"href=/login.php?u=/home.php>Login</a><li class=nav-item>&nbsp;<a aria-current=page class="btn btn-primary"href=/register.php>Register</a></div>';
 					} else {
 						include_once "navbar-logged-in.php";
 					}
