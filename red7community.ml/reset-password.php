@@ -114,7 +114,11 @@ if($_GET['key'] && $_GET['token'])
                     <label for="exampleInputEmail1">Confirm Password</label>
                     <input type="password" name='cpassword' class="form-control">
                 </div>
-                <input type="submit" name="new-password" class="btn btn-primary">
+                <input type="submit" name="new-password" class="btn btn-primary" onclick="document.getElementById('spinner').style = '';">
+                <br/>
+                <div id="spinner" style="display: none;" class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
         </form>
         <?php } } else{
 echo '<p>This reset link has been used already or expired.</p>';

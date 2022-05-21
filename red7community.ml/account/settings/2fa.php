@@ -106,7 +106,7 @@ $qrCodeUrl 	= $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
         <main class="centered">
             <h1><i class="fa-solid fa-mobile"></i></h1>
             <h2>2 Factor Authentication</h2>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <input type="hidden" name="secret" value="<?php echo $secret; ?>">
 
                 <div class="form-group">
@@ -118,7 +118,12 @@ $qrCodeUrl 	= $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
                     <input type="text" maxlength="6" name="code" id="code" autocomplete="off" value="" required>
                 </div>
 
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-success" type="submit"
+                    onclick="document.getElementById('spinner').style = '';">Submit</button>
+                <br />
+                <div id="spinner" style="display: none;" class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
             </form>
         </main>
     </div>

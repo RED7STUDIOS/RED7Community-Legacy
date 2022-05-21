@@ -37,6 +37,8 @@ if (!str_contains($data, "This item doesn't exist or has been deleted"))
 	$type = $json_a[0]['data'][0]['type'];
 	$icon = $json_a[0]['data'][0]['icon'];
 	$creator = $json_a[0]['data'][0]['creator'];
+    $obj = $json_a[0]['data'][0]['obj'];
+    $mtl = $json_a[0]['data'][0]['mtl'];
 
 	$data_u = file_get_contents($API_URL. '/user.php?api=getbyid&id='. $creator);
 
@@ -109,7 +111,7 @@ else
 		?>
 
     <div class="page-content-wrapper">
-	<script type="text/javascript">
+        <script type="text/javascript">
         var ajaxSubmit2 = function(formEl) {
             // fetch the data for the form
             var data = $(formEl).serializeArray();
@@ -137,42 +139,50 @@ else
             return false;
         }
         </script>
-        <main class="col-md-9">
-            <div class="d-flex align-items-center border-bottom">
-                <?php
+        <main class="page-content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <canvas id="c-catalog" class="catalog-item-preview"></canvas>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center border-bottom">
+                            <?php
 							if ($name == "Not Found")
 							{
 								echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
 								exit;
 							}
 						?>
-                <img src="<?php echo $icon ?>" class="catalog-item-preview"></img>
-                <?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
-                &nbsp;
-                <div class="wrapper">
-                    <h2><?php echo $name ?>
-                        <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
-                        <span>
-                            <h6>By <a
-                                    href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
-                            </h6>
-                        </span>
-                </div>
-            </div>
+                            <!-- <img src="<?php echo $icon ?>" class="catalog-item-preview"></img> -->
 
-            <div>
-                <?php
+
+                            <?php if ($membershipRequired == "Premium") { echo '<img class="premium-icon" src="'. $premiumIcon . '"</img>'; } ?>
+                            &nbsp;
+                            <div class="wrapper">
+                                <h2><?php echo $name ?>
+                                    <?php if (in_array($_GET['id'], $items)) { echo '<img src="/assets/images/item-owned.png" class="item-owned"/>'; } ?>
+                                    <span>
+                                        <h6>By <a
+                                                href="/users/profile.php?id=<?php echo $creator; ?>">@<?php echo $creator_name; ?></a>
+                                        </h6>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <?php
 							if ($limited == 1)
 							{
 								echo '<p><strong><i>LIMITED</i></strong></p>';
 							}
 						?>
 
-                <h3>About:</h3>
-                <p><strong>Description:</strong> <?php echo $description ?></p>
-                <p><strong>Created:</strong> <?php echo $created ?></p>
+                            <h3>About:</h3>
+                            <p><strong>Description:</strong> <?php echo $description ?></p>
+                            <p><strong>Created:</strong> <?php echo $created ?></p>
 
-                <?php
+                            <?php
 						if ($price != "-1")
 						{
 							if ($price == "0" || $price == 0)
@@ -186,16 +196,16 @@ else
 						}
 						?>
 
-                <p><strong>Type:</strong> <?php echo $type ?></p>
+                            <p><strong>Type:</strong> <?php echo $type ?></p>
 
-                <?php
+                            <?php
 							if ($limited == 1)
 							{
 								echo '<p><strong>Copies:</strong> '. $copies. '</p>';
 							}
 						?>
 
-                <?php
+                            <?php
 
 						if (in_array($_GET['id'], $items))
 						{
@@ -208,18 +218,18 @@ else
 
 						?>
 
-                <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                    <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>" />
-                    <input hidden type="text" name="action" value="purchaseItem" />
-                    <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
-                </form>
+                            <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
+                                <input hidden type="text" name="value" value="<?php echo $_GET['id']; ?>" />
+                                <input hidden type="text" name="action" value="purchaseItem" />
+                                <?php if (isset($_SESSION['id'])) { if ($price === "-1") { echo 'This item is not for sale.'; } else { if ($your_currency >= $price) { echo '<input class="btn btn-primary" type="submit" name="form_submit" value="Buy"/>'; } else { echo 'You do not have enough money to buy this item!'; } } } else { echo 'Create a free account to purchase this item!'; } ?>
+                            </form>
 
-                <hr />
+                            <hr />
 
-                <h3>Owners:</h3>
+                            <h3>Owners:</h3>
 
-                <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
-                    <?php
+                            <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
+                                <?php
 								$vals = array_count_values(json_decode($owners, true));
 
 								if ($owners != "" && $owners != "[]" && !empty($owners)) {
@@ -253,9 +263,9 @@ else
 									echo '<p>This item has no owners yet.</p>';
 								}
 							?>
-                </div>
-				
-				<?php
+                            </div>
+
+                            <?php
 				if ($your_isAdmin == 1)
 				{
 					echo '
@@ -297,8 +307,12 @@ else
                 </fieldset>';
 				}
                 ?>
+                        </div>
+                    </div>
+                </div>
             </div>
     </div>
+
     </main>
     </div>
 
@@ -307,6 +321,7 @@ else
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
+    <?php include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/js/catalog.js.php"; ?>
 </body>
 
 </html>
