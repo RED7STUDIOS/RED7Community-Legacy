@@ -32,6 +32,9 @@ $selected_page = $_SERVER['REQUEST_URI'];
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/users/search.php"><i class="far fa-user"></i> Users</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="/clans/search.php"><i class="far fa-people-simple"></i> Clans</a>
+				</li>
 			</ul>
 			<form class="d-flex">
 				<ul class="navbar-nav">
