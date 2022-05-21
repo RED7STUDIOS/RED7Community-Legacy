@@ -133,6 +133,50 @@
 			// Prepare an insert statement
 			$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = ". $_POST["id"];
 			$result = mysqli_query($link, $sql);
+		} else if ($_POST['action'] == "createNewItem") {
+			$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
+	
+			// Decode the json response.
+			if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+				$json_a = json_decode($data, true);
+		
+				$creator = $json_a[0]['data'][0]['id'];
+			}
+
+			$createdFormat = mktime(
+				date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+				);
+			$created = date("Y-m-d H:i:s",$createdFormat);
+
+			if ($_POST["isLimited"] == "on")
+			{
+				$isLimited = 1;
+			}
+			else
+			{
+				$isLimited = 0;
+			}
+
+			if ($_POST["isEquippable"] == "on")
+			{
+				$isEquippable = 1;
+			}
+			else
+			{
+				$isEquippable = 0;
+			}
+
+			if ($_POST["membershipRequired"] == "on")
+			{
+				$membershipRequired = "Premium";
+			}
+			else
+			{
+				$membershipRequired = "None";
+			}
+
+			// Prepare an insert statement
+			$sql = "INSERT INTO catalog (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('". $_POST["name"]. "', '". $_POST["displayName"]. "', '". $_POST["description"]. "', '". $created. "', '". $membershipRequired. "', '[]', ". $_POST["price"]. ", '". $_POST["type"]. "', ". $isLimited. ", ". $isEquippable. ", ". $_POST["copies"]. ", ". $creator. ", '". $_POST["obj"]. "', '". $_POST["mtl"]. "', '". $_POST["texture"]. "', '". $_POST["icon"]. "')";
 		}
 	}
 	if ($role == 3)
@@ -167,7 +211,7 @@
 		$resp->success = true;
 	}
 
-echo($link -> error);
+//echo($link -> error);
 
 	print json_encode($resp);
 ?>

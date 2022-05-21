@@ -121,6 +121,54 @@
                 <input class="btn btn-success" type="submit" name="form_submit" value="Update Site Settings" />
             </form>
         </fieldset>
+
+        <h3>Create a new catalog item:</h3>
+        <fieldset>
+            <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
+                <h5>*Internal* Name:</h5>
+                <input maxlength="69420" type="text" name="name" class="moderate-input" value="" />
+                <h5>Display Name:</h5>
+                <input maxlength="69420" type="text" name="displayName" class="moderate-input" value="" />
+                <h5>Creator:</h5>
+                <input maxlength="69420" type="text" name="creator" class="moderate-input" value="" />
+                <h5>Description:</h5>
+                <textarea maxlength="200" type="text" name="description"
+                    style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;"></textarea>
+                <h5>Price:</h5>
+                <input maxlength="69420" type="text" name="price" class="moderate-input" value="" />
+                <h5>Type:</h5>
+                <select name="type" id="type">
+                    <option value="back">Back</option>
+                    <option value="front">Front</option>
+                    <option value="face">Face</option>
+                    <option value="shirt">Shirt</option>
+                    <option value="pants">Pants</option>
+                    <option value="t-shirt">T-Shirt</option>
+                    <option value="cosmetic">Cosmetic</option>
+                    <option value="hat">Hat</option>
+                    <option value="faceaccessory">Face Accessory</option>
+                    <option value="gear">Gear</option>
+                </select>
+                <h5>Membership Required:</h5>
+                <input type="checkbox" name="membershipRequired" />
+                <h5>Is Limited:</h5>
+                <input type="checkbox" name="isLimited" />
+                <h5>Is Equippable:</h5>
+                <input type="checkbox" name="isEquippable" />
+                <h5>Copies:</h5>
+                <input maxlength="69420" type="text" name="copies" class="moderate-input" value="" />
+                <h5>OBJ File:</h5>
+                <input maxlength="69420" type="text" name="obj" class="moderate-input" value="" />
+                <h5>MTL File:</h5>
+                <input maxlength="69420" type="text" name="mtl" class="moderate-input" value="" />
+                <h5>Texture File:</h5>
+                <input maxlength="69420" type="text" name="texture" class="moderate-input" value="" />
+                </br>
+                </br>
+                <input hidden type="text" name="action" value="createNewItem" />
+                <input class="btn btn-success" type="submit" name="form_submit" value="Create New Item" />
+            </form>
+        </fieldset>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>

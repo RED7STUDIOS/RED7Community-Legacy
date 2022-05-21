@@ -8,7 +8,7 @@ $email_err = "";
 
     // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $email = $_POST['email'];
+    $email = htmlspecialchars($_POST['email']);
     if ($email == null)
     {
         $email_err = "You didn't input an email!";

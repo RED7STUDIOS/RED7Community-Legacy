@@ -27,7 +27,7 @@
 	session_start();
 
 	include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
-htmlspecialchars(
+ 
 	if (isset($_GET["page"])) { $page = htmlspecialchars($_GET["page"]); } else { $page=1; };
 ?>
 
