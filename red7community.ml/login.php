@@ -309,6 +309,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<button class="w-100 btn btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
 
 						<p>Don't have an account? <a href="register.php">Register here</a>.</p>
+						<p>Forgot your password? <a href="forgot-password.php">Reset it here</a>.</p>
 
 						<p class="mt-5 mb-3 text-muted">&copy; <?php echo $site_name. " ". date("Y") ?></p>
 					</form>

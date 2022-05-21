@@ -59,17 +59,9 @@ function resetSQLVariables() {
     $_content = "";
 }
 
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'site_name'";
-$result = mysqli_query($link, $sql_query);
+require($_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Site.php");
 
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while($row = mysqli_fetch_assoc($result)) {
-		$site_name = $row["content"];
-	}
-}
+$site_name = $site_name();
 
 $sql_query = "SELECT id, name, content FROM site_info WHERE name = 'currency'";
 $result = mysqli_query($link, $sql_query);
@@ -191,66 +183,51 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
-$getAdminName = function($id) use ($link) {
-	$sql_query = "SELECT full_name FROM admin_panel WHERE ownerid = ". $id;
-	$result = mysqli_query($link, $sql_query);
+$sendEmail = function($id, $url, $template) use ($link, $SMTP_Debug, $SMTP_Auth, $SMTP_Secure, $SMTP_Port, $SMTP_Host, $SMTP_Username, $SMTP_Password, $SMTP_From) {
+	require($_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Mail/PHPMailer.php");
+	require($_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Mail/SMTP.php");
+	require($_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Users.php");
+	require($_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Site.php");
 
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			return $row["full_name"];
-		}
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+	$message = file_get_contents($_SERVER["DOCUMENT_ROOT"]. "/templates/emails/". $template. ".html");
+	$message = str_replace('%username%', $getDisplayName($id), $message);
+	$message = str_replace('%site_name%', $site_name(), $message);
+	$message = str_replace('%url%', $url, $message);
+
+	$title = preg_match("/<title>(.*)<\/title>/siU", $message, $title_matches);
+	$title = preg_replace('/\s+/', ' ', $title_matches[1]);
+	$title = trim($title);
+
+	$mail->isSMTP();
+	$mail->SMTPDebug  = $SMTP_Debug;  
+	$mail->SMTPAuth   = $SMTP_Auth;
+	$mail->SMTPSecure = $SMTP_Secure;
+	$mail->Port       = $SMTP_Port;
+	$mail->Host       = $SMTP_Host;
+	$mail->Username = $SMTP_Username;
+	$mail->Password = $SMTP_Password;
+
+	$mail->From = $SMTP_From;
+	$mail->FromName = $site_name();
+	$mail->addAddress($getEmail($id), $getDisplayName($id));
+
+	$mail->WordWrap = 50;
+	$mail->isHTML(true);
+
+	$mail->Subject = $title;
+	$mail->Body    = $message;
+
+	if(!$mail->send()) {
+		echo 'Message could not be sent.';
+		echo 'Mailer Error: ' . $mail->ErrorInfo;
+	} else {
+		echo 'Message has been sent';
 	}
 };
 
-$getEmail = function($id) use ($link) {
-	$sql_query = "SELECT email FROM users WHERE id = ". $id;
-	$result = mysqli_query($link, $sql_query);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			return $row["email"];
-		}
-	}
-};
-
-$getSecret = function($id) use ($link) {
-	$sql_query = "SELECT auth_secret FROM users WHERE id = ". $id;
-	$result = mysqli_query($link, $sql_query);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			return $row["auth_secret"];
-		}
-	}
-};
-
-$getLastLogin = function($id) use ($link) {
-	$sql_query = "SELECT lastLogin FROM users WHERE id = ". $id;
-	$result = mysqli_query($link, $sql_query);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			return $row["lastLogin"];
-		}
-	}
-};
-
-$setSecret = function($id, $secret) use ($link) {
-	$sql_query = "UPDATE users SET auth_secret='". $secret."' WHERE id = ". $id;
-
-	if (mysqli_query($link, $sql_query))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-};
+include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/classes/Users.php";
 
 // Filter certain words out.
 // Usage: filterwords("blah blah");
