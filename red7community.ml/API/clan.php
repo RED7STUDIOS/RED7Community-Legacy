@@ -7,7 +7,7 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 
 $response = array();
 
@@ -35,7 +35,7 @@ if (!empty($api_type)) {
 						echo json_encode($response, JSON_PRETTY_PRINT);
 					} else {
 						while ($row = mysqli_fetch_assoc($result)) {
-                            $response[$i]['data'][0]['id'] = $row['id'];
+							$response[$i]['data'][0]['id'] = $row['id'];
 							$response[$i]['data'][0]['name'] = $row['name'];
 							$response[$i]['data'][0]['displayname'] = $row['displayname'];
 							$response[$i]['data'][0]['description'] = $row['description'];
@@ -48,6 +48,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
 							$response[$i]['data'][0]['isSpecial'] = $row['isSpecial'];
+							$response[$i]['data'][0]['owner'] = $row['owner'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);
@@ -88,6 +89,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
 							$response[$i]['data'][0]['isSpecial'] = $row['isSpecial'];
+							$response[$i]['data'][0]['owner'] = $row['owner'];
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);

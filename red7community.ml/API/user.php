@@ -7,7 +7,7 @@
   Copyright (C) RED7 STUDIOS 2021
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"]. "/assets/config.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 
 $response = array();
 
@@ -51,21 +51,15 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							// WARNING: Please use the role API response value instead!
 							// This API call may be deprecated in the next releases.
-							if ($row['role'] >= 2)
-							{
+							if ($row['role'] >= 2) {
 								$response[$i]['data'][0]['isAdmin'] = "1";
-							}
-							else
-							{
+							} else {
 								$response[$i]['data'][0]['isAdmin'] = "0";
 							}
 
-							if ($row['role'] > 2)
-							{
+							if ($row['role'] > 2) {
 								$response[$i]['data'][0]['isSuperAdmin'] = "1";
-							}
-							else
-							{
+							} else {
 								$response[$i]['data'][0]['isSuperAdmin'] = "0";
 							}
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
@@ -117,21 +111,15 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							// WARNING: Please use the role API response value instead!
 							// This API call may be deprecated in the next releases.
-							if ($row['role'] >= 2)
-							{
+							if ($row['role'] >= 2) {
 								$response[$i]['data'][0]['isAdmin'] = "1";
-							}
-							else
-							{
+							} else {
 								$response[$i]['data'][0]['isAdmin'] = "0";
 							}
 
-							if ($row['role'] > 2)
-							{
+							if ($row['role'] > 2) {
 								$response[$i]['data'][0]['isSuperAdmin'] = "1";
-							}
-							else
-							{
+							} else {
 								$response[$i]['data'][0]['isSuperAdmin'] = "0";
 							}
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];

@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_name, $param_displayname, "https://www.gravatar.com/avatar/?s=180&d=mp&r=g", $_SESSION["id"], "[". $_SESSION["id"]. "]");
+            mysqli_stmt_bind_param($stmt, "ss", $param_name, $param_displayname, "https://www.gravatar.com/avatar/?s=180&d=mp&r=g", $_SESSION["id"], "[" . $_SESSION["id"] . "]");
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 $data = file_get_contents($API_URL . '/clan.php?api=getbyname&name=' . $_POST["name"]);

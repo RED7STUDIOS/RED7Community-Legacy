@@ -27,6 +27,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
 
     $real_displayname = $json_a[0]['data'][0]['displayname'];
     $real_description = $json_a[0]['data'][0]['description'];
+    $currency = $json_a[0]['data'][0]['currency'];
 
     if ($isBanned != 1) {
         $displayname = $filterwords($json_a[0]['data'][0]['displayname']);
@@ -48,8 +49,19 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $members = $json_a[0]['data'][0]['members'];
     $isVerified = $json_a[0]['data'][0]['isVerified'];
     $isSpecial = $json_a[0]['data'][0]['isSpecial'];
+    $owner = $json_a[0]['data'][0]['owner'];
 } else {
     $name = "Not Found";
+}
+
+$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($owner));
+
+// Decode the json response.
+if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+    $json_a = json_decode($data, true);
+
+    $id_owner = htmlspecialchars($_GET['id']);
+    $name_owner = $json_a[0]['data'][0]['username'];
 }
 
 if (isset($_GET["page"])) {
@@ -65,8 +77,8 @@ if (isset($_GET["page"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The profile page for <?php echo htmlspecialchars($name) ?>.">
-    <title><?php echo htmlspecialchars($name) ?> - <?php echo htmlspecialchars($site_name); ?></title>
+    <meta name="description" content="The profile page for <?php echo htmlspecialchars($displayname) ?>.">
+    <title><?php echo htmlspecialchars($displayname) ?> - <?php echo htmlspecialchars($site_name); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -192,7 +204,11 @@ if (isset($_GET["page"])) {
                         echo '<p><strong class="banned-text">*BANNED*</strong></p>';
                     } ?>
                     <span>
-                        <h6>By <a href="/users/profile.php?id=1">@RED7Community</a>
+                        <h6>By <a href="/users/profile.php?id=1">@<?php echo $name_owner; ?></a>
+                        </h6>
+                    </span>
+                    <span>
+                        <h6><b>Worth:</b> <a><?php echo number_format_short($currency) . " " . $currency_name; ?></a>
                         </h6>
                     </span>
                 </h2>
@@ -212,6 +228,12 @@ if (isset($_GET["page"])) {
                     } else {
                         echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>' . $banReason . '</strong></p><hr/>';
                     }
+                }
+                ?>
+
+                <?php
+                if ($owner == $_SESSION['id']) {
+                    echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
                 }
                 ?>
 
