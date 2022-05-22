@@ -236,6 +236,19 @@ if (isset($_GET["page"])) {
                     echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
                 }
                 ?>
+                
+                <?php
+                $d = json_decode($members);
+
+                if (!in_array($_SESSION['id'], $d)) {
+                    echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
+                        <input hidden type="text" name="action" value="joinClan" />
+                        <input hidden type="text" name="id" value="' . $_GET['id'] . '" />
+                        <input class="btn btn-success" type="submit" name="form_submit" value="Join Clan" />
+                    </form>';
+                }
+                ?>
+
 
                 <h3>About:</h3>
                 <textarea class="description" id="text" disabled><?php echo $filterwords(htmlspecialchars($description)); ?></textarea>

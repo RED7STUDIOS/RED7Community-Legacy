@@ -192,3 +192,22 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES
 	(1, '<USER_NAME>', '<USER_NAME>', NULL, <PASSWORD>, '', '2021-02-27 22:59:37', '2022-05-02', '2022-05-02 21:48:48', 1000000000000, '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g', 3);
+
+
+CREATE TABLE `clans` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `displayname` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `currency` bigint NOT NULL DEFAULT '0',
+  `members` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `owner` int DEFAULT NULL,
+  `icon` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `isBanned` int NOT NULL DEFAULT '0',
+  `isVerified` int NOT NULL DEFAULT '0',
+  `bannedDate` datetime DEFAULT NULL,
+  `bannedReason` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `isSpecial` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

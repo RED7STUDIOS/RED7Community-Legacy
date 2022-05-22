@@ -72,6 +72,18 @@ if ($_POST['action'] == "changeDisplayName") {
     } else {
         $sql = null;
     }
+} else if ($_POST['action'] == "joinClan") {
+    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
+    $json_a = json_decode($data, true);
+    $members = $json_a[0]['data'][0]['members'];
+
+    $members = json_decode($members);
+
+    array_push($members, $_SESSION['id']);
+
+    $members = json_encode($members);
+
+    $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = " . $_POST["id"];
 } else if ($_POST['action'] == "purchaseItem") {
     $your_id = $_SESSION['id'];
 
