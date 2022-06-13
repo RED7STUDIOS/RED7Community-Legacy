@@ -186,16 +186,27 @@ if (mysqli_num_rows($result) > 0) {
 	}
 }
 
-$sendEmail = function ($id, $url, $template) use ($link, $SMTP_Debug, $SMTP_Auth, $SMTP_Secure, $SMTP_Port, $SMTP_Host, $SMTP_Username, $SMTP_Password, $SMTP_From) {
-	require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/PHPMailer.php");
-	require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/SMTP.php");
-	require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php");
-	require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Site.php");
-
-	$mail = new PHPMailer\PHPMailer\PHPMailer();
+$sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $email = "", $internalEmail = false) use ($link, $SMTP_Debug, $SMTP_Auth, $SMTP_Secure, $SMTP_Port, $SMTP_Host, $SMTP_Username, $SMTP_Password, $SMTP_From) {
+	
+	if (!class_exists("PHPMailer"))
+	{
+		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/PHPMailer.php");
+		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/SMTP.php");
+		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php");
+		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Site.php");
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+	}
 
 	$message = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/templates/emails/" . $template . ".html");
+
+	if ($template == "verification-form") {
+		$message = str_replace('%full_name%', $fullName, $message);
+		$message = str_replace('%reason%', $reason, $message);
+		$message = str_replace('%email%', $email, $message);
+	}
+
 	$message = str_replace('%username%', $getDisplayName($id), $message);
+	$message = str_replace('%realusername%', $getUsername($id), $message);
 	$message = str_replace('%site_name%', $site_name(), $message);
 	$message = str_replace('%url%', $url, $message);
 
@@ -214,7 +225,17 @@ $sendEmail = function ($id, $url, $template) use ($link, $SMTP_Debug, $SMTP_Auth
 
 	$mail->From = $SMTP_From;
 	$mail->FromName = $site_name();
-	$mail->addAddress($getEmail($id), $getDisplayName($id));
+
+	if ($internalEmail == false)
+	{
+		$email_address = $getEmail($id);
+	}
+	else
+	{
+		$email_address = $SMTP_From;
+	}
+
+	$mail->addAddress($email_address, $getDisplayName($id));
 
 	$mail->WordWrap = 50;
 	$mail->isHTML(true);

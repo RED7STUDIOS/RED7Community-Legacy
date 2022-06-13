@@ -86,7 +86,7 @@ if (isset($_GET["page"])) {
 			$results_per_page = 21; // number of results per page
 
 			$start_from = ($page - 1) * $results_per_page;
-			$sql = "SELECT * FROM clans WHERE `displayname` like '%$key%'";
+			$sql = "SELECT id, name, displayname, icon FROM clans WHERE `displayname` like '%$key%' OR `name` like '%$key%'";
 			$result = mysqli_query($link, $sql);
 
 			while ($row = mysqli_fetch_assoc($result)) {
