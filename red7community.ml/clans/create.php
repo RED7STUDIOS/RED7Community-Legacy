@@ -73,11 +73,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors before inserting in database
     if (empty($name_err) && empty($displayname_err)) {
         // Prepare an insert statement
-        $sql = 'INSERT INTO clans (name, displayname, icon, owner, members) VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO clans (name, displayname, owner, icon, members) VALUES (?, ?, ?, ?, ?)';
+
+        $icon = "https://www.gravatar.com/avatar/?s=180&d=mp&r=g";
+        $owner = $_SESSION["id"];
+        $members = "[" . $_SESSION["id"] . "]";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_name, $param_displayname, "https://www.gravatar.com/avatar/?s=180&d=mp&r=g", $_SESSION["id"], "[" . $_SESSION["id"] . "]");
+            mysqli_stmt_bind_param($stmt, "sssss", $param_name, $param_displayname, $owner, $icon, $members);
+
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 $data = file_get_contents($API_URL . '/clan.php?api=getbyname&name=' . $_POST["name"]);
@@ -139,13 +144,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <h1 class="h3 mb-3 fw-normal">Create Clan</h1>
                 <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                    <label><i class=" fas fa-user"></i> Name (no spaces)</label>
+                    <label><i class=" fas fa-input-text"></i> Name (no spaces)</label>
                     <input type="text" name="name" class="form-control" onkeyup="nospaces(this)" value="<?php echo $name; ?>">
                     <span class="help-block"><?php echo $name_err; ?></span>
                 </div>
                 <div class="form-group">
                     <div class="form-group <?php echo (!empty($displayname_err)) ? 'has-error' : ''; ?>">
-                        <label><i class="fas fa-key"></i> Display Name</label>
+                        <label><i class="fas fa-display-code"></i> Display Name</label>
                         <input type="text" name="displayname" class="form-control" value="<?php echo $displayname; ?>">
                         <span class="help-block"><?php echo $displayname_err; ?></span>
                     </div>
