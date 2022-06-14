@@ -90,7 +90,7 @@ if ($isAdmin != 1) {
                                                                                         } ?>!
             </h2>
         </div>
-
+        <a class="btn btn-primary" href="/admin/applications"><i class="far fa-badge-check"></i> View Applications</a>
         <h3>Site Settings:</h3>
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">
