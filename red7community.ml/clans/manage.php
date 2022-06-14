@@ -59,8 +59,7 @@ if (isset($_GET["page"])) {
     $page = 1;
 };
 
-if ($_SESSION['id'] != $owner)
-{
+if ($_SESSION['id'] != $owner) {
     header("HTTP/1.1 403 Forbidden");
     exit;
 }

@@ -187,9 +187,8 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $email = "", $internalEmail = false) use ($link, $SMTP_Debug, $SMTP_Auth, $SMTP_Secure, $SMTP_Port, $SMTP_Host, $SMTP_Username, $SMTP_Password, $SMTP_From) {
-	
-	if (!class_exists("PHPMailer"))
-	{
+
+	if (!class_exists("PHPMailer")) {
 		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/PHPMailer.php");
 		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Mail/SMTP.php");
 		require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php");
@@ -226,12 +225,9 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 	$mail->From = $SMTP_From;
 	$mail->FromName = $site_name();
 
-	if ($internalEmail == false)
-	{
+	if ($internalEmail == false) {
 		$email_address = $getEmail($id);
-	}
-	else
-	{
+	} else {
 		$email_address = $SMTP_From;
 	}
 

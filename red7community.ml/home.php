@@ -67,10 +67,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 									} else {
 										echo $your_username;
 									} ?></h2>&nbsp;<?php if ($your_isVerified == 1) {
-												echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
-											} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
-																																echo '<p><strong style="color: red;">*BANNED*</strong></p>';
-																															} ?>!
+														echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
+													} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
+																																	echo '<p><strong style="color: red;">*BANNED*</strong></p>';
+																																} ?>!
 			</h2>
 		</div>
 

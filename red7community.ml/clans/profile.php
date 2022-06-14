@@ -236,7 +236,7 @@ if (isset($_GET["page"])) {
                     echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
                 }
                 ?>
-                
+
                 <?php
                 $d = json_decode($members);
 

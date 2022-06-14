@@ -21,8 +21,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 if ($_POST) {
-    if ($sendEmail($_SESSION["id"], "/admin/view-application.php?id=blahblah", "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true)) {}
-    if ($sendEmail($_SESSION["id"], "", "verification-sent", $_POST["full_name"], $_POST["reason"], $_POST["email"])) {}
+    if ($sendEmail($_SESSION["id"], "/admin/view-application.php?id=blahblah", "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true)) {
+    }
+    if ($sendEmail($_SESSION["id"], "", "verification-sent", $_POST["full_name"], $_POST["reason"], $_POST["email"])) {
+    }
 }
 ?>
 
@@ -58,9 +60,23 @@ if ($_POST) {
     ?>
 
     <div class="page-content-wrapper">
-
-        <div class="center redeem-form">
-            <form action="verify.php" method="post">
+        <div class="center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="<?php echo $verifiedIcon; ?>" />
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Apply for Verification</h3>
+                                <h5>Fill out the form below and our team will get back to you as soon as possible!</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="redeem-form text-center" action="verify.php" method="post">
                 <div class="elem-group">
                     <h4 for="name">Full Name</h4>
                     <input type="text" id="name" name="full_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>

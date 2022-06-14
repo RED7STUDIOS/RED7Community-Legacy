@@ -7,246 +7,256 @@
 */
 
 body {
-    zoom: 1.2;
+  zoom: 1.2;
 }
 
 .center {
-    /* Set the margin to 0 */
-    margin: 0;
-    /* Set the position to absolute */
-    position: absolute;
-    /* Set the top to 50 percent */
-    top: 50%;
-    /* Set the left to 50 percent */
-    left: 50%;
-    /* Transform for mozilla browsers */
-    -ms-transform: translate(-50%, -50%);
-    /* Transform for other browsers */
-    transform: translate(-50%, -50%);
+  /* Set the margin to 0 */
+  margin: 0;
+  /* Set the position to absolute */
+  position: absolute;
+  /* Set the top to 50 percent */
+  top: 50%;
+  /* Set the left to 50 percent */
+  left: 50%;
+  /* Transform for mozilla browsers */
+  -ms-transform: translate(-50%, -50%);
+  /* Transform for other browsers */
+  transform: translate(-50%, -50%);
 }
 
 .force-to-bottom {
-    position: absolute;
-    bottom: 5%;
-    width: 100%;
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
 }
 
 .alert .alert-server {
-    margin-bottom: 0;
-    border-radius: 0;
+  margin-bottom: 0;
+  border-radius: 0;
 }
 
 .nav-tabs {
-    float: left;
-    margin-right: 20px;
-    border: 1px solid #ccc;
+  float: left;
+  margin-right: 20px;
+  border: 1px solid #ccc;
 }
 
-.nav-tabs>li.active>a,
-.nav-tabs>li.active>a:focus,
-.nav-tabs>li.active>a:hover {
-    background: #ddd;
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  background: #ddd;
 }
 
-.nav-tabs>li {
-    float: none;
+.nav-tabs > li {
+  float: none;
 }
 
-.nav-tabs>li>a {
-    margin-right: 0;
+.nav-tabs > li > a {
+  margin-right: 0;
 }
 
 .tab-content {
-    border-top: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 
 html,
 body {
-    margin: 0;
-    height: 100%;
+  margin: 0;
+  height: 100%;
 }
 
 .dropdown-toggle {
-    outline: 0;
+  outline: 0;
 }
 
 .nav-flush .nav-link {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 .btn-toggle {
-    display: inline-flex;
-    align-items: center;
-    padding: .25rem .5rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, .65);
-    background-color: transparent;
-    border: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: transparent;
+  border: 0;
 }
 
 .btn-toggle:hover,
 .btn-toggle:focus {
-    color: rgba(0, 0, 0, .85);
-    background-color: #d2f4ea;
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #d2f4ea;
 }
 
 .btn-toggle::before {
-    width: 1.25em;
-    line-height: 0;
-    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
-    transition: transform .35s ease;
-    transform-origin: .5em 50%;
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform 0.35s ease;
+  transform-origin: 0.5em 50%;
 }
 
 .btn-toggle[aria-expanded="true"] {
-    color: rgba(0, 0, 0, .85);
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .btn-toggle[aria-expanded="true"]::before {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .btn-toggle-nav a {
-    display: inline-flex;
-    padding: .1875rem .5rem;
-    margin-top: .125rem;
-    margin-left: 1.25rem;
-    text-decoration: none;
+  display: inline-flex;
+  padding: 0.1875rem 0.5rem;
+  margin-top: 0.125rem;
+  margin-left: 1.25rem;
+  text-decoration: none;
 }
 
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
-    background-color: #d2f4ea;
+  background-color: #d2f4ea;
 }
 
 .centered {
-    margin: 0;
-    padding: 0;
-    padding-top: 10px;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+  text-align: center;
 }
 
 .premium-icon {
-    height: 25px;
-    width: 25px;
-    display: inline;
+  height: 25px;
+  width: 25px;
+  display: inline;
 }
 
 .verified-icon {
-    height: 20px;
-    width: 20px;
-    display: inline;
+  height: 20px;
+  width: 20px;
+  display: inline;
 }
 
 .profile-picture {
-    height: 128px;
-    width: 128px;
-    border-radius: 50%;
+  height: 128px;
+  width: 128px;
+  border-radius: 50%;
 }
 
 /* Inventory/friends/badges/clans/currently wearing related CSS */
 
 .row .profile-list {
-    width: 100%;
+  width: 100%;
 }
 
 div .profile-list {
-    height: 180px;
-    width: 180px;
+  height: 180px;
+  width: 180px;
 }
 
 a,
 h6,
 small,
 b .profile-list {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .profile-list-title {
-    text-align: center;
-    width: 120px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  text-align: center;
+  width: 120px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile-list-width {
-    width: 100%;
-    min-height: 200px;
+  width: 100%;
+  min-height: 200px;
 }
 
 div .profile-list-card {
-    height: 180px;
-    width: 180px;
+  height: 180px;
+  width: 180px;
 }
 
 /* ------------------------ */
 
 .banned-text {
-    color: red;
+  color: red;
 }
 
 .catalog-item-preview {
-    height: 128px;
-    width: 128px;
+  height: 128px;
+  width: 128px;
 }
 
 .item-owned {
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
 }
 
 .user-img {
-    height: 90px;
-    width: 90px;
-    margin-top: 15px;
-    border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  margin-top: 15px;
+  border-radius: 50%;
 }
 
 .normal-img {
-    height: 90px;
-    width: 90px;
-    margin-top: 15px;
+  height: 90px;
+  width: 90px;
+  margin-top: 15px;
 }
 
 .description {
-    width: 100%;
-    border: 0px none white;
-    overflow: hidden;
-    padding: 0px;
-    outline: none;
-    background-color: rgb(208, 208, 208);
-    height: 47px;
+  width: 100%;
+  border: 0px none white;
+  overflow: hidden;
+  padding: 0px;
+  outline: none;
+  background-color: rgb(208, 208, 208);
+  height: 47px;
 }
 
 .moderate-input {
-    width: 100%;
+  width: 100%;
 }
 
 /* Admin rainbow text */
 
 .title-rainbow-lr {
-    background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red, violet);
-    text-align: center;
-    background-size: 800% 800%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 24px;
-    animation: rainbow 8s ease infinite;
+  background-image: repeating-linear-gradient(
+    45deg,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red,
+    violet
+  );
+  text-align: center;
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  animation: rainbow 8s ease infinite;
 }
 
 @keyframes rainbow {
-    0% {
-        background-position: 0% 50%
-    }
+  0% {
+    background-position: 0% 50%;
+  }
 
-    50% {
-        background-position: 100% 25%
-    }
+  50% {
+    background-position: 100% 25%;
+  }
 
-    100% {
-        background-position: 0% 50%
-    }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ----------------- */
@@ -254,86 +264,86 @@ div .profile-list-card {
 /* Signing in & registering stuff */
 
 .form-signin {
-    max-width: 380px;
-    padding: 15px;
-    margin: auto;
+  max-width: 380px;
+  padding: 15px;
+  margin: auto;
 }
 
 .form-signin .checkbox {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .form-signin .form-control:focus {
-    z-index: 2;
+  z-index: 2;
 }
 
 .form-register {
-    width: 100%;
-    max-width: 380px;
-    padding: 15px;
-    margin: auto;
+  width: 100%;
+  max-width: 380px;
+  padding: 15px;
+  margin: auto;
 }
 
 .form-register .checkbox {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .form-register .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .form-register .form-control:focus {
-    z-index: 2;
+  z-index: 2;
 }
 
 /* ----------------------------- */
 
 textarea:disabled {
-    border: 0 none white;
-    overflow: hidden;
-    padding: 0;
-    outline: none;
-    background-color: #D0D0D0;
+  border: 0 none white;
+  overflow: hidden;
+  padding: 0;
+  outline: none;
+  background-color: #d0d0d0;
 }
 
 fieldset {
-    padding: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
+  padding: 10px;
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
 .wrapper {
-    display: flex;
-    align-self: center;
+  display: flex;
+  align-self: center;
 }
 
 .redeem-form .btn-success {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .page-content-wrapper {
-    margin-top: 10px;
-    margin-left: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 #c {
-    width: 50%;
-    height: 50%;
+  width: 50%;
+  height: 50%;
 }
 
 #c-catalog {
-    width: 100%;
-    height: 50%;
+  width: 100%;
+  height: 50%;
 }
