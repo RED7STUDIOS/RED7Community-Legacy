@@ -79,15 +79,15 @@ if ($_POST) {
             <form class="redeem-form text-center" action="verify.php" method="post">
                 <div class="elem-group">
                     <h4 for="name">Full Name</h4>
-                    <input type="text" id="name" name="full_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>
+                    <input type="text" id="name" name="full_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required style="width: 70%;">
                 </div>
                 <div class="elem-group">
                     <h4 for="email">Preferred Contact Email</h4>
-                    <input type="email" id="email" name="email" value="<?php echo $your_email; ?>" placeholder="john@example.com" required>
+                    <input type="email" id="email" name="email" value="<?php echo $your_email; ?>" placeholder="john@example.com" required style="width: 70%;">
                 </div>
                 <div class="elem-group">
                     <h4 for="reason">Reason</h4>
-                    <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ..." required></textarea>
+                    <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ..." required style="width: 70%;"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
