@@ -21,11 +21,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 if ($_POST) {
-    if ($sendEmail($_SESSION["id"], "/admin/view-application.php?id=blahblah", "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true)) {
-    }
-    if ($sendEmail($_SESSION["id"], "", "verification-sent", $_POST["full_name"], $_POST["reason"], $_POST["email"])) {
-    }
+    $sendEmail($_SESSION["id"], "/admin/view-application.php?id=blahblah", "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
+    //$sendEmail($_SESSION["id"], "", "verification-sent", $_POST["full_name"], $_POST["reason"], $_POST["email"]);
+    echo '<div class="alert alert-success" style="margin-bottom: 0; border-radius: 0;" role="alert">
+    Your application has been sent to our team and they will get back to you shortly.
+  </div>';
 }
+
+$requirements = 0;
 ?>
 
 <!DOCTYPE html>
@@ -60,37 +63,77 @@ if ($_POST) {
     ?>
 
     <div class="page-content-wrapper">
-        <div class="center">
+        <div class="centered">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div>
                         <img src="<?php echo $verifiedIcon; ?>" />
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col">
                         <div class="row">
                             <div class="col">
                                 <h3>Apply for Verification</h3>
-                                <h5>Fill out the form below and our team will get back to you as soon as possible!</h5>
+                                <h5>If you have met all of the requirements then you can fill out the form below, and our team will get back to you as soon as possible!</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <form class="redeem-form text-center" action="verify.php" method="post">
-                <div class="elem-group">
-                    <h4 for="name">Full Name</h4>
-                    <input type="text" id="name" name="full_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required style="width: 70%;">
-                </div>
-                <div class="elem-group">
-                    <h4 for="email">Preferred Contact Email</h4>
-                    <input type="email" id="email" name="email" value="<?php echo $your_email; ?>" placeholder="john@example.com" required style="width: 70%;">
-                </div>
-                <div class="elem-group">
-                    <h4 for="reason">Reason</h4>
-                    <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ..." required style="width: 70%;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            <hr />
+            <div>
+                <h3>Requirements</h3>
+                <p>
+                    <?php if ($getSecret($_SESSION["id"]) == "" || $getSecret($_SESSION["id"]) == null) {
+                        $requirements = $requirements + 1;
+                        echo '<i style="color: #f00;" class="fa-solid fa-xmark"></i>';
+                    } else {
+                        echo '<i style="color: #50ae47;" class="fa-solid fa-check"></i>';
+                    } ?> |
+                    You need to have 2FA enabled on your account.
+                </p>
+                <p>
+                    <?php if ($your_email == null) {
+                        $requirements = $requirements + 1;
+                        echo '<i style="color: #f00;" class="fa-solid fa-xmark"></i>';
+                    } else {
+                        echo '<i style="color: #50ae47;" class="fa-solid fa-check"></i>';
+                    } ?> |
+                    You need to have a valid email on your account.
+                </p>
+                <p>
+                    <?php
+                    if (strtotime($your_created_at) > strtotime('1 month ago')) {
+                        $requirements = $requirements + 1;
+                        echo '<i style="color: #f00;" class="fa-solid fa-xmark"></i>';
+                    } else {
+                        echo '<i style="color: #50ae47;" class="fa-solid fa-check"></i>';
+                    } ?> |
+                    Your account must be older than 1 month.
+                </p>
+                <p><b>Status:</b> <?php if ($your_isVerified == 1) { echo "Verified"; } else if ($requirements != 0 ) { echo "Ineligible"; } else if ($your_isVerified != 1 ) { echo "Eligible"; } ?></p>
+            </div>
+
+            <?php
+            if ($requirements == 0) {
+            ?>
+                <form class="redeem-form text-center" action="verify.php" method="post">
+                    <div class="elem-group">
+                        <h4 for="name">Full Name</h4>
+                        <input type="text" id="name" name="full_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required style="width: 70%;">
+                    </div>
+                    <div class="elem-group">
+                        <h4 for="email">Preferred Contact Email</h4>
+                        <input type="email" id="email" name="email" value="<?php echo $your_email; ?>" placeholder="john@example.com" required style="width: 70%;">
+                    </div>
+                    <div class="elem-group">
+                        <h4 for="reason">Reason</h4>
+                        <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ... and I feel that I can contribute to <?php echo $site_name; ?> by ..." required style="width: 70%;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

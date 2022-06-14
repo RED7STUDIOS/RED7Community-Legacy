@@ -242,6 +242,48 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 	if (!$mail->send()) {
 	} else {
 	}
+
+	if ($template == "verification-form") {
+		$message = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/templates/emails/verification-sent.html");
+
+		$message = str_replace('%full_name%', $fullName, $message);
+		$message = str_replace('%reason%', $reason, $message);
+		$message = str_replace('%email%', $email, $message);
+		$message = str_replace('%username%', $getDisplayName($id), $message);
+		$message = str_replace('%realusername%', $getUsername($id), $message);
+		$message = str_replace('%site_name%', $site_name(), $message);
+		$message = str_replace('%url%', $url, $message);
+
+		$title = preg_match("/<title>(.*)<\/title>/siU", $message, $title_matches);
+		$title = preg_replace('/\s+/', ' ', $title_matches[1]);
+		$title = trim($title);
+
+		$mail->isSMTP();
+		$mail->SMTPDebug  = $SMTP_Debug;
+		$mail->SMTPAuth   = $SMTP_Auth;
+		$mail->SMTPSecure = $SMTP_Secure;
+		$mail->Port       = $SMTP_Port;
+		$mail->Host       = $SMTP_Host;
+		$mail->Username = $SMTP_Username;
+		$mail->Password = $SMTP_Password;
+
+		$mail->From = $SMTP_From;
+		$mail->FromName = $site_name();
+
+		$email_address = $getEmail($id);
+
+		$mail->addAddress($email_address, $getDisplayName($id));
+
+		$mail->WordWrap = 50;
+		$mail->isHTML(true);
+
+		$mail->Subject = $title;
+		$mail->Body    = $message;
+
+		if (!$mail->send()) {
+		} else {
+		}
+	}
 };
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
