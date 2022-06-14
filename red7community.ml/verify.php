@@ -113,6 +113,8 @@ $requirements = 0;
                 <p><b>Status:</b> <?php if ($your_isVerified == 1) { echo "Verified"; } else if ($requirements != 0 ) { echo "Ineligible"; } else if ($your_isVerified != 1 ) { echo "Eligible"; } ?></p>
             </div>
 
+            <hr/>
+
             <?php
             if ($requirements == 0) {
             ?>

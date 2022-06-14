@@ -130,6 +130,7 @@ mysqli_query($link, $sql);
 		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#friends"><i class="far fa-users"></i> Friends</a></li>
 		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#inventory"><i class="far fa-backpack"></i> Inventory</a></li>
 		<li><a class="dropdown-item" href="/account/settings"><i class="far fa-cog"></i> Settings</a></li>
+		<li><a class="dropdown-item" href="/verify.php"><i class="far fa-badge-check"></i> Verification</a></li>
 		<li><a class="dropdown-item" href="/redeem.php"><i class="far fa-clipboard-check"></i> Redeem Code</a></li>
 		<li><a class="dropdown-item" href="/account/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a></li>
 		<li><a class="dropdown-item" href="/terms-of-service.php"><i class="far fa-user-check"></i> Terms of Service</a></li>
