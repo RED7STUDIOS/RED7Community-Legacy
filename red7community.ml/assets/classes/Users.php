@@ -92,3 +92,25 @@ $setSecret = function ($id, $secret) use ($link) {
 		return false;
 	}
 };
+
+$sendApplication = function ($id, $reason, $email, $full_name) use ($link) {
+	$sql_query = "INSERT INTO applications (sender_id, preferred_email, reason, full_name) VALUES (". $id. ", '". $email. "', '". $reason. "', '". $full_name. "')";
+
+	if (mysqli_query($link, $sql_query)) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+$getApplication = function ($id) use ($link) {
+	$sql_query = "SELECT id FROM applications WHERE sender_id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["id"];
+		}
+	}
+};

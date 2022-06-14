@@ -244,6 +244,10 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 	}
 
 	if ($template == "verification-form") {
+		unset($mail);
+
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+
 		$message = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/templates/emails/verification-sent.html");
 
 		$message = str_replace('%full_name%', $fullName, $message);

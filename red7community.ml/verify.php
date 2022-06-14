@@ -21,8 +21,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 if ($_POST) {
-    $sendEmail($_SESSION["id"], "/admin/view-application.php?id=blahblah", "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
-    //$sendEmail($_SESSION["id"], "", "verification-sent", $_POST["full_name"], $_POST["reason"], $_POST["email"]);
+    $sendApplication($_SESSION["id"], $_POST["reason"], $_POST["email"], $_POST["full_name"]);
+    $sendEmail($_SESSION["id"], $ROOT_URL. "/admin/applications/view.php?id=" . $getApplication($_SESSION["id"]), "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
     echo '<div class="alert alert-success" style="margin-bottom: 0; border-radius: 0;" role="alert">
     Your application has been sent to our team and they will get back to you shortly.
   </div>';
@@ -110,10 +110,16 @@ $requirements = 0;
                     } ?> |
                     Your account must be older than 1 month.
                 </p>
-                <p><b>Status:</b> <?php if ($your_isVerified == 1) { echo "Verified"; } else if ($requirements != 0 ) { echo "Ineligible"; } else if ($your_isVerified != 1 ) { echo "Eligible"; } ?></p>
+                <p><b>Status:</b> <?php if ($your_isVerified == 1) {
+                                        echo "Verified";
+                                    } else if ($requirements != 0) {
+                                        echo "Ineligible";
+                                    } else if ($your_isVerified != 1) {
+                                        echo "Eligible";
+                                    } ?></p>
             </div>
 
-            <hr/>
+            <hr />
 
             <?php
             if ($requirements == 0) {
