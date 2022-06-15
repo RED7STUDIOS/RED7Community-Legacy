@@ -100,7 +100,7 @@ $shownName = "";
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <script src="/assets/js/fontawesome.js"></script>
-	<script src="/assets/js/site.js"></script>
+    <script src="/assets/js/site.js"></script>
 
     <script src="/assets/js/relation.js"></script>
 
@@ -114,27 +114,27 @@ $shownName = "";
 
 <body onload="init();">
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
-    
+
     <?php
     if (str_contains($membership, "Premium")) {
-		$premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
-	}
-	
-	if ($isAdmin == 1) {
-		$adminCSS = 'class="title-rainbow-lr"';
-	}
-	
-	if ($displayname != "" && $displayname != "[]" && !empty($displayname)) {
-		$shownName = htmlspecialchars($displayname);
-	} else {
-		$shownName = $username;
-	}
-	
-	if ($isVerified == 1) {
-		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
-	}
+        $premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
+    }
 
-	$usernameText = $premium. "<span ". $adminCSS. ">". $shownName. "</span>". $verified;
+    if ($isAdmin == 1) {
+        $adminCSS = 'class="title-rainbow-lr"';
+    }
+
+    if ($displayname != "" && $displayname != "[]" && !empty($displayname)) {
+        $shownName = htmlspecialchars($displayname);
+    } else {
+        $shownName = $username;
+    }
+
+    if ($isVerified == 1) {
+        $verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
+    }
+
+    $usernameText = $premium . "<span " . $adminCSS . ">" . $shownName . "</span>" . $verified;
     ?>
 
     <div class="page-content-wrapper">
@@ -343,9 +343,9 @@ $shownName = "";
 
                 <h3>About:</h3>
                 <textarea class="description" id="text" disabled><?php echo $filterwords(htmlspecialchars($description)); ?></textarea>
-                <hr/>
+                <hr />
                 <canvas id="c"></canvas>
-                <hr/>
+                <hr />
                 <div title="currently-wearing" id="currently-wearing">
                     <h4>Currently Wearing:</h4>
                     <div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">

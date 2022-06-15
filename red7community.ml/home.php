@@ -48,22 +48,22 @@ $shownName = "";
 	if (str_contains($your_membership, "Premium")) {
 		$premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
 	}
-	
+
 	if ($your_isAdmin == 1) {
 		$adminCSS = 'class="title-rainbow-lr"';
 	}
-	
+
 	if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) {
 		$shownName = htmlspecialchars($your_displayname);
 	} else {
 		$shownName = $your_username;
 	}
-	
+
 	if ($your_isVerified == 1) {
 		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 	}
 
-	$usernameText = $premium. "<span ". $adminCSS. ">". $shownName. "</span>". $verified;
+	$usernameText = $premium . "<span " . $adminCSS . ">" . $shownName . "</span>" . $verified;
 	?>
 
 	<?php
