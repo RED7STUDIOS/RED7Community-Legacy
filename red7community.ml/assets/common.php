@@ -233,8 +233,7 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 
 	$mail->addAddress($email_address, $getDisplayName($id));
 
-	if ($template == "verification-accepted" || $template == "verification-denied")
-	{
+	if ($template == "verification-accepted" || $template == "verification-denied") {
 		if ($email != $email_address) {
 			$mail->addAddress($email, $getDisplayName($id));
 		}

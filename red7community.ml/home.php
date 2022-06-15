@@ -56,7 +56,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 		<div class="d-flex align-items-center border-bottom" style="display: inline;">
 			<img src="<?php echo $your_icon; ?>" class="profile-picture" />
 			&nbsp;
-			<?php // I want to rework this mess \\ ?>
+			<?php // I want to rework this mess \\ 
+			?>
 			<h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) {
 									echo '<img src="' . $premiumIcon . '" class="premium-icon"></img>';
 								} ?>
@@ -70,8 +71,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 									} ?></h2>&nbsp;<?php if ($your_isVerified == 1) {
 														echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 													} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
-																																	echo '<p><strong style="color: red;">*BANNED*</strong></p>';
-																																} ?>!
+																																			echo '<p><strong style="color: red;">*BANNED*</strong></p>';
+																																		} ?>!
 			</h2>
 		</div>
 

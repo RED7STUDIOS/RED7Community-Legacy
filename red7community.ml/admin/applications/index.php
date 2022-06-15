@@ -91,13 +91,13 @@ if ($isAdmin != 1) {
                 <?php
                 $datatable = "applications"; // MySQL table name
                 $results_per_page = 21; // number of results per page
-                
+
                 $start_from = ($page - 1) * $results_per_page;
                 $sql = "SELECT * FROM applications WHERE accepted = 0 ORDER BY id ASC LIMIT " . $start_from . ", " . $results_per_page;
                 $result = mysqli_query($link, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<tr><th scope="row">'. $row['id']. '</th><td>'. $getUsername($row['sender_id']). '</td><td>'. $row['submitted']. '</td><td><a href="/admin/applications/view.php?id='. $row['id']. '">Click here</a></td></tr>';
+                    echo '<tr><th scope="row">' . $row['id'] . '</th><td>' . $getUsername($row['sender_id']) . '</td><td>' . $row['submitted'] . '</td><td><a href="/admin/applications/view.php?id=' . $row['id'] . '">Click here</a></td></tr>';
                 };
                 ?>
 

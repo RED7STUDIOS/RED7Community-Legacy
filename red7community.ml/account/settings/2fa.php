@@ -53,9 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Refresh:0");
             exit;
         }
-    }
-    else if ($_POST["enabled"])
-    {
+    } else if ($_POST["enabled"]) {
         $setSecret($_SESSION["id"], "");
         $sendEmail($_SESSION["id"], "", "2fa-enabled");
         header("Location: /account/logout.php");
@@ -122,9 +120,9 @@ $qrCodeUrl     = $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
                     <span class="sr-only">Loading...</span>
                 </div>
             </form>
-            <br/>
+            <br />
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input type="hidden" name="enabled" value="off">
+                <input type="hidden" name="enabled" value="off">
                 <button class="btn btn-success" type="submit" onclick="document.getElementById('spinner').style = '';">Turn off 2FA</button>
                 <br />
                 <div id="spinner" style="display: none;" class="spinner-border" role="status">

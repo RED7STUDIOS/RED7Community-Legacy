@@ -48,7 +48,7 @@ if ($role >= 1) {
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET accepted = 1 WHERE id = '" . $_POST['id'] . "'";
-			$sendEmail($user, $ROOT_URL. "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
+			$sendEmail($user, $ROOT_URL . "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
 		} else if ($_POST['action'] == "denyApplication") {
 			$sql = "UPDATE users SET isVerified = 0 WHERE id = " . $user;
 			$result = mysqli_query($link, $sql);
@@ -57,7 +57,7 @@ if ($role >= 1) {
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET deniedReason = '" . $_POST['reason'] . "' WHERE id = '" . $_POST['id'] . "'";
-			$sendEmail($user, $ROOT_URL. "/verify.php", "verification-denied", $full_name, $_POST['reason'], $preferred_email, false);
+			$sendEmail($user, $ROOT_URL . "/verify.php", "verification-denied", $full_name, $_POST['reason'], $preferred_email, false);
 		}
 	}
 }

@@ -22,7 +22,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 if ($_POST) {
     $sendApplication($_SESSION["id"], $_POST["reason"], $_POST["email"], $_POST["full_name"]);
-    $sendEmail($_SESSION["id"], $ROOT_URL. "/admin/applications/view.php?id=" . $getApplication($_SESSION["id"]), "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
+    $sendEmail($_SESSION["id"], $ROOT_URL . "/admin/applications/view.php?id=" . $getApplication($_SESSION["id"]), "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
     echo '<div class="alert alert-success" style="margin-bottom: 0; border-radius: 0;" role="alert">
     Your application has been sent to our team and they will get back to you shortly.
   </div>';
@@ -139,8 +139,8 @@ $requirements = 0;
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="document.getElementById('spinner').style = '';"><i class="fa-solid fa-envelope"></i> Send Application</button>
                     <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </form>
             <?php
             }

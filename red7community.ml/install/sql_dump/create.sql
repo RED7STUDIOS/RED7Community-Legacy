@@ -181,8 +181,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `bannedReason` text,
   `bannedDate` datetime DEFAULT NULL,
   `isVerified` int DEFAULT '0',
-  `followers` longtext,
-  `following` longtext,
   `clans` longtext,
   `icon` varchar(255) DEFAULT '/assets/images/users/default.png',
   `role` int DEFAULT '0',
@@ -211,3 +209,15 @@ CREATE TABLE `clans` (
   `isSpecial` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `applications` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `sender_id` bigint DEFAULT NULL,
+  `preferred_email` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `reason` longtext COLLATE utf8mb4_general_ci,
+  `full_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `submitted` datetime DEFAULT CURRENT_TIMESTAMP,
+  `accepted` tinyint(1) DEFAULT '0',
+  `deniedReason` longtext COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

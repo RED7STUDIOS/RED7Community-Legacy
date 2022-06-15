@@ -35,12 +35,9 @@ $user = $getUserFromApplicationId($id);
 $status = $getApplicationStatus($id);
 $deniedReason = $getApplicationDeniedReason($id);
 
-if ($status != 1)
-{
+if ($status != 1) {
     $status = "Denied";
-}
-else
-{
+} else {
     $status = "Accepted";
 }
 ?>
@@ -125,8 +122,8 @@ else
             <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>" />
             <input class="btn btn-success" type="submit" name="form_submit" value="Accept Application" onclick="document.getElementById('spinner').style = '';" />
             <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <span class="sr-only">Loading...</span>
+            </div>
         </form>
         <br />
         <fieldset>

@@ -94,7 +94,7 @@ $setSecret = function ($id, $secret) use ($link) {
 };
 
 $sendApplication = function ($id, $reason, $email, $full_name) use ($link) {
-	$sql_query = "INSERT INTO applications (sender_id, preferred_email, reason, full_name) VALUES (". $id. ", '". $email. "', '". $reason. "', '". $full_name. "')";
+	$sql_query = "INSERT INTO applications (sender_id, preferred_email, reason, full_name) VALUES (" . $id . ", '" . $email . "', '" . $reason . "', '" . $full_name . "')";
 
 	if (mysqli_query($link, $sql_query)) {
 		return true;
