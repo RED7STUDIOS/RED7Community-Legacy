@@ -491,14 +491,14 @@ $shownName = "";
                                     value="' . $real_displayname . '"/>
     <input hidden type="text" name="action" value="displayNameChange"/>
     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
     </form></p>
                                 <p><b>Username: </b>' . $username . '</p>
                                 <form method="post" action="/ajax/moderate.php"
                                     onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">' . $real_description . '
                                     </textarea><input hidden type="text" name="action" value="descriptionChange"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                                     </form></p>
                         
                                 <form method="post" action="/ajax/moderate.php"
@@ -507,7 +507,7 @@ $shownName = "";
                                                                                 value="' . $current_currency . '"/>
                                     <input hidden type="text" name="action" value="currencyChange"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                                 </form>';
                         if ($your_role == 3) {
                             echo '<form method="post" action="/ajax/moderate.php"
@@ -520,7 +520,7 @@ $shownName = "";
                                 </select>
                                     <input hidden type="text" name="action" value="roleChange"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                                    <input class="btn btn-success" type="submit" name="form_submit" value="Change"/>
+                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                                 </form>';
                         }
                         echo '
@@ -545,7 +545,7 @@ $shownName = "";
                         <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . htmlspecialchars($banReason) . '"/>
                         <input hidden type="text" name="action" value="banningUser"/>
                         <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                        <input class="btn btn-success" type="submit" name="form_submit" value="Ban / Unban"/>
+                        <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-ban"></i> Ban / Unban</button>
                     </form>
                 </fieldset>
 

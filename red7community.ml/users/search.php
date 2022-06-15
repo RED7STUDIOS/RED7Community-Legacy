@@ -76,7 +76,7 @@ if (isset($_GET["page"])) {
 		<div class="d-flex align-items-center border-bottom">
 			<form method="get">
 				<input class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($key); ?>" />
-				<input class="btn btn-success" type="submit" value="Search" />
+				<button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
 			</form>
 		</div>
 

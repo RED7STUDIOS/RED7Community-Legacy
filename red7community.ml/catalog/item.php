@@ -294,7 +294,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                         </br>
                         <input hidden type="text" name="action" value="updateItemSettings" />
 						<input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                        <input class="btn btn-success" type="submit" name="form_submit" value="Update Item Settings" />
+                        <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Update Item Settings</button>
                     </form>
                 </fieldset>';
                             }

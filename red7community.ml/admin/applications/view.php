@@ -121,7 +121,7 @@ if ($status != 1) {
         <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">
             <input hidden type="text" name="action" value="acceptApplication" />
             <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>" />
-            <input class="btn btn-success" type="submit" name="form_submit" value="Accept Application" onclick="spin();" />
+            <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Accept Application</button>
         </form>
         <br />
         <fieldset>
@@ -131,7 +131,7 @@ if ($status != 1) {
                 </br>
                 <input hidden type="text" name="action" value="denyApplication" />
                 <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>" />
-                <input class="btn btn-success" type="submit" name="form_submit" value="Deny Application" onclick="spin();" />
+                <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Deny Application</button>
             </form>
         </fieldset>
     </div>

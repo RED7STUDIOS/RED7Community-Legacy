@@ -121,7 +121,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                                                                     }
                                                                                                 } ?>" />
                     <input hidden type="text" name="action" value="changeDisplayName" />
-                    <input class="btn btn-success" type="submit" name="form_submit" value="Change Display Name" />
+                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                 </form>
             </fieldset>
 
@@ -139,7 +139,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                                                                                                                                                             } ?>
                             </textarea>
                     <input hidden type="text" name="action" value="changeDescription" />
-                    <input class="btn btn-success" type="submit" name="form_submit" value="Change Description" />
+                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                 </form>
             </fieldset>
 
@@ -156,7 +156,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                                                     }
                                                                                 } ?>" />
                     <input hidden type="text" name="action" value="changeEmail" />
-                    <input class="btn btn-success" type="submit" name="form_submit" value="Change Email" />
+                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                 </form>
             </fieldset>
         </main>
