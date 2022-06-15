@@ -23,7 +23,7 @@ if ($maintenanceMode == "off") {
 	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 	<!-- Styles and Font Awesome. -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<link rel="stylesheet" href="/assets/css/space.css">
 	<script src="/assets/js/fontawesome.js"></script>
@@ -64,9 +64,9 @@ if ($maintenanceMode == "off") {
 	</div>
 
 	<!-- Scripts required for Bootstrap 5 -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/assets/js/space.js"></script>
 	<!-------------------------------------->
 </body>
