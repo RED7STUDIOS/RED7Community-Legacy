@@ -8,6 +8,6 @@ RED7Community is a community tool built in PHP. RED7Community was built to make 
 
 Follow our handy guides to get started on the basics as quickly as possible:
 
-{% content-ref url="guides/installation/" %}
-[installation](guides/installation/)
+{% content-ref url="guides/installation-old/" %}
+[installation-old](guides/installation-old/)
 {% endcontent-ref %}
