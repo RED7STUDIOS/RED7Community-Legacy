@@ -193,7 +193,7 @@ if ($_SESSION['id'] != $owner) {
                                     <input maxlength="69420" type="text" name="description" class="moderate-input" value="<?php echo $description; ?>" />
                                     <input hidden type="text" name="action" value="updateClanSettings" />
                                     <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
-                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-gear"></i> Update Clan Settings</button>
+                                    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-gear"></i> Update Clan Settings</button>
                                 </form>
                             </div>
                         </div>
@@ -206,7 +206,7 @@ if ($_SESSION['id'] != $owner) {
                                     <input type="number" name="amount" class="moderate-input" />
                                     <input hidden type="text" name="action" value="payoutClan" />
                                     <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
-                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-money-check-dollar-pen"></i> Payout to User</button>
+                                    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-money-check-dollar-pen"></i> Payout to User</button>
                                 </form>
                             </div>
                         </div>
@@ -217,7 +217,7 @@ if ($_SESSION['id'] != $owner) {
                                     <input type="number" name="amount" class="moderate-input" />
                                     <input hidden type="text" name="action" value="addFundsToClan" />
                                     <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
-                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-money-bill-wave"></i> Add Funds</button>
+                                    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-money-bill-wave"></i> Add Funds</button>
                                 </form>
                             </div>
                         </div>

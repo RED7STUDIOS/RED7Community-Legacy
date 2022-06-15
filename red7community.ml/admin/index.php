@@ -115,7 +115,7 @@ if ($isAdmin != 1) {
                                                             } ?> />
                 </br>
                 <input hidden type="text" name="action" value="updateSiteSettings" />
-                <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
+                <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
             </form>
         </fieldset>
 
@@ -162,7 +162,7 @@ if ($isAdmin != 1) {
                 </br>
                 </br>
                 <input hidden type="text" name="action" value="createNewItem" />
-                <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Create New Item</button>
+                <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Create New Item</button>
             </form>
         </fieldset>
     </div>

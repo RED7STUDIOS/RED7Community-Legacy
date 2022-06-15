@@ -245,7 +245,7 @@ if (isset($_GET["page"])) {
                     echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
                         <input hidden type="text" name="action" value="joinClan" />
                         <input hidden type="text" name="id" value="' . $_GET['id'] . '" />
-                        <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-right-to-bracket"></i> Join Clan</button>
+                        <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-right-to-bracket"></i> Join Clan</button>
                     </form>';
                 }
                 ?>
@@ -304,14 +304,14 @@ if (isset($_GET["page"])) {
                                     value="' . $real_displayname . '"/>
     <input hidden type="text" name="action" value="displayNameChangeClan"/>
     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
+    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
     </form></p>
                                 <p><b>Name: </b>' . $name . '</p>
                                 <form method="post" action="/ajax/moderate.php"
                                     onSubmit="return ajaxSubmit(this);"><p><b>Description: </b><textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;">' . $real_description . '
                                     </textarea><input hidden type="text" name="action" value="descriptionChangeClan"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
+                                    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                                     </form></p>
                         
                                 <form method="post" action="/ajax/moderate.php"
@@ -320,7 +320,7 @@ if (isset($_GET["page"])) {
                                                                                 value="' . $current_currency . '"/>
                                     <input hidden type="text" name="action" value="currencyChangeClan"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                                    <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-pen-to-square"></i> Change</button>
+                                    <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
                                 </form>
                             </fieldset>
                             <hr/>
@@ -343,7 +343,7 @@ if (isset($_GET["page"])) {
                         <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . htmlspecialchars($banReason) . '"/>
                         <input hidden type="text" name="action" value="banningClan"/>
                         <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
-                        <button class="btn btn-success" type="submit" name="form_submit"><i class="fa-solid fa-ban"></i> Ban / Unban</button>
+                        <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-ban"></i> Ban / Unban</button>
                     </form>
                 </fieldset>
 

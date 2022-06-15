@@ -99,7 +99,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 			<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
 				<input maxlength="6969" type="text" name="value" style="width: 100%;" />
 				<input hidden type="text" name="action" value="redeemCode" />
-				<button class="btn btn-success" type="submit" name="form_submit"><i class="far fa-clipboard-check"></i> Redeem Code</button>
+				<button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="far fa-clipboard-check"></i> Redeem Code</button>
 			</form>
 		</div>
 	</div>
