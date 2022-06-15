@@ -148,6 +148,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	<link rel="stylesheet" href="/assets/css/style.css">
 
 	<script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 
 	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 	<script type="text/javascript" src="payment.js"></script>

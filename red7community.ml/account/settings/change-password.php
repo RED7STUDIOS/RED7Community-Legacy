@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<link rel="stylesheet" href="/assets/css/style.css">
 
 	<script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 </html>
@@ -140,12 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<span class="help-block"><?php echo $confirm_password_err; ?></span>
 				</div>
 				<div class="form-group">
-					<input type="submit" class="btn btn-primary" value="Submit" onclick="document.getElementById('spinner').style = '';">
+					<button type="submit" class="btn btn-primary" value="Submit" onclick="spin();"></button>
 					<a class="btn btn-link" href="/account/settings">Cancel</a>
-				</div>
-				<br />
-				<div id="spinner" style="display: none;" class="spinner-border" role="status">
-					<span class="sr-only">Loading...</span>
 				</div>
 			</form>
 		</main>

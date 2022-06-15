@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
     <script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
     <!----------------------------->
 </head>
 
@@ -114,11 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <label for="exampleInputEmail1">Confirm Password</label>
                                     <input type="password" name='cpassword' class="form-control">
                                 </div>
-                                <input type="submit" name="new-password" class="btn btn-primary" onclick="document.getElementById('spinner').style = '';">
-                                <br />
-                                <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
+                                <button type="submit" name="new-password" class="btn btn-primary" onclick="spin();"></button>
                         </form>
             <?php }
                 } else {

@@ -39,6 +39,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 	<link rel="stylesheet" href="/assets/css/style.css">
 
 	<script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 <body>

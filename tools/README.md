@@ -1,4 +1,8 @@
 This file documents all of the warnings for using these tools / making your own community site.
+By using this software you agree to use the license below. This requires you to understand that there is ZERO liability and warranty. You must state the license, copyright notice and state the changes you have made.
+By using "Map Hosts File.bat" it will overwrite the RED7Community domains to point to a LOCAL web-server. This means you will NOT have access to your real RED7Community account.
+
+-----------------------------------------------------------------------------------------------------------------
 
                                 SOFTWARE LICENSE:
                                  Apache License
@@ -202,12 +206,3 @@ This file documents all of the warnings for using these tools / making your own 
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-By using this software you agree to use the license above. This requires you to not use Trademarks, there is ZERO liability and warranty. You must state the license and copyright notice and state the changes you have made.
-By using "Map Hosts File.bat" it will overwrite the RED7Community domains to point to a LOCAL web-server. This means you will NOT have access to your real RED7Community account.

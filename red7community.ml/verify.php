@@ -43,6 +43,7 @@ $requirements = 0;
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 <body>
@@ -137,10 +138,7 @@ $requirements = 0;
                         <h4 for="reason">Reason</h4>
                         <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ... and I feel that I can contribute to <?php echo $site_name; ?> by ..." required style="width: 70%;"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('spinner').style = '';"><i class="fa-solid fa-envelope"></i> Send Application</button>
-                    <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="spin();"><i class="fa-solid fa-envelope"></i> Send Application</button>
                 </form>
             <?php
             }

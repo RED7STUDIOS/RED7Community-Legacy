@@ -79,6 +79,7 @@ $qrCodeUrl     = $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 </html>
@@ -114,20 +115,12 @@ $qrCodeUrl     = $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
                     <input type="text" maxlength="6" name="code" id="code" autocomplete="off" value="" required>
                 </div>
 
-                <button class="btn btn-success" type="submit" onclick="document.getElementById('spinner').style = '';">Submit</button>
-                <br />
-                <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <button class="btn btn-success" type="submit" onclick="spin();">Submit</button>
             </form>
             <br />
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <input type="hidden" name="enabled" value="off">
-                <button class="btn btn-success" type="submit" onclick="document.getElementById('spinner').style = '';">Turn off 2FA</button>
-                <br />
-                <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <button class="btn btn-success" type="submit" onclick="spin();">Turn off 2FA</button>
             </form>
         </main>
     </div>

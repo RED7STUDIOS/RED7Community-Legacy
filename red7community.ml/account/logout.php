@@ -24,6 +24,7 @@
 	<link href="/assets/css/style.css" rel="stylesheet">
 
 	<script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 <body class="text-center">

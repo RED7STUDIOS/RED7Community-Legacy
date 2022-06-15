@@ -50,7 +50,6 @@ $your_isAdmin = $your_json[0]['data'][0]['isAdmin'];
 $your_isVerified = $your_json[0]['data'][0]['isVerified'];
 $your_followers = $your_json[0]['data'][0]['followers'];
 $your_following = $your_json[0]['data'][0]['following'];
-//$your_following_clans = $your_json[0]['data'][0]['following_clans'];
 $your_clans = $your_json[0]['data'][0]['clans'];
 $your_items = $your_json[0]['data'][0]['items'];
 $your_icon = $your_json[0]['data'][0]['icon'];
@@ -112,19 +111,13 @@ $todayTime = date("Y-m-d H:i:s");
 $sql = "UPDATE users SET lastloginDate='" . $todayDate . "' WHERE id=" . $your_id;
 
 mysqli_query($link, $sql);
-
-//$sql = "UPDATE users SET lastlogin='". $todayTime . "' WHERE id=". $your_id;
-
-//mysqli_query($link, $sql);
-
-// END OF COPY FROM login.php ---------------------------- !!! UPDATE BOTH !!!
 ?>
 
 <li class="nav-item dropdown pull-left">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		<img class="profile-picture" style="width: 20px; height: 20px;" src="<?php echo $your_icon; ?>" /> <?php echo $_SESSION["username"] ?>
 	</a>
-	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
+	<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-user"></i> Profile</a></li>
 		<li><a class="dropdown-item" href="/avatar-editor.php"><i class="far fa-user-tag"></i> Avatar Editor</a></li>
 		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#friends"><i class="far fa-users"></i> Friends</a></li>
@@ -144,11 +137,11 @@ mysqli_query($link, $sql);
 	</ul>
 </li>
 
-<li class="nav-item dropdown pull-right">
+<li class="nav-item dropdown pull-left">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-money-bill-wave"></i> <?php echo htmlspecialchars(number_format_short($your_currency)); ?>
 	</a>
-	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink">
+	<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink" style="left: -28%;">
 		<li><a class="dropdown-item" href="/account/currency.php"><?php echo htmlspecialchars(number_format_comma($your_currency)) ?> <?php echo htmlspecialchars($currency_name) ?></a></li>
 		<li><a class="dropdown-item" href="/currency.php">Buy <?php echo htmlspecialchars($currency_name) ?></a></li>
 	</ul>

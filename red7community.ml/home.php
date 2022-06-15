@@ -19,6 +19,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
 	exit;
 }
+
+$premium = "";
+$adminCSS = "";
+$verified = "";
+$shownName = "";
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +38,33 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	<link rel="stylesheet" href="/assets/css/style.css">
 
 	<script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
+
+	<?php
+	if (str_contains($your_membership, "Premium")) {
+		$premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
+	}
+	
+	if ($your_isAdmin == 1) {
+		$adminCSS = 'class="title-rainbow-lr"';
+	}
+	
+	if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) {
+		$shownName = htmlspecialchars($your_displayname);
+	} else {
+		$shownName = $your_username;
+	}
+	
+	if ($your_isVerified == 1) {
+		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
+	}
+
+	$usernameText = $premium. "<span ". $adminCSS. ">". $shownName. "</span>". $verified;
+	?>
 
 	<?php
 	if (isset($your_isBanned)) {
@@ -56,24 +84,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 		<div class="d-flex align-items-center border-bottom" style="display: inline;">
 			<img src="<?php echo $your_icon; ?>" class="profile-picture" />
 			&nbsp;
-			<?php // I want to rework this mess \\ 
-			?>
-			<h2>Welcome&nbsp;<?php if (str_contains($your_membership, "Premium")) {
-									echo '<img src="' . $premiumIcon . '" class="premium-icon"></img>';
-								} ?>
-				<h2 class="<?php if ($your_isAdmin == 1) {
-								echo 'title-rainbow-lr';
-							} else {
-							} ?>"> <?php if ($your_displayname != "" && $your_displayname != "[]" && !empty($your_displayname)) {
-										echo htmlspecialchars($your_displayname);
-									} else {
-										echo $your_username;
-									} ?></h2>&nbsp;<?php if ($your_isVerified == 1) {
-														echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
-													} ?> &nbsp; <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
-																																			echo '<p><strong style="color: red;">*BANNED*</strong></p>';
-																																		} ?>!
-			</h2>
+			<h2>Welcome <?php echo $usernameText; ?>!</h2>
 		</div>
 
 		<br />
@@ -111,7 +122,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 				}
 			}
 			if ($friends_amt == 0) {
-				echo '<p>This user has no friends yet.</p>';
+				echo '<p>You do not have any friends yet.</p>';
 			}
 			?>
 		</div>

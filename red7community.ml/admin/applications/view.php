@@ -54,6 +54,7 @@ if ($status != 1) {
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <script src="/assets/js/fontawesome.js"></script>
+	<script src="/assets/js/site.js"></script>
 </head>
 
 <body>
@@ -120,10 +121,7 @@ if ($status != 1) {
         <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">
             <input hidden type="text" name="action" value="acceptApplication" />
             <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>" />
-            <input class="btn btn-success" type="submit" name="form_submit" value="Accept Application" onclick="document.getElementById('spinner').style = '';" />
-            <div id="spinner" style="display: none;" class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+            <input class="btn btn-success" type="submit" name="form_submit" value="Accept Application" onclick="spin();" />
         </form>
         <br />
         <fieldset>
@@ -133,10 +131,7 @@ if ($status != 1) {
                 </br>
                 <input hidden type="text" name="action" value="denyApplication" />
                 <input hidden type="text" name="id" value="<?php echo $_GET['id']; ?>" />
-                <input class="btn btn-success" type="submit" name="form_submit" value="Deny Application" onclick="document.getElementById('spinner2').style = '';" />
-                <div id="spinner2" style="display: none;" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <input class="btn btn-success" type="submit" name="form_submit" value="Deny Application" onclick="spin();" />
             </form>
         </fieldset>
     </div>
