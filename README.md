@@ -24,7 +24,7 @@ RED7Community is a community website where you can find new friends and play gam
 **_Steps:_**
 1. [Download](https://github.com/RED7Studios/RED7Community/releases/latest) the latest release zip file.
 2. Extract it to your website directory.
-3. Edit the assets/config.php file to fit your purposes.
+3. Use the built in installer.
 4. Done!
 
 ## ~~Default Credentials~~
