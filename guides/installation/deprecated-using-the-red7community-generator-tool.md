@@ -1,4 +1,4 @@
-# Using the RED7Community Generator tool
+# DEPRECATED : Using the RED7Community Generator tool
 
 Launch the program.
 
