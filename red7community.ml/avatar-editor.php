@@ -51,8 +51,8 @@ if (isset($_GET["page"])) {
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="/assets/css/style.css">
-	<script src="/assets/js/fontawesome.js"></script>
-	<script src="/assets/js/site.js"></script>
+	<script defer src="/assets/js/fontawesome.js"></script>
+	<script defer src="/assets/js/site.js"></script>
 	<style>
 		#c {
 			width: 50%;

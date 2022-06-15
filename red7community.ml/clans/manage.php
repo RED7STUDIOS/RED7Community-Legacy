@@ -78,10 +78,10 @@ if ($_SESSION['id'] != $owner) {
 
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <script src="/assets/js/fontawesome.js"></script>
-    <script src="/assets/js/site.js"></script>
+    <script defer src="/assets/js/fontawesome.js"></script>
+    <script defer src="/assets/js/site.js"></script>
 
-    <script src="/assets/js/relation.js"></script>
+    <script defer src="/assets/js/relation.js"></script>
 
     <style>
         .blok {
