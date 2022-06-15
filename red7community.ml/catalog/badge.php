@@ -15,17 +15,17 @@ $data = file_get_contents($API_URL . '/badge.php?api=getbyid&id=' . htmlspecialc
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted")) {
-	$json_a = json_decode($data, true);
+	$json = json_decode($data, true);
 
 	$id = htmlspecialchars($_GET['id']);
-	$name = $json_a[0]['data'][0]['displayname'];
+	$name = $json[0]['data'][0]['displayname'];
 
-	$description = $json_a[0]['data'][0]['description'];
+	$description = $json[0]['data'][0]['description'];
 
 	if ($description == "") {
 		$description = "This catalog item does not have a description.";
 	}
-	$icon = $json_a[0]['data'][0]['icon'];
+	$icon = $json[0]['data'][0]['icon'];
 } else {
 	$name = "Not Found";
 }

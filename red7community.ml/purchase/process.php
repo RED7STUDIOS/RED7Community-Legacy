@@ -17,7 +17,7 @@ if (!isset($_SESSION)) {
 $allowGifts = "";
 
 $your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
-$your_json_a = json_decode($your_data, true);
+$your_json = json_decode($your_data, true);
 $your_currency = $your_json_a[0]['data'][0]['currency'];
 $your_membership = $your_json_a[0]['data'][0]['membership'];
 
@@ -28,12 +28,12 @@ if ($_POST["giftUser"] == "" && empty($_POST["giftUser"])) {
 } else {
 	$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["giftUser"]);
 
-	$json_a = json_decode($data, true);
+	$json = json_decode($data, true);
 
-	$user = $json_a[0]['data'][0]['id'];
-	$currencyAmount = $json_a[0]['data'][0]['currency'];
-	$membership = $json_a[0]['data'][0]['membership'];
-	$allowGifts = $json_a[0]['data'][0]['allowGifts'];
+	$user = $json[0]['data'][0]['id'];
+	$currencyAmount = $json[0]['data'][0]['currency'];
+	$membership = $json[0]['data'][0]['membership'];
+	$allowGifts = $json[0]['data'][0]['allowGifts'];
 }
 
 //check if stripe token exist to proceed with payment
@@ -132,7 +132,7 @@ if (!isset($_SESSION)) {
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-	header("location: login.php?u=" . $_SERVER["REQUEST_URI"]);
+	header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
 	exit;
 }
 ?>

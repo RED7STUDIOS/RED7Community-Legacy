@@ -63,9 +63,9 @@ $items = $json_a_main[0]['data'][0]['items'];
 
 			$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
 
-			$json_a = json_decode($data, true);
+			$json = json_decode($data, true);
 
-			$id = $json_a[0]['data'][0]['id'];
+			$id = $json[0]['data'][0]['id'];
 
 			$items_before = json_decode($items, true);
 

@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-	header("location: login.php?u=" . $_SERVER["REQUEST_URI"]);
+	header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
 	exit;
 }
 ?>
@@ -84,18 +84,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 			$users = $REL->getUsers();
 			$friends = $REL->getFriends($_SESSION['id']);
+			$friends_amt = 0;
 
 			if ($friends != "" && $friends != "[]" && !empty($friends)) {
 				foreach ($users as $id => $name) {
 					if (isset($friends['f'][$id])) {
+						$friends_amt = $friends_amt + 1;
 						$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $name);
 
-						$json_a = json_decode($data, true);
+						$json = json_decode($data, true);
 
-						$friend_id = $json_a[0]['data'][0]['id'];
-						$friend_name = $json_a[0]['data'][0]['username'];
-						$friend_icon = $json_a[0]['data'][0]['icon'];
-						$friend_dsp = $json_a[0]['data'][0]['displayname'];
+						$friend_id = $json[0]['data'][0]['id'];
+						$friend_name = $json[0]['data'][0]['username'];
+						$friend_icon = $json[0]['data'][0]['icon'];
+						$friend_dsp = $json[0]['data'][0]['displayname'];
 
 						if ($friend_dsp == null || $friend_dsp == "") {
 							$friend_f = htmlspecialchars($name);
@@ -106,7 +108,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 						echo '<div class="col profile-list-card"><a href="/users/profile.php?id=' . $friend_id . '" class="profile-list"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="' . $friend_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . $friend_f . '</h6> <small><b>(@<small class="profile-list-title">' . htmlspecialchars($name) . '</small>)</b></small></div></div></a></div>';
 					}
 				}
-			} else {
+			}
+			if ($friends_amt == 0) {
 				echo '<p>This user has no friends yet.</p>';
 			}
 			?>

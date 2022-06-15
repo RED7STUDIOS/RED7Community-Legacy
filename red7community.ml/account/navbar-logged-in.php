@@ -19,11 +19,11 @@ if (!isset($_SESSION)) {
 
 $your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
 
-$your_json_a = json_decode($your_data, true);
+$your_json = json_decode($your_data, true);
 
 $your_id = $_SESSION['id'];
-$your_username = $your_json_a[0]['data'][0]['username'];
-$your_displayname = $your_json_a[0]['data'][0]['displayname'];
+$your_username = $your_json[0]['data'][0]['username'];
+$your_displayname = $your_json[0]['data'][0]['displayname'];
 
 $your_email = "";
 
@@ -36,25 +36,25 @@ if (mysqli_num_rows($result) > 0) {
 	}
 }
 
-$your_description = $your_json_a[0]['data'][0]['description'];
-$your_created_at = $your_json_a[0]['data'][0]['created_at'];
-$your_lastLogin = $your_json_a[0]['data'][0]['lastLogin'];
-$your_lastLoginDate = $your_json_a[0]['data'][0]['lastLoginDate'];
-$your_currency = $your_json_a[0]['data'][0]['currency'];
-$your_badges = $your_json_a[0]['data'][0]['badges'];
-$your_membership = $your_json_a[0]['data'][0]['membership'];
-$your_isBanned = $your_json_a[0]['data'][0]['isBanned'];
-$your_banReason = $your_json_a[0]['data'][0]['bannedReason'];
-$your_banDate = $your_json_a[0]['data'][0]['bannedDate'];
-$your_isAdmin = $your_json_a[0]['data'][0]['isAdmin'];
-$your_isVerified = $your_json_a[0]['data'][0]['isVerified'];
-$your_followers = $your_json_a[0]['data'][0]['followers'];
-$your_following = $your_json_a[0]['data'][0]['following'];
-//$your_following_clans = $your_json_a[0]['data'][0]['following_clans'];
-$your_clans = $your_json_a[0]['data'][0]['clans'];
-$your_items = $your_json_a[0]['data'][0]['items'];
-$your_icon = $your_json_a[0]['data'][0]['icon'];
-$your_role = $your_json_a[0]['data'][0]['role'];
+$your_description = $your_json[0]['data'][0]['description'];
+$your_created_at = $your_json[0]['data'][0]['created_at'];
+$your_lastLogin = $your_json[0]['data'][0]['lastLogin'];
+$your_lastLoginDate = $your_json[0]['data'][0]['lastLoginDate'];
+$your_currency = $your_json[0]['data'][0]['currency'];
+$your_badges = $your_json[0]['data'][0]['badges'];
+$your_membership = $your_json[0]['data'][0]['membership'];
+$your_isBanned = $your_json[0]['data'][0]['isBanned'];
+$your_banReason = $your_json[0]['data'][0]['bannedReason'];
+$your_banDate = $your_json[0]['data'][0]['bannedDate'];
+$your_isAdmin = $your_json[0]['data'][0]['isAdmin'];
+$your_isVerified = $your_json[0]['data'][0]['isVerified'];
+$your_followers = $your_json[0]['data'][0]['followers'];
+$your_following = $your_json[0]['data'][0]['following'];
+//$your_following_clans = $your_json[0]['data'][0]['following_clans'];
+$your_clans = $your_json[0]['data'][0]['clans'];
+$your_items = $your_json[0]['data'][0]['items'];
+$your_icon = $your_json[0]['data'][0]['icon'];
+$your_role = $your_json[0]['data'][0]['role'];
 
 // END OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 

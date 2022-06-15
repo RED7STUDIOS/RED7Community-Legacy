@@ -114,3 +114,87 @@ $getApplication = function ($id) use ($link) {
 		}
 	}
 };
+
+$getUserFromApplicationId = function ($id) use ($link) {
+	$sql_query = "SELECT sender_id FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["sender_id"];
+		}
+	}
+};
+
+$getApplicationReason = function ($id) use ($link) {
+	$sql_query = "SELECT reason FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["reason"];
+		}
+	}
+};
+
+$getApplicationEmail = function ($id) use ($link) {
+	$sql_query = "SELECT preferred_email FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["preferred_email"];
+		}
+	}
+};
+
+$getApplicationFullName = function ($id) use ($link) {
+	$sql_query = "SELECT full_name FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["full_name"];
+		}
+	}
+};
+
+$getApplicationSubmittedDate = function ($id) use ($link) {
+	$sql_query = "SELECT submitted FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["submitted"];
+		}
+	}
+};
+
+$getApplicationStatus = function ($id) use ($link) {
+	$sql_query = "SELECT accepted FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["accepted"];
+		}
+	}
+};
+
+$getApplicationDeniedReason = function ($id) use ($link) {
+	$sql_query = "SELECT deniedReason FROM applications WHERE id = " . $id;
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["deniedReason"];
+		}
+	}
+};

@@ -29,14 +29,14 @@ define('DB_USERNAME', '<DB_USER>');
 define('DB_PASSWORD', '<DB_PASSWORD>');
 define('DB_NAME', '<DB_NAME>');
 
-$SMTP_Debug  = 1;  
+$SMTP_Debug  = 0;
 $SMTP_Auth   = TRUE;
-$SMTP_Secure = "tls";
-$SMTP_Port       = 587;
+$SMTP_Secure = "ssl";
+$SMTP_Port       = 465;
 $SMTP_Host       = "smtp.gmail.com";
-$SMTP_Username = 'red7community';
-$SMTP_Password = '';
-$SMTP_From = "red7community@gmail.com";
+$SMTP_Username = 'USERNAME';
+$SMTP_Password = 'APP_PASSWORD';
+$SMTP_From = "USERNAME@gmail.com";
 
 /* Attempt to connect to MySQL database with the credentials. */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

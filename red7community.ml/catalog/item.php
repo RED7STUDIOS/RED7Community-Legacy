@@ -15,35 +15,35 @@ $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlsp
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted")) {
-    $json_a = json_decode($data, true);
+    $json = json_decode($data, true);
 
     $id = htmlspecialchars($_GET['id']);
-    $fullname = $json_a[0]['data'][0]['name'];
-    $name = $json_a[0]['data'][0]['displayname'];
+    $fullname = $json[0]['data'][0]['name'];
+    $name = $json[0]['data'][0]['displayname'];
 
-    $description = $json_a[0]['data'][0]['description'];
+    $description = $json[0]['data'][0]['description'];
 
     if ($description == "") {
         $description = "This catalog item does not have a description.";
     }
 
-    $created = $json_a[0]['data'][0]['created'];
-    $limited = $json_a[0]['data'][0]['isLimited'];
-    $copies = $json_a[0]['data'][0]['copies'];
-    $membershipRequired = $json_a[0]['data'][0]['membershipRequired'];
-    $owners = $json_a[0]['data'][0]['owners'];
-    $price = $json_a[0]['data'][0]['price'];
-    $type = $json_a[0]['data'][0]['type'];
-    $icon = $json_a[0]['data'][0]['icon'];
-    $creator = $json_a[0]['data'][0]['creator'];
-    $obj = $json_a[0]['data'][0]['obj'];
-    $mtl = $json_a[0]['data'][0]['mtl'];
+    $created = $json[0]['data'][0]['created'];
+    $limited = $json[0]['data'][0]['isLimited'];
+    $copies = $json[0]['data'][0]['copies'];
+    $membershipRequired = $json[0]['data'][0]['membershipRequired'];
+    $owners = $json[0]['data'][0]['owners'];
+    $price = $json[0]['data'][0]['price'];
+    $type = $json[0]['data'][0]['type'];
+    $icon = $json[0]['data'][0]['icon'];
+    $creator = $json[0]['data'][0]['creator'];
+    $obj = $json[0]['data'][0]['obj'];
+    $mtl = $json[0]['data'][0]['mtl'];
 
     $data_u = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $creator);
 
-    $json_a = json_decode($data_u, true);
+    $json = json_decode($data_u, true);
 
-    $creator_name = $json_a[0]['data'][0]['username'];
+    $creator_name = $json[0]['data'][0]['username'];
 } else {
     $name = "Not Found";
 }
@@ -234,12 +234,12 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                                     foreach ($vals as $key => $mydata) {
                                         $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $key);
 
-                                        $json_a = json_decode($data, true);
+                                        $json = json_decode($data, true);
 
-                                        $owner_id = $json_a[0]['data'][0]['id'];
-                                        $owner_icon = $json_a[0]['data'][0]['icon'];
-                                        $owner_name = $json_a[0]['data'][0]['username'];
-                                        $owner_displayname = $json_a[0]['data'][0]['displayname'];
+                                        $owner_id = $json[0]['data'][0]['id'];
+                                        $owner_icon = $json[0]['data'][0]['icon'];
+                                        $owner_name = $json[0]['data'][0]['username'];
+                                        $owner_displayname = $json[0]['data'][0]['displayname'];
 
                                         if ($owner_displayname == null || $owner_displayname == "") {
                                             $owner_f = htmlspecialchars($owner_name);

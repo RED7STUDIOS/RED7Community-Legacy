@@ -18,21 +18,21 @@ $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialch
 
 // Decode the json response.
 if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
-    $json_a = json_decode($data, true);
+    $json = json_decode($data, true);
 
-    $isBanned = $json_a[0]['data'][0]['isBanned'];
+    $isBanned = $json[0]['data'][0]['isBanned'];
 
     $id = htmlspecialchars($_GET['id']);
-    $name = $json_a[0]['data'][0]['name'];
+    $name = $json[0]['data'][0]['name'];
 
-    $real_displayname = $json_a[0]['data'][0]['displayname'];
-    $real_description = $json_a[0]['data'][0]['description'];
-    $currency = $json_a[0]['data'][0]['currency'];
+    $real_displayname = $json[0]['data'][0]['displayname'];
+    $real_description = $json[0]['data'][0]['description'];
+    $currency = $json[0]['data'][0]['currency'];
 
     if ($isBanned != 1) {
-        $displayname = $filterwords($json_a[0]['data'][0]['displayname']);
-        $description = $filterwords($json_a[0]['data'][0]['description']);
-        $icon = $json_a[0]['data'][0]['icon'];
+        $displayname = $filterwords($json[0]['data'][0]['displayname']);
+        $description = $filterwords($json[0]['data'][0]['description']);
+        $icon = $json[0]['data'][0]['icon'];
     } else {
         $displayname = "[ CONTENT REMOVED ]";
         $description = "[ CONTENT REMOVED ]";
@@ -43,13 +43,13 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
         $description = "This clan has not set a description.";
     }
 
-    $created_at = $json_a[0]['data'][0]['created_at'];
-    $banReason = $json_a[0]['data'][0]['bannedReason'];
-    $banDate = $json_a[0]['data'][0]['bannedDate'];
-    $members = $json_a[0]['data'][0]['members'];
-    $isVerified = $json_a[0]['data'][0]['isVerified'];
-    $isSpecial = $json_a[0]['data'][0]['isSpecial'];
-    $owner = $json_a[0]['data'][0]['owner'];
+    $created_at = $json[0]['data'][0]['created_at'];
+    $banReason = $json[0]['data'][0]['bannedReason'];
+    $banDate = $json[0]['data'][0]['bannedDate'];
+    $members = $json[0]['data'][0]['members'];
+    $isVerified = $json[0]['data'][0]['isVerified'];
+    $isSpecial = $json[0]['data'][0]['isSpecial'];
+    $owner = $json[0]['data'][0]['owner'];
 } else {
     $name = "Not Found";
 }
@@ -58,10 +58,10 @@ $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialch
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-    $json_a = json_decode($data, true);
+    $json = json_decode($data, true);
 
     $id_owner = htmlspecialchars($_GET['id']);
-    $name_owner = $json_a[0]['data'][0]['username'];
+    $name_owner = $json[0]['data'][0]['username'];
 }
 
 if (isset($_GET["page"])) {
@@ -330,12 +330,12 @@ if (isset($_GET["page"])) {
                             foreach (json_decode($members) as $mydata) {
                                 $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $mydata);
 
-                                $json_a = json_decode($data, true);
+                                $json = json_decode($data, true);
 
-                                $member_id = $json_a[0]['data'][0]['id'];
-                                $member_name = $json_a[0]['data'][0]['username'];
-                                $member_icon = $json_a[0]['data'][0]['icon'];
-                                $member_dsp = $json_a[0]['data'][0]['displayname'];
+                                $member_id = $json[0]['data'][0]['id'];
+                                $member_name = $json[0]['data'][0]['username'];
+                                $member_icon = $json[0]['data'][0]['icon'];
+                                $member_dsp = $json[0]['data'][0]['displayname'];
 
                                 if ($member_dsp == null || $member_dsp == "") {
                                     $member_f = htmlspecialchars($name);

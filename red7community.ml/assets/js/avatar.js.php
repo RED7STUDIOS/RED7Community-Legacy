@@ -72,11 +72,11 @@
 		<?php
 		$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $face);
 
-		$json_a = json_decode($data, true);
+		$json = json_decode($data, true);
 
 		$id = $face;
-		$name = $json_a[0]['data'][0]['displayname'];
-		$icon = $json_a[0]['data'][0]['texture'];
+		$name = $json[0]['data'][0]['displayname'];
+		$icon = $json[0]['data'][0]['texture'];
 
 		$data_shirt = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $shirt);
 
@@ -149,10 +149,10 @@
 			foreach (json_decode($hats, true) as $hat) {
 				$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
 
-				$json_a = json_decode($data, true);
+				$json = json_decode($data, true);
 
 				$id = $hat;
-				$type = $json_a[0]['data'][0]['type'];
+				$type = $json[0]['data'][0]['type'];
 				if ($type == "Gear") {
 					$armthingy = $STORAGE_URL . "/Avatar/LeftArmUp.obj";
 				}
@@ -267,12 +267,12 @@
 		foreach (json_decode($hats, true) as $hat) {
 			$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
 
-			$json_a = json_decode($data, true);
+			$json = json_decode($data, true);
 
 			$id = $hat;
-			$name = $json_a[0]['data'][0]['displayname'];
-			$obj = $json_a[0]['data'][0]['obj'];
-			$mtl = $json_a[0]['data'][0]['mtl'];
+			$name = $json[0]['data'][0]['displayname'];
+			$obj = $json[0]['data'][0]['obj'];
+			$mtl = $json[0]['data'][0]['mtl'];
 
 			echo '{
 			const mtlLoader = new MTLLoader();

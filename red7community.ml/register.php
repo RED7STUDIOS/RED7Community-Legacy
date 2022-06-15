@@ -94,8 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Attempt to execute the prepared statement
 			if (mysqli_stmt_execute($stmt)) {
 				$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $username);
-				$json_a = json_decode($data, true);
-				$id = $json_a[0]['data'][0]['id'];
+				$json = json_decode($data, true);
+				$id = $json[0]['data'][0]['id'];
 
 				// Prepare an insert statement
 				$sql = 'INSERT INTO avatars (ownerid, items, shirt, pants, face) VALUES (' . $id . ', "[]", 9, 8, 5)';
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					// Attempt to execute the prepared statement
 					if (mysqli_stmt_execute($stmt)) {
 						// Redirect to login page
-						header("location: login.php?u=" . $_SERVER["REQUEST_URI"]);
+						header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
 					} else {
 						echo "Something went wrong. Please try again later.";
 					}

@@ -1,5 +1,4 @@
 <?php
-
 if (!isset($_SESSION)) {
 	// Initialize the session
 	session_start();
@@ -18,9 +17,9 @@ $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-	$json_a = json_decode($data, true);
+	$json = json_decode($data, true);
 
-	$role = $json_a[0]['data'][0]['role'];
+	$role = $json[0]['data'][0]['role'];
 }
 
 if ($role == 0) {
@@ -36,6 +35,32 @@ function post($key)
 }
 
 $sql = "";
+
+if ($role >= 1) {
+	if (str_contains($_POST['action'], "Application")) {
+		$id = $_POST['id'];
+		$preferred_email = $getApplicationEmail($id);
+		$full_name = $getApplicationFullName($id);
+		$user = $getUserFromApplicationId($id);
+
+		if ($_POST['action'] == "acceptApplication") {
+			$sql = "UPDATE users SET isVerified = 1 WHERE id = " . $user;
+			$result = mysqli_query($link, $sql);
+
+			$sql = "UPDATE applications SET accepted = 1 WHERE id = '" . $_POST['id'] . "'";
+			$sendEmail($user, $ROOT_URL. "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
+		} else if ($_POST['action'] == "denyApplication") {
+			$sql = "UPDATE users SET isVerified = 0 WHERE id = " . $user;
+			$result = mysqli_query($link, $sql);
+
+			$sql = "UPDATE applications SET accepted = 0 WHERE id = '" . $_POST['id'] . "'";
+			$result = mysqli_query($link, $sql);
+
+			$sql = "UPDATE applications SET deniedReason = '" . $_POST['reason'] . "' WHERE id = '" . $_POST['id'] . "'";
+			$sendEmail($user, $ROOT_URL. "/verify.php", "verification-denied", $full_name, $_POST['reason'], $preferred_email, false);
+		}
+	}
+}
 
 if ($role >= 2) {
 	if ($_POST['action'] == "banningUser") {
@@ -137,9 +162,9 @@ if ($role >= 2) {
 
 		// Decode the json response.
 		if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-			$json_a = json_decode($data, true);
+			$json = json_decode($data, true);
 
-			$creator = $json_a[0]['data'][0]['displayname'];
+			$creator = $json[0]['data'][0]['displayname'];
 		}
 
 		// Prepare an insert statement
@@ -162,9 +187,9 @@ if ($role >= 2) {
 
 		// Decode the json response.
 		if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-			$json_a = json_decode($data, true);
+			$json = json_decode($data, true);
 
-			$creator = $json_a[0]['data'][0]['id'];
+			$creator = $json[0]['data'][0]['id'];
 		}
 
 		$createdFormat = mktime(
@@ -199,6 +224,7 @@ if ($role >= 2) {
 		$sql = "INSERT INTO catalog (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . $_POST["displayName"] . "', '" . $_POST["description"] . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
 	}
 }
+
 if ($role == 3) {
 	if ($_POST['action'] == "roleChange") {
 		if ($_POST["value"] == "user") {

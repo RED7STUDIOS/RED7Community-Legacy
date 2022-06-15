@@ -4,7 +4,7 @@ if (file_exists("assets/config.php")) {
 		header("location: home.php");
 		exit;
 	} else {
-		header("location: login.php?u=/home.php");
+		header("location: /login.php?u=/home.php");
 		exit;
 	}
 } else {

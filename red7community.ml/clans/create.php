@@ -89,9 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Decode the json response.
                 if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
-                    $json_a = json_decode($data, true);
+                    $json = json_decode($data, true);
 
-                    $id = $json_a[0]['data'][0]['id'];
+                    $id = $json[0]['data'][0]['id'];
                 }
 
                 // Redirect to login page

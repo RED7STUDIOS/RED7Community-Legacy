@@ -38,13 +38,13 @@ if ($_POST['action'] == "changeDisplayName") {
     $sql = "UPDATE clans SET displayname = '" . $_POST["displayname"] . "', description='" . $_POST["description"] . "' WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
 } else if ($_POST['action'] == "payoutClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
-    $json_a = json_decode($data, true);
-    $currency = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $currency = $json[0]['data'][0]['currency'];
 
     $data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["username"]);
-    $json_a = json_decode($data, true);
-    $id = $json_a[0]['data'][0]['id'];
-    $currency_user = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $id = $json[0]['data'][0]['id'];
+    $currency_user = $json[0]['data'][0]['currency'];
 
     if ($currency >= $_POST["amount"]) {
         $sql_c = "UPDATE users SET currency = " . ($currency_user + $_POST["amount"]) . " WHERE id = " . $id;
@@ -56,13 +56,13 @@ if ($_POST['action'] == "changeDisplayName") {
     }
 } else if ($_POST['action'] == "addFundsToClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
-    $json_a = json_decode($data, true);
-    $currency = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $currency = $json[0]['data'][0]['currency'];
 
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
-    $json_a = json_decode($data, true);
-    $id = $json_a[0]['data'][0]['id'];
-    $currency_user = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $id = $json[0]['data'][0]['id'];
+    $currency_user = $json[0]['data'][0]['currency'];
 
     if ($currency_user >= $_POST["amount"]) {
         $sql_c = "UPDATE users SET currency = " . ($currency_user - $_POST["amount"]) . " WHERE id = " . $id;
@@ -74,8 +74,8 @@ if ($_POST['action'] == "changeDisplayName") {
     }
 } else if ($_POST['action'] == "joinClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
-    $json_a = json_decode($data, true);
-    $members = $json_a[0]['data'][0]['members'];
+    $json = json_decode($data, true);
+    $members = $json[0]['data'][0]['members'];
 
     $members = json_decode($members);
 
@@ -89,13 +89,13 @@ if ($_POST['action'] == "changeDisplayName") {
 
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
-    $json_a = json_decode($data, true);
-    $currency = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $currency = $json[0]['data'][0]['currency'];
 
     $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $_POST['value']);
-    $json_a = json_decode($data, true);
-    $price = $json_a[0]['data'][0]['price'];
-    $owners = $json_a[0]['data'][0]['owners'];
+    $json = json_decode($data, true);
+    $price = $json[0]['data'][0]['price'];
+    $owners = $json[0]['data'][0]['owners'];
 
     if ($currency >= $price) {
         $sql_query = "SELECT items FROM users WHERE id = '" . $your_id . "'";
@@ -134,24 +134,24 @@ if ($_POST['action'] == "changeDisplayName") {
 
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
-    $json_a = json_decode($data, true);
-    $your_currency = $json_a[0]['data'][0]['currency'];
+    $json = json_decode($data, true);
+    $your_currency = $json[0]['data'][0]['currency'];
 
     $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . $_POST['value']);
-    $json_a = json_decode($data, true);
+    $json = json_decode($data, true);
 
-    $code_id = $json_a[0]['data'][0]['id'];
-    $code_name = $json_a[0]['data'][0]['name'];
-    $code_currency = $json_a[0]['data'][0]['currency'];
-    $code_items = $json_a[0]['data'][0]['items'];
+    $code_id = $json[0]['data'][0]['id'];
+    $code_name = $json[0]['data'][0]['name'];
+    $code_currency = $json[0]['data'][0]['currency'];
+    $code_items = $json[0]['data'][0]['items'];
 
     if ($code_items != "[]") {
         if ($code_items != "" && $code_items != "[]" && !empty($code_items)) {
             foreach (json_decode($code_items) as $mydata) {
                 $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $mydata);
-                $json_a = json_decode($data, true);
-                $price = $json_a[0]['data'][0]['price'];
-                $owners = $json_a[0]['data'][0]['owners'];
+                $json = json_decode($data, true);
+                $price = $json[0]['data'][0]['price'];
+                $owners = $json[0]['data'][0]['owners'];
 
                 $sql_query = "SELECT items FROM users WHERE id = '" . $your_id . "'";
                 $result_e = mysqli_query($link, $sql_query);

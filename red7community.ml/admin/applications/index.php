@@ -18,6 +18,26 @@ if (isset($_GET["page"])) {
 } else {
     $page = 1;
 };
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
+    exit;
+}
+
+$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+
+// Decode the json response.
+if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+    $json = json_decode($data, true);
+
+    $isAdmin = $json[0]['data'][0]['isAdmin'];
+}
+
+if ($isAdmin != 1) {
+    header("HTTP/1.1 403 Forbidden");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +93,7 @@ if (isset($_GET["page"])) {
                 $results_per_page = 21; // number of results per page
                 
                 $start_from = ($page - 1) * $results_per_page;
-                $sql = "SELECT * FROM applications ORDER BY id ASC LIMIT " . $start_from . ", " . $results_per_page;
+                $sql = "SELECT * FROM applications WHERE accepted = 0 ORDER BY id ASC LIMIT " . $start_from . ", " . $results_per_page;
                 $result = mysqli_query($link, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)) {

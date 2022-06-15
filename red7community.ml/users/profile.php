@@ -18,20 +18,19 @@ $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialch
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-    $json_a = json_decode($data, true);
+    $json = json_decode($data, true);
 
-    $isBanned = $json_a[0]['data'][0]['isBanned'];
+    $isBanned = $json[0]['data'][0]['isBanned'];
 
     $id = htmlspecialchars($_GET['id']);
-    $username = $json_a[0]['data'][0]['username'];
-
-    $real_displayname = $json_a[0]['data'][0]['displayname'];
-    $real_description = $json_a[0]['data'][0]['description'];
+    $username = $json[0]['data'][0]['username'];
 
     if ($isBanned != 1) {
-        $displayname = $filterwords($json_a[0]['data'][0]['displayname']);
-        $description = $filterwords($json_a[0]['data'][0]['description']);
-        $icon = $json_a[0]['data'][0]['icon'];
+        $real_displayname = $json[0]['data'][0]['displayname'];
+        $real_description = $json[0]['data'][0]['description'];
+        $displayname = $filterwords($real_displayname);
+        $description = $filterwords($real_description);
+        $icon = $json[0]['data'][0]['icon'];
     } else {
         $displayname = "[ CONTENT REMOVED ]";
         $description = "[ CONTENT REMOVED ]";
@@ -42,26 +41,26 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
         $description = "This user has not set a description.";
     }
 
-    $created_at = $json_a[0]['data'][0]['created_at'];
-    $membership = $json_a[0]['data'][0]['membership'];
-    $banReason = $json_a[0]['data'][0]['bannedReason'];
-    $banDate = $json_a[0]['data'][0]['bannedDate'];
-    $isAdmin = $json_a[0]['data'][0]['isAdmin'];
-    $isVerified = $json_a[0]['data'][0]['isVerified'];
-    $items = $json_a[0]['data'][0]['items'];
-    $clans = $json_a[0]['data'][0]['clans'];
-    $badges = $json_a[0]['data'][0]['badges'];
+    $created_at = $json[0]['data'][0]['created_at'];
+    $membership = $json[0]['data'][0]['membership'];
+    $banReason = $json[0]['data'][0]['bannedReason'];
+    $banDate = $json[0]['data'][0]['bannedDate'];
+    $isAdmin = $json[0]['data'][0]['isAdmin'];
+    $isVerified = $json[0]['data'][0]['isVerified'];
+    $items = $json[0]['data'][0]['items'];
+    $clans = $json[0]['data'][0]['clans'];
+    $badges = $json[0]['data'][0]['badges'];
 
     $data_avatar = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . htmlspecialchars($_GET['id']));
 
-    $json_a_avatar = json_decode($data_avatar, true);
+    $json_avatar = json_decode($data_avatar, true);
 
-    $hats = $json_a_avatar[0]['data'][0]['items'];
-    $shirt = $json_a_avatar[0]['data'][0]['shirt'];
-    $pants = $json_a_avatar[0]['data'][0]['pants'];
-    $face = $json_a_avatar[0]['data'][0]['face'];
+    $hats = $json_avatar[0]['data'][0]['items'];
+    $shirt = $json_avatar[0]['data'][0]['shirt'];
+    $pants = $json_avatar[0]['data'][0]['pants'];
+    $face = $json_avatar[0]['data'][0]['face'];
 
-    $role = $json_a[0]['data'][0]['role'];
+    $role = $json[0]['data'][0]['role'];
 
     if ($role == 0) {
         $role = "User";
@@ -463,12 +462,12 @@ if (isset($_GET["page"])) {
                                 if (isset($friends['f'][$id])) {
                                     $data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $name);
 
-                                    $json_a = json_decode($data, true);
+                                    $json = json_decode($data, true);
 
-                                    $friend_id = $json_a[0]['data'][0]['id'];
-                                    $friend_name = $json_a[0]['data'][0]['username'];
-                                    $friend_icon = $json_a[0]['data'][0]['icon'];
-                                    $friend_dsp = $json_a[0]['data'][0]['displayname'];
+                                    $friend_id = $json[0]['data'][0]['id'];
+                                    $friend_name = $json[0]['data'][0]['username'];
+                                    $friend_icon = $json[0]['data'][0]['icon'];
+                                    $friend_dsp = $json[0]['data'][0]['displayname'];
 
                                     if ($friend_dsp == null || $friend_dsp == "") {
                                         $friend_f = htmlspecialchars($name);
@@ -496,11 +495,11 @@ if (isset($_GET["page"])) {
                             foreach (json_decode($badges) as $mydata) {
                                 $data = file_get_contents($API_URL . '/badge.php?api=getbyid&id=' . $mydata);
 
-                                $json_a = json_decode($data, true);
+                                $json = json_decode($data, true);
 
-                                $badge_id = $json_a[0]['data'][0]['id'];
-                                $badge_name = $json_a[0]['data'][0]['displayname'];
-                                $badge_icon = $json_a[0]['data'][0]['icon'];
+                                $badge_id = $json[0]['data'][0]['id'];
+                                $badge_name = $json[0]['data'][0]['displayname'];
+                                $badge_icon = $json[0]['data'][0]['icon'];
 
                                 echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id=' . htmlspecialchars($badge_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="' . $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($badge_name) . '</h6></div></div></a></div>';
                             }
@@ -523,12 +522,12 @@ if (isset($_GET["page"])) {
                             foreach ($vals as $key => $mydata) {
                                 $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $key);
 
-                                $json_a = json_decode($data, true);
+                                $json = json_decode($data, true);
 
-                                $item_id = $json_a[0]['data'][0]['id'];
-                                $item_propername = $json_a[0]['data'][0]['name'];
-                                $item_name = $json_a[0]['data'][0]['displayname'];
-                                $item_icon = $json_a[0]['data'][0]['icon'];
+                                $item_id = $json[0]['data'][0]['id'];
+                                $item_propername = $json[0]['data'][0]['name'];
+                                $item_name = $json[0]['data'][0]['displayname'];
+                                $item_icon = $json[0]['data'][0]['icon'];
 
                                 $value = htmlspecialchars($vals[$key]);
 
@@ -625,15 +624,15 @@ if (isset($_GET["page"])) {
         <?php
         $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $face);
 
-        $json_a = json_decode($data, true);
+        $json = json_decode($data, true);
 
         $id = $face;
-        $name = $json_a[0]['data'][0]['displayname'];
-        $icon = $json_a[0]['data'][0]['texture'];
+        $name = $json[0]['data'][0]['displayname'];
+        $icon = $json[0]['data'][0]['texture'];
 
         $data_shirt = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $shirt);
 
-        $json_a_shirt = json_decode($data_shirt, true);
+        $json_shirt = json_decode($data_shirt, true);
 
         $shirtid = $shirt;
 
@@ -642,13 +641,13 @@ if (isset($_GET["page"])) {
         if ($shirtid == 0 || $shirtid = 0) {
             $shirticon = "";
         } else {
-            $shirtname = $json_a_shirt[0]['data'][0]['displayname'];
-            $shirticon = $json_a_shirt[0]['data'][0]['texture'];
+            $shirtname = $json_shirt[0]['data'][0]['displayname'];
+            $shirticon = $json_shirt[0]['data'][0]['texture'];
         }
 
         $data_pants = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $pants);
 
-        $json_a_pants = json_decode($data_pants, true);
+        $json_pants = json_decode($data_pants, true);
 
         $pantsid = $pants;
         $pantsicon = "";
@@ -656,8 +655,8 @@ if (isset($_GET["page"])) {
         if ($pantsid == 0 || $pantsid = 0) {
             $pantsicon = "";
         } else {
-            $pantsname = $json_a_shirt[0]['data'][0]['displayname'];
-            $pantsicon = $json_a_shirt[0]['data'][0]['texture'];
+            $pantsname = $json_shirt[0]['data'][0]['displayname'];
+            $pantsicon = $json_shirt[0]['data'][0]['texture'];
         }
         ?>
 
@@ -715,10 +714,10 @@ if (isset($_GET["page"])) {
             foreach (json_decode($hats, true) as $hat) {
                 $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
 
-                $json_a = json_decode($data, true);
+                $json = json_decode($data, true);
 
                 $id = $hat;
-                $type = $json_a[0]['data'][0]['type'];
+                $type = $json[0]['data'][0]['type'];
                 if ($type == "Gear") {
                     $armthingy = $STORAGE_URL . "/Avatar/LeftArmUp.obj";
                 }
@@ -853,12 +852,12 @@ if (isset($_GET["page"])) {
         foreach (json_decode($hats, true) as $hat) {
             $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
 
-            $json_a = json_decode($data, true);
+            $json = json_decode($data, true);
 
             $id = $hat;
-            $name = $json_a[0]['data'][0]['displayname'];
-            $obj = $json_a[0]['data'][0]['obj'];
-            $mtl = $json_a[0]['data'][0]['mtl'];
+            $name = $json[0]['data'][0]['displayname'];
+            $obj = $json[0]['data'][0]['obj'];
+            $mtl = $json[0]['data'][0]['mtl'];
 
             echo '{
 				const mtlLoader = new MTLLoader();

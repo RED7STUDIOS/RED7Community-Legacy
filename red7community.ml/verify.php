@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php?u=" . $_SERVER["REQUEST_URI"]);
+    header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
     exit;
 }
 
@@ -137,7 +137,10 @@ $requirements = 0;
                         <h4 for="reason">Reason</h4>
                         <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ... and I feel that I can contribute to <?php echo $site_name; ?> by ..." required style="width: 70%;"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('spinner').style = '';"><i class="fa-solid fa-envelope"></i> Send Application</button>
+                    <div id="spinner" style="display: none;" class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 </form>
             <?php
             }
