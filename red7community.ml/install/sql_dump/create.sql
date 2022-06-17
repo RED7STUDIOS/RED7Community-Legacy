@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `clans` longtext,
   `icon` varchar(255) DEFAULT '/assets/images/users/default.png',
   `role` int DEFAULT '0',
+  `allowGifts` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
