@@ -33,19 +33,7 @@ if (!isset($_SESSION)) {
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 	<div class="page-content-wrapper">
-		<?php
-		if (isset($your_isBanned)) {
-			if ($your_isBanned == 1) {
-				echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-			}
-		}
-
-		if (isset($maintenanceMode)) {
-			if ($maintenanceMode == "on") {
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-		?>
+		
 		<main class="col-md-9">
 			<?php echo $termsOfService; ?>
 		</main>

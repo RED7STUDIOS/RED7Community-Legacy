@@ -164,20 +164,6 @@ if (isset($_GET["page"])) {
             }
         </script>
 
-        <?php
-        if (isset($your_isBanned)) {
-            if ($your_isBanned == 1) {
-                echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-            }
-        }
-
-        if (isset($maintenanceMode)) {
-            if ($maintenanceMode == "on") {
-                echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-            }
-        }
-        ?>
-
         <main class="page-content-wrapper">
             <div class="d-flex align-items-center border-bottom">
                 <?php
@@ -233,21 +219,26 @@ if (isset($_GET["page"])) {
                 ?>
 
                 <?php
-                if ($owner == $_SESSION['id']) {
-                    echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
+                if (isset($_SESSION['id'])) {
+                    if ($owner == $_SESSION['id']) {
+                        echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
+                    }
                 }
                 ?>
 
                 <?php
                 $d = json_decode($members);
 
-                if (!in_array($_SESSION['id'], $d)) {
-                    echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                        <input hidden type="text" name="action" value="joinClan" />
-                        <input hidden type="text" name="id" value="' . $_GET['id'] . '" />
-                        <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-right-to-bracket"></i> Join Clan</button>
-                    </form>';
+                if (isset($_SESSION['id'])) {
+                    if (!in_array($_SESSION['id'], $d)) {
+                        echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
+                            <input hidden type="text" name="action" value="joinClan" />
+                            <input hidden type="text" name="id" value="' . $_GET['id'] . '" />
+                            <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-right-to-bracket"></i> Join Clan</button>
+                        </form>';
+                    }
                 }
+
                 ?>
 
 

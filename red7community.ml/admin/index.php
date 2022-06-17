@@ -46,13 +46,6 @@ if ($isAdmin != 1) {
 <body>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 
-    <?php
-    if (isset($your_isBanned)) {
-        if ($your_isBanned == 1) {
-            echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-        }
-    }
-    ?>
 
     <div class="page-content-wrapper">
         <script type="text/javascript">

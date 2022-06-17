@@ -61,3 +61,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	}
 }
 ?>
+
+<?php
+if ($_SERVER["REQUEST_URI"] != "/errors/banned.php") {
+	
+
+	if (isset($maintenanceMode)) {
+		if ($maintenanceMode == "on") {
+			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+		}
+	}
+}
+else if ($_SERVER["REQUEST_URI"] == "/errors/banned.php")
+{
+	if (isset($your_isBanned)) {
+		if ($your_isBanned != 1) {
+			echo "<script type='text/javascript'>location.href = '/';</script>";
+		}
+	}
+}
+?>

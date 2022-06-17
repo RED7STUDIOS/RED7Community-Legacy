@@ -66,20 +66,6 @@ $shownName = "";
 	$usernameText = $premium . "<span " . $adminCSS . ">" . $shownName . "</span>" . $verified;
 	?>
 
-	<?php
-	if (isset($your_isBanned)) {
-		if ($your_isBanned == 1) {
-			echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-		}
-	}
-
-	if (isset($maintenanceMode)) {
-		if ($maintenanceMode == "on") {
-			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-		}
-	}
-	?>
-
 	<div class="page-content-wrapper">
 		<div class="d-flex align-items-center border-bottom" style="display: inline;">
 			<img src="<?php echo $your_icon; ?>" class="profile-picture" />

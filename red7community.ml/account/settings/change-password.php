@@ -112,20 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 	<div class="page-content-wrapper">
-		<?php
-		if (isset($your_isBanned)) {
-			if ($your_isBanned == 1) {
-				echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-			}
-		}
-
-		if (isset($maintenanceMode)) {
-			if ($maintenanceMode == "on") {
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-
-		?>
 		<main class="col-lg-10">
 			<h2>Change Password</h2>
 			<p>Please fill out this form to change your password.</p>

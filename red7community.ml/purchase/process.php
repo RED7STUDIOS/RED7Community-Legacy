@@ -18,13 +18,14 @@ $allowGifts = "";
 
 $your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
 $your_json = json_decode($your_data, true);
-$your_currency = $your_json_a[0]['data'][0]['currency'];
-$your_membership = $your_json_a[0]['data'][0]['membership'];
+$your_currency = $your_json[0]['data'][0]['currency'];
+$your_membership = $your_json[0]['data'][0]['membership'];
 
 if ($_POST["giftUser"] == "" && empty($_POST["giftUser"])) {
 	$user = $_SESSION['id'];
 	$currencyAmount = $your_currency;
 	$membership = $your_membership;
+	$allowGifts = 1;
 } else {
 	$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["giftUser"]);
 

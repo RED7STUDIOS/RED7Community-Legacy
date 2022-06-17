@@ -138,15 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 	<div class="page-content-wrapper">
-
-		<?php
-		if (isset($maintenanceMode)) {
-			if ($maintenanceMode == "on") {
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-		?>
-
 		<main class="col-md-9 form-signin">
 			<?php
 			if ($registration == "on") {

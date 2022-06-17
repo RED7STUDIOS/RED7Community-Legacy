@@ -48,15 +48,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
-	<div class="page-content-wrapper">
-		<?php
-		if (isset($maintenanceMode)) {
-			if ($maintenanceMode == "on") {
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-		?>
-		<main class="col-md-9">
+	<div class="page-content-wrapper">		<main class="col-md-9">
 			<div class="d-flex align-items-center border-bottom">
 				<?php
 				if ($name == "Not Found") {

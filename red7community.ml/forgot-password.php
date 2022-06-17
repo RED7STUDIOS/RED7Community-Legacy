@@ -57,14 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
 	<div class="page-content-wrapper">
 
-		<?php
-		if (isset($maintenanceMode)) {
-			if ($maintenanceMode == "on") {
-				echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-			}
-		}
-		?>
-
 		<main class="form-signin">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 				<h3 class="fw-normal">Forgot Password</h3>

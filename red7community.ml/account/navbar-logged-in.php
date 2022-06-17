@@ -124,10 +124,14 @@ mysqli_query($link, $sql);
 		<li><a class="dropdown-item" href="/avatar-editor.php"><i class="far fa-user-tag"></i> Avatar Editor</a></li>
 		<li><a class="dropdown-item" href="/redeem.php"><i class="far fa-clipboard-check"></i> Redeem Code</a></li>
 		<li><a class="dropdown-item" href="/verify.php"><i class="far fa-badge-check"></i> Verification</a></li>
-		<li><hr class="dropdown-divider"></li>
+		<li>
+			<hr class="dropdown-divider">
+		</li>
 		<li><a class="dropdown-item" href="/account/settings"><i class="far fa-cog"></i> Settings</a></li>
 		<li><a class="dropdown-item" href="/account/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a></li>
-		<li><hr class="dropdown-divider"></li>
+		<li>
+			<hr class="dropdown-divider">
+		</li>
 		<li><a class="dropdown-item" href="/terms-of-service.php"><i class="far fa-user-check"></i> Terms of Service</a></li>
 		<?php
 

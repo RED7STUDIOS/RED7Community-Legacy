@@ -259,8 +259,9 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                             </div>
 
                             <?php
-                            if ($your_isAdmin == 1) {
-                                echo '
+                            if (isset($your_isAdmin)) {
+                                if ($your_isAdmin == 1) {
+                                    echo '
 					<h3>Item Settings:</h3>
                 <fieldset>
                     <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
@@ -297,6 +298,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                         <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Update Item Settings</button>
                     </form>
                 </fieldset>';
+                                }
                             }
                             ?>
                         </div>

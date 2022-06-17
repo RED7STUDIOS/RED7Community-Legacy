@@ -59,13 +59,6 @@ if (isset($_GET["page"])) {
 	}
 	?>
 
-	<?php
-	if (isset($maintenanceMode)) {
-		if ($maintenanceMode == "on") {
-			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-		}
-	}
-	?>
 
 	<div class="page-content-wrapper">
 

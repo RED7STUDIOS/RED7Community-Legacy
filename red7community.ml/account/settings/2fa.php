@@ -87,19 +87,7 @@ $qrCodeUrl     = $ga->getQRCodeGoogleUrl($user, $secret, $_SERVER['HTTP_HOST']);
 <body>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
     <div class="page-content-wrapper">
-        <?php
-        if (isset($your_isBanned)) {
-            if ($your_isBanned == 1) {
-                echo "<script type='text/javascript'>location.href = '/errors/banned.php';</script>";
-            }
-        }
-
-        if (isset($maintenanceMode)) {
-            if ($maintenanceMode == "on") {
-                echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-            }
-        }
-        ?>
+        
         <main class="centered">
             <h1><i class="fa-solid fa-mobile"></i></h1>
             <h2>2 Factor Authentication</h2>
