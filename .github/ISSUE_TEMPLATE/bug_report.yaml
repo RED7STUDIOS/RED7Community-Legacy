@@ -1,0 +1,59 @@
+# taken from xenondevs/Nova
+# credits to them for making this.
+
+name: Bug Report
+description: Create a bug report to help us improve.
+title: "[Bug] "
+labels: [ "bug" ]
+body:
+  - type: checkboxes
+    attributes:
+      label: Agreements
+      description: Please agree to the following.
+      options:
+        - label: I have checked for similar issues.
+          required: true
+  - type: input
+    attributes:
+      label: Version of RED7Community, Web Server (and version), Operating System
+      description: "The version of our software, the version and what kind of web server you are using, and the operating system you are using to host it."
+      placeholder: "v1.0.0-beta.6-dev, nginx/1.22.0, Arch Linux"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen. Can be left empty if there is no need for an explanation.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Observed/Actual behavior
+      description: What you actually saw.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce this behavior. Provide a minimal reproducible example.
+      placeholder: "1. Go to [...]\n2. Click on [...]\n3. Go to [...] then [...]"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Full Web Server Log
+      description: Please provide the complete web server log. You can use Pastebin or similar sites to upload it, then link to it here.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Full PHP Log
+      description: Please provide the complete php log. You can use Pastebin or similar sites to upload it, then link it here.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
