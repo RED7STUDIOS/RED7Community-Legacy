@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+- name: Email me
+  about: If you are creating an issue for a SERIOUS security risk, then please email me instead.
+  url: mailto:contact@redsevenstudios.com
