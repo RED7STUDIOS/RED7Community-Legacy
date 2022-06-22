@@ -42,13 +42,13 @@ body:
   - type: textarea
     attributes:
       label: Full Web Server Log
-      description: Please provide the complete web server log. You can use Pastebin or similar sites to upload it, then link to it here.
+      description: THIS IS NOT REQUIRED! Please provide the complete web server log. You can use Pastebin or similar sites to upload it, then link to it here.
     validations:
-      required: true
+      required: false
   - type: textarea
     attributes:
       label: Full PHP Log
-      description: Please provide the complete php log. You can use Pastebin or similar sites to upload it, then link it here.
+      description: THIS IS NOT REQUIRED! Please provide the complete PHP log. You can use Pastebin or similar sites to upload it, then link it here.
     validations:
       required: false
   - type: textarea
