@@ -45,7 +45,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
     $membership = $json[0]['data'][0]['membership'];
     $banReason = $json[0]['data'][0]['bannedReason'];
     $banDate = $json[0]['data'][0]['bannedDate'];
-    $isAdmin = $json[0]['data'][0]['isAdmin'];
+    $role = $json[0]['data'][0]['role'];
     $isVerified = $json[0]['data'][0]['isVerified'];
     $items = $json[0]['data'][0]['items'];
     $clans = $json[0]['data'][0]['clans'];
@@ -120,7 +120,7 @@ $shownName = "";
         $premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
     }
 
-    if ($isAdmin == 1) {
+    if ($role >= 2) {
         $adminCSS = 'class="title-rainbow-lr"';
     }
 
@@ -463,8 +463,8 @@ $shownName = "";
                 </div>
                 <hr />
                 <?php
-                if (isset($your_isAdmin))
-                    if ($your_isAdmin == 1) {
+                if (isset($your_role))
+                    if ($your_role >= 2) {
                         $sql = "SELECT currency FROM users WHERE id=" . htmlspecialchars($_GET['id']);
                         $result = mysqli_query($link, $sql);
                         if (mysqli_num_rows($result) > 0) {

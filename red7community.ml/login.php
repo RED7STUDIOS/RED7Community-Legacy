@@ -106,12 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$_SESSION["lastlogin"] = $lastlogin;
 							$_SESSION["role"] = $role;
 
-							if ($role >= 1) {
-								$_SESSION["isAdmin"] = 1;
-							} else {
-								$_SESSION["isAdmin"] = 0;
-							}
-
 							if ($badges == null || $badges == "") {
 								$sql = "UPDATE users SET badges='[1]' WHERE id=" . $id;
 								mysqli_query($link, $sql);

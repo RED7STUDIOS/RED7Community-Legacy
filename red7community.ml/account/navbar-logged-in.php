@@ -46,7 +46,7 @@ $your_membership = $your_json[0]['data'][0]['membership'];
 $your_isBanned = $your_json[0]['data'][0]['isBanned'];
 $your_banReason = $your_json[0]['data'][0]['bannedReason'];
 $your_banDate = $your_json[0]['data'][0]['bannedDate'];
-$your_isAdmin = $your_json[0]['data'][0]['isAdmin'];
+$your_role = $your_json[0]['data'][0]['role'];
 $your_isVerified = $your_json[0]['data'][0]['isVerified'];
 $your_followers = $your_json[0]['data'][0]['followers'];
 $your_following = $your_json[0]['data'][0]['following'];
@@ -135,7 +135,7 @@ mysqli_query($link, $sql);
 		<li><a class="dropdown-item" href="/terms-of-service.php"><i class="far fa-user-check"></i> Terms of Service</a></li>
 		<?php
 
-		if ($your_isAdmin == 1) {
+		if ($your_role >= 2) {
 			echo '<li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="/admin"><i class="far fa-screwdriver-wrench"></i> Admin Panel</a></li>';
 		}
 

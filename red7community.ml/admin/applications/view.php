@@ -18,10 +18,10 @@ $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {
     $json = json_decode($data, true);
 
-    $isAdmin = $json[0]['data'][0]['isAdmin'];
+    $role = $json[0]['data'][0]['role'];
 }
 
-if ($isAdmin != 1) {
+if (!$role >= 2) {
     header("HTTP/1.1 403 Forbidden");
     exit;
 }

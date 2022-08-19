@@ -278,8 +278,8 @@ if (isset($_GET["page"])) {
 
                 <hr />
                 <?php
-                if (isset($your_isAdmin))
-                    if ($your_isAdmin == 1) {
+                if (isset($your_role))
+                    if ($your_role >= 2) {
                         $sql = "SELECT currency FROM clans WHERE id=" . htmlspecialchars($_GET['id']);
                         $result = mysqli_query($link, $sql);
                         if (mysqli_num_rows($result) > 0) {

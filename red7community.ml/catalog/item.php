@@ -259,8 +259,8 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                             </div>
 
                             <?php
-                            if (isset($your_isAdmin)) {
-                                if ($your_isAdmin == 1) {
+                            if (isset($your_role)) {
+                                if ($your_role >= 2) {
                                     echo '
 					<h3>Item Settings:</h3>
                 <fieldset>

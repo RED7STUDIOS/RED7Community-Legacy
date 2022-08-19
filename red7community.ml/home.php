@@ -49,7 +49,7 @@ $shownName = "";
 		$premium = ' <img src="' . $premiumIcon . '" class="premium-icon"></img>';
 	}
 
-	if ($your_isAdmin == 1) {
+	if ($your_role >= 2) {
 		$adminCSS = 'class="title-rainbow-lr"';
 	}
 
