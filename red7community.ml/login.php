@@ -91,13 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							// Password is correct, so start a new session
 							session_start();
 
-							if ($auth_secret != null) {
-								$_SESSION["loggedin"] = false;
-								$_SESSION["loggedin_b2fa"] = true;
-							} else {
-								$_SESSION["loggedin"] = true;
-							}
-
 							// Store data in session variables
 
 							$_SESSION["id"] = $id;
@@ -105,6 +98,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$_SESSION["created_at"] = $created_at;
 							$_SESSION["lastlogin"] = $lastlogin;
 							$_SESSION["role"] = $role;
+
+							if ($auth_secret != null) {
+								$_SESSION["loggedin"] = false;
+								$_SESSION["loggedin_b2fa"] = true;
+							} else {
+								$_SESSION["loggedin"] = true;
+								$_SESSION["loggedin_b2fa"] = false;
+							}
 
 							if ($badges == null || $badges == "") {
 								$sql = "UPDATE users SET badges='[1]' WHERE id=" . $id;
@@ -240,11 +241,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
+	<?php if(!isset($_GET["maintenanceBypass"])) { include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php"; } else { echo '<div class="alert alert-danger text-center" role="alert">The site is currently in maintenance, you are authenticating as an admin.</div>'; } ?>
 	<div class="page-content-wrapper">
 		<main class="form-signin">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
-							echo "?u=" . $u; ?>" method="post">
+							echo "?u=" . $u; ?> <?php if ($maintenanceMode == "on") { echo "&maintenanceBypass"; } ?>" method="post">
 				<h3 class="fw-normal">Login to <?php echo htmlspecialchars($site_name); ?></h3>
 
 				<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -260,6 +261,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				</div>
 
 				<button class="w-100 btn btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+
+				<?php
+				if ($maintenanceMode == "on")
+				{
+					echo '<p class="text-muted">&copy; '. htmlspecialchars($site_name) . " " . date("Y"). '</p>';
+					exit;
+				}
+				?>
 
 				<p>Don't have an account? <a href="register.php">Register here</a>.</p>
 				<p>Forgot your password? <a href="forgot-password.php">Reset it here</a>.</p>

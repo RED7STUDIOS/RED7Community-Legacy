@@ -81,7 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php
             if (isset($maintenanceMode)) {
                 if ($maintenanceMode == "on") {
-                    echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+                    if (!$role >= 2)
+                    {
+                        echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+                    }
                 }
             }
             ?>

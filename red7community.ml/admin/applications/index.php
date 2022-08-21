@@ -67,11 +67,16 @@ if (!$role >= 2) {
     ?>
 
     <?php
-    if (isset($maintenanceMode)) {
-        if ($maintenanceMode == "on") {
-            echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-        }
-    }
+    
+            if (isset($maintenanceMode)) {
+                if ($maintenanceMode == "on") {
+                    if (!$role >= 2)
+                    {
+                        echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+                    }
+                }
+            }
+
     ?>
 
     <div class="page-content-wrapper">

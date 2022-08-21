@@ -63,14 +63,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 ?>
 
 <?php
-if ($_SERVER["REQUEST_URI"] != "/errors/banned.php") {
-	
+$role = 0;
 
-	if (isset($maintenanceMode)) {
-		if ($maintenanceMode == "on") {
-			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-		}
+if (isset($_SESSION['id'])) {
+	$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+
+	// Decode the json response.
+	if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+		$json = json_decode($data, true);
+	$role = $json[0]['data'][0]['role'];
 	}
+}
+
+if ($_SERVER["REQUEST_URI"] != "/errors/banned.php") {
+            if (isset($maintenanceMode)) {
+                if ($maintenanceMode == "on") {
+					
+                    if (!$role >= 2)
+                    {
+                        echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
+                    }
+                }
+            }
+
 }
 else if ($_SERVER["REQUEST_URI"] == "/errors/banned.php")
 {

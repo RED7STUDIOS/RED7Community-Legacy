@@ -9,7 +9,24 @@
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
-if ($maintenanceMode == "off") {
+// Initialize the session
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$role = 0;
+
+if (isset($_SESSION['id'])) {
+	$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+
+	// Decode the json response.
+	if (!str_contains($data, "This user doesn't exist or has been deleted")) {
+		$json = json_decode($data, true);
+	$role = $json[0]['data'][0]['role'];
+	}
+}
+
+if ($maintenanceMode == "off" || $role >= 2) {
 	header("location: /index.php");
 }
 ?>
@@ -17,7 +34,7 @@ if ($maintenanceMode == "off") {
 <html>
 
 <head>
-	<title>Under Maintenance</title>
+	<title>Under Maintenance - <?php echo $site_name; ?></title>
 
 	<!-- Particle.js -->
 	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -40,25 +57,12 @@ if ($maintenanceMode == "off") {
 			<main class="col-md-9" id="particles-js">
 				<!-- Center everything in this DIV-->
 				<div class="center text-center align-items-center text-white">
+				<h2><a href="/login.php?maintenanceBypass"><?php echo $site_name; ?></a></h2>
 					<div>
-						<h1>We are making things awesome!</h1>
+						<h3>We are making things awesome!</h3>
 					</div>
 
 					<p>We are currently down for maintenance, but when we come back a new feature will be likely to come!</p>
-
-					<a class="btn btn-primary" href="#R">R</a>
-					<a class="btn btn-primary" href="#RE">E</a>
-					<a class="btn btn-primary" href="#RED">D</a>
-					<a class="btn btn-primary" href="#RED7">7</a>
-					<a class="btn btn-primary" href="#RED7C">C</a>
-					<a class="btn btn-primary" href="#RED7CO">O</a>
-					<a class="btn btn-primary" href="#RED7COM">M</a>
-					<a class="btn btn-primary" href="#RED7COMM">M</a>
-					<a class="btn btn-primary" href="#RED7COMMU">U</a>
-					<a class="btn btn-primary" href="#RED7COMMUN">N</a>
-					<a class="btn btn-primary" href="#RED7COMMUNI">I</a>
-					<a class="btn btn-primary" href="#RED7COMMUNIT">T</a>
-					<a class="btn btn-primary" href="#RED7COMMUNITY">Y</a>
 				</div>
 		</div>
 		</main>
