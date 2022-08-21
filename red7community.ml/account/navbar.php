@@ -21,19 +21,19 @@ $selected_page = $_SERVER['REQUEST_URI'];
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/"><i class="far fa-house"></i> Home</a>
+					<a class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/catalog"><i class="far fa-user-plus"></i> Catalog</a>
+					<a class="nav-link" aria-current="page" href="/catalog"><i class="fa-solid fa-shop"></i> Catalog</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/currency.php"><i class="far fa-money-bill-wave"></i> <?php echo $currency_name ?></a>
+					<a class="nav-link" aria-current="page" href="/currency.php"><i class="fa-solid fa-wallet"></i> <?php echo $currency_name ?></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/users/search.php"><i class="far fa-user"></i> Users</a>
+					<a class="nav-link" aria-current="page" href="/users/search.php"><i class="fa-solid fa-users"></i> Users</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/clans/search.php"><i class="far fa-people-simple"></i> Clans</a>
+					<a class="nav-link" aria-current="page" href="/clans/search.php"><i class="fa-solid fa-people-group"></i> Clans</a>
 				</li>
 			</ul>
 			<form class="d-flex">

@@ -68,7 +68,7 @@ if (isset($_GET["page"])) {
 		<div class="d-flex align-items-center border-bottom">
 			<h1>Page <?php echo $page ?> - Catalog</h1>
 			&nbsp;
-			<a class="btn btn-primary btn-sm" href="/catalog/search.php"><i class="fa-regular fa-magnifying-glass"></i></a>
+			<a class="btn btn-primary btn-sm" href="/catalog/search.php"><i class="fa-solid fa-magnifying-glass"></i></a>
 		</div>
 
 		<a class="btn btn-primary" href="/catalog/?tab=all">All</a>
