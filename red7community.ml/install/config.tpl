@@ -15,6 +15,10 @@ $API_URL = $ROOT_URL. '/API';
 // The Storage URL.
 $STORAGE_URL = 'https://cdn.jsdelivr.net/gh/RED7Studios/RED7Community-CDN@main';
 
+// Stripe keys for payment.
+$STRIPE_SECRET_KEY = "";
+$STRIPE_PUBLISHABLE_KEY = "";
+
 // The status URL.
 $STATUS_URL = 'https://status.red7community.ml';
 $STATUS_GITHUB_URL = 'https://github.com/RED7STUDIOS/RED7Community-status';

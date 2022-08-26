@@ -7,6 +7,7 @@
   Copyright (C) RED7 STUDIOS 2022
 */
 
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 if (!isset($_SESSION)) {
@@ -37,10 +38,9 @@ if ($_POST["giftUser"] == "" && empty($_POST["giftUser"])) {
 	$allowGifts = $json[0]['data'][0]['allowGifts'];
 }
 
-//check if stripe token exist to proceed with payment
 if (!empty($_POST['stripeToken'])) {
 	if ($allowGifts == 1 || $allowGifts == "" || $allowGifts == null) {
-		// get token and user details
+
 		$stripeToken  = $_POST['stripeToken'];
 		$custName = $_POST['custName'];
 		$custEmail = $_POST['custEmail'];
@@ -48,26 +48,27 @@ if (!empty($_POST['stripeToken'])) {
 		$cardCVC = $_POST['cardCVC'];
 		$cardExpMonth = $_POST['cardExpMonth'];
 		$cardExpYear = $_POST['cardExpYear'];
-		//include Stripe PHP library
+
 		require_once('stripe-php/init.php');
-		//set stripe secret key and publishable key
+
 		$stripe = array(
-			"secret_key"      => "sk_test_51IhCSFHFvvpJx5JTNNYkrdLu3K5Hep0I80wxHc7XR4moFrbW2HfkkPOsT2jixqzXxIc6666SVC1UBIA0uzymfMib00tV9EajIP",
-			"publishable_key" => "pk_test_51IhCSFHFvvpJx5JTi6JC0Gs3vfxkojvppb2T6qnGmMNQgufsGVbeDBGENKZTqaCGMtAijKSgWOealsXfKqzeJbQT00GgXO9hjO"
+			"secret_key"      => $STRIPE_SECRET_KEY,
+			"publishable_key" => $STRIPE_PUBLISHABLE_KEY
 		);
+
 		\Stripe\Stripe::setApiKey($stripe['secret_key']);
-		//add customer to stripe
+
 		$customer = \Stripe\Customer::create(array(
 			'email' => $custEmail,
 			'source'  => $stripeToken
 		));
-		// item details for which payment made
+
 		$itemName = $_GET['nam'];
 		$itemNumber = $_GET['num'];
 		$itemPrice = $_GET['pri'];
 		$currency = "AUD";
 		$orderID = $_GET['oid'];
-		// details for which payment performed
+
 		$payDetails = \Stripe\Charge::create(array(
 			'customer' => $customer->id,
 			'amount'   => $itemPrice,
@@ -77,21 +78,16 @@ if (!empty($_POST['stripeToken'])) {
 				'order_id' => $orderID
 			)
 		));
-		// get payment details
-		$paymenyResponse = $payDetails->jsonSerialize();
-		// check whether the payment is successful
-		if ($paymenyResponse['amount_refunded'] == 0 && empty($paymenyResponse['failure_code']) && $paymenyResponse['paid'] == 1 && $paymenyResponse['captured'] == 1) {
-			// transaction details 
-			$amountPaid = $paymenyResponse['amount'];
-			$balanceTransaction = $paymenyResponse['balance_transaction'];
-			$paidCurrency = $paymenyResponse['currency'];
-			$paymentStatus = $paymenyResponse['status'];
+		$paymentResponse = $payDetails->jsonSerialize();
+		if ($paymentResponse['amount_refunded'] == 0 && empty($paymentResponse['failure_code']) && $paymentResponse['paid'] == 1 && $paymentResponse['captured'] == 1) {
+			$amountPaid = $paymentResponse['amount'];
+			$balanceTransaction = $paymentResponse['balance_transaction'];
+			$paidCurrency = $paymentResponse['currency'];
+			$paymentStatus = $paymentResponse['status'];
 			$paymentDate = date("Y-m-d H:i:s");
-			//insert tansaction details into database
-			include_once($_SERVER["DOCUMENT_ROOT"] . "/assets/config.php");
 			$insertTransactionSQL = "INSERT INTO transactions(cust_name, cust_email, item_name, item_number, item_price, item_price_currency, paid_amount, paid_amount_currency, txn_id, payment_status, created, modified) 
 			VALUES('" . $custName . "','" . $custEmail . "','" . $itemName . "','" . $itemNumber . "','" . $itemPrice . "','" . $paidCurrency . "','" . $amountPaid . "','" . $paidCurrency . "','" . $balanceTransaction . "','" . $paymentStatus . "','" . $paymentDate . "','" . $paymentDate . "')";
-			mysqli_query($link, $insertTransactionSQL) or die("database error: " . mysqli_error($link));
+			mysqli_query($link, $insertTransactionSQL) or die("Database Error: " . mysqli_error($link));
 			$lastInsertId = mysqli_insert_id($link);
 
 			if (!str_contains($_GET['nam'], "Premium")) {
@@ -110,7 +106,6 @@ if (!empty($_POST['stripeToken'])) {
 				}
 			}
 
-			//if order inserted successfully
 			if ($lastInsertId && $paymentStatus == 'succeeded') {
 				$paymentMessage = "<h3>The payment was successful.</h3><h4><strong> Order ID: " . $lastInsertId . "</strong></h4>";
 			} else {
