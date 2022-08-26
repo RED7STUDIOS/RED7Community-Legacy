@@ -12,11 +12,11 @@ RED7Community is an in-progress open source community software.
 - IIS, Nginx or Apache
 
 **_PHP Requirements:_**
-- CURL
-- MBString
-- MySQLi
-- OpenSSL (might be optional)
-- PDO_MySQL
+- curl
+- mbstring
+- mysqli
+- openssl
+- pdo_mysql
 
 **_Steps:_**
 1. [Download](https://github.com/RED7Studios/RED7Community/releases/latest) the latest release zip file.
