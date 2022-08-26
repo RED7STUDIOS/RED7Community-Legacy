@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-// Check if the user is logged in, if not then redirect him to login page
+// Check if the user is logged in, if not then redirect them to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
     exit;
@@ -85,7 +85,6 @@ if (!$role >= 2) {
             </h2>
         </div>
         <a class="btn btn-primary" href="/admin/applications"><i class="far fa-badge-check"></i> View Applications</a>
-        <a class="btn btn-primary" href="/admin/roles.php"><i class="far fa-badge-check"></i> Manage User Roles</a>
         <h3>Site Settings:</h3>
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">

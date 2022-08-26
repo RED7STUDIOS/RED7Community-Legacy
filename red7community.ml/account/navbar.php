@@ -39,7 +39,7 @@ $selected_page = $_SERVER['REQUEST_URI'];
 			<form class="d-flex">
 				<ul class="navbar-nav">
 					<?php
-					// Check if the user is logged in, if not then redirect him to login page
+					// Check if the user is logged in, if not then redirect them to login page
 					if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 						echo '<div class="btn-group" role="group"><li class=nav-item><a aria-current=page class="btn btn-primary"href=/login.php?u=/home.php>Login</a><li class=nav-item>&nbsp;<a aria-current=page class="btn btn-primary"href=/register.php>Register</a></div>';
 					} else {
@@ -53,7 +53,7 @@ $selected_page = $_SERVER['REQUEST_URI'];
 </nav>
 
 <?php
-// Check if the user is logged in, if not then redirect him to login page
+// Check if the user is logged in, if not then redirect them to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 } else {
 	if (!str_contains($selected_page, "/events")) {

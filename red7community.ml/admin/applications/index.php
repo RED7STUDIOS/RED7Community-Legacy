@@ -19,7 +19,7 @@ if (isset($_GET["page"])) {
     $page = 1;
 };
 
-// Check if the user is logged in, if not then redirect him to login page
+// Check if the user is logged in, if not then redirect them to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: /login.php?u=" . $_SERVER["REQUEST_URI"]);
     exit;
