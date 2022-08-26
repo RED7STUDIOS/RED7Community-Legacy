@@ -13,7 +13,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/common.php';
 
-$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {
@@ -37,19 +37,19 @@ function post($key)
 $sql = "";
 
 if ($role >= 1) {
-	if (str_contains($_POST['action'], "Application")) {
+	if (str_contains(htmlspecialchars($_POST['action']), "Application")) {
 		$id = $_POST['id'];
 		$preferred_email = $getApplicationEmail($id);
 		$full_name = $getApplicationFullName($id);
 		$user = $getUserFromApplicationId($id);
 
-		if ($_POST['action'] == "acceptApplication") {
+		if (htmlspecialchars($_POST['action']) == "acceptApplication") {
 			$sql = "UPDATE users SET isVerified = 1 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET accepted = 1 WHERE id = '" . $_POST['id'] . "'";
 			$sendEmail($user, $ROOT_URL . "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
-		} else if ($_POST['action'] == "denyApplication") {
+		} else if (htmlspecialchars($_POST['action']) == "denyApplication") {
 			$sql = "UPDATE users SET isVerified = 0 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
@@ -63,7 +63,7 @@ if ($role >= 1) {
 }
 
 if ($role >= 2) {
-	if ($_POST['action'] == "banningUser") {
+	if (htmlspecialchars($_POST['action']) == "banningUser") {
 		if (isset($_POST['isBanned'])) {
 			// Prepare an insert statement
 			$sql = "UPDATE users SET isBanned = 1 WHERE id = '" . $_POST['id'] . "'";
@@ -79,16 +79,16 @@ if ($role >= 2) {
 			// Prepare an insert statement
 			$sql = "UPDATE users SET isBanned = 0 WHERE id = '" . $_POST['id'] . "'";
 		}
-	} else if ($_POST['action'] == "currencyChange") {
+	} else if (htmlspecialchars($_POST['action']) == "currencyChange") {
 		// Prepare an insert statement
-		$sql = "UPDATE users SET currency = '" . $_POST["amount"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "displayNameChange") {
+		$sql = "UPDATE users SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "displayNameChange") {
 		// Prepare an insert statement
-		$sql = "UPDATE users SET displayName = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "descriptionChange") {
+		$sql = "UPDATE users SET displayName = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "descriptionChange") {
 		// Prepare an insert statement
-		$sql = "UPDATE users SET description = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "banningClan") {
+		$sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "banningClan") {
 		if (isset($_POST['isBanned'])) {
 			// Prepare an insert statement
 			$sql = "UPDATE clans SET isBanned = 1 WHERE id = '" . $_POST['id'] . "'";
@@ -104,16 +104,16 @@ if ($role >= 2) {
 			// Prepare an insert statement
 			$sql = "UPDATE clans SET isBanned = 0 WHERE id = '" . $_POST['id'] . "'";
 		}
-	} else if ($_POST['action'] == "currencyChangeClan") {
+	} else if (htmlspecialchars($_POST['action']) == "currencyChangeClan") {
 		// Prepare an insert statement
-		$sql = "UPDATE clans SET currency = '" . $_POST["amount"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "displayNameChangeClan") {
+		$sql = "UPDATE clans SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "displayNameChangeClan") {
 		// Prepare an insert statement
-		$sql = "UPDATE clans SET displayName = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "descriptionChangeClan") {
+		$sql = "UPDATE clans SET displayName = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "descriptionChangeClan") {
 		// Prepare an insert statement
-		$sql = "UPDATE clans SET description = '" . $_POST["value"] . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if ($_POST['action'] == "updateSiteSettings") {
+		$sql = "UPDATE clans SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+	} else if (htmlspecialchars($_POST['action']) == "updateSiteSettings") {
 		// Prepare an insert statement
 		$sql = "UPDATE site_info SET content = '" . $_POST["site_name"] . "' WHERE name = 'site_name'";
 		$result = mysqli_query($link, $sql);
@@ -153,9 +153,9 @@ if ($role >= 2) {
 			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'maintenanceMode'";
 			$result = mysqli_query($link, $sql);
 		}
-	} else if ($_POST['action'] == "updateItemSettings") {
+	} else if (htmlspecialchars($_POST['action']) == "updateItemSettings") {
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = '" . $_POST["id"]. "'";
+		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
@@ -168,21 +168,21 @@ if ($role >= 2) {
 		}
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = '" . $_POST["id"]. "'";
+		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET description = '" . $_POST["description"] . "' WHERE id = '" . $_POST["id"]. "'";
+		$sql = "UPDATE catalog SET description = '" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = '" . $_POST["id"]. "'";
+		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = '" . $_POST["id"]. "'";
+		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
-	} else if ($_POST['action'] == "createNewItem") {
+	} else if (htmlspecialchars($_POST['action']) == "createNewItem") {
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
 
 		// Decode the json response.
@@ -221,19 +221,19 @@ if ($role >= 2) {
 		}
 
 		// Prepare an insert statement
-		$sql = "INSERT INTO catalog (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . $_POST["displayName"] . "', '" . $_POST["description"] . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
+		$sql = "INSERT INTO catalog (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . htmlspecialchars($_POST["displayname"]) . "', '" . htmlspecialchars($_POST["description"]) . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
 	}
 }
 
 if ($role == 3) {
-	if ($_POST['action'] == "roleChange") {
-		if ($_POST["value"] == "user") {
+	if (htmlspecialchars($_POST['action']) == "roleChange") {
+		if (htmlspecialchars($_POST["action"]) == "user") {
 			$v = 0;
-		} else if ($_POST["value"] == "moderator") {
+		} else if (htmlspecialchars($_POST["action"]) == "moderator") {
 			$v = 1;
-		} else if ($_POST["value"] == "admin") {
+		} else if (htmlspecialchars($_POST["action"]) == "admin") {
 			$v = 2;
-		} else if ($_POST["value"] == "super_admin") {
+		} else if (htmlspecialchars($_POST["action"]) == "super_admin") {
 			$v = 3;
 		}
 

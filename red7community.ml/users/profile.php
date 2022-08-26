@@ -236,27 +236,27 @@ $shownName = "";
                             break;
                             // (B1) ADD FRIEND
                         case "add":
-                            $pass = $REL->request($_SESSION['id'], $_POST['id']);
+                            $pass = $REL->request(htmlspecialchars($_SESSION['id']), $_POST['id']);
                             break;
                             // (B2) ACCEPT FRIEND
                         case "accept":
-                            $pass = $REL->acceptReq($_POST['id'], $_SESSION['id']);
+                            $pass = $REL->acceptReq($_POST['id'], htmlspecialchars($_SESSION['id']));
                             break;
                             // (B3) CANCEL ADD
                         case "cancel":
-                            $pass = $REL->cancelReq($_SESSION['id'], $_POST['id']);
+                            $pass = $REL->cancelReq(htmlspecialchars($_SESSION['id']), $_POST['id']);
                             break;
                             // (B4) UNFRIEND
                         case "unfriend":
-                            $pass = $REL->unfriend($_SESSION['id'], $_POST['id'], false);
+                            $pass = $REL->unfriend(htmlspecialchars($_SESSION['id']), $_POST['id'], false);
                             break;
                             // (B5) BLOCK
                         case "block":
-                            $pass = $REL->block($_SESSION['id'], $_POST['id']);
+                            $pass = $REL->block(htmlspecialchars($_SESSION['id']), $_POST['id']);
                             break;
                             // (B6) UNBLOCK
                         case "unblock":
-                            $pass = $REL->block($_SESSION['id'], $_POST['id'], false);
+                            $pass = $REL->block(htmlspecialchars($_SESSION['id']), $_POST['id'], false);
                             break;
                     }
                     //echo $pass ? "<div class='ok'>OK</div>" : "<div class='nok'>{$REL->error}</div>";
@@ -267,9 +267,9 @@ $shownName = "";
 
                 <div id="userList"><?php
                                     if (isset($_SESSION['id'])) {
-                                        if ($_SESSION['id'] != htmlspecialchars($_GET['id'])) {
-                                            $requests = $REL->getReq($_SESSION['id']);
-                                            $friends = $REL->getFriends($_SESSION['id']);
+                                        if (htmlspecialchars($_SESSION['id']) != htmlspecialchars($_GET['id'])) {
+                                            $requests = $REL->getReq(htmlspecialchars($_SESSION['id']));
+                                            $friends = $REL->getFriends(htmlspecialchars($_SESSION['id']));
                                             $id = htmlspecialchars($_GET['id']);
 
                                             echo '&nbsp;';

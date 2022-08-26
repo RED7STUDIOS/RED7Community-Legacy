@@ -17,17 +17,17 @@ if (!isset($_SESSION)) {
 
 // START OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 
-$your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+$your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
 
 $your_json = json_decode($your_data, true);
 
-$your_id = $_SESSION['id'];
+$your_id = htmlspecialchars($_SESSION['id']);
 $your_username = $your_json[0]['data'][0]['username'];
 $your_displayname = $your_json[0]['data'][0]['displayname'];
 
 $your_email = "";
 
-$sql = "SELECT email FROM users WHERE id=" . $_SESSION['id'];
+$sql = "SELECT email FROM users WHERE id=" . htmlspecialchars($_SESSION['id']);
 $result = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -118,9 +118,9 @@ mysqli_query($link, $sql);
 		<img class="profile-picture" style="width: 20px; height: 20px;" src="<?php echo $your_icon; ?>" /> <?php echo $_SESSION["username"] ?>
 	</a>
 	<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>"><i class="far fa-user"></i> Profile</a></li>
-		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#friends"><i class="far fa-users"></i> Friends</a></li>
-		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo $_SESSION['id'] ?>#inventory"><i class="far fa-backpack"></i> Inventory</a></li>
+		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo htmlspecialchars($_SESSION['id']) ?>"><i class="far fa-user"></i> Profile</a></li>
+		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo htmlspecialchars($_SESSION['id']) ?>#friends"><i class="far fa-users"></i> Friends</a></li>
+		<li><a class="dropdown-item" href="/users/profile.php?id=<?php echo htmlspecialchars($_SESSION['id']) ?>#inventory"><i class="far fa-backpack"></i> Inventory</a></li>
 		<li><a class="dropdown-item" href="/avatar-editor.php"><i class="far fa-user-tag"></i> Avatar Editor</a></li>
 		<li><a class="dropdown-item" href="/redeem.php"><i class="far fa-clipboard-check"></i> Redeem Code</a></li>
 		<li><a class="dropdown-item" href="/verify.php"><i class="far fa-badge-check"></i> Verification</a></li>

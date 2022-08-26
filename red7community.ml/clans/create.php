@@ -61,13 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate displayname
-    if (empty(trim($_POST["displayname"]))) {
+    if (empty(trim(htmlspecialchars($_POST["displayname"])))) {
         $displayname_err = "Please enter a display name.";
-    } elseif (strlen(trim($_POST["displayname"])) < 4) {
+    } elseif (strlen(trim(htmlspecialchars($_POST["displayname"]))) < 4) {
         $displayname_err = "A display name must have atleast 4 characters.";
     } else {
-        $displayname = trim($_POST["displayname"]);
-        $param_displayname = trim($_POST["displayname"]);
+        $displayname = trim(htmlspecialchars($_POST["displayname"]));
+        $param_displayname = trim(htmlspecialchars($_POST["displayname"]));
     }
 
     // Check input errors before inserting in database

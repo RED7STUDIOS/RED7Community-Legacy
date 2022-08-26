@@ -105,7 +105,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <fieldset>
                 <legend>Change Display Name:</legend>
                 <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                    <input maxlength="14" type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT displayname FROM users WHERE id=" . $_SESSION['id'];
+                    <input maxlength="14" type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT displayname FROM users WHERE id=" . htmlspecialchars($_SESSION['id']);
                                                                                                 $result = mysqli_query($link, $sql);
                                                                                                 if (mysqli_num_rows($result) > 0) {
                                                                                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -122,7 +122,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <fieldset>
                 <legend>Change Description: <small>(only 1 line)</small></legend>
                 <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                    <textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;"><?php $sql = "SELECT description FROM users WHERE id=" . $_SESSION['id'];
+                    <textarea maxlength="200" type="text" name="value" style="width: 100%; border: 0 none white; overflow: hidden; padding: 0; outline: none; background-color: #D0D0D0;"><?php $sql = "SELECT description FROM users WHERE id=" . htmlspecialchars($_SESSION['id']);
                                                                                                                                                                                             $result = mysqli_query($link, $sql);
                                                                                                                                                                                             if (mysqli_num_rows($result) > 0) {
                                                                                                                                                                                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -140,7 +140,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <fieldset>
                 <legend>Change Email:</legend>
                 <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
-                    <input type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT email FROM users WHERE id=" . $_SESSION['id'];
+                    <input type="text" name="value" style="width: 100%;" value="<?php $sql = "SELECT email FROM users WHERE id=" . htmlspecialchars($_SESSION['id']);
                                                                                 $result = mysqli_query($link, $sql);
                                                                                 if (mysqli_num_rows($result) > 0) {
                                                                                     while ($row = mysqli_fetch_assoc($result)) {

@@ -12,7 +12,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This user doesn't exist or has been deleted")) {

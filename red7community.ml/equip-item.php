@@ -20,7 +20,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	exit;
 }
 
-$data_main = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . $_SESSION['id']);
+$data_main = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
 
 $json_a_main = json_decode($data_main, true);
 

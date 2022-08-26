@@ -22,7 +22,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	exit;
 }
 
-$id = $_SESSION['id'];
+$id = htmlspecialchars($_SESSION['id']);
 
 $data_avatar = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . $id);
 

@@ -13,31 +13,31 @@ function post($key)
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
 
-if ($_POST['action'] == "changeDisplayName") {
-    if (strlen($_POST["value"]) > 14) {
+if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
+    if (strlen(htmlspecialchars($_POST["action"])) > 14) {
         $sql = null;
     } else {
         // Prepare an insert statement
-        $sql = "UPDATE users SET displayname = '" . $_POST["value"] . "' WHERE id = '" . $_SESSION['id'] . "'";
+        $sql = "UPDATE users SET displayname = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
     }
-} else if ($_POST['action'] == "changeDescription") {
-    if (strlen($_POST["value"]) > 200) {
+} else if (htmlspecialchars($_POST['action']) == "changeDescription") {
+    if (strlen(htmlspecialchars($_POST["action"])) > 200) {
         $sql = null;
     } else {
         // Prepare an insert statement
-        $sql = "UPDATE users SET description = '" . $_POST["value"] . "' WHERE id = '" . $_SESSION['id'] . "'";
+        $sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
     }
-} else if ($_POST['action'] == "changeEmail") {
+} else if (htmlspecialchars($_POST['action']) == "changeEmail") {
     // Prepare an insert statement
-    $sql = "UPDATE users SET email = '" . $_POST["value"] . "' WHERE id = '" . $_SESSION['id'] . "'";
-} else if ($_POST['action'] == "changeProfile") {
+    $sql = "UPDATE users SET email = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+} else if (htmlspecialchars($_POST['action']) == "changeProfile") {
     // Prepare an insert statement
-    $sql = "UPDATE users SET icon = '" . $_POST["value"] . "' WHERE id = '" . $_SESSION['id'] . "'";
-} else if ($_POST['action'] == "updateClanSettings") {
+    $sql = "UPDATE users SET icon = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+} else if (htmlspecialchars($_POST['action']) == "updateClanSettings") {
     // Prepare an insert statement
-    $sql = "UPDATE clans SET displayname = '" . $_POST["displayname"] . "', description='" . $_POST["description"] . "' WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
-} else if ($_POST['action'] == "payoutClan") {
-    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
+    $sql = "UPDATE clans SET displayname = '" . htmlspecialchars($_POST["displayname"]) . "', description='" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
+} else if (htmlspecialchars($_POST['action']) == "payoutClan") {
+    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
@@ -46,53 +46,53 @@ if ($_POST['action'] == "changeDisplayName") {
     $id = $json[0]['data'][0]['id'];
     $currency_user = $json[0]['data'][0]['currency'];
 
-    if ($currency >= $_POST["amount"]) {
-        $sql_c = "UPDATE users SET currency = " . ($currency_user + $_POST["amount"]) . " WHERE id = '" . $id. "'";
+    if ($currency >= htmlspecialchars($_POST["amount"])) {
+        $sql_c = "UPDATE users SET currency = " . ($currency_user + htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
         $result_c = mysqli_query($link, $sql_c);
 
-        $sql = "UPDATE clans SET currency = " . ($currency - $_POST["amount"]) . " WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
+        $sql = "UPDATE clans SET currency = " . ($currency - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
     } else {
         $sql = null;
     }
-} else if ($_POST['action'] == "addFundsToClan") {
-    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
+} else if (htmlspecialchars($_POST['action']) == "addFundsToClan") {
+    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $_SESSION['id']);
+    $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
     $json = json_decode($data, true);
     $id = $json[0]['data'][0]['id'];
     $currency_user = $json[0]['data'][0]['currency'];
 
-    if ($currency_user >= $_POST["amount"]) {
-        $sql_c = "UPDATE users SET currency = " . ($currency_user - $_POST["amount"]) . " WHERE id = '" . $id. "'";
+    if ($currency_user >= htmlspecialchars($_POST["amount"])) {
+        $sql_c = "UPDATE users SET currency = " . ($currency_user - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
         $result_c = mysqli_query($link, $sql_c);
 
-        $sql = "UPDATE clans SET currency = " . ($currency + $_POST["amount"]) . " WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
+        $sql = "UPDATE clans SET currency = " . ($currency + htmlspecialchars($_POST["amount"])) . " WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
     } else {
         $sql = null;
     }
-} else if ($_POST['action'] == "joinClan") {
-    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . $_POST["id"]);
+} else if (htmlspecialchars($_POST['action']) == "joinClan") {
+    $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $members = $json[0]['data'][0]['members'];
 
     $members = json_decode($members);
 
-    array_push($members, $_SESSION['id']);
+    array_push($members, htmlspecialchars($_SESSION['id']));
 
     $members = json_encode($members);
 
-    $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = '" . $_POST["id"]. "'";
-} else if ($_POST['action'] == "purchaseItem") {
-    $your_id = $_SESSION['id'];
+    $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+} else if (htmlspecialchars($_POST['action']) == "purchaseItem") {
+    $your_id = htmlspecialchars($_SESSION['id']);
 
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $_POST['value']);
+    $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
     $json = json_decode($data, true);
     $price = $json[0]['data'][0]['price'];
     $owners = $json[0]['data'][0]['owners'];
@@ -111,7 +111,7 @@ if ($_POST['action'] == "changeDisplayName") {
         $items_before = json_decode($your_items, true);
         $owners_before = json_decode($owners, true);
 
-        array_push($items_before, intval($_POST['value']));
+        array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["action"]))));
         array_push($owners_before, $your_id);
 
         $items_final = json_encode($items_before);
@@ -125,19 +125,19 @@ if ($_POST['action'] == "changeDisplayName") {
 
         $result_catalog = mysqli_query($link, $sql_catalog);
 
-        $sql = "UPDATE catalog SET owners = '" . $owners_final . "' WHERE id = '" . $_POST["value"] . "'";
+        $sql = "UPDATE catalog SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["action"]) . "'";
     } else {
         $sql = null;
     }
-} else if ($_POST['action'] == "redeemCode") {
-    $your_id = $_SESSION['id'];
+} else if (htmlspecialchars($_POST['action']) == "redeemCode") {
+    $your_id = htmlspecialchars($_SESSION['id']);
 
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
     $json = json_decode($data, true);
     $your_currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . $_POST['value']);
+    $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
     $json = json_decode($data, true);
 
     $code_id = $json[0]['data'][0]['id'];

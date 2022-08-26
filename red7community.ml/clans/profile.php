@@ -220,7 +220,7 @@ if (isset($_GET["page"])) {
 
                 <?php
                 if (isset($_SESSION['id'])) {
-                    if ($owner == $_SESSION['id']) {
+                    if ($owner == htmlspecialchars($_SESSION['id'])) {
                         echo '<a href="/clans/manage.php?id=' . htmlspecialchars($_GET['id']) . '" class="btn btn-primary">Manage</a>';
                     }
                 }
@@ -230,7 +230,7 @@ if (isset($_GET["page"])) {
                 $d = json_decode($members);
 
                 if (isset($_SESSION['id'])) {
-                    if (!in_array($_SESSION['id'], $d)) {
+                    if (!in_array(htmlspecialchars($_SESSION['id']), $d)) {
                         echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
                             <input hidden type="text" name="action" value="joinClan" />
                             <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '" />

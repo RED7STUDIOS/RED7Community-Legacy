@@ -81,7 +81,7 @@ $shownName = "";
 			require $_SERVER['DOCUMENT_ROOT'] . "/assets/relation.php";
 
 			$users = $REL->getUsers();
-			$friends = $REL->getFriends($_SESSION['id']);
+			$friends = $REL->getFriends(htmlspecialchars($_SESSION['id']));
 			$friends_amt = 0;
 
 			if ($friends != "" && $friends != "[]" && !empty($friends)) {
