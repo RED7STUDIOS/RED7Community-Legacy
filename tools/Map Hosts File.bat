@@ -1,5 +1,7 @@
 @echo off
 echo.
+echo THIS FEATURE IS UNMAINTAINED!!!
+echo.
 echo WARNING: This batch file edits your Windows Host Files.
 echo This will overwrite the RED7Community domains and make them resolve to your web-servers.
 echo If you wish to remove these domains, you must edit the hosts file, it is: C:\Windows\System32\drivers\etc\hosts.
@@ -40,7 +42,7 @@ echo Mapping hosts file...
 xcopy /y "C:\Windows\System32\drivers\etc\hosts" "%~dp0/hosts.bak.*"
 
 REM the hosts mapping part
-echo 127.0.0.1   red7community.ml >> C:\Windows\System32\drivers\etc\hosts
+echo 127.0.0.1   red7community.local >> C:\Windows\System32\drivers\etc\hosts
 REM -----------------------
 
 echo Done!
