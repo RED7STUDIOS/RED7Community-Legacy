@@ -34,7 +34,7 @@ if ($maintenanceMode == "off" || $role >= 2) {
 <html>
 
 <head>
-	<title>Under Maintenance - <?php echo $site_name; ?></title>
+	<title>Under Maintenance - <?php echo htmlspecialchars($site_name); ?></title>
 
 	<!-- Particle.js -->
 	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -57,7 +57,7 @@ if ($maintenanceMode == "off" || $role >= 2) {
 			<main class="col-md-9" id="particles-js">
 				<!-- Center everything in this DIV-->
 				<div class="center text-center align-items-center text-white">
-				<h2><a href="/login.php?maintenanceBypass"><?php echo $site_name; ?></a></h2>
+				<h2><a href="/login.php?maintenanceBypass"><?php echo htmlspecialchars($site_name); ?></a></h2>
 					<div>
 						<h3>We are making things awesome!</h3>
 					</div>

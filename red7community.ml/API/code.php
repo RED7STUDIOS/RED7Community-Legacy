@@ -1,8 +1,8 @@
 <?php
 /*
-	  File Name: catalog.php
-	  Original Location: /API/catalog.php
-	  Description: Catalog API to get details.
+	  File Name: item.php
+	  Original Location: /API/item.php
+	  Description: Shop API to get details.
 	  Author: Mitchell (Creaous)
 	  Copyright (C) RED7 STUDIOS 2022
 	*/

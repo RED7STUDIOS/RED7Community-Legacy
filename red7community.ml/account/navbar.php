@@ -24,7 +24,7 @@ $selected_page = $_SERVER['REQUEST_URI'];
 					<a class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="/catalog"><i class="fa-solid fa-shop"></i> Catalog</a>
+					<a class="nav-link" aria-current="page" href="/shop"><i class="fa-solid fa-shop"></i> Shop</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="/currency.php"><i class="fa-solid fa-wallet"></i> <?php echo $currency_name ?></a>

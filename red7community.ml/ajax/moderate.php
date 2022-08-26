@@ -155,7 +155,7 @@ if ($role >= 2) {
 		}
 	} else if (htmlspecialchars($_POST['action']) == "updateItemSettings") {
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+		$sql = "UPDATE items SET displayname = '" . $_POST["name"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
@@ -168,19 +168,19 @@ if ($role >= 2) {
 		}
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+		$sql = "UPDATE items SET creator = " . $creator . " WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET description = '" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+		$sql = "UPDATE items SET description = '" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+		$sql = "UPDATE items SET price = '" . $_POST["price"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
+		$sql = "UPDATE items SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 	} else if (htmlspecialchars($_POST['action']) == "createNewItem") {
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
@@ -221,7 +221,7 @@ if ($role >= 2) {
 		}
 
 		// Prepare an insert statement
-		$sql = "INSERT INTO catalog (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . htmlspecialchars($_POST["displayname"]) . "', '" . htmlspecialchars($_POST["description"]) . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
+		$sql = "INSERT INTO items (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . htmlspecialchars($_POST["displayname"]) . "', '" . htmlspecialchars($_POST["description"]) . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
 	}
 }
 

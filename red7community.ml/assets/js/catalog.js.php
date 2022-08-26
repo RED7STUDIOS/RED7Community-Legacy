@@ -11,7 +11,7 @@
 	} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
 
 	function main() {
-		const canvas = document.querySelector('#c-catalog');
+		const canvas = document.querySelector('#c-items');
 		const renderer = new THREE.WebGLRenderer({
 			canvas
 		});
@@ -70,7 +70,7 @@
 		}
 
 		<?php /*
-			$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $face);
+			$data = file_get_contents($API_URL. '/item.php?api=getitembyid&id='. $face);
 
 			$json = json_decode($data, true);
 
@@ -78,7 +78,7 @@
 			$name = $json[0]['data'][0]['displayname'];
 			$icon = $json[0]['data'][0]['texture'];
 
-			$data_shirt = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $shirt);
+			$data_shirt = file_get_contents($API_URL. '/item.php?api=getitembyid&id='. $shirt);
 
 			$json_a_shirt = json_decode($data_shirt, true);
 
@@ -86,7 +86,7 @@
 			$shirtname = $json_a_shirt[0]['data'][0]['displayname'];
 			$shirticon = $json_a_shirt[0]['data'][0]['texture'];
 
-			$data_pants = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $pants);
+			$data_pants = file_get_contents($API_URL. '/item.php?api=getitembyid&id='. $pants);
 
 			$json_a_pants = json_decode($data_pants, true);
 
@@ -146,7 +146,7 @@
 			/*
 			foreach(json_decode($hats, true) as $hat) {
                 
-				$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
+				$data = file_get_contents($API_URL. '/item.php?api=getitembyid&id='. $hat);
 
 				$json = json_decode($data, true);
 
@@ -267,7 +267,7 @@
 		<?php echo '';
 		/*
 		foreach(json_decode($hats, true) as $hat) {
-			$data = file_get_contents($API_URL. '/catalog.php?api=getitembyid&id='. $hat);
+			$data = file_get_contents($API_URL. '/item.php?api=getitembyid&id='. $hat);
 
 			$json = json_decode($data, true);
 

@@ -88,14 +88,14 @@ if (false == true) { // (!$role >= 2) {
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">
             <p><b><input type="checkbox" name="user-api-keys"/> User - API Keys</b></p>
-            <p><b><input type="checkbox" name="admin-catalog-name"/> Admin - Catalog - Name</b></p>
-            <p><b><input type="checkbox" name="admin-catalog-creator"/> Admin - Catalog - Creator</b></p>
-            <p><b><input type="checkbox" name="admin-catalog-description"/> Admin - Catalog - Description</b></p>
-            <p><b><input type="checkbox" name="admin-catalog-price"/> Admin - Catalog - Price</b></p>
-            <p><b><input type="checkbox" name="admin-catalog-type"/> Admin - Catalog - Type</b></p>
+            <p><b><input type="checkbox" name="admin-items-name"/> Admin - Shop - Name</b></p>
+            <p><b><input type="checkbox" name="admin-items-creator"/> Admin - Shop - Creator</b></p>
+            <p><b><input type="checkbox" name="admin-items-description"/> Admin - Shop - Description</b></p>
+            <p><b><input type="checkbox" name="admin-items-price"/> Admin - Shop - Price</b></p>
+            <p><b><input type="checkbox" name="admin-items-type"/> Admin - Shop - Type</b></p>
             <p><b><input type="checkbox" name="admin-user-display-name"/> Admin - User - Display Name</b></p>
             <p><b><input type="checkbox" name="admin-user-description"/> Admin - User - Description</b></p>
-            <p><b><input type="checkbox" name="admin-user-currency"/> Admin - User - Currency</b></p>
+            <p><b><input type="checkbox" name="admin-user-currency"/> Admin - User - <?php echo htmlspecialchars($currency_name); ?></b></p>
             <p><b><input type="checkbox" name="admin-user-role"/> Admin - User - Role</b></p>
             <p><b><input type="checkbox" name="admin-user-ban"/> Admin - User - Ban</b></p>
             <p><b><input type="checkbox" name="admin-user-unban"/> Admin - User - Unban</b></p>

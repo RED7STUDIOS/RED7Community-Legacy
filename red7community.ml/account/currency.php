@@ -80,7 +80,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 		
 		<main class="col-md-9">
 			<div class="d-flex align-items-center border-bottom">
-				<h2><?php echo htmlspecialchars($_SESSION["username"]); ?>'s Currency</h2>
+				<h2><?php echo htmlspecialchars($_SESSION["username"]); ?>'s <?php echo htmlspecialchars($currency_name); ?></h2>
 			</div>
 
 			<p>Current Balance: <b><?php echo number_format_short($your_currency); ?> (<?php echo number_format_comma($your_currency); ?> <?php echo $currency_name ?>)</b></p>

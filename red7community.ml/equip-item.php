@@ -33,7 +33,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home - <?php echo htmlspecialchars($site_name); ?></title>
+	<title>Equipping Item - <?php echo htmlspecialchars($site_name); ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="/assets/css/style.css">
@@ -50,7 +50,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 			<h2>Avatar Editor Action</h2>
 			<?php
 
-			$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
+			$data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
 
 			$json = json_decode($data, true);
 

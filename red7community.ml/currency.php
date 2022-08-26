@@ -27,7 +27,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Currency - <?php echo htmlspecialchars($site_name); ?></title>
+	<title><?php echo htmlspecialchars($currency_name); ?> - <?php echo htmlspecialchars($site_name); ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="/assets/css/style.css">
@@ -64,10 +64,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 		<p><b>Your Membership:</b> <?php echo $membership; ?></p>
 
-		<small>*Purchasing Currency and Membership are one-time, no need to pay monthly for your membership.</small>
+		<small>*Purchasing <?php echo htmlspecialchars($currency_name); ?> and Membership are one-time, no need to pay monthly for your membership.</small>
 
 		<div class="d-flex justify-content flex-wrap flex-md align-items-center border-bottom">
-			<h2>Currency</h2>
+			<h2><?php echo htmlspecialchars($currency_name); ?></h2>
 		</div>
 		<div class="row">
 			<div class="col">

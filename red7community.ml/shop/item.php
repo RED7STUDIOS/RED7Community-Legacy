@@ -1,7 +1,7 @@
 <?php
 /*
   File Name: item.php
-  Original Location: /catalog/item.php
+  Original Location: /shop/item.php
   Description: The details for a item.
   Author: Mitchell (BlxckSky_959)
   Copyright (C) RED7 STUDIOS 2022
@@ -11,7 +11,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 session_start();
 
-$data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
+$data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars($_GET['id']));
 
 // Decode the json response.
 if (!str_contains($data, "This item doesn't exist or has been deleted")) {
@@ -24,7 +24,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
     $description = $json[0]['data'][0]['description'];
 
     if ($description == "") {
-        $description = "This catalog item does not have a description.";
+        $description = "This items item does not have a description.";
     }
 
     $created = $json[0]['data'][0]['created'];
@@ -137,7 +137,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <canvas id="c-catalog" class="catalog-item-preview"></canvas>
+                        <canvas id="c-items" class="items-item-preview"></canvas>
                     </div>
                     <div class="col">
                         <div class="d-flex align-items-center border-bottom">
@@ -147,7 +147,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                                 exit;
                             }
                             ?>
-                            <!-- <img src="<?php echo $icon ?>" class="catalog-item-preview"></img> -->
+                            <!-- <img src="<?php echo $icon ?>" class="items-item-preview"></img> -->
 
 
                             <?php if ($membershipRequired == "Premium") {
@@ -314,7 +314,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
     </script>
-    <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/js/catalog.js.php"; ?>
+    <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/js/shop.js.php"; ?>
 </body>
 
 </html>

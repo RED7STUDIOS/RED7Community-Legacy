@@ -84,13 +84,13 @@ if (!empty($_POST['stripeToken'])) {
 			// transaction details 
 			$amountPaid = $paymenyResponse['amount'];
 			$balanceTransaction = $paymenyResponse['balance_transaction'];
-			$paidCurrency = $paymenyResponse['currency'];
+			$paid<?php echo htmlspecialchars($currency_name); ?> = $paymenyResponse['currency'];
 			$paymentStatus = $paymenyResponse['status'];
 			$paymentDate = date("Y-m-d H:i:s");
 			//insert tansaction details into database
 			include_once($_SERVER["DOCUMENT_ROOT"] . "/assets/config.php");
 			$insertTransactionSQL = "INSERT INTO transactions(cust_name, cust_email, item_name, item_number, item_price, item_price_currency, paid_amount, paid_amount_currency, txn_id, payment_status, created, modified) 
-			VALUES('" . $custName . "','" . $custEmail . "','" . $itemName . "','" . $itemNumber . "','" . $itemPrice . "','" . $paidCurrency . "','" . $amountPaid . "','" . $paidCurrency . "','" . $balanceTransaction . "','" . $paymentStatus . "','" . $paymentDate . "','" . $paymentDate . "')";
+			VALUES('" . $custName . "','" . $custEmail . "','" . $itemName . "','" . $itemNumber . "','" . $itemPrice . "','" . $paid<?php echo htmlspecialchars($currency_name); ?> . "','" . $amountPaid . "','" . $paid<?php echo htmlspecialchars($currency_name); ?> . "','" . $balanceTransaction . "','" . $paymentStatus . "','" . $paymentDate . "','" . $paymentDate . "')";
 			mysqli_query($link, $insertTransactionSQL) or die("database error: " . mysqli_error($link));
 			$lastInsertId = mysqli_insert_id($link);
 

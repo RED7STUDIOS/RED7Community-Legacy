@@ -94,7 +94,7 @@ $shownName = "";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="The profile page for <?php echo htmlspecialchars($username) ?>.">
-    <title><?php echo htmlspecialchars($username) ?> - <?php echo htmlspecialchars($site_name); ?></title>
+    <title><?php echo htmlspecialchars($username) ?>'s Profile - <?php echo htmlspecialchars($site_name); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -340,11 +340,11 @@ $shownName = "";
                         <?php
                         $total = 0;
 
-                        $datatable = "catalog"; // MySQL table name
+                        $datatable = "items"; // MySQL table name
                         $results_per_page = 8; // number of results per page
 
                         $start_from = ($page - 1) * $results_per_page;
-                        $sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
+                        $sql = "SELECT id, displayname, type, icon FROM items WHERE isEquippable=1";
                         $result = mysqli_query($link, $sql);
 
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -359,7 +359,7 @@ $shownName = "";
                                 $total = $total + 1;
 
                                 $thingy = " border-success";
-                                $thingy2 = "/catalog/item.php?id=" . htmlspecialchars($row['id']);
+                                $thingy2 = "/shop/item.php?id=" . htmlspecialchars($row['id']);
 
                                 echo '<div class="col profile-list-card"><a class="profile-list" href="' . htmlspecialchars($thingy2) . '"><div class="align-items-center card text-center' . htmlspecialchars($thingy) . '"><img class="card-img-top normal-img" src="' . $row['icon'] . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($row['displayname']) . '</h6><p class="card-text">' . htmlspecialchars($row['type']) . '</div></div></a></div>';
                             }
@@ -423,7 +423,7 @@ $shownName = "";
                                 $badge_name = $json[0]['data'][0]['displayname'];
                                 $badge_icon = $json[0]['data'][0]['icon'];
 
-                                echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/badge.php?id=' . htmlspecialchars($badge_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="' . $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($badge_name) . '</h6></div></div></a></div>';
+                                echo '<div class="col profile-list-card"><a class="profile-list" href="/shop/badge.php?id=' . htmlspecialchars($badge_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="' . $badge_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($badge_name) . '</h6></div></div></a></div>';
                             }
                         } else {
                             echo '<p>This user has no badges yet.</p>';
@@ -442,7 +442,7 @@ $shownName = "";
 
                         if ($items != "" && $items != "[]" && !empty($items)) {
                             foreach ($vals as $key => $mydata) {
-                                $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $key);
+                                $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $key);
 
                                 $json = json_decode($data, true);
 
@@ -453,7 +453,7 @@ $shownName = "";
 
                                 $value = htmlspecialchars($vals[$key]);
 
-                                echo '<div class="col profile-list-card"><a class="profile-list" href="/catalog/item.php?id=' . htmlspecialchars($item_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="' . $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($item_name) . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x' . number_format_short($value) . '</span></div></div></a></div>';
+                                echo '<div class="col profile-list-card"><a class="profile-list" href="/shop/item.php?id=' . htmlspecialchars($item_id) . '"><div class="align-items-center card text-center"><img class="card-img-top normal-img" src="' . $item_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($item_name) . '</h6><p class="card-text profile-list-title"><span class="badge bg-success">x' . number_format_short($value) . '</span></div></div></a></div>';
                             }
                         } else {
                             echo '<p>This user has no items yet.</p>';
@@ -492,7 +492,7 @@ $shownName = "";
                         
                                 <form method="post" action="/ajax/moderate.php"
                                     onSubmit="return ajaxSubmit(this);">
-                                    <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
+                                    <label><b><?php echo htmlspecialchars($currency_name); ?> Amount:</b></label> <input maxlength="69420" type="number" name="amount"
                                                                                 value="' . $current_currency . '"/>
                                     <input hidden type="text" name="action" value="currencyChange"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
@@ -627,7 +627,7 @@ $shownName = "";
         }
 
         <?php
-        $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $face);
+        $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $face);
 
         $json = json_decode($data, true);
 
@@ -635,7 +635,7 @@ $shownName = "";
         $name = $json[0]['data'][0]['displayname'];
         $icon = $json[0]['data'][0]['texture'];
 
-        $data_shirt = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $shirt);
+        $data_shirt = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $shirt);
 
         $json_shirt = json_decode($data_shirt, true);
 
@@ -650,7 +650,7 @@ $shownName = "";
             $shirticon = $json_shirt[0]['data'][0]['texture'];
         }
 
-        $data_pants = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $pants);
+        $data_pants = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $pants);
 
         $json_pants = json_decode($data_pants, true);
 
@@ -717,7 +717,7 @@ $shownName = "";
             <?php
             $armthingy = $STORAGE_URL . "/Avatar/LeftArm.obj";
             foreach (json_decode($hats, true) as $hat) {
-                $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
+                $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $hat);
 
                 $json = json_decode($data, true);
 
@@ -855,7 +855,7 @@ $shownName = "";
 
         <?php
         foreach (json_decode($hats, true) as $hat) {
-            $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $hat);
+            $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $hat);
 
             $json = json_decode($data, true);
 

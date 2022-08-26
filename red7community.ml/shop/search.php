@@ -14,8 +14,8 @@ if (isset($_GET['search'])) {
 <?php
 /*
 	  File Name: index.php
-	  Original Location: /catalog/index.php
-	  Description: The catalog list.
+	  Original Location: /shop/index.php
+	  Description: The items list.
 	  Author: Mitchell (BlxckSky_959)
 	  Copyright (C) RED7 STUDIOS 2022
 	*/
@@ -39,7 +39,7 @@ if (isset($_GET["page"])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Catalog Search - <?php echo htmlspecialchars($site_name); ?></title>
+	<title>Shop Search - <?php echo htmlspecialchars($site_name); ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="/assets/css/style.css">
@@ -63,7 +63,7 @@ if (isset($_GET["page"])) {
 	<div class="page-content-wrapper">
 
 		<div class="d-flex align-items-center">
-			<h1>Page <?php echo $page ?> - Catalog Search</h1>
+			<h1>Page <?php echo $page ?> - Shop Search</h1>
 		</div>
 
 		<div class="d-flex align-items-center border-bottom">
@@ -75,11 +75,11 @@ if (isset($_GET["page"])) {
 
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<?php
-			$datatable = "catalog"; // MySQL table name
+			$datatable = "items"; // MySQL table name
 			$results_per_page = 21; // number of results per page
 
 			$start_from = ($page - 1) * $results_per_page;
-			$sql = "SELECT * FROM catalog WHERE `displayname` like '%$key%' AND price != '-1'";
+			$sql = "SELECT * FROM items WHERE `displayname` like '%$key%' AND price != '-1'";
 			$result = mysqli_query($link, $sql);
 
 			while ($row = mysqli_fetch_assoc($result)) {
@@ -89,7 +89,7 @@ if (isset($_GET["page"])) {
 					$item_owned = "";
 				}
 
-				echo '<div class="col" style="height:180px; width:180px;"><a href="/catalog/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
+				echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
 				if ($row['price'] == "0") {
 					echo '<b>Free' . $item_owned . '</b>';
 				} else {
@@ -108,7 +108,7 @@ if (isset($_GET["page"])) {
 			$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
 
 			for ($i = 1; $i <= $total_pages; $i++) {  // print links for all pages
-				echo " <a class='btn btn-primary' href='/catalog/?page=" . $i . "'";
+				echo " <a class='btn btn-primary' href='/shop/?page=" . $i . "'";
 				if ($i == $page)  echo " class='curPage'";
 				echo ">" . $i . "</a>&nbsp;";
 			};

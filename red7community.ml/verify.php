@@ -37,7 +37,7 @@ $requirements = 0;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Apply for Verification - <?php echo htmlspecialchars($site_name); ?></title>
+    <title>Verification - <?php echo htmlspecialchars($site_name); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -124,7 +124,7 @@ $requirements = 0;
                     </div>
                     <div class="elem-group">
                         <h4 for="reason">Reason</h4>
-                        <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ... and I feel that I can contribute to <?php echo $site_name; ?> by ..." required style="width: 70%;"></textarea>
+                        <textarea type="text" id="reason" name="reason" placeholder="I want to be verified because ... and I feel that I can contribute to <?php echo htmlspecialchars($site_name); ?> by ..." required style="width: 70%;"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="spin();"><i class="fa-solid fa-envelope"></i> Send Application</button>
                 </form>

@@ -161,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="help-block"><?php echo $displayname_err; ?></span>
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit"><i class="fas fa-user-plus"></i> Create</button>
-                    <p class="mt-5 mb-3 text-muted">&copy; <?php echo $site_name . " " . date("Y") ?></p>
+                    <p class="mt-5 mb-3 text-muted">&copy; <?php echo htmlspecialchars($site_name) . " " . date("Y") ?></p>
             </form>
         </main>
     </div>

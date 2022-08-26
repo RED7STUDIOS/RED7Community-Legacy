@@ -307,7 +307,7 @@ if (isset($_GET["page"])) {
                         
                                 <form method="post" action="/ajax/moderate.php"
                                     onSubmit="return ajaxSubmit(this);">
-                                    <label><b>Currency Amount:</b></label> <input maxlength="69420" type="number" name="amount"
+                                    <label><b><?php echo htmlspecialchars($currency_name); ?> Amount:</b></label> <input maxlength="69420" type="number" name="amount"
                                                                                 value="' . $current_currency . '"/>
                                     <input hidden type="text" name="action" value="currencyChangeClan"/>
                                     <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>

@@ -1,8 +1,8 @@
 <?php
 /*
   File Name: index.php
-  Original Location: /catalog/index.php
-  Description: The catalog list.
+  Original Location: /shop/index.php
+  Description: The items list.
   Author: Mitchell (BlxckSky_959)
   Copyright (C) RED7 STUDIOS 2022
 */
@@ -81,7 +81,7 @@ if (false == true) { // (!$role >= 2) {
 
     <div class="page-content-wrapper">
         <div class="d-flex align-items-center border-bottom">
-            <h1>Applications - <?php echo $site_name; ?></h1>
+            <h1>Applications - <?php echo htmlspecialchars($site_name); ?></h1>
         </div>
 
         <table class="table table-dark table-hover">
@@ -118,7 +118,7 @@ if (false == true) { // (!$role >= 2) {
             $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
 
             for ($i = 1; $i <= $total_pages; $i++) {  // print links for all pages
-                echo " <a class='btn btn-primary' href='/catalog/?page=" . $i . "'";
+                echo " <a class='btn btn-primary' href='/shop/?page=" . $i . "'";
                 if ($i == $page)  echo " class='curPage'";
                 echo ">" . $i . "</a>&nbsp;";
             };

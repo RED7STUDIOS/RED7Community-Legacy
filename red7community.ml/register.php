@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="The register page for <?php echo htmlspecialchars($site_name); ?>.">
-	<title>Sign-up - <?php echo htmlspecialchars($site_name); ?></title>
+	<title>Register - <?php echo htmlspecialchars($site_name); ?></title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/assets/css/style.css" rel="stylesheet">
@@ -142,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<?php
 			if ($registration == "on") {
 				echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post">';
-				echo '<h1 class="h3 mb-3 fw-normal">Sign-up to ' . $site_name . '</h1>';
+				echo '<h1 class="h3 mb-3 fw-normal">Register on ' . $site_name . '</h1>';
 				echo '<div class="form-group ';
 				echo (!empty($username_err)) ? 'has-error' : '' . '">';
 				echo '<label><i class="fas fa-user"></i> Username</label>';

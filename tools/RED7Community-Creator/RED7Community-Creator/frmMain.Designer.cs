@@ -401,7 +401,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(122, 21);
             this.label10.TabIndex = 5;
-            this.label10.Text = "Currency Name:";
+            this.label10.Text = "<?php echo htmlspecialchars($currency_name); ?> Name:";
             // 
             // ss_registration
             // 
@@ -472,7 +472,7 @@
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(76, 21);
             this.label21.TabIndex = 7;
-            this.label21.Text = "Currency:";
+            this.label21.Text = "<?php echo htmlspecialchars($currency_name); ?>:";
             // 
             // mu_username
             // 

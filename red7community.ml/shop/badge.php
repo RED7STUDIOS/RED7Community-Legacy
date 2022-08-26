@@ -1,7 +1,7 @@
 <?php
 /*
   File Name: badge.php
-  Original Location: /catalog/badge.php
+  Original Location: /shop/badge.php
   Description: The details for a badge.
   Author: Mitchell (BlxckSky_959)
   Copyright (C) RED7 STUDIOS 2022
@@ -23,7 +23,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 	$description = $json[0]['data'][0]['description'];
 
 	if ($description == "") {
-		$description = "This catalog item does not have a description.";
+		$description = "This items item does not have a description.";
 	}
 	$icon = $json[0]['data'][0]['icon'];
 } else {

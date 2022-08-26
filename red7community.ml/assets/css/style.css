@@ -186,7 +186,7 @@ div .profile-list-card {
   color: red;
 }
 
-.catalog-item-preview {
+.items-item-preview {
   height: 128px;
   width: 128px;
 }
@@ -343,7 +343,7 @@ fieldset {
   height: 50%;
 }
 
-#c-catalog {
+#c-items {
   width: 100%;
   height: 50%;
 }

@@ -92,7 +92,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
+    $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
     $json = json_decode($data, true);
     $price = $json[0]['data'][0]['price'];
     $owners = $json[0]['data'][0]['owners'];
@@ -117,15 +117,15 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
         $items_final = json_encode($items_before);
         $owners_final = json_encode($owners_before);
 
-        $sql_catalog = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
+        $sql_items = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
 
-        $result_catalog = mysqli_query($link, $sql_catalog);
+        $result_items = mysqli_query($link, $sql_items);
 
-        $sql_catalog = "UPDATE users SET currency = '" . ($currency - $price) . "' WHERE id = '" . $your_id . "'";
+        $sql_items = "UPDATE users SET currency = '" . ($currency - $price) . "' WHERE id = '" . $your_id . "'";
 
-        $result_catalog = mysqli_query($link, $sql_catalog);
+        $result_items = mysqli_query($link, $sql_items);
 
-        $sql = "UPDATE catalog SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["action"]) . "'";
+        $sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["action"]) . "'";
     } else {
         $sql = null;
     }
@@ -148,7 +148,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     if ($code_items != "[]") {
         if ($code_items != "" && $code_items != "[]" && !empty($code_items)) {
             foreach (json_decode($code_items) as $mydata) {
-                $data = file_get_contents($API_URL . '/catalog.php?api=getitembyid&id=' . $mydata);
+                $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . $mydata);
                 $json = json_decode($data, true);
                 $price = $json[0]['data'][0]['price'];
                 $owners = $json[0]['data'][0]['owners'];
@@ -172,13 +172,13 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
                 $items_final = json_encode($items_before);
                 $owners_final = json_encode($owners_before);
 
-                $sql_catalog = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
+                $sql_items = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
 
-                $result_catalog = mysqli_query($link, $sql_catalog);
+                $result_items = mysqli_query($link, $sql_items);
 
-                $sql_catalog1 = "UPDATE catalog SET owners = '" . $owners_final . "' WHERE id = '" . $mydata . "'";
+                $sql_items1 = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . $mydata . "'";
 
-                $result_catalog1 = mysqli_query($link, $sql_catalog1);
+                $result_items1 = mysqli_query($link, $sql_items1);
             }
         }
     }

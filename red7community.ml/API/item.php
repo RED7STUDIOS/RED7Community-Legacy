@@ -1,8 +1,8 @@
 <?php
 /*
-  File Name: catalog.php
-  Original Location: /API/catalog.php
-  Description: Catalog API to get details.
+  File Name: item.php
+  Original Location: /API/item.php
+  Description: Shop API to get details.
   Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
@@ -19,7 +19,7 @@ if (!empty($api_type)) {
 			$id = htmlspecialchars($_GET['id']);
 
 			if ($link) {
-				$sql = "SELECT * FROM catalog WHERE id=" . $id;
+				$sql = "SELECT * FROM items WHERE id=" . $id;
 				$result = mysqli_query($link, $sql);
 
 				if ($result) {
@@ -63,7 +63,7 @@ if (!empty($api_type)) {
 			$name = $_GET['name'];
 
 			if ($link) {
-				$sql = "SELECT * FROM catalog WHERE name='" . $name . "'";
+				$sql = "SELECT * FROM items WHERE name='" . $name . "'";
 				$result = mysqli_query($link, $sql);
 
 				if ($result) {
@@ -107,7 +107,7 @@ if (!empty($api_type)) {
 			$name = $_GET['name'];
 
 			if ($link) {
-				$sql = "SELECT * FROM catalog WHERE name='" . $name . "'";
+				$sql = "SELECT * FROM items WHERE name='" . $name . "'";
 				$result = mysqli_query($link, $sql);
 
 				if ($result) {

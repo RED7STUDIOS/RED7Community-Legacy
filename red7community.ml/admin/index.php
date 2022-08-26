@@ -91,7 +91,7 @@ if (false == true) { // (!$role >= 2) {
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">
                 <h5>Site Name:</h5>
                 <input maxlength="69420" type="text" name="site_name" class="moderate-input" value="<?php echo htmlspecialchars($site_name); ?>" />
-                <h5>Currency:</h5>
+                <h5><?php echo htmlspecialchars($currency_name); ?>:</h5>
                 <input maxlength="69420" type="text" name="currency" class="moderate-input" value="<?php echo $currency_name; ?>" />
                 <h5>Premium Icon:</h5>
                 <input maxlength="69420" type="text" name="premiumIcon" class="moderate-input" value="<?php echo $premiumIcon; ?>" />
@@ -113,7 +113,7 @@ if (false == true) { // (!$role >= 2) {
             </form>
         </fieldset>
 
-        <h3>Create a new catalog item:</h3>
+        <h3>Create a new items item:</h3>
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
                 <h5>*Internal* Name:</h5>

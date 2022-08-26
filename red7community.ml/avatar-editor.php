@@ -73,11 +73,11 @@ if (isset($_GET["page"])) {
 			<?php
 			$total = 0;
 
-			$datatable = "catalog"; // MySQL table name
+			$datatable = "items"; // MySQL table name
 			$results_per_page = 21; // number of results per page
 
 			$start_from = ($page - 1) * $results_per_page;
-			$sql = "SELECT id, displayname, type, icon FROM catalog WHERE isEquippable=1";
+			$sql = "SELECT id, displayname, type, icon FROM items WHERE isEquippable=1";
 			$result = mysqli_query($link, $sql);
 
 			while ($row = mysqli_fetch_assoc($result)) {
