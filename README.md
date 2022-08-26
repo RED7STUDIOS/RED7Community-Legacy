@@ -1,7 +1,6 @@
-#### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
-#### MAKE SURE TO REMOVE THE "install" DIRECTORY AFTER FINISHING THE INSTALLATION!
 # RED7Community
-RED7Community is a community website where you can find new friends and play games. This repo is for hosting the source code of RED7Community, no support will be given if you edit the code.
+#### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
+RED7Community is an in-progress open source community software.
 
 ![Downloads](https://img.shields.io/github/downloads/RED7Studios/RED7Community/total)
 ![Repo Size](https://img.shields.io/github/repo-size/RED7Studios/RED7Community)
@@ -13,17 +12,18 @@ RED7Community is a community website where you can find new friends and play gam
 - IIS, Nginx or Apache
 
 **_PHP Requirements:_**
-- CURL
-- MBString
-- MySQLi
-- OpenSSL (might be optional)
-- PDO_MySQL
+- curl
+- mbstring
+- mysqli
+- openssl
+- pdo_mysql
 
 **_Steps:_**
 1. [Download](https://github.com/RED7Studios/RED7Community/releases/latest) the latest release zip file.
 2. Extract it to your website directory.
 3. Use the built in installer.
-4. Done!
+4. Remove the install directory.
+5. Done!
 
 ## Credits
 Installer by apPHP | https://www.apphp.com/customer/index.php?page=free-products
