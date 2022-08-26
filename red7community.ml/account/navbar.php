@@ -3,7 +3,7 @@
 	  File Name: navbar.php
 	  Original Location: /account/navbar.php
 	  Description: Navbar file in general.
-	  Author: Mitchell (BlxckSky_959)
+	  Author: Mitchell (Creaous)
 	  Copyright (C) RED7 STUDIOS 2022
 	*/
 

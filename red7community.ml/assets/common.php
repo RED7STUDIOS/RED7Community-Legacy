@@ -3,7 +3,7 @@
   File Name: common.php
   Original Location: /assets/common.php
   Description: Functions that are common.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

@@ -3,7 +3,7 @@
   File Name: change-password.php
   Original Location: /account/settings/change-password.php
   Description: Changing Password file.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

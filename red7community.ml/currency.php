@@ -3,7 +3,7 @@
 	File Name: currency.php
 	Original Location: /currency.php
 	Description: The main currency page.
-	Author: Mitchell (BlxckSky_959)
+	Author: Mitchell (Creaous)
 	Copyright (C) RED7 STUDIOS 2022
 */
 

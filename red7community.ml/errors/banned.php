@@ -3,7 +3,7 @@
   File Name: banned.php
   Original Location: /errors/banned.php
   Description: The details for a user's ban.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

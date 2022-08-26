@@ -3,7 +3,7 @@
   File Name: terms-of-service.php
   Original Location: /terms-of-service.php
   Description: The terms of service stuff.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

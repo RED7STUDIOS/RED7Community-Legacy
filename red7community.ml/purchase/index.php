@@ -3,7 +3,7 @@
   File Name: index.php
   Original Location: /purchase/index.php
   Description: Payment purchasing form.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

@@ -3,7 +3,7 @@
   File Name: badge.php
   Original Location: /shop/badge.php
   Description: The details for a badge.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

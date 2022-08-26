@@ -3,7 +3,7 @@
 	  File Name: navbar-logged-in.php
 	  Original Location: /account/navbar-logged-in.php
 	  Description: Navbar for being logged in.
-	  Author: Mitchell (BlxckSky_959)
+	  Author: Mitchell (Creaous)
   	  Copyright (C) RED7 STUDIOS 2022
 	*/
 

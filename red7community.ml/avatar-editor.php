@@ -5,7 +5,7 @@
   File Name: avatar-editor.php
   Original Location: /avatar-editor.php
   Description: The avatar editor.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

@@ -3,7 +3,7 @@
 	  File Name: home.php
 	  Original Location: /home.php
 	  Description: The main home page.
-	  Author: Mitchell (BlxckSky_959)
+	  Author: Mitchell (Creaous)
 	  Copyright (C) RED7 STUDIOS 2022
 	*/
 

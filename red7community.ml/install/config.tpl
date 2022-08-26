@@ -3,7 +3,7 @@
   File Name: config.php
   Original Location: /assets/config.php
   Description: Config file for the Database and APIs.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

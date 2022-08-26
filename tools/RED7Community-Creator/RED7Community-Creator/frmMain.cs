@@ -29,7 +29,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("  File Name: config.php");
                 writer.WriteLine("  Original Location: /assets/config.php");
                 writer.WriteLine("  Description: Config file for the Database and APIs.");
-                writer.WriteLine("  Author: Mitchell (BlxckSky_959)");
+                writer.WriteLine("  Author: Mitchell (Creaous)");
                 writer.WriteLine("  Copyright (C) RED7 STUDIOS 2022");
                 writer.WriteLine("*/");
                 writer.WriteLine("");

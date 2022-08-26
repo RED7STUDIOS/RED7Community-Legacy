@@ -3,7 +3,7 @@
   File Name: privacy.php
   Original Location: /privacy.php
   Description: The privacy policy stuff.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

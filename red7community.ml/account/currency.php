@@ -3,7 +3,7 @@
   File Name: index.php
   Original Location: /account/settings/index.php
   Description: The main settings file for everything.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

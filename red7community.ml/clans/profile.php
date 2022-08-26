@@ -3,7 +3,7 @@
   File Name: profile.php
   Original Location: /users/profile.php
   Description: The profile for a user.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

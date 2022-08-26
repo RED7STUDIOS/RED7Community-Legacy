@@ -3,7 +3,7 @@
   File Name: equip-item.php
   Original Location: /equip-item.php
   Description: Do stuff with the avatar editor.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

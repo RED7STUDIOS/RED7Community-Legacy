@@ -3,7 +3,7 @@
   File Name: maintenance.php
   Original Location: /errors/maintenance.php
   Description: The details for maintenance.
-  Author: Mitchell (BlxckSky_959)
+  Author: Mitchell (Creaous)
   Copyright (C) RED7 STUDIOS 2022
 */
 

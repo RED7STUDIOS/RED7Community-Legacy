@@ -3,7 +3,7 @@
 	  File Name: verify.php
 	  Original Location: /verify.php
 	  Description: The form for applying for verification.
-	  Author: Mitchell (BlxckSky_959)
+	  Author: Mitchell (Creaous)
 	  Copyright (C) RED7 STUDIOS 2022
 	*/
 
