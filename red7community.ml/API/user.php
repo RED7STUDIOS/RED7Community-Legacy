@@ -52,7 +52,6 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['created_at'] = $row['created_at'];
 							$response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
 							$response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
-							$response[$i]['data'][0]['currency'] = $row['currency'];
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];
@@ -105,7 +104,6 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['created_at'] = $row['created_at'];
 							$response[$i]['data'][0]['lastLogin'] = $row['lastLogin'];
 							$response[$i]['data'][0]['lastLoginDate'] = $row['lastLoginDate'];
-							$response[$i]['data'][0]['currency'] = $row['currency'];
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];

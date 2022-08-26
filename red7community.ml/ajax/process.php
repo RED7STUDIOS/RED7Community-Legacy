@@ -56,7 +56,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["username"]);
     $json = json_decode($data, true);
     $id = $json[0]['data'][0]['id'];
-    $currency_user = $json[0]['data'][0]['currency'];
+    $currency_user = $getCurrencyFromId($id);
 
     if ($currency >= htmlspecialchars($_POST["amount"])) {
         $sql_c = "UPDATE users SET currency = " . ($currency_user + htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
@@ -74,7 +74,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
     $json = json_decode($data, true);
     $id = $json[0]['data'][0]['id'];
-    $currency_user = $json[0]['data'][0]['currency'];
+    $currency_user = $getCurrencyFromId($id);
 
     if ($currency_user >= htmlspecialchars($_POST["amount"])) {
         $sql_c = "UPDATE users SET currency = " . ($currency_user - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
@@ -102,7 +102,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
     $json = json_decode($data, true);
-    $currency = $json[0]['data'][0]['currency'];
+    $currency = $getCurrencyFromId($your_id);
 
     $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
     $json = json_decode($data, true);
@@ -147,7 +147,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     // Get the user so an interceptor cannot be used to modify currency.
     $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
     $json = json_decode($data, true);
-    $your_currency = $json[0]['data'][0]['currency'];
+    $your_currency = $getCurrencyFromId($your_id);
 
     $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
     $json = json_decode($data, true);
