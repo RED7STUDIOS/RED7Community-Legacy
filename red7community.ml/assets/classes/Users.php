@@ -71,6 +71,18 @@ $getIdFromEmail = function ($email) use ($link) {
 	}
 };
 
+$getIdFromName = function ($email) use ($link) {
+	$sql_query = "SELECT id FROM users WHERE username = '" . mysqli_real_escape_string($link, htmlspecialchars($email)) . "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["id"];
+		}
+	}
+};
+
 $setSecret = function ($id, $secret) use ($link) {
 	$sql_query = "UPDATE users SET auth_secret='" . $secret . "' WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 

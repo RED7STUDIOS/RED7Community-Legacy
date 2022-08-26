@@ -8,6 +8,8 @@
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 $response = array();
 
@@ -35,6 +37,14 @@ if (!empty($api_type)) {
 						echo json_encode($response, JSON_PRETTY_PRINT);
 					} else {
 						while ($row = mysqli_fetch_assoc($result)) {
+							$_id = $getActiveInfraction($_GET['id']);
+							$_type = $getInfractionType($_id);
+							$_isBanned = 0;
+
+							if ($_type === "Ban") {
+								$_isBanned = 1;
+							}
+
 							$response[$i]['data'][0]['id'] = $row['id'];
 							$response[$i]['data'][0]['username'] = $row['username'];
 							$response[$i]['data'][0]['displayname'] = $row['displayname'];
@@ -46,9 +56,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];
-							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
-							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
-							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
+							$response[$i]['data'][0]['isBanned'] = $_isBanned;
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];
@@ -82,6 +90,14 @@ if (!empty($api_type)) {
 						echo json_encode($response, JSON_PRETTY_PRINT);
 					} else {
 						while ($row = mysqli_fetch_assoc($result)) {
+							$_id = $getActiveInfraction($getIdFromName($_GET['name']));
+							$_type = $getInfractionType($_id);
+							$_isBanned = 0;
+
+							if ($_type === "Ban") {
+								$_isBanned = 1;
+							}
+
 							$response[$i]['data'][0]['id'] = $row['id'];
 							$response[$i]['data'][0]['username'] = $row['username'];
 							$response[$i]['data'][0]['displayname'] = $row['displayname'];
@@ -93,9 +109,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];
-							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
-							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
-							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
+							$response[$i]['data'][0]['isBanned'] = $_isBanned;
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];

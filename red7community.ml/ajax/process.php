@@ -12,27 +12,39 @@ function post($key)
 }
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     if (strlen(htmlspecialchars($_POST["action"])) > 14) {
         $sql = null;
     } else {
         // Prepare an insert statement
-        $sql = "UPDATE users SET displayname = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+        $sql = "UPDATE users SET displayname = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+    }
+} else if (htmlspecialchars($_POST['action']) == "acceptInfraction") {
+    $_id = $getActiveInfraction($_SESSION['id']);
+    $_type = $getInfractionType($_id);
+    if ($_type === "Warning")
+    {
+        $sql = "UPDATE infractions SET active = 0 WHERE id = '" . htmlspecialchars($_id) . "'";
+    }
+    else
+    {
+        $sql = null;
     }
 } else if (htmlspecialchars($_POST['action']) == "changeDescription") {
     if (strlen(htmlspecialchars($_POST["action"])) > 200) {
         $sql = null;
     } else {
         // Prepare an insert statement
-        $sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+        $sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
     }
 } else if (htmlspecialchars($_POST['action']) == "changeEmail") {
     // Prepare an insert statement
-    $sql = "UPDATE users SET email = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+    $sql = "UPDATE users SET email = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
 } else if (htmlspecialchars($_POST['action']) == "changeProfile") {
     // Prepare an insert statement
-    $sql = "UPDATE users SET icon = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
+    $sql = "UPDATE users SET icon = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
 } else if (htmlspecialchars($_POST['action']) == "updateClanSettings") {
     // Prepare an insert statement
     $sql = "UPDATE clans SET displayname = '" . htmlspecialchars($_POST["displayname"]) . "', description='" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
@@ -125,7 +137,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
 
         $result_items = mysqli_query($link, $sql_items);
 
-        $sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["action"]) . "'";
+        $sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["value"]) . "'";
     } else {
         $sql = null;
     }

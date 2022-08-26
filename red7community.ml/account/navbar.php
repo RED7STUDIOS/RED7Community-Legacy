@@ -56,9 +56,7 @@ $selected_page = $_SERVER['REQUEST_URI'];
 // Check if the user is logged in, if not then redirect them to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 } else {
-	if (!str_contains($selected_page, "/events")) {
-		include_once "navbar-logged-in.php";
-	}
+	include_once "navbar-logged-in.php";
 }
 ?>
 
@@ -75,23 +73,12 @@ if (isset($_SESSION['id'])) {
 	}
 }
 
-if ($_SERVER["REQUEST_URI"] != "/errors/banned.php") {
-            if (isset($maintenanceMode)) {
-                if ($maintenanceMode == "on") {
-					
-                    if (!$role >= 2)
-                    {
-                        echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
-                    }
-                }
-            }
-
-}
-else if ($_SERVER["REQUEST_URI"] == "/errors/banned.php")
-{
-	if (isset($your_isBanned)) {
-		if ($your_isBanned != 1) {
-			echo "<script type='text/javascript'>location.href = '/';</script>";
+if (isset($maintenanceMode)) {
+	if ($maintenanceMode == "on") {
+		
+		if (!$role >= 2)
+		{
+			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
 		}
 	}
 }

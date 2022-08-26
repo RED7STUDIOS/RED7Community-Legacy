@@ -1,6 +1,7 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (!isset($_SESSION)) {
 	session_start();
@@ -33,6 +34,22 @@ if (!$role >= 2) {
 
 // Decided to move to MySQL table instead :P
 
+$_id = $getActiveInfraction($_SESSION['id']);
+$_type = $getInfractionType($_id);
+$_reason = $getInfractionReason($_id);
+$_start = $getInfractionStart($_id);
+$_end = $getInfractionEnd($_id);
+$_issued_by_id = $getInfractionIssuer($_id);
+$_issued_by = $getDisplayName($_issued_by_id);
 
+echo "ID: ". $_id. "<br/>Type: ". $_type. "<br/>Reason: ". $_reason. "<br/>Start: ". $_start. "<br/>End: ". $_end. "<br/>Issuer: ". $_issued_by;
+
+if ($_type == "Ban")
+{
+    echo "<br/><br/>You are currently banned.";
+} else if ($_type == "Warn")
+{
+    echo "<br/><br/>You are currently warned.";
+}
 
 ?>

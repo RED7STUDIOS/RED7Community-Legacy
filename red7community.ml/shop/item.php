@@ -156,7 +156,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                             &nbsp;
                             <div class="wrapper">
                                 <h2><?php echo htmlspecialchars($name); ?>
-                                    <?php if (in_array(htmlspecialchars($_GET['id']), $items)) {
+                                    <?php if (in_array($_GET['id'], $items)) {
                                         echo '<img src="/assets/images/item-owned.png" class="item-owned"/>';
                                     } ?>
                                     <span>

@@ -12,6 +12,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/common.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
 
@@ -63,31 +64,45 @@ if ($role >= 1) {
 }
 
 if ($role >= 2) {
-	if (htmlspecialchars($_POST['action']) == "banningUser") {
-		if (isset($_POST['isBanned'])) {
-			// Prepare an insert statement
-			$sql = "UPDATE users SET isBanned = 1 WHERE id = '" . $_POST['id'] . "'";
-			$result = mysqli_query($link, $sql);
+	if (htmlspecialchars($_POST['action']) == "infractUser") {
+		$_id = $getActiveInfraction($_POST['id']);
 
-			$sql = "UPDATE users SET bannedReason = '" . $_POST["banReason"] . "' WHERE id = '" . $_POST['id'] . "'";
-			$result = mysqli_query($link, $sql);
-
-			$todayTime = date("Y-m-d H:i:s");
-			$sql = "UPDATE users SET bannedDate = '" . $todayTime . "' WHERE id = '" . $_POST['id'] . "'";
-			$result = mysqli_query($link, $sql);
-		} else {
+		if (isset($_id))
+		{
+			$_type = $getInfractionType($_id);
+			if (isset($_POST['isActive'])) {
+				// Prepare an insert statement
+				$sql = "UPDATE infractions SET active = 1 WHERE id = '" . $_id . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$sql = "UPDATE infractions SET type = '" . $_POST["type"] . "' WHERE id = '" . $_id . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$sql = "UPDATE infractions SET reason = '" . $_POST["reason"] . "' WHERE id = '" . $_id . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$sql = "UPDATE infractions SET start = '" . $_POST["start"] . "' WHERE id = '" . $_id . "'";
+				$result = mysqli_query($link, $sql);
+	
+				$sql = "UPDATE infractions SET end = '" . $_POST["end"] . "' WHERE id = '" . $_id . "'";
+			} else {
+				// Prepare an insert statement
+				$sql = "UPDATE infractions SET active = 0 WHERE id = '" . $_id . "'";
+			}
+		}
+		else {
 			// Prepare an insert statement
-			$sql = "UPDATE users SET isBanned = 0 WHERE id = '" . $_POST['id'] . "'";
+			$sql = "INSERT INTO infractions (issued_by, user_id, `type`, reason, `start`, `end`, active) VALUES(". $_SESSION["id"].", ". $_POST["id"].", '". $_POST["type"]. "', '". $_POST["reason"]. "', '". $_POST["start"]. "', '". $_POST["end"]. "', 1);";
 		}
 	} else if (htmlspecialchars($_POST['action']) == "currencyChange") {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "displayNameChange") {
 		// Prepare an insert statement
-		$sql = "UPDATE users SET displayName = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+		$sql = "UPDATE users SET displayName = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "descriptionChange") {
 		// Prepare an insert statement
-		$sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+		$sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "banningClan") {
 		if (isset($_POST['isBanned'])) {
 			// Prepare an insert statement
@@ -109,10 +124,10 @@ if ($role >= 2) {
 		$sql = "UPDATE clans SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "displayNameChangeClan") {
 		// Prepare an insert statement
-		$sql = "UPDATE clans SET displayName = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+		$sql = "UPDATE clans SET displayName = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "descriptionChangeClan") {
 		// Prepare an insert statement
-		$sql = "UPDATE clans SET description = '" . htmlspecialchars($_POST["action"]) . "' WHERE id = '" . $_POST['id'] . "'";
+		$sql = "UPDATE clans SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "updateSiteSettings") {
 		// Prepare an insert statement
 		$sql = "UPDATE site_info SET content = '" . $_POST["site_name"] . "' WHERE name = 'site_name'";

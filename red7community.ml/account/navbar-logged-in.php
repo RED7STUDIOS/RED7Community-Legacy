@@ -8,6 +8,7 @@
 	*/
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 // Detect if the session isn't set.
 if (!isset($_SESSION)) {
@@ -44,8 +45,6 @@ $your_currency = $your_json[0]['data'][0]['currency'];
 $your_badges = $your_json[0]['data'][0]['badges'];
 $your_membership = $your_json[0]['data'][0]['membership'];
 $your_isBanned = $your_json[0]['data'][0]['isBanned'];
-$your_banReason = $your_json[0]['data'][0]['bannedReason'];
-$your_banDate = $your_json[0]['data'][0]['bannedDate'];
 $your_role = $your_json[0]['data'][0]['role'];
 $your_isVerified = $your_json[0]['data'][0]['isVerified'];
 $your_followers = $your_json[0]['data'][0]['followers'];
@@ -106,11 +105,40 @@ if ($today_dt2 >= $expire_dt) {
 	}
 }
 
+
+
 $todayTime = date("Y-m-d H:i:s");
 
 $sql = "UPDATE users SET lastloginDate='" . $todayDate . "' WHERE id=" . $your_id;
 
 mysqli_query($link, $sql);
+
+
+
+if ($_SERVER["REQUEST_URI"] == "/errors/infraction.php")
+{
+	if ($your_isBanned != 1) {
+		echo "<script type='text/javascript'>location.href = '/';</script>";
+	}
+}
+else {
+	if ($your_isBanned === 1) {
+		$_id = $getActiveInfraction($_SESSION['id']);
+		$_start = $getInfractionStart($_id);
+		$_end = date($getInfractionEnd($_id));
+	
+		if ($_end < $todayTime)
+		{
+			$sql = "UPDATE infractions SET active=0 WHERE id=" . $_id;
+			mysqli_query($link, $sql);
+		}
+		else
+		{
+			echo "<script type='text/javascript'>location.href = '/errors/infraction.php';</script>";
+		}
+	}
+}
+
 ?>
 
 <li class="nav-item dropdown pull-left">
