@@ -1,6 +1,6 @@
 # RED7Community
 #### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
-RED7Community is a community website where you can find new friends and play games. This repo is for hosting the source code of RED7Community, no support will be given if you edit the code.
+RED7Community is an in-progress open source community software.
 
 ![Downloads](https://img.shields.io/github/downloads/RED7Studios/RED7Community/total)
 ![Repo Size](https://img.shields.io/github/repo-size/RED7Studios/RED7Community)
