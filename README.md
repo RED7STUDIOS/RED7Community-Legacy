@@ -20,10 +20,10 @@ RED7Community is an in-progress open source community software.
 
 **_Steps:_**
 1. [Download](https://github.com/RED7Studios/RED7Community/archive/refs/heads/main.zip) the latest source zip file.
-2. Extract it to your website directory.
-3. Use the built in installer.
-4. Remove the install directory.
-5. Done!
+2. Extract the 'red7community.ml' directory to your website.
+3. Use the built in installer to do the setup wizard.
+4. Remove the install directory (for security reasons).
+5. Done, enjoy RED7Community!
 
 ## Credits
 Installer by apPHP | https://www.apphp.com/customer/index.php?page=free-products
