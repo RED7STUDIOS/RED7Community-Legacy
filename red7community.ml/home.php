@@ -78,7 +78,7 @@ $shownName = "";
 		<h3>Friends:</h3>
 		<div class="row row-cols-1 row-cols-md-2 flex-nowrap overflow-auto profile-list-width">
 			<?php
-			require $_SERVER['DOCUMENT_ROOT'] . "/assets/relation.php";
+			require $_SERVER['DOCUMENT_ROOT'] . "/assets/classes/Relations.php";
 
 			$users = $REL->getUsers();
 			$friends = $REL->getFriends(htmlspecialchars($_SESSION['id']));

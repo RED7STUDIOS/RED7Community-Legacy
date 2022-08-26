@@ -223,7 +223,7 @@ $shownName = "";
 
                 <?php
                 // (A) LOAD RELATIONSHIP LIBRARY + SET CURRENT USER
-                require $_SERVER['DOCUMENT_ROOT'] . "/assets/relation.php";
+                require $_SERVER['DOCUMENT_ROOT'] . "/assets/classes/Relations.php";
 
                 // (B) PROCESS RELATIONSHIP REQUEST
                 if (isset($_POST['req'])) {

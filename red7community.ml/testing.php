@@ -31,6 +31,8 @@ if (!$role >= 2) {
 
 <?php
 
+// Decided to move to MySQL table instead :P
+
 
 
 ?>
