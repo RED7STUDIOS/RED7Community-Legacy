@@ -4,7 +4,7 @@
   Original Location: /account/settings/change-password.php
   Description: Changing Password file.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";

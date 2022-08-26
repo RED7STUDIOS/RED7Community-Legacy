@@ -1,6 +1,6 @@
 <?php
 $getUsername = function ($id) use ($link) {
-	$sql_query = "SELECT username FROM users WHERE id = " . $id;
+	$sql_query = "SELECT username FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -12,7 +12,7 @@ $getUsername = function ($id) use ($link) {
 };
 
 $getDisplayName = function ($id) use ($link) {
-	$sql_query = "SELECT displayname FROM users WHERE id = " . $id;
+	$sql_query = "SELECT displayname FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -23,20 +23,8 @@ $getDisplayName = function ($id) use ($link) {
 	}
 };
 
-$getAdminName = function ($id) use ($link) {
-	$sql_query = "SELECT full_name FROM admin_panel WHERE ownerid = " . $id;
-	$result = mysqli_query($link, $sql_query);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while ($row = mysqli_fetch_assoc($result)) {
-			return $row["full_name"];
-		}
-	}
-};
-
 $getEmail = function ($id) use ($link) {
-	$sql_query = "SELECT email FROM users WHERE id = " . $id;
+	$sql_query = "SELECT email FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -48,7 +36,7 @@ $getEmail = function ($id) use ($link) {
 };
 
 $getSecret = function ($id) use ($link) {
-	$sql_query = "SELECT auth_secret FROM users WHERE id = " . $id;
+	$sql_query = "SELECT auth_secret FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -60,7 +48,7 @@ $getSecret = function ($id) use ($link) {
 };
 
 $getLastLogin = function ($id) use ($link) {
-	$sql_query = "SELECT lastLogin FROM users WHERE id = " . $id;
+	$sql_query = "SELECT lastLogin FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -72,7 +60,7 @@ $getLastLogin = function ($id) use ($link) {
 };
 
 $getIdFromEmail = function ($email) use ($link) {
-	$sql_query = "SELECT id FROM users WHERE email = '" . $email . "'";
+	$sql_query = "SELECT id FROM users WHERE email = '" . mysqli_real_escape_string($link, htmlspecialchars($email)) . "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -84,7 +72,7 @@ $getIdFromEmail = function ($email) use ($link) {
 };
 
 $setSecret = function ($id, $secret) use ($link) {
-	$sql_query = "UPDATE users SET auth_secret='" . $secret . "' WHERE id = " . $id;
+	$sql_query = "UPDATE users SET auth_secret='" . $secret . "' WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 
 	if (mysqli_query($link, $sql_query)) {
 		return true;
@@ -94,7 +82,7 @@ $setSecret = function ($id, $secret) use ($link) {
 };
 
 $sendApplication = function ($id, $reason, $email, $full_name) use ($link) {
-	$sql_query = "INSERT INTO applications (sender_id, preferred_email, reason, full_name) VALUES (" . $id . ", '" . $email . "', '" . $reason . "', '" . $full_name . "')";
+	$sql_query = "INSERT INTO applications (sender_id, preferred_email, reason, full_name) VALUES (" . mysqli_real_escape_string($link, htmlspecialchars($id)) . ", '" . mysqli_real_escape_string($link, htmlspecialchars($email)) . "', '" . mysqli_real_escape_string($link, htmlspecialchars($reason)) . "', '" . mysqli_real_escape_string($link, htmlspecialchars($full_name)) . "')";
 
 	if (mysqli_query($link, $sql_query)) {
 		return true;
@@ -104,7 +92,7 @@ $sendApplication = function ($id, $reason, $email, $full_name) use ($link) {
 };
 
 $getApplication = function ($id) use ($link) {
-	$sql_query = "SELECT id FROM applications WHERE sender_id = " . $id;
+	$sql_query = "SELECT id FROM applications WHERE sender_id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -116,7 +104,7 @@ $getApplication = function ($id) use ($link) {
 };
 
 $getUserFromApplicationId = function ($id) use ($link) {
-	$sql_query = "SELECT sender_id FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT sender_id FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -128,7 +116,7 @@ $getUserFromApplicationId = function ($id) use ($link) {
 };
 
 $getApplicationReason = function ($id) use ($link) {
-	$sql_query = "SELECT reason FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT reason FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -140,7 +128,7 @@ $getApplicationReason = function ($id) use ($link) {
 };
 
 $getApplicationEmail = function ($id) use ($link) {
-	$sql_query = "SELECT preferred_email FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT preferred_email FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -152,7 +140,7 @@ $getApplicationEmail = function ($id) use ($link) {
 };
 
 $getApplicationFullName = function ($id) use ($link) {
-	$sql_query = "SELECT full_name FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT full_name FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -164,7 +152,7 @@ $getApplicationFullName = function ($id) use ($link) {
 };
 
 $getApplicationSubmittedDate = function ($id) use ($link) {
-	$sql_query = "SELECT submitted FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT submitted FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -176,7 +164,7 @@ $getApplicationSubmittedDate = function ($id) use ($link) {
 };
 
 $getApplicationStatus = function ($id) use ($link) {
-	$sql_query = "SELECT accepted FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT accepted FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -188,7 +176,7 @@ $getApplicationStatus = function ($id) use ($link) {
 };
 
 $getApplicationDeniedReason = function ($id) use ($link) {
-	$sql_query = "SELECT deniedReason FROM applications WHERE id = " . $id;
+	$sql_query = "SELECT deniedReason FROM applications WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
 
 	if (mysqli_num_rows($result) > 0) {

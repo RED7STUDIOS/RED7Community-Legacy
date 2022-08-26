@@ -4,7 +4,7 @@
   Original Location: /privacy.php
   Description: The privacy policy stuff.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";

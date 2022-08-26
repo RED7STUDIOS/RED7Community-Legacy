@@ -4,7 +4,7 @@
   Original Location: /equip-item.php
   Description: Do stuff with the avatar editor.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";

@@ -4,7 +4,7 @@
   Original Location: /purchase/index.php
   Description: Payment purchasing form.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";

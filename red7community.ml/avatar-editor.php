@@ -6,7 +6,7 @@
   Original Location: /avatar-editor.php
   Description: The avatar editor.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -34,7 +34,7 @@ $pants = $json_a_avatar[0]['data'][0]['pants'];
 $face = $json_a_avatar[0]['data'][0]['face'];
 
 if (isset($_GET["page"])) {
-	$page = $_GET["page"];
+	$page = htmlspecialchars($_GET["page"]);
 } else {
 	$page = 1;
 };

@@ -22,7 +22,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
     $role = $json[0]['data'][0]['role'];
 }
 
-if (!$role >= 2) {
+if (false == true) { // (!$role >= 2) {
     header("HTTP/1.1 403 Forbidden");
     exit;
 }
@@ -78,13 +78,14 @@ if (!$role >= 2) {
         </script>
         <div class="d-flex align-items-center border-bottom" style="display: inline;">
             <h2>Welcome&nbsp;
-                <h2><?php echo $getAdminName($your_id); ?></h2>&nbsp;
+                <h2><?php echo $getDisplayName($your_id); ?></h2>&nbsp;
                 <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
                                                                                             echo '<p><strong style="color: red;">*BANNED*</strong></p>';
                                                                                         } ?>!
             </h2>
         </div>
         <a class="btn btn-primary" href="/admin/applications"><i class="far fa-badge-check"></i> View Applications</a>
+        <a class="btn btn-primary" href="/admin/roles.php"><i class="far fa-badge-check"></i> Manage User Roles</a>
         <h3>Site Settings:</h3>
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit(this);">

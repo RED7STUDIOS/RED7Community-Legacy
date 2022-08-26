@@ -4,7 +4,7 @@
   Original Location: /register.php
   Description: The main register form.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 // Include config file

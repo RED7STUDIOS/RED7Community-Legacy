@@ -1,12 +1,4 @@
 <?php
-/*
-  File Name: relation.php
-  Original Location: /assets/relation.php
-  Description: Friends and blocking class.
-  Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
-*/
-
 class Relation
 {
 	// (A) CONSTRUCTOR - CONNECT TO DATABASE
@@ -59,7 +51,7 @@ class Relation
 	{
 		// (D1) CHECK IF ALREADY FRIENDS
 		$this->query(
-			"SELECT * FROM `relation` WHERE `from`=? AND `to`=? AND `status`='F'",
+			"SELECT * FROM `relation` WHERE `from`=? AND `to`=? AND `status`='FRIEND'",
 			[$from, $to]
 		);
 		$result = $this->stmt->fetch();
@@ -71,8 +63,8 @@ class Relation
 		// (D2) CHECK FOR PENDING REQUESTS
 		$this->query(
 			"SELECT * FROM `relation` WHERE " .
-				"(`status`='P' AND `from`=? AND `to`=?) OR " .
-				"(`status`='P' AND `from`=? AND `to`=?)",
+				"(`status`='PENDING' AND `from`=? AND `to`=?) OR " .
+				"(`status`='PENDING' AND `from`=? AND `to`=?)",
 			[$from, $to, $to, $from]
 		);
 		$result = $this->stmt->fetch();
@@ -83,7 +75,7 @@ class Relation
 
 		// (D3) ADD FRIEND REQUEST
 		return $this->query(
-			"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'P')",
+			"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'PENDING')",
 			[$from, $to]
 		);
 	}
@@ -93,7 +85,7 @@ class Relation
 	{
 		// (E1) UPGRADE STATUS TO "F"RIENDS
 		$this->query(
-			"UPDATE `relation` SET `status`='F' WHERE `status`='P' AND `from`=? AND `to`=?",
+			"UPDATE `relation` SET `status`='FRIEND' WHERE `status`='PENDING' AND `from`=? AND `to`=?",
 			[$from, $to]
 		);
 		if ($this->stmt->rowCount() == 0) {
@@ -103,7 +95,7 @@ class Relation
 
 		// (E2) ADD RECIPOCAL RELATIONSHIP
 		return $this->query(
-			"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'F')",
+			"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'FRIEND')",
 			[$to, $from]
 		);
 	}
@@ -112,7 +104,7 @@ class Relation
 	function cancelReq($from, $to)
 	{
 		return $this->query(
-			"DELETE FROM `relation` WHERE `status`='P' AND `from`=? AND `to`=?",
+			"DELETE FROM `relation` WHERE `status`='PENDING' AND `from`=? AND `to`=?",
 			[$from, $to]
 		);
 	}
@@ -122,8 +114,8 @@ class Relation
 	{
 		return $this->query(
 			"DELETE FROM `relation` WHERE " .
-				"(`status`='F' AND `from`=? AND `to`=?) OR " .
-				"(`status`='F' AND `from`=? AND `to`=?)",
+				"(`status`='FRIEND' AND `from`=? AND `to`=?) OR " .
+				"(`status`='FRIEND' AND `from`=? AND `to`=?)",
 			[$from, $to, $to, $from]
 		);
 	}
@@ -134,7 +126,7 @@ class Relation
 		// (H1) BLOCK
 		if ($blocked) {
 			return $this->query(
-				"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'B')",
+				"INSERT INTO `relation` (`from`, `to`, `status`) VALUES (?,?,'BLOCKED')",
 				[$from, $to]
 			);
 		}
@@ -142,7 +134,7 @@ class Relation
 		// (H2) UNBLOCK
 		else {
 			return $this->query(
-				"DELETE FROM `relation` WHERE `from`=? AND `to`=? AND `status`='B'",
+				"DELETE FROM `relation` WHERE `from`=? AND `to`=? AND `status`='BLOCKED'",
 				[$from, $to]
 			);
 		}
@@ -154,7 +146,7 @@ class Relation
 		// (I1) GET OUTGOING FRIEND REQUESTS (FROM USER TO OTHER PEOPLE)
 		$req = ["in" => [], "out" => []];
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='P' AND `from`=?",
+			"SELECT * FROM `relation` WHERE `status`='PENDING' AND `from`=?",
 			[$uid]
 		);
 		while ($row = $this->stmt->fetch()) {
@@ -163,7 +155,7 @@ class Relation
 
 		// (I2) GET INCOMING FRIEND REQUESTS (FROM OTHER PEOPLE TO USER)
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='P' AND `to`=?",
+			"SELECT * FROM `relation` WHERE `status`='PENDING' AND `to`=?",
 			[$uid]
 		);
 		while ($row = $this->stmt->fetch()) {
@@ -178,7 +170,7 @@ class Relation
 		// (J1) GET FRIENDS
 		$friends = ["f" => [], "b" => []];
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='F' AND `from`=?",
+			"SELECT * FROM `relation` WHERE `status`='FRIEND' AND `from`=?",
 			[$uid]
 		);
 		while ($row = $this->stmt->fetch()) {
@@ -187,7 +179,7 @@ class Relation
 
 		// (J2) GET FOES
 		$this->query(
-			"SELECT * FROM `relation` WHERE `status`='B' AND `from`=?",
+			"SELECT * FROM `relation` WHERE `status`='BLOCKED' AND `from`=?",
 			[$uid]
 		);
 		while ($row = $this->stmt->fetch()) {

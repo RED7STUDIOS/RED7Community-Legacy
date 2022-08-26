@@ -4,7 +4,7 @@
 	  Original Location: /account/navbar.php
 	  Description: Navbar file in general.
 	  Author: Mitchell (BlxckSky_959)
-	  Copyright (C) RED7 STUDIOS 2021
+	  Copyright (C) RED7 STUDIOS 2022
 	*/
 
 $selected_page = $_SERVER['REQUEST_URI'];

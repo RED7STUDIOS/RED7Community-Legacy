@@ -4,7 +4,7 @@
   Original Location: /users/profile.php
   Description: The profile for a user.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -65,7 +65,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
 }
 
 if (isset($_GET["page"])) {
-    $page = $_GET["page"];
+    $page = htmlspecialchars($_GET["page"]);
 } else {
     $page = 1;
 };
@@ -221,7 +221,7 @@ if (isset($_GET["page"])) {
                 <?php
                 if (isset($_SESSION['id'])) {
                     if ($owner == $_SESSION['id']) {
-                        echo '<a href="/clans/manage.php?id=' . $_GET['id'] . '" class="btn btn-primary">Manage</a>';
+                        echo '<a href="/clans/manage.php?id=' . htmlspecialchars($_GET['id']) . '" class="btn btn-primary">Manage</a>';
                     }
                 }
                 ?>
@@ -233,7 +233,7 @@ if (isset($_GET["page"])) {
                     if (!in_array($_SESSION['id'], $d)) {
                         echo '<form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
                             <input hidden type="text" name="action" value="joinClan" />
-                            <input hidden type="text" name="id" value="' . $_GET['id'] . '" />
+                            <input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '" />
                             <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-right-to-bracket"></i> Join Clan</button>
                         </form>';
                     }

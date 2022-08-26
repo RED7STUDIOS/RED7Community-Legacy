@@ -47,7 +47,7 @@ if ($_POST['action'] == "changeDisplayName") {
     $currency_user = $json[0]['data'][0]['currency'];
 
     if ($currency >= $_POST["amount"]) {
-        $sql_c = "UPDATE users SET currency = " . ($currency_user + $_POST["amount"]) . " WHERE id = " . $id;
+        $sql_c = "UPDATE users SET currency = " . ($currency_user + $_POST["amount"]) . " WHERE id = '" . $id. "'";
         $result_c = mysqli_query($link, $sql_c);
 
         $sql = "UPDATE clans SET currency = " . ($currency - $_POST["amount"]) . " WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
@@ -65,7 +65,7 @@ if ($_POST['action'] == "changeDisplayName") {
     $currency_user = $json[0]['data'][0]['currency'];
 
     if ($currency_user >= $_POST["amount"]) {
-        $sql_c = "UPDATE users SET currency = " . ($currency_user - $_POST["amount"]) . " WHERE id = " . $id;
+        $sql_c = "UPDATE users SET currency = " . ($currency_user - $_POST["amount"]) . " WHERE id = '" . $id. "'";
         $result_c = mysqli_query($link, $sql_c);
 
         $sql = "UPDATE clans SET currency = " . ($currency + $_POST["amount"]) . " WHERE id = '" . $_POST["id"] . "' AND owner = " . $_SESSION['id'];
@@ -83,7 +83,7 @@ if ($_POST['action'] == "changeDisplayName") {
 
     $members = json_encode($members);
 
-    $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = " . $_POST["id"];
+    $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = '" . $_POST["id"]. "'";
 } else if ($_POST['action'] == "purchaseItem") {
     $your_id = $_SESSION['id'];
 

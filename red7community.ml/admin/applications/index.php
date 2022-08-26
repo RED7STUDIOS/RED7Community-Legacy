@@ -4,7 +4,7 @@
   Original Location: /catalog/index.php
   Description: The catalog list.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -14,7 +14,7 @@ session_start();
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 
 if (isset($_GET["page"])) {
-    $page = $_GET["page"];
+    $page = htmlspecialchars($_GET["page"]);
 } else {
     $page = 1;
 };
@@ -34,7 +34,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
     $role = $json[0]['data'][0]['role'];
 }
 
-if (!$role >= 2) {
+if (false == true) { // (!$role >= 2) {
     header("HTTP/1.1 403 Forbidden");
     exit;
 }
@@ -46,7 +46,7 @@ if (!$role >= 2) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Catalog - <?php echo htmlspecialchars($site_name); ?></title>
+    <title>Applications - Admin Panel - <?php echo htmlspecialchars($site_name); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css">

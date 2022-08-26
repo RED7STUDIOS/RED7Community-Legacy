@@ -4,7 +4,7 @@
   Original Location: /assets/config.php
   Description: Config file for the Database and APIs.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 // The domain URL.

@@ -4,7 +4,7 @@
   Original Location: /assets/common.php
   Description: Functions that are common.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 // Include the configuration file.

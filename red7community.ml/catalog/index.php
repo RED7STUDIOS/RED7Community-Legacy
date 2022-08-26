@@ -4,7 +4,7 @@
   Original Location: /catalog/index.php
   Description: The catalog list.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -20,7 +20,7 @@ if (isset($_GET["tab"])) {
 };
 
 if (isset($_GET["page"])) {
-	$page = $_GET["page"];
+	$page = htmlspecialchars($_GET["page"]);
 } else {
 	$page = 1;
 };

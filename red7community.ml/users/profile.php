@@ -4,7 +4,7 @@
   Original Location: /users/profile.php
   Description: The profile for a user.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -76,7 +76,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
 }
 
 if (isset($_GET["page"])) {
-    $page = $_GET["page"];
+    $page = htmlspecialchars($_GET["page"]);
 } else {
     $page = 1;
 };

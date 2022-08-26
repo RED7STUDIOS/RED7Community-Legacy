@@ -4,7 +4,7 @@
 	  Original Location: /account/navbar-logged-in.php
 	  Description: Navbar for being logged in.
 	  Author: Mitchell (BlxckSky_959)
-  	  Copyright (C) RED7 STUDIOS 2021
+  	  Copyright (C) RED7 STUDIOS 2022
 	*/
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";

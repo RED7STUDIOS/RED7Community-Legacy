@@ -44,13 +44,13 @@ if ($role >= 1) {
 		$user = $getUserFromApplicationId($id);
 
 		if ($_POST['action'] == "acceptApplication") {
-			$sql = "UPDATE users SET isVerified = 1 WHERE id = " . $user;
+			$sql = "UPDATE users SET isVerified = 1 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET accepted = 1 WHERE id = '" . $_POST['id'] . "'";
 			$sendEmail($user, $ROOT_URL . "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
 		} else if ($_POST['action'] == "denyApplication") {
-			$sql = "UPDATE users SET isVerified = 0 WHERE id = " . $user;
+			$sql = "UPDATE users SET isVerified = 0 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET accepted = 0 WHERE id = '" . $_POST['id'] . "'";
@@ -155,7 +155,7 @@ if ($role >= 2) {
 		}
 	} else if ($_POST['action'] == "updateItemSettings") {
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = " . $_POST["id"];
+		$sql = "UPDATE catalog SET displayname = '" . $_POST["name"] . "' WHERE id = '" . $_POST["id"]. "'";
 		$result = mysqli_query($link, $sql);
 
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
@@ -168,19 +168,19 @@ if ($role >= 2) {
 		}
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = " . $_POST["id"];
+		$sql = "UPDATE catalog SET creator = " . $creator . " WHERE id = '" . $_POST["id"]. "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET description = '" . $_POST["description"] . "' WHERE id = " . $_POST["id"];
+		$sql = "UPDATE catalog SET description = '" . $_POST["description"] . "' WHERE id = '" . $_POST["id"]. "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = " . $_POST["id"];
+		$sql = "UPDATE catalog SET price = '" . $_POST["price"] . "' WHERE id = '" . $_POST["id"]. "'";
 		$result = mysqli_query($link, $sql);
 
 		// Prepare an insert statement
-		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = " . $_POST["id"];
+		$sql = "UPDATE catalog SET type = '" . $_POST["type"] . "' WHERE id = '" . $_POST["id"]. "'";
 		$result = mysqli_query($link, $sql);
 	} else if ($_POST['action'] == "createNewItem") {
 		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);

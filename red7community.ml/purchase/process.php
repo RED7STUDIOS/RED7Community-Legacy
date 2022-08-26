@@ -4,7 +4,7 @@
   Original Location: /purchase/process.php
   Description: Process a payment.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -95,14 +95,14 @@ if (!empty($_POST['stripeToken'])) {
 			$lastInsertId = mysqli_insert_id($link);
 
 			if (!str_contains($_GET['nam'], "Premium")) {
-				$sql = "UPDATE users SET currency = " . ($currencyAmount + $_GET["nam"]) . " WHERE id = " . $user;
+				$sql = "UPDATE users SET currency = " . ($currencyAmount + $_GET["nam"]) . " WHERE id = '" . $user. "'";
 
 				if (mysqli_query($link, $sql)) {
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error($link);
 				}
 			} else {
-				$sql = "UPDATE users SET membership = '" . $_GET["nam"] . "' WHERE id = " . $user;
+				$sql = "UPDATE users SET membership = '" . $_GET["nam"] . "' WHERE id = '" . $user. "'";
 
 				if (mysqli_query($link, $sql)) {
 				} else {

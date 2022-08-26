@@ -4,7 +4,7 @@
   Original Location: /API/avatar.php
   Description: Avatar API to get details.
   Author: Mitchell (Creaous)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";

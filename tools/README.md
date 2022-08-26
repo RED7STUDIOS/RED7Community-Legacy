@@ -193,7 +193,7 @@ By using "Map Hosts File.bat" it will overwrite the RED7Community domains to poi
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright 2021 RED7 STUDIOS
+   Copyright 2022 RED7 STUDIOS
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

@@ -4,7 +4,7 @@
   Original Location: /account/logout.php
   Description: Logout account file.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 ?>
 

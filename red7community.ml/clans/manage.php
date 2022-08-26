@@ -4,7 +4,7 @@
   Original Location: /users/profile.php
   Description: The profile for a user.
   Author: Mitchell (BlxckSky_959)
-  Copyright (C) RED7 STUDIOS 2021
+  Copyright (C) RED7 STUDIOS 2022
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
@@ -55,7 +55,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
 }
 
 if (isset($_GET["page"])) {
-    $page = $_GET["page"];
+    $page = htmlspecialchars($_GET["page"]);
 } else {
     $page = 1;
 };
@@ -141,7 +141,7 @@ if ($_SESSION['id'] != $owner) {
                         <h2 class="<?php if ($isSpecial == 1) {
                                         echo 'title-rainbow-lr';
                                     } else {
-                                    } ?>"><a href="/clans/profile.php?id=<?php echo $_GET['id']; ?>">
+                                    } ?>"><a href="/clans/profile.php?id=<?php echo htmlspecialchars($_GET['id']); ?>">
                                 <?php if ($displayname != "" && $displayname != "[]" && !empty($displayname)) {
                                     echo $filterwords(htmlspecialchars($displayname));
                                 } else {
@@ -180,7 +180,7 @@ if ($_SESSION['id'] != $owner) {
                                     <h5>Description:</h5>
                                     <input maxlength="69420" type="text" name="description" class="moderate-input" value="<?php echo $description; ?>" />
                                     <input hidden type="text" name="action" value="updateClanSettings" />
-                                    <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
+                                    <input hidden type="text" name="id" value="<?php echo htmlspecialchars($_GET["id"]); ?>" />
                                     <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-gear"></i> Update Clan Settings</button>
                                 </form>
                             </div>
@@ -193,7 +193,7 @@ if ($_SESSION['id'] != $owner) {
                                     <h5>Amount:</h5>
                                     <input type="number" name="amount" class="moderate-input" />
                                     <input hidden type="text" name="action" value="payoutClan" />
-                                    <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
+                                    <input hidden type="text" name="id" value="<?php echo htmlspecialchars($_GET["id"]); ?>" />
                                     <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-money-check-dollar-pen"></i> Payout to User</button>
                                 </form>
                             </div>
@@ -204,7 +204,7 @@ if ($_SESSION['id'] != $owner) {
                                     <h5>Amount:</h5>
                                     <input type="number" name="amount" class="moderate-input" />
                                     <input hidden type="text" name="action" value="addFundsToClan" />
-                                    <input hidden type="text" name="id" value="<?php echo $_GET["id"]; ?>" />
+                                    <input hidden type="text" name="id" value="<?php echo htmlspecialchars($_GET["id"]); ?>" />
                                     <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-money-bill-wave"></i> Add Funds</button>
                                 </form>
                             </div>
