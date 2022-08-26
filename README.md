@@ -19,7 +19,7 @@ RED7Community is an in-progress open source community software.
 - pdo_mysql
 
 **_Steps:_**
-1. [Download](https://github.com/RED7Studios/RED7Community/releases/latest) the latest release zip file.
+1. [Download](https://github.com/RED7Studios/RED7Community/archive/refs/heads/main.zip) the latest source zip file.
 2. Extract it to your website directory.
 3. Use the built in installer.
 4. Remove the install directory.
