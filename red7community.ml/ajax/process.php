@@ -73,7 +73,7 @@ if (htmlspecialchars($_POST['action']) === "changeDisplayName") {
     $currency_user = $getCurrencyFromId($_SESSION['id']);
 
     if ($currency_user >= htmlspecialchars($_POST["amount"])) {
-        $sql_c = "UPDATE users SET currency = " . ($currency_user - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
+        $sql_c = "UPDATE users SET currency = " . ($currency_user - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $_SESSION['id']. "'";
         $result_c = mysqli_query($link, $sql_c);
 
         $sql = "UPDATE clans SET currency = " . ($currency + htmlspecialchars($_POST["amount"])) . " WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
