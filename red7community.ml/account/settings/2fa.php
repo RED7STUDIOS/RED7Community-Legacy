@@ -7,6 +7,8 @@
   Copyright (C) RED7 STUDIOS 2022
 */
 
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/GoogleAuthenticator.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 // Initialize the session
@@ -18,17 +20,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-// Include config file
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/GoogleAuthenticator.php";
-
 $start = date_create($getLastLogin($_SESSION["id"]));
-$end = date_create(date('m/d/Y h:i:s a', time()));
-$diff = date_diff($end, $start);
-$hours   = $diff->format('%h');
-$minutes = $diff->format('%i');
-$diff = $hours * 60 + $minutes;
-if ($diff > 2) {
+$end = $start->diff(new DateTime(date("Y-m-d H:i:s")));
+
+if ($end->i > 5) {
     header("Location: /account/logout.php?u=" . $_SERVER["REQUEST_URI"]);
     exit;
 }

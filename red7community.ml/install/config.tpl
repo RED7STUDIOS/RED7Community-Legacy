@@ -51,3 +51,5 @@ if($link === false){
 die('ERROR: Could not connect.' . mysqli_connect_error());
 }
 ?>
+
+date_default_timezone_set("Australia/Adelaide");
