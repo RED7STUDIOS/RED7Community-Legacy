@@ -9,7 +9,7 @@
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/GoogleAuthenticator.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 // Initialize the session
 session_start();

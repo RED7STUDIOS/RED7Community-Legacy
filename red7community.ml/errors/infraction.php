@@ -1,13 +1,5 @@
 <?php
-/*
-  File Name: infraction.php
-  Original Location: /errors/infraction.php
-  Description: The details for a user's infraction.
-  Author: Mitchell (Creaous)
-  Copyright (C) RED7 STUDIOS 2022
-*/
-
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (!isset($_SESSION)) {

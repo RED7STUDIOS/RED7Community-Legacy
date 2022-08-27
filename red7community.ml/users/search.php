@@ -12,15 +12,7 @@ if (isset($_GET['search'])) {
 ?>
 
 <?php
-/*
-	  File Name: index.php
-	  Original Location: /users/index.php
-	  Description: The users list.
-	  Author: Mitchell (Creaous)
-	  Copyright (C) RED7 STUDIOS 2022
-	*/
-
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 session_start();
 

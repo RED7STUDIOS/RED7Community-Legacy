@@ -8,7 +8,7 @@
 */
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 if (!isset($_SESSION)) {
 	// Initialize the session

@@ -1,13 +1,5 @@
 <?php
-/*
-  File Name: item.php
-  Original Location: /shop/item.php
-  Description: The details for a item.
-  Author: Mitchell (Creaous)
-  Copyright (C) RED7 STUDIOS 2022
-*/
-
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 session_start();
 

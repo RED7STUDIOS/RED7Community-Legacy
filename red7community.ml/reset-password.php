@@ -9,7 +9,7 @@
 
 // Include config file
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
 
 // Initialize the session
 if (!isset($_SESSION)) {
