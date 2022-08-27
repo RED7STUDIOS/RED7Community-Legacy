@@ -21,7 +21,7 @@ $password = "";
 $password_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $emailId = $_GET['key'];
     $token = $_GET['token'];
 
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <main class="form-signin">
             <?php
             if (isset($maintenanceMode)) {
-                if ($maintenanceMode == "on") {
+                if ($maintenanceMode === "on") {
                     if (!$role >= 2)
                     {
                         echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";

@@ -98,7 +98,7 @@ mysqli_query($link, $sql);
 
 
 
-if ($_SERVER["REQUEST_URI"] == "/errors/infraction.php")
+if ($_SERVER["REQUEST_URI"] === "/errors/infraction.php")
 {
 	if ($your_hasInfraction !== 1) {
 		echo "<script type='text/javascript'>location.href = '/';</script>";

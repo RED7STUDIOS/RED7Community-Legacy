@@ -72,7 +72,7 @@ if (!$role >= 2) {
         <div class="d-flex align-items-center border-bottom" style="display: inline;">
             <h2>Welcome&nbsp;
                 <h2><?php echo $getDisplayName($your_id); ?></h2>&nbsp;
-                <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_hasInfraction == 1) {
+                <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_hasInfraction === 1) {
                                                                                             echo '<p><strong style="color: red;">*BANNED*</strong></p>';
                                                                                         } ?>!
             </h2>
@@ -92,11 +92,11 @@ if (!$role >= 2) {
                 <h5>Appeal Email:</h5>
                 <input maxlength="69420" type="text" name="appealEmail" class="moderate-input" value="<?php echo $appealEmail; ?>" />
                 <h5>Registration:</h5>
-                <input type="checkbox" name="registration" <?php if ($registration == "on") {
+                <input type="checkbox" name="registration" <?php if ($registration === "on") {
                                                                 echo "checked";
                                                             } ?> />
                 <h5>Maintenance Mode:</h5>
-                <input type="checkbox" name="maintenance" <?php if ($maintenanceMode == "on") {
+                <input type="checkbox" name="maintenance" <?php if ($maintenanceMode === "on") {
                                                                 echo "checked";
                                                             } ?> />
                 </br>

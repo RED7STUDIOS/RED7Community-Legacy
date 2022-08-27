@@ -39,7 +39,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
         $icon = "https://www.gravatar.com/avatar/?s=180";
     }
 
-    if ($description == "") {
+    if ($description === "") {
         $description = "This clan has not set a description.";
     }
 
@@ -160,14 +160,14 @@ if (isset($_GET["page"])) {
         <main class="page-content-wrapper">
             <div class="d-flex align-items-center border-bottom">
                 <?php
-                if ($name == "Not Found") {
+                if ($name === "Not Found") {
                     echo "<h2>This user could not be found!</h2></div><p>This user could possibly not be found due to a bug/glitch or has been removed (not banned).";
                     exit;
                 }
                 ?>
                 <img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
                 &nbsp;
-                <h2 class="<?php if ($isSpecial == 1) {
+                <h2 class="<?php if ($isSpecial === 1) {
                                 echo 'title-rainbow-lr';
                             } else {
                             } ?>">
@@ -176,11 +176,11 @@ if (isset($_GET["page"])) {
                     } else {
                         echo $filterwords(htmlspecialchars($name));
                     } ?>
-                    <?php if ($isVerified == 1) {
+                    <?php if ($isVerified === 1) {
                         echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
                     } ?>
                     <small style="font-size: 15px;"><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
-                    <?php if ($hasInfraction == 1) {
+                    <?php if ($hasInfraction === 1) {
                         echo '<p><strong class="banned-text">*BANNED*</strong></p>';
                     } ?>
                     <span>
@@ -196,8 +196,8 @@ if (isset($_GET["page"])) {
             </div>
             <div>
                 <?php
-                if ($hasInfraction == 1) {
-                    if ($banDate == "" && $banReason == "") {
+                if ($hasInfraction === 1) {
+                    if ($banDate === "" && $banReason === "") {
                         echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
                     } else if ($banDate != "") {
                         if ($banReason != "") {
@@ -213,7 +213,7 @@ if (isset($_GET["page"])) {
 
                 <?php
                 if (isset($_SESSION['id'])) {
-                    if ($owner == htmlspecialchars($_SESSION['id'])) {
+                    if ($owner === htmlspecialchars($_SESSION['id'])) {
                         echo '<a href="/clans/manage.php?id=' . htmlspecialchars($_GET['id']) . '" class="btn btn-primary">Manage</a>';
                     }
                 }
@@ -250,7 +250,7 @@ if (isset($_GET["page"])) {
                                 $member_icon = $getIcon($member_id);
                                 $member_dsp = $getDisplayName($member_id);
 
-                                if ($member_dsp == null || $member_dsp == "") {
+                                if ($member_dsp === null || $member_dsp === "") {
                                     $member_f = htmlspecialchars($name);
                                 } else {
                                     $member_f = htmlspecialchars($member_dsp);
@@ -306,7 +306,7 @@ if (isset($_GET["page"])) {
                             <hr/>
                             ';
 
-                        if ($hasInfraction == 1) {
+                        if ($hasInfraction === 1) {
                             $checked = 'checked';
                         } else {
                             $checked = "";

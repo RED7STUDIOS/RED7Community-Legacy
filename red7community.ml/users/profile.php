@@ -22,19 +22,19 @@ if ($getUsername($id) !== null) {
 	$hasInfraction = $hasInfraction($id);
 	$username = $getUsername($id);
 
-	if ($hasInfraction != 1) {
-		$real_displayname = $getDisplayName($id);
-		$real_description = $getDescription($id);
-		$displayname = $filterwords($real_displayname);
-		$description = $filterwords($real_description);
-		$icon = $getIcon($id);
-	} else {
+	$real_displayname = $getDisplayName($id);
+	$real_description = $getDescription($id);
+	$displayname = $filterwords($real_displayname);
+	$description = $filterwords($real_description);
+	$icon = $getIcon($id);
+
+	if ($hasInfraction === 1) {
 		$displayname = "[ CONTENT REMOVED ]";
 		$description = "[ CONTENT REMOVED ]";
 		$icon = "https://www.gravatar.com/avatar/?s=180";
 	}
 
-	if ($description == "") {
+	if ($description === "") {
 		$description = "This user has not set a description.";
 	}
 
@@ -63,13 +63,13 @@ if ($getUsername($id) !== null) {
 	$_issued_by_id = $getInfractionIssuer($_id);
 	$_issued_by = $getDisplayName($_issued_by_id);
 
-	if ($role == 0) {
+	if ($role === 0) {
 		$role = "User";
-	} else if ($role == 1) {
+	} else if ($role === 1) {
 		$role = "Moderator";
-	} else if ($role == 2) {
+	} else if ($role === 2) {
 		$role = "Admin";
-	} else if ($role == 3) {
+	} else if ($role === 3) {
 		$role = "Super Admin";
 	}
 } else {
@@ -209,7 +209,7 @@ $shownName = "";
 		<main class="col-md-9">
 			<div class="d-flex align-items-center border-bottom">
 				<?php
-				if ($username == "Not Found") {
+				if ($username === "Not Found") {
 					echo "<h2>This user could not be found!</h2></div><p>This user could possibly not be found due to a bug/glitch or has been removed (not banned).";
 					exit;
 				}
@@ -376,7 +376,7 @@ $shownName = "";
 									$friend_icon = $getIcon($friend_id);
 									$friend_dsp = $getDisplayName($friend_id);
 
-									if ($friend_dsp == null || $friend_dsp == "") {
+									if ($friend_dsp === null || $friend_dsp === "") {
 										$friend_f = htmlspecialchars($name);
 									} else {
 										$friend_f = htmlspecialchars($friend_dsp);
@@ -386,7 +386,7 @@ $shownName = "";
 								}
 							}
 						}
-						if ($friends_amt == 0) {
+						if ($friends_amt === 0) {
 							echo '<p>This user has no friends yet.</p>';
 						}
 						?>
@@ -484,7 +484,7 @@ $shownName = "";
 									<input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
 									<button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
 								</form>';
-						if ($your_role == 3) {
+						if ($your_role === 3) {
 							echo '<form method="post" action="/ajax/moderate.php"
 									onSubmit="return ajaxSubmit(this);">
 									<label><b>Role:</b></label> <select name="value" id="value">
@@ -641,7 +641,7 @@ $shownName = "";
 
 		$shirticon = "";
 
-		if ($shirtid == 0 || $shirtid = 0) {
+		if ($shirtid === 0 || $shirtid = 0) {
 			$shirticon = "";
 		} else {
 			$shirtname = $json_shirt[0]['data'][0]['displayname'];
@@ -655,7 +655,7 @@ $shownName = "";
 		$pantsid = $pants;
 		$pantsicon = "";
 
-		if ($pantsid == 0 || $pantsid = 0) {
+		if ($pantsid === 0 || $pantsid = 0) {
 			$pantsicon = "";
 		} else {
 			$pantsname = $json_shirt[0]['data'][0]['displayname'];
@@ -721,7 +721,7 @@ $shownName = "";
 
 				$id = $hat;
 				$type = $json[0]['data'][0]['type'];
-				if ($type == "Gear") {
+				if ($type === "Gear") {
 					$armthingy = $STORAGE_URL . "/Avatar/LeftArmUp.obj";
 				}
 			}

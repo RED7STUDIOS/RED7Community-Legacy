@@ -85,7 +85,7 @@ if (isset($_GET["page"])) {
 
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<?php
-			if ($tab == "all") {
+			if ($tab === "all") {
 				$datatable = "items"; // MySQL table name
 				$results_per_page = 21; // number of results per page
 
@@ -109,14 +109,14 @@ if (isset($_GET["page"])) {
 					}
 
 					echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
-					if ($row['price'] == "0") {
+					if ($row['price'] === "0") {
 						echo '<b>Free' . $item_owned . '</b>';
 					} else {
 						echo '<b>' . number_format_short($row['price']) . '</b> ' . $currency_name . $item_owned;
 					}
 					echo '</div></div></a></div>';
 				};
-			} else if ($tab == "shirts") {
+			} else if ($tab === "shirts") {
 				$datatable = "items"; // MySQL table name
 				$results_per_page = 21; // number of results per page
 
@@ -140,14 +140,14 @@ if (isset($_GET["page"])) {
 					}
 
 					echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
-					if ($row['price'] == "0") {
+					if ($row['price'] === "0") {
 						echo '<b>Free' . $item_owned . '</b>';
 					} else {
 						echo '<b>' . number_format_short($row['price']) . '</b> ' . $currency_name . $item_owned;
 					}
 					echo '</div></div></a></div>';
 				};
-			} else if ($tab == "pants") {
+			} else if ($tab === "pants") {
 				$datatable = "items"; // MySQL table name
 				$results_per_page = 21; // number of results per page
 
@@ -171,14 +171,14 @@ if (isset($_GET["page"])) {
 					}
 
 					echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
-					if ($row['price'] == "0") {
+					if ($row['price'] === "0") {
 						echo '<b>Free' . $item_owned . '</b>';
 					} else {
 						echo '<b>' . number_format_short($row['price']) . '</b> ' . $currency_name . $item_owned;
 					}
 					echo '</div></div></a></div>';
 				};
-			} else if ($tab == "hats") {
+			} else if ($tab === "hats") {
 				$datatable = "items"; // MySQL table name
 				$results_per_page = 21; // number of results per page
 
@@ -202,14 +202,14 @@ if (isset($_GET["page"])) {
 					}
 
 					echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
-					if ($row['price'] == "0") {
+					if ($row['price'] === "0") {
 						echo '<b>Free' . $item_owned . '</b>';
 					} else {
 						echo '<b>' . number_format_short($row['price']) . '</b> ' . $currency_name . $item_owned;
 					}
 					echo '</div></div></a></div>';
 				};
-			} else if ($tab == "faces") {
+			} else if ($tab === "faces") {
 				$datatable = "items"; // MySQL table name
 				$results_per_page = 21; // number of results per page
 
@@ -233,7 +233,7 @@ if (isset($_GET["page"])) {
 					}
 
 					echo '<div class="col" style="height:180px; width:180px;"><a href="/shop/item.php?id=' . $row['id'] . '" style="text-decoration: none;"><div class="align-items-center card text-center"><img class="card-img-top" src="' . $row['icon'] . '" style="height:90px;width:90px;margin-top:15px"><div class="card-body"><h6 class="card-title" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">' . $row['displayname'] . '</h6><p class="card-text" style="text-align: center; width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">';
-					if ($row['price'] == "0") {
+					if ($row['price'] === "0") {
 						echo '<b>Free' . $item_owned . '</b>';
 					} else {
 						echo '<b>' . number_format_short($row['price']) . '</b> ' . $currency_name . $item_owned;
@@ -253,7 +253,7 @@ if (isset($_GET["page"])) {
 
 			for ($i = 1; $i <= $total_pages; $i++) {  // print links for all pages
 				echo " <a class='btn btn-primary' href='/shop/?page=" . $i . "'";
-				if ($i == $page)  echo " class='curPage'";
+				if ($i === $page)  echo " class='curPage'";
 				echo ">" . $i . "</a>&nbsp;";
 			};
 			?>

@@ -72,7 +72,7 @@ $requirements = 0;
             <div>
                 <h3>Requirements</h3>
                 <p>
-                    <?php if ($getSecret($_SESSION["id"]) == "" || $getSecret($_SESSION["id"]) == null) {
+                    <?php if ($getSecret($_SESSION["id"]) === "" || $getSecret($_SESSION["id"]) === null) {
                         $requirements = $requirements + 1;
                         echo '<i style="color: #f00;" class="fa-solid fa-xmark"></i>';
                     } else {
@@ -81,7 +81,7 @@ $requirements = 0;
                     You need to have 2FA enabled on your account.
                 </p>
                 <p>
-                    <?php if ($your_email == null) {
+                    <?php if ($your_email === null) {
                         $requirements = $requirements + 1;
                         echo '<i style="color: #f00;" class="fa-solid fa-xmark"></i>';
                     } else {
@@ -99,7 +99,7 @@ $requirements = 0;
                     } ?> |
                     Your account must be older than 1 month.
                 </p>
-                <p><b>Status:</b> <?php if ($your_isVerified == 1) {
+                <p><b>Status:</b> <?php if ($your_isVerified === 1) {
                                         echo "Verified";
                                     } else if ($requirements != 0) {
                                         echo "Ineligible";
@@ -111,7 +111,7 @@ $requirements = 0;
             <hr />
 
             <?php
-            if ($requirements == 0) {
+            if ($requirements === 0) {
             ?>
                 <form class="redeem-form text-center" action="verify.php" method="post">
                     <div class="elem-group">

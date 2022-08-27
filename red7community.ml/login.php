@@ -24,7 +24,7 @@ if (isset($url_components['query'])) {
 		$u = "/home.php";
 	} else {
 		$u = $params['u'];
-		if ($u == "/") {
+		if ($u === "/") {
 			$u = "/home.php";
 		}
 	}
@@ -47,7 +47,7 @@ $username = $password = "";
 $username_err = $password_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 	// Check if username is empty
 	if (empty(trim($_POST["username"]))) {
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				mysqli_stmt_store_result($stmt);
 
 				// Check if username exists, if yes then verify password
-				if (mysqli_stmt_num_rows($stmt) == 1) {
+				if (mysqli_stmt_num_rows($stmt) === 1) {
 					// Bind result variables
 					mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $created_at, $lastlogin, $lastloginDate, $membershipTemp, $currencyTemp, $badges, $items, $followers, $following, $role, $auth_secret);
 					if (mysqli_stmt_fetch($stmt)) {
@@ -107,27 +107,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								$_SESSION["loggedin_b2fa"] = false;
 							}
 
-							if ($badges == null || $badges == "") {
+							if ($badges === null || $badges === "") {
 								$sql = "UPDATE users SET badges='[1]' WHERE id=" . $id;
 								mysqli_query($link, $sql);
 							}
 
-							if ($items == null || $items == "") {
+							if ($items === null || $items === "") {
 								$sql = "UPDATE users SET items='[]' WHERE id=" . $id;
 								mysqli_query($link, $sql);
 							}
 
-							if ($followers == null || $followers == "") {
+							if ($followers === null || $followers === "") {
 								$sql = "UPDATE users SET followers='[]' WHERE id=" . $id;
 								mysqli_query($link, $sql);
 							}
 
-							if ($following == null || $following == "") {
+							if ($following === null || $following === "") {
 								$sql = "UPDATE users SET following='[]' WHERE id=" . $id;
 								mysqli_query($link, $sql);
 							}
 
-							if ($membershipTemp == null || $membershipTemp == "") {
+							if ($membershipTemp === null || $membershipTemp === "") {
 								$sql = "UPDATE users SET membership='None' WHERE id=" . $id;
 								mysqli_query($link, $sql);
 							}
@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$today_dt = strtotime($todayDate);
 							$expire_dt = strtotime($expire);
 
-							if ($membershipTemp == "" || $membershipTemp == null) {
+							if ($membershipTemp === "" || $membershipTemp === null) {
 								$membershipTemp = "None";
 							}
 
@@ -195,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 							// Redirect user to welcome page
 							if (isset($params['u'])) {
-								if ($_SESSION["loggedin_b2fa"] == true) {
+								if ($_SESSION["loggedin_b2fa"] === true) {
 									header("Location: /2fa.php?u=" . $params['u']);
 								} else {
 									header("Location: " . $params['u']);
@@ -245,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<div class="page-content-wrapper">
 		<main class="form-signin">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
-							echo "?u=" . $u; ?> <?php if ($maintenanceMode == "on") { echo "&maintenanceBypass"; } ?>" method="post">
+							echo "?u=" . $u; ?> <?php if ($maintenanceMode === "on") { echo "&maintenanceBypass"; } ?>" method="post">
 				<h3 class="fw-normal">Login to <?php echo htmlspecialchars($site_name); ?></h3>
 
 				<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -263,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<button class="w-100 btn btn-lg btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
 
 				<?php
-				if ($maintenanceMode == "on")
+				if ($maintenanceMode === "on")
 				{
 					echo '<p class="text-muted">&copy; '. htmlspecialchars($site_name) . " " . date("Y"). '</p>';
 					exit;

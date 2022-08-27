@@ -30,14 +30,14 @@ if (isset($url_components['query'])) {
         $u = "/home.php";
     } else {
         $u = $params['u'];
-        if ($u == "/") {
+        if ($u === "/") {
             $u = "/home.php";
         }
     }
 }
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $checkResult = "";
     if ($_POST['code']) {
         $code = $link->real_escape_string($_POST['code']);

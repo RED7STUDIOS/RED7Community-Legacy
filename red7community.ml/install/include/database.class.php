@@ -127,7 +127,7 @@ class Database
             $this->port = $host_parts[1];
         }
 
-        if ($database_host == '' && $database_name == '') {
+        if ($database_host === '' && $database_name === '') {
             $config = new Config();
             $this->host = $config->getHost();
             $this->user = $config->getUser();
@@ -161,7 +161,7 @@ class Database
      */
     public function AllowTransactions($mode = false)
     {
-        $this->allow_transactions = ($mode == true) ? $mode : false;
+        $this->allow_transactions = ($mode === true) ? $mode : false;
     }
 
     /**
@@ -185,7 +185,7 @@ class Database
     public function Open()
     {
         // Without PDO extension
-        if ($this->use_mysql && $this->db_driver == 'mysql') {
+        if ($this->use_mysql && $this->db_driver === 'mysql') {
             // Choose the appropriate connect function 
             if ($this->persistent_connection) {
                 $func = 'mysql_pconnect';
@@ -276,7 +276,7 @@ class Database
      */
     public function GetVersion()
     {
-        if ($this->use_mysql && $this->db_driver == 'mysql') {
+        if ($this->use_mysql && $this->db_driver === 'mysql') {
             $version = mysql_get_server_info();
         } else {
             $version = $this->dbh->getAttribute(PDO::ATTR_SERVER_VERSION);
@@ -302,7 +302,7 @@ class Database
     {
         if (!$this->dbh || empty($query)) return false;
 
-        if ($this->use_mysql && $this->db_driver == 'mysql') {
+        if ($this->use_mysql && $this->db_driver === 'mysql') {
             $this->sth = mysql_query($query, $this->dbh);
             return ($this->sth != false);
         } else {
@@ -517,7 +517,7 @@ class Database
             $database_port = $host_parts[1];
         }
 
-        if ($database_host == '') {
+        if ($database_host === '') {
             $config = new Config();
             $database_host = $config->getHost();
             $database_name = $config->getDatabase();
@@ -546,7 +546,7 @@ class Database
      */
     private function PrepareLogSQL($e, $query)
     {
-        if (self::$PROJECT == 'AdminPanel') {
+        if (self::$PROJECT === 'AdminPanel') {
             $sql_log = '';
             $error_no = $e->getCode();
             $error_descr  = 'ENV:        ' . $_SERVER['SERVER_NAME'] . '<br><br>';

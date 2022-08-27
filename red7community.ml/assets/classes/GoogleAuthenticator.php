@@ -100,7 +100,7 @@ class GoogleAuthenticator
 
         for ($i = -$discrepancy; $i <= $discrepancy; $i++) {
             $calculatedCode = $this->getCode($secret, $currentTimeSlice + $i);
-            if ($calculatedCode == $code) {
+            if ($calculatedCode === $code) {
                 return true;
             }
         }
@@ -138,7 +138,7 @@ class GoogleAuthenticator
         if (!in_array($paddingCharCount, $allowedValues)) return false;
         for ($i = 0; $i < 4; $i++) {
             if (
-                $paddingCharCount == $allowedValues[$i] &&
+                $paddingCharCount === $allowedValues[$i] &&
                 substr($secret, - ($allowedValues[$i])) != str_repeat($base32chars[32], $allowedValues[$i])
             ) return false;
         }
@@ -153,7 +153,7 @@ class GoogleAuthenticator
             }
             $eightBits = str_split($x, 8);
             for ($z = 0; $z < count($eightBits); $z++) {
-                $binaryString .= (($y = chr(base_convert($eightBits[$z], 2, 10))) || ord($y) == 48) ? $y : "";
+                $binaryString .= (($y = chr(base_convert($eightBits[$z], 2, 10))) || ord($y) === 48) ? $y : "";
             }
         }
         return $binaryString;
@@ -185,10 +185,10 @@ class GoogleAuthenticator
             $i++;
         }
         if ($padding && ($x = strlen($binaryString) % 40) != 0) {
-            if ($x == 8) $base32 .= str_repeat($base32chars[32], 6);
-            elseif ($x == 16) $base32 .= str_repeat($base32chars[32], 4);
-            elseif ($x == 24) $base32 .= str_repeat($base32chars[32], 3);
-            elseif ($x == 32) $base32 .= $base32chars[32];
+            if ($x === 8) $base32 .= str_repeat($base32chars[32], 6);
+            elseif ($x === 16) $base32 .= str_repeat($base32chars[32], 4);
+            elseif ($x === 24) $base32 .= str_repeat($base32chars[32], 3);
+            elseif ($x === 32) $base32 .= $base32chars[32];
         }
         return $base32;
     }

@@ -12,7 +12,7 @@ foreach ($_GET as $get_key => $get_value) {
 }
 
 // *** check token for POST requests
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 	$token_post = isset($_POST['token']) ? $_POST['token'] : 'post';
 	$token_session = isset($_SESSION['token']) ? $_SESSION['token'] : 'session';
 

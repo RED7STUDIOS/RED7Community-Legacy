@@ -78,7 +78,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
 
             <p>Display Name:
-                <b><?php if ($your_displayname == null || $your_displayname == "") {
+                <b><?php if ($your_displayname === null || $your_displayname === "") {
                         echo htmlspecialchars($your_username);
                     } else {
                         echo htmlspecialchars($your_displayname);

@@ -29,7 +29,7 @@ if ($end->i > 5) {
 }
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $checkResult = "";
     if ($_POST['code']) {
         $code = $link->real_escape_string($_POST['code']);

@@ -84,7 +84,7 @@ if (isset($_GET["page"])) {
 			$result = mysqli_query($link, $sql);
 
 			while ($row = mysqli_fetch_assoc($result)) {
-				if ($row["displayname"] == null || $row["displayname"] == "") {
+				if ($row["displayname"] === null || $row["displayname"] === "") {
 					$owner_f = htmlspecialchars($row["name"]);
 				} else {
 					$owner_f = htmlspecialchars($row["displayname"]);
@@ -103,7 +103,7 @@ if (isset($_GET["page"])) {
 
 			for ($i = 1; $i <= $total_pages; $i++) {  // print links for all pages
 				echo " <a class='btn btn-primary' href='/clans/?page=" . $i . "'";
-				if ($i == $page)  echo " class='curPage'";
+				if ($i === $page)  echo " class='curPage'";
 				echo ">" . $i . "</a>&nbsp;";
 			};
 			?>

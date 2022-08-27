@@ -36,13 +36,13 @@ header('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
 header('Pragma: no-cache'); // HTTP/1.0
 header('Content-Type: application/json');
 
-if ($check_key == 'apphpei') {
+if ($check_key === 'apphpei') {
 
 	$arr[] = '"status": "1"';
 
 	$error = false;
-	if (EI_MODE == 'demo') {
-		if ($database_host == 'localhost' && $database_name == 'db_name' && $database_username == 'test' && $database_password == 'test') {
+	if (EI_MODE === 'demo') {
+		if ($database_host === 'localhost' && $database_name === 'db_name' && $database_username === 'test' && $database_password === 'test') {
 			$error = true;
 			$arr[] = '"db_connection_status": "1"';
 			$arr[] = '"db_version": "test"';

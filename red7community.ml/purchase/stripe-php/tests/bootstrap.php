@@ -21,7 +21,7 @@ $version = null;
 $headers = explode("\n", $resp);
 foreach ($headers as $header) {
     $pair = explode(":", $header, 2);
-    if ($pair[0] == "Stripe-Mock-Version") {
+    if ($pair[0] === "Stripe-Mock-Version") {
         $version = trim($pair[1]);
     }
 }
@@ -33,7 +33,7 @@ if ($version === null) {
     exit(1);
 }
 
-if (version_compare($version, MOCK_MINIMUM_VERSION) == -1) {
+if (version_compare($version, MOCK_MINIMUM_VERSION) === -1) {
     echo "Your version of stripe-mock (" . $version . ") is too old. The minimum " .
         "version to run this test suite is " . MOCK_MINIMUM_VERSION . ". " .
         "Please see its repository for upgrade instructions.\n";

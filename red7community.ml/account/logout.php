@@ -60,7 +60,7 @@ if (isset($url_components['query'])) {
 		$u = "/home.php";
 	} else {
 		$u = $params['u'];
-		if ($u == "/") {
+		if ($u === "/") {
 			$u = "/home.php";
 		}
 	}

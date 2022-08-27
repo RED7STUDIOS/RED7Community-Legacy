@@ -22,7 +22,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
 	$description = $json[0]['data'][0]['description'];
 
-	if ($description == "") {
+	if ($description === "") {
 		$description = "This items item does not have a description.";
 	}
 	$icon = $json[0]['data'][0]['icon'];
@@ -51,7 +51,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 	<div class="page-content-wrapper">		<main class="col-md-9">
 			<div class="d-flex align-items-center border-bottom">
 				<?php
-				if ($name == "Not Found") {
+				if ($name === "Not Found") {
 					echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
 					exit;
 				}

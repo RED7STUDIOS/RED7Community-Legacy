@@ -33,12 +33,12 @@ if (file_exists(EI_CONFIG_FILE_PATH)) {
 
 // handle form submission
 // -------------------------------------------------
-if ($task == 'send') {
+if ($task === 'send') {
 	$_SESSION['passed_step'] = 1;
 	$_SESSION['installation_type'] = $installation_type;
 	header('location: server_requirements.php');
 	exit;
-} else if ($task == 'start_over') {
+} else if ($task === 'start_over') {
 	$_SESSION['passed_step'] = 0;
 	$_SESSION['installation_type'] = '';
 	@unlink(EI_CONFIG_FILE_PATH);
@@ -61,7 +61,7 @@ if ($task == 'send') {
 	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
-	if ($curr_lang_direction == 'rtl') {
+	if ($curr_lang_direction === 'rtl') {
 		echo '<link rel="stylesheet" type="text/css" href="templates/' . EI_TEMPLATE . '/css/rtl.css" />' . "\n";
 	}
 	?>

@@ -72,7 +72,7 @@ else
 }
 
 if (isset($maintenanceMode)) {
-	if ($maintenanceMode == "on") {
+	if ($maintenanceMode === "on") {
 		
 		if (!$role >= 2)
 		{

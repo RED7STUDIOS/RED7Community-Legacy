@@ -33,7 +33,7 @@ if ($passed_step >= 3) {
 
 // handle form submission
 // -------------------------------------------------
-if ($task == 'send') {
+if ($task === 'send') {
 
 	// skip this step if admin account is not required
 	if (!EI_USE_ADMIN_ACCOUNT) {
@@ -56,21 +56,21 @@ if ($task == 'send') {
 
 	// validation here
 	// -------------------------------------------------
-	if ($admin_username == '') {
+	if ($admin_username === '') {
 		$focus_field = 'admin_username';
 		$error_msg = lang_key('alert_admin_username_empty');
-	} else if ($admin_password == '') {
+	} else if ($admin_password === '') {
 		$focus_field = 'admin_password';
 		$error_msg = lang_key('alert_admin_password_empty');
 	} else if ($admin_email != '' && !is_email($admin_email)) {
 		$focus_field = 'admin_email';
 		$error_msg = lang_key('alert_admin_email_wrong');
-	} else if ($site_name == '') {
+	} else if ($site_name === '') {
 		$focus_field = 'site_name';
 		$error_msg = "Site name cannot be empty!";
 	} else {
 
-		if (EI_MODE == 'demo') {
+		if (EI_MODE === 'demo') {
 			if ($admin_username != 'test' || $admin_password != 'test') {
 				$error_msg = lang_key('alert_wrong_testing_parameters');
 			}
@@ -97,7 +97,7 @@ if ($task == 'send') {
 	$install_type = isset($_SESSION['install_type']) ? $_SESSION['install_type'] : '';
 
 	// skip administrator settings
-	if ($install_type == 'un-install') {
+	if ($install_type === 'un-install') {
 		$_SESSION['passed_step'] = 3;
 		header('location: database_settings.php');
 	}
@@ -117,7 +117,7 @@ if ($task == 'send') {
 	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
-	if ($curr_lang_direction == 'rtl') {
+	if ($curr_lang_direction === 'rtl') {
 		echo '<link rel="stylesheet" type="text/css" href="templates/' . EI_TEMPLATE . '/css/rtl.css" />' . "\n";
 	}
 	?>
@@ -166,7 +166,7 @@ if ($task == 'send') {
 							</tr>
 							<tr>
 								<td width="250px">&nbsp;<?php echo lang_key('admin_login'); ?>&nbsp;<span class="star">*</span></td>
-								<td><input name="admin_username" id="admin_username" class="form_text" size="28" maxlength="22" value="<?php echo $admin_username; ?>" onfocus="textboxOnFocus('notes_admin_username')" onblur="textboxOnBlur('notes_admin_username')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+								<td><input name="admin_username" id="admin_username" class="form_text" size="28" maxlength="22" value="<?php echo $admin_username; ?>" onfocus="textboxOnFocus('notes_admin_username')" onblur="textboxOnBlur('notes_admin_username')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE === 'demo') echo 'demo: test'; ?>" /></td>
 								<td rowspan="6" valign="top">
 									<div id="notes_admin_email" class="notes_container">
 										<h4><?php echo lang_key('admin_email'); ?></h4>
@@ -186,15 +186,15 @@ if ($task == 'send') {
 							</tr>
 							<tr>
 								<td>&nbsp;<?php echo lang_key('admin_password'); ?>&nbsp;<span class="star">*</span></td>
-								<td><input name="admin_password" id="admin_password" class="form_text" type="password" size="28" maxlength="22" value="<?php echo $admin_password; ?>" onfocus="textboxOnFocus('notes_admin_password')" onblur="textboxOnBlur('notes_admin_password')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+								<td><input name="admin_password" id="admin_password" class="form_text" type="password" size="28" maxlength="22" value="<?php echo $admin_password; ?>" onfocus="textboxOnFocus('notes_admin_password')" onblur="textboxOnBlur('notes_admin_password')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE === 'demo') echo 'demo: test'; ?>" /></td>
 							</tr>
 							<?php if (EI_USE_PASSWORD_ENCRYPTION) { ?>
 								<tr>
 									<td>&nbsp;<?php echo lang_key('password_encryption'); ?>&nbsp;</td>
 									<td>
 										<select class="form_select" name="password_encryption" id="password_encryption">
-											<option <?php echo (($password_encryption == 'AES') ? 'selected="selected"' : ''); ?> value="AES">AES</option>
-											<option <?php echo (($password_encryption == 'MD5') ? 'selected="selected"' : ''); ?> value="MD5">MD5</option>
+											<option <?php echo (($password_encryption === 'AES') ? 'selected="selected"' : ''); ?> value="AES">AES</option>
+											<option <?php echo (($password_encryption === 'MD5') ? 'selected="selected"' : ''); ?> value="MD5">MD5</option>
 										</select>
 									</td>
 								</tr>
@@ -213,7 +213,7 @@ if ($task == 'send') {
 						</tr>
 						<tr>
 							<td width="250px">&nbsp;Site Name&nbsp;<span class="star">*</span></td>
-							<td><input name="site_name" id="site_name" class="form_text" size="28" maxlength="22" value="<?php echo htmlspecialchars($site_name); ?>" onblur="textboxOnBlur('notes_admin_username')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+							<td><input name="site_name" id="site_name" class="form_text" size="28" maxlength="22" value="<?php echo htmlspecialchars($site_name); ?>" onblur="textboxOnBlur('notes_admin_username')" <?php if (EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if (EI_MODE === 'demo') echo 'demo: test'; ?>" /></td>
 						</tr>
 						<tr>
 							<td colspan="2" nowrap height="50px">&nbsp;</td>

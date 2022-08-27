@@ -174,7 +174,7 @@ class Unzipper {
       $GLOBALS['status'] = array('success' => 'File unzipped successfully.');
 
       // If we had a tar.gz file, let's extract that tar file.
-      if (pathinfo($destination . '/' . $filename, PATHINFO_EXTENSION) == 'tar') {
+      if (pathinfo($destination . '/' . $filename, PATHINFO_EXTENSION) === 'tar') {
         $phar = new PharData($destination . '/' . $filename);
         if ($phar->extractTo($destination)) {
           $GLOBALS['status'] = array('success' => 'Extracted tar.gz archive successfully.');
@@ -287,7 +287,7 @@ class Zipper {
     $z = new ZipArchive();
     $z->open($outZipPath, ZipArchive::CREATE);
     $z->addEmptyDir($dirName);
-    if ($sourcePath == $dirName) {
+    if ($sourcePath === $dirName) {
       self::folderToZip($sourcePath, $z, 0);
     }
     else {

@@ -20,47 +20,47 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	exit;
 }
 
-if ($_GET['pri'] == "699") {
+if ($_GET['pri'] === "699") {
 	$pri = "6.99";
-} else if ($_GET['pri'] == "1399") {
+} else if ($_GET['pri'] === "1399") {
 	$pri = "13.99";
-} else if ($_GET['pri'] == "2899") {
+} else if ($_GET['pri'] === "2899") {
 	$pri = "28.99";
-} else if ($_GET['pri'] == "7199") {
+} else if ($_GET['pri'] === "7199") {
 	$pri = "71.99";
-} else if ($_GET['pri'] == "14499") {
+} else if ($_GET['pri'] === "14499") {
 	$pri = "144.99";
-} else if ($_GET['pri'] == "1099") {
+} else if ($_GET['pri'] === "1099") {
 	$pri = "10.99";
-} else if ($_GET['pri'] == "2899") {
+} else if ($_GET['pri'] === "2899") {
 	$pri = "28.99";
-} else if ($_GET['pri'] == "3899") {
+} else if ($_GET['pri'] === "3899") {
 	$pri = "38.99";
-} else if ($_GET['pri'] == "1799") {
+} else if ($_GET['pri'] === "1799") {
 	$pri = "17.99";
 }
 
-if ($_GET['nam'] == "400") {
+if ($_GET['nam'] === "400") {
 	$nam = "B$400";
-} else if ($_GET['nam'] == "800") {
+} else if ($_GET['nam'] === "800") {
 	$nam = "B$800";
-} else if ($_GET['nam'] == "1700") {
+} else if ($_GET['nam'] === "1700") {
 	$nam = "B$1700";
-} else if ($_GET['nam'] == "4500") {
+} else if ($_GET['nam'] === "4500") {
 	$nam = "B$4500";
-} else if ($_GET['nam'] == "10000") {
+} else if ($_GET['nam'] === "10000") {
 	$nam = "B$10000";
-} else if ($_GET['nam'] == "Premium450") {
+} else if ($_GET['nam'] === "Premium450") {
 	$nam = "Premium B$450";
-} else if ($_GET['nam'] == "Premium1000") {
+} else if ($_GET['nam'] === "Premium1000") {
 	$nam = "Premium B$1000";
-} else if ($_GET['nam'] == "Premium2200") {
+} else if ($_GET['nam'] === "Premium2200") {
 	$nam = "Premium B$2200";
-} else if ($_GET['nam'] == "PremiumDaily450") {
+} else if ($_GET['nam'] === "PremiumDaily450") {
 	$nam = "Premium Daily B$450";
-} else if ($_GET['nam'] == "PremiumDaily1000") {
+} else if ($_GET['nam'] === "PremiumDaily1000") {
 	$nam = "Premium Daily B$1000";
-} else if ($_GET['nam'] == "PremiumDaily2200") {
+} else if ($_GET['nam'] === "PremiumDaily2200") {
 	$nam = "Premium Daily B$2200";
 }
 ?>
@@ -91,7 +91,7 @@ if ($_GET['nam'] == "400") {
 
 			<?php
 			if (isset($maintenanceMode)) {
-				if ($maintenanceMode == "on") {
+				if ($maintenanceMode === "on") {
 					echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
 				}
 			}

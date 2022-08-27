@@ -14,7 +14,7 @@ $response = array();
 $api_type = $_GET['api'];
 
 if (!empty($api_type)) {
-	if ($api_type == 'getitembyid') {
+	if ($api_type === 'getitembyid') {
 		if (!empty(htmlspecialchars($_GET['id']))) {
 			$id = htmlspecialchars($_GET['id']);
 
@@ -26,7 +26,7 @@ if (!empty($api_type)) {
 					header("Content-Type: JSON");
 					$i = 0;
 
-					if ($result->num_rows == 0 || $result->num_rows == null) {
+					if ($result->num_rows === 0 || $result->num_rows === null) {
 						header("Content-Type: JSON");
 
 						$response[0]['code'] = '3';
@@ -58,7 +58,7 @@ if (!empty($api_type)) {
 				}
 			}
 		}
-	} else if ($api_type == 'getitembyname') {
+	} else if ($api_type === 'getitembyname') {
 		if (!empty($_GET['name'])) {
 			$name = $_GET['name'];
 
@@ -70,7 +70,7 @@ if (!empty($api_type)) {
 					header("Content-Type: JSON");
 					$i = 0;
 
-					if ($result->num_rows == 0 || $result->num_rows == null) {
+					if ($result->num_rows === 0 || $result->num_rows === null) {
 						header("Content-Type: JSON");
 
 						$response[0]['code'] = '3';
@@ -102,7 +102,7 @@ if (!empty($api_type)) {
 				}
 			}
 		}
-	} else if ($api_type == 'purchaseitembyname') {
+	} else if ($api_type === 'purchaseitembyname') {
 		if (!empty($_GET['name'])) {
 			$name = $_GET['name'];
 

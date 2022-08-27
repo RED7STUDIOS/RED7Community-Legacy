@@ -44,17 +44,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 		$membership = "Free";
 
 		if (isset($your_membership)) {
-			if ($your_membership == "Premium450") {
+			if ($your_membership === "Premium450") {
 				$membership = "Premium B$450";
-			} else if ($your_membership == "Premium1000") {
+			} else if ($your_membership === "Premium1000") {
 				$membership = "Premium B$1000";
-			} else if ($your_membership == "Premium2200") {
+			} else if ($your_membership === "Premium2200") {
 				$membership = "Premium B$2200";
-			} else if ($your_membership == "PremiumDaily450") {
+			} else if ($your_membership === "PremiumDaily450") {
 				$membership = "Premium Daily B$450";
-			} else if ($your_membership == "PremiumDaily1000") {
+			} else if ($your_membership === "PremiumDaily1000") {
 				$membership = "Premium Daily B$1000";
-			} else if ($your_membership == "PremiumDaily2200") {
+			} else if ($your_membership === "PremiumDaily2200") {
 				$membership = "Premium Daily B$2200";
 			}
 		}

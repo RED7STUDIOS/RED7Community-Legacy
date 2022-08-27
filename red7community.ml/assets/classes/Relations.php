@@ -88,7 +88,7 @@ class Relation
 			"UPDATE `relation` SET `status`='FRIEND' WHERE `status`='PENDING' AND `from`=? AND `to`=?",
 			[$from, $to]
 		);
-		if ($this->stmt->rowCount() == 0) {
+		if ($this->stmt->rowCount() === 0) {
 			$this->error = "Invalid friend request";
 			return false;
 		}

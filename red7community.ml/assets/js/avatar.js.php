@@ -153,7 +153,7 @@
 
 				$id = $hat;
 				$type = $json[0]['data'][0]['type'];
-				if ($type == "Gear") {
+				if ($type === "Gear") {
 					$armthingy = $STORAGE_URL . "/Avatar/LeftArmUp.obj";
 				}
 			}

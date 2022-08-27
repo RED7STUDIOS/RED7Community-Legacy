@@ -22,7 +22,7 @@ $your_json = json_decode($your_data, true);
 $your_currency = $your_json[0]['data'][0]['currency'];
 $your_membership = $your_json[0]['data'][0]['membership'];
 
-if ($_POST["giftUser"] == "" && empty($_POST["giftUser"])) {
+if ($_POST["giftUser"] === "" && empty($_POST["giftUser"])) {
 	$user = htmlspecialchars($_SESSION['id']);
 	$currencyAmount = $your_currency;
 	$membership = $your_membership;
@@ -39,7 +39,7 @@ if ($_POST["giftUser"] == "" && empty($_POST["giftUser"])) {
 }
 
 if (!empty($_POST['stripeToken'])) {
-	if ($allowGifts == 1 || $allowGifts == "" || $allowGifts == null) {
+	if ($allowGifts === 1 || $allowGifts === "" || $allowGifts === null) {
 
 		$stripeToken  = $_POST['stripeToken'];
 		$custName = $_POST['custName'];
@@ -79,7 +79,7 @@ if (!empty($_POST['stripeToken'])) {
 			)
 		));
 		$paymentResponse = $payDetails->jsonSerialize();
-		if ($paymentResponse['amount_refunded'] == 0 && empty($paymentResponse['failure_code']) && $paymentResponse['paid'] == 1 && $paymentResponse['captured'] == 1) {
+		if ($paymentResponse['amount_refunded'] === 0 && empty($paymentResponse['failure_code']) && $paymentResponse['paid'] === 1 && $paymentResponse['captured'] === 1) {
 			$amountPaid = $paymentResponse['amount'];
 			$balanceTransaction = $paymentResponse['balance_transaction'];
 			$paidCurrency = $paymentResponse['currency'];
@@ -106,7 +106,7 @@ if (!empty($_POST['stripeToken'])) {
 				}
 			}
 
-			if ($lastInsertId && $paymentStatus == 'succeeded') {
+			if ($lastInsertId && $paymentStatus === 'succeeded') {
 				$paymentMessage = "<h3>The payment was successful.</h3><h4><strong> Order ID: " . $lastInsertId . "</strong></h4>";
 			} else {
 				$paymentMessage = "<h3>Payment failed!</h3>";
@@ -157,7 +157,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 			<?php
 			if (isset($maintenanceMode)) {
-				if ($maintenanceMode == "on") {
+				if ($maintenanceMode === "on") {
 					echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
 				}
 			}

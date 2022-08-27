@@ -17,7 +17,7 @@ $termsOfService = $termsOfService();
 $privacyPolicy = $privacyPolicy();
 $bannedWords = $bannedWords();
 
-if ($CUSTOM_SESSION_LOCATION == true) {
+if ($CUSTOM_SESSION_LOCATION === true) {
 	session_save_path($CSL_PATH);
 }
 
@@ -57,7 +57,7 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 
 	$message = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/templates/emails/" . $template . ".html");
 
-	if ($template == "verification-form" || $template == "verification-denied") {
+	if ($template === "verification-form" || $template === "verification-denied") {
 		$message = str_replace('%full_name%', $fullName, $message);
 		$message = str_replace('%reason%', $reason, $message);
 		$message = str_replace('%email%', $email, $message);
@@ -84,7 +84,7 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 	$mail->From = $SMTP_From;
 	$mail->FromName = $site_name();
 
-	if ($internalEmail == false) {
+	if ($internalEmail === false) {
 		$email_address = $getEmail($id);
 	} else {
 		$email_address = $SMTP_From;
@@ -92,7 +92,7 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 
 	$mail->addAddress($email_address, $getDisplayName($id));
 
-	if ($template == "verification-accepted" || $template == "verification-denied") {
+	if ($template === "verification-accepted" || $template === "verification-denied") {
 		if ($email != $email_address) {
 			$mail->addAddress($email, $getDisplayName($id));
 		}
@@ -108,7 +108,7 @@ $sendEmail = function ($id, $url, $template, $fullName = "", $reason = "", $emai
 	} else {
 	}
 
-	if ($template == "verification-form") {
+	if ($template === "verification-form") {
 		unset($mail);
 
 		$mail = new PHPMailer\PHPMailer\PHPMailer();

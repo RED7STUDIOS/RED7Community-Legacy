@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
 	}
 }
 
-if ($maintenanceMode == "off" || $role >= 2) {
+if ($maintenanceMode === "off" || $role >= 2) {
 	header("location: /index.php");
 }
 ?>

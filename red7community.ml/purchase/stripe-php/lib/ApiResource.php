@@ -82,7 +82,7 @@ abstract class ApiResource extends StripeObject
         if ($postfixFakeNamespaces = strrchr($class, '')) {
             $class = $postfixFakeNamespaces;
         }
-        if (substr($class, 0, strlen('Stripe')) == 'Stripe') {
+        if (substr($class, 0, strlen('Stripe')) === 'Stripe') {
             $class = substr($class, strlen('Stripe'));
         }
         $class = str_replace('_', '', $class);

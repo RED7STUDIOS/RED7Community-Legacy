@@ -15,14 +15,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
-if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
+if (htmlspecialchars($_POST['action']) === "changeDisplayName") {
     if (strlen(htmlspecialchars($_POST["action"])) > 14) {
         $sql = null;
     } else {
         // Prepare an insert statement
         $sql = "UPDATE users SET displayname = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
     }
-} else if (htmlspecialchars($_POST['action']) == "acceptInfraction") {
+} else if (htmlspecialchars($_POST['action']) === "acceptInfraction") {
     $_id = $getActiveInfraction($_SESSION['id']);
     $_type = $getInfractionType($_id);
     if ($_type === "Warning")
@@ -33,23 +33,23 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     {
         $sql = null;
     }
-} else if (htmlspecialchars($_POST['action']) == "changeDescription") {
+} else if (htmlspecialchars($_POST['action']) === "changeDescription") {
     if (strlen(htmlspecialchars($_POST["action"])) > 200) {
         $sql = null;
     } else {
         // Prepare an insert statement
         $sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
     }
-} else if (htmlspecialchars($_POST['action']) == "changeEmail") {
+} else if (htmlspecialchars($_POST['action']) === "changeEmail") {
     // Prepare an insert statement
     $sql = "UPDATE users SET email = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
-} else if (htmlspecialchars($_POST['action']) == "changeProfile") {
+} else if (htmlspecialchars($_POST['action']) === "changeProfile") {
     // Prepare an insert statement
     $sql = "UPDATE users SET icon = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . htmlspecialchars($_SESSION['id']) . "'";
-} else if (htmlspecialchars($_POST['action']) == "updateClanSettings") {
+} else if (htmlspecialchars($_POST['action']) === "updateClanSettings") {
     // Prepare an insert statement
     $sql = "UPDATE clans SET displayname = '" . htmlspecialchars($_POST["displayname"]) . "', description='" . htmlspecialchars($_POST["description"]) . "' WHERE id = '" . htmlspecialchars($_POST["id"]) . "' AND owner = " . htmlspecialchars($_SESSION['id']);
-} else if (htmlspecialchars($_POST['action']) == "payoutClan") {
+} else if (htmlspecialchars($_POST['action']) === "payoutClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
@@ -65,7 +65,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     } else {
         $sql = null;
     }
-} else if (htmlspecialchars($_POST['action']) == "addFundsToClan") {
+} else if (htmlspecialchars($_POST['action']) === "addFundsToClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
@@ -80,7 +80,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     } else {
         $sql = null;
     }
-} else if (htmlspecialchars($_POST['action']) == "joinClan") {
+} else if (htmlspecialchars($_POST['action']) === "joinClan") {
     $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialchars($_POST["id"]));
     $json = json_decode($data, true);
     $members = $json[0]['data'][0]['members'];
@@ -92,7 +92,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $members = json_encode($members);
 
     $sql = "UPDATE clans SET members = '" . $members . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
-} else if (htmlspecialchars($_POST['action']) == "purchaseItem") {
+} else if (htmlspecialchars($_POST['action']) === "purchaseItem") {
     $your_id = htmlspecialchars($_SESSION['id']);
 
     $currency = $getCurrencyFromId($your_id);
@@ -134,7 +134,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     } else {
         $sql = null;
     }
-} else if (htmlspecialchars($_POST['action']) == "redeemCode") {
+} else if (htmlspecialchars($_POST['action']) === "redeemCode") {
     $your_id = htmlspecialchars($_SESSION['id']);
 
     $your_currency = $getCurrencyFromId($your_id);

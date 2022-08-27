@@ -58,7 +58,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 
 			$items_before = json_decode($items, true);
 
-			if ($_GET['api'] == "equip") {
+			if ($_GET['api'] === "equip") {
 				if (!in_array(htmlspecialchars($_GET['id']), $items_before)) {
 					if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true))) {
 						array_push($items_before, intval(htmlspecialchars($_GET['id'])));
@@ -80,7 +80,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 				} else {
 					echo '<p>You are already wearing this item.</p>';
 				}
-			} else if ($_GET['api'] == "unequip") {
+			} else if ($_GET['api'] === "unequip") {
 				if (in_array(htmlspecialchars($_GET['id']), $items_before)) {
 					unset($items_before[array_search(htmlspecialchars($_GET['id']), $items_before)]);
 					$items_final = json_encode($items_before);
@@ -98,7 +98,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 				} else {
 					echo '<p>You are not wearing this item.</p>';
 				}
-			} else if ($_GET['api'] == "changeshirt") {
+			} else if ($_GET['api'] === "changeshirt") {
 				if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true))) {
 					$sql = "UPDATE avatars SET shirt = '" . htmlspecialchars($_GET['id']) . "' WHERE ownerid = '" . $your_id . "'";
 
@@ -107,7 +107,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 						echo "Error: " . $sql . "<br>" . mysqli_error($link);
 					}
 				}
-			} else if ($_GET['api'] == "changepants") {
+			} else if ($_GET['api'] === "changepants") {
 				if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true))) {
 					$sql = "UPDATE avatars SET pants = '" . htmlspecialchars($_GET['id']) . "' WHERE ownerid = '" . $your_id . "'";
 
@@ -116,7 +116,7 @@ $items = $json_a_main[0]['data'][0]['items'];
 						echo "Error: " . $sql . "<br>" . mysqli_error($link);
 					}
 				}
-			} else if ($_GET['api'] == "changeface") {
+			} else if ($_GET['api'] === "changeface") {
 				if (in_array(htmlspecialchars($_GET['id']), json_decode($your_items, true))) {
 					$sql = "UPDATE avatars SET face = '" . htmlspecialchars($_GET['id']) . "' WHERE ownerid = '" . $your_id . "'";
 

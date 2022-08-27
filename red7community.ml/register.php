@@ -21,7 +21,7 @@ $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 	// Validate username
 	if (empty(trim($_POST["username"]))) {
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					/* store result */
 					mysqli_stmt_store_result($stmt);
 
-					if (mysqli_stmt_num_rows($stmt) == 1) {
+					if (mysqli_stmt_num_rows($stmt) === 1) {
 						$username_err = "This username is already taken.";
 					} else {
 						$username = trim($_POST["username"]);
@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<div class="page-content-wrapper">
 		<main class="col-md-9 form-signin">
 			<?php
-			if ($registration == "on") {
+			if ($registration === "on") {
 				echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post">';
 				echo '<h1 class="h3 mb-3 fw-normal">Register on ' . $site_name . '</h1>';
 				echo '<div class="form-group ';

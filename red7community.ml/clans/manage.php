@@ -39,7 +39,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
         $icon = "https://www.gravatar.com/avatar/?s=180";
     }
 
-    if ($description == "") {
+    if ($description === "") {
         $description = "This clan has not set a description.";
     }
 
@@ -131,14 +131,14 @@ if (htmlspecialchars($_SESSION['id']) != $owner) {
                 <div class="row-nav">
                     <div class="d-flex align-items-center border-bottom">
                         <?php
-                        if ($name == "Not Found") {
+                        if ($name === "Not Found") {
                             echo "<h2>This user could not be found!</h2></div><p>This user could possibly not be found due to a bug/glitch or has been removed (not banned).";
                             exit;
                         }
                         ?>
                         <img src="<?php echo htmlspecialchars($icon) ?>" class="profile-picture"></img>
                         &nbsp;
-                        <h2 class="<?php if ($isSpecial == 1) {
+                        <h2 class="<?php if ($isSpecial === 1) {
                                         echo 'title-rainbow-lr';
                                     } else {
                                     } ?>"><a href="/clans/profile.php?id=<?php echo htmlspecialchars($_GET['id']); ?>">
@@ -147,11 +147,11 @@ if (htmlspecialchars($_SESSION['id']) != $owner) {
                                 } else {
                                     echo $filterwords(htmlspecialchars($name));
                                 } ?></a>
-                            <?php if ($isVerified == 1) {
+                            <?php if ($isVerified === 1) {
                                 echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
                             } ?>
                             <small style="font-size: 15px;"><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
-                            <?php if ($hasInfraction == 1) {
+                            <?php if ($hasInfraction === 1) {
                                 echo '<p><strong class="banned-text">*BANNED*</strong></p>';
                             } ?>
                             <span>

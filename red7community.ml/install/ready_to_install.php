@@ -31,7 +31,7 @@ if ($passed_step >= 4) {
 
 // handle form submission
 // -------------------------------------------------
-if ($task == 'send') {
+if ($task === 'send') {
 	$_SESSION['passed_step'] = 5;
 	header('location: complete_installation.php');
 	exit;
@@ -51,7 +51,7 @@ if ($task == 'send') {
 	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
-	if ($curr_lang_direction == 'rtl') {
+	if ($curr_lang_direction === 'rtl') {
 		echo '<link rel="stylesheet" type="text/css" href="templates/' . EI_TEMPLATE . '/css/rtl.css" />' . "\n";
 	}
 	?>

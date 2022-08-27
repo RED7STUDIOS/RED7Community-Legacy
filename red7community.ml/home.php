@@ -59,7 +59,7 @@ $shownName = "";
 		$shownName = $your_username;
 	}
 
-	if ($your_isVerified == 1) {
+	if ($your_isVerified === 1) {
 		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 	}
 
@@ -93,7 +93,7 @@ $shownName = "";
 						$friend_icon = $getIcon($friend_id);
 						$friend_dsp = $getDisplayName($friend_id);
 
-						if ($friend_dsp == null || $friend_dsp == "") {
+						if ($friend_dsp === null || $friend_dsp === "") {
 							$friend_f = htmlspecialchars($name);
 						} else {
 							$friend_f = htmlspecialchars($friend_dsp);
@@ -103,7 +103,7 @@ $shownName = "";
 					}
 				}
 			}
-			if ($friends_amt == 0) {
+			if ($friends_amt === 0) {
 				echo '<p>You do not have any friends yet.</p>';
 			}
 			?>

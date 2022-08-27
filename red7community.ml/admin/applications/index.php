@@ -62,7 +62,7 @@ if (!$role >= 2) {
     <?php
     
             if (isset($maintenanceMode)) {
-                if ($maintenanceMode == "on") {
+                if ($maintenanceMode === "on") {
                     if (!$role >= 2)
                     {
                         echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
@@ -112,7 +112,7 @@ if (!$role >= 2) {
 
             for ($i = 1; $i <= $total_pages; $i++) {  // print links for all pages
                 echo " <a class='btn btn-primary' href='/shop/?page=" . $i . "'";
-                if ($i == $page)  echo " class='curPage'";
+                if ($i === $page)  echo " class='curPage'";
                 echo ">" . $i . "</a>&nbsp;";
             };
             ?>

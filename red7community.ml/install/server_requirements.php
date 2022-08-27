@@ -44,7 +44,7 @@ if ($passed_step >= 1) {
 
 // handle form submission
 // -------------------------------------------------
-if ($task == 'send') {
+if ($task === 'send') {
 	$_SESSION['passed_step'] = 2;
 	header('location: database_settings.php');
 	exit;
@@ -77,7 +77,7 @@ if (EI_CHECK_PHP_MINIMUM_VERSION && (version_compare(phpversion(), EI_PHP_MINIMU
 }
 if (EI_CHECK_CONFIG_DIR_WRITABILITY && !is_writable(EI_CONFIG_FILE_DIRECTORY)) {
 	$is_error = true;
-	$EI_CONFIG_FILE_DIRECTORY = EI_CONFIG_FILE_DIRECTORY == '' ? "''" : EI_CONFIG_FILE_DIRECTORY;
+	$EI_CONFIG_FILE_DIRECTORY = EI_CONFIG_FILE_DIRECTORY === '' ? "''" : EI_CONFIG_FILE_DIRECTORY;
 	$error_mg[] = str_replace('_FILE_DIRECTORY_', $EI_CONFIG_FILE_DIRECTORY, lang_key('alert_directory_not_writable'));
 }
 
@@ -98,13 +98,13 @@ $validations = array(
 	'server_api'   => array(false, lang_key('server_api'), isset($phpinfo['phpinfo']['Server API']), (isset($phpinfo['phpinfo']['Server API']) ? $phpinfo['phpinfo']['Server API'] : ''), lang_key('unknown')),
 
 	'divider_php_settings' => array('title' => lang_key('required_php_settings')),
-	'pdo_support'  => array(false, lang_key('pdo_support'), (isset($phpinfo['PDO']['PDO support']) && $phpinfo['PDO']['PDO support'] == 'enabled'), lang_key('enabled'), lang_key('disabled'), lang_key('error_pdo_support')),
+	'pdo_support'  => array(false, lang_key('pdo_support'), (isset($phpinfo['PDO']['PDO support']) && $phpinfo['PDO']['PDO support'] === 'enabled'), lang_key('enabled'), lang_key('disabled'), lang_key('error_pdo_support')),
 	'database_extension' => array(false, lang_key('database_extension') . ' (' . EI_DATABASE_TYPE . 'i)', extension_loaded(EI_DATABASE_TYPE . 'i'), lang_key('enabled'), lang_key('disabled')),
-	'vd_support'   => array(false, lang_key('virtual_directory_support'), (isset($phpinfo['phpinfo']['Virtual Directory Support']) && $phpinfo['phpinfo']['Virtual Directory Support'] == 'enabled'), lang_key('enabled'), lang_key('disabled'), lang_key('error_vd_support')),
-	//'asp_tags'     => array(false, lang_key('asp_tags'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['asp_tags'][0] == 'On'), lang_key('on'), lang_key('off'), lang_key('error_asp_tags')),
-	//'safe_mode'    => array(false, lang_key('safe_mode'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['safe_mode'][0] == 'On'), lang_key('on'), lang_key('off')),
-	'short_open_tag'  => array(false, lang_key('short_open_tag'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['short_open_tag'][0] == 'On'), lang_key('on'), lang_key('off')),
-	'session_support' => array(false, lang_key('session_support'), (isset($phpinfo['session']['Session Support']) && $phpinfo['session']['Session Support'] == 'enabled'), lang_key('enabled'), lang_key('disabled')),
+	'vd_support'   => array(false, lang_key('virtual_directory_support'), (isset($phpinfo['phpinfo']['Virtual Directory Support']) && $phpinfo['phpinfo']['Virtual Directory Support'] === 'enabled'), lang_key('enabled'), lang_key('disabled'), lang_key('error_vd_support')),
+	//'asp_tags'     => array(false, lang_key('asp_tags'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['asp_tags'][0] === 'On'), lang_key('on'), lang_key('off'), lang_key('error_asp_tags')),
+	//'safe_mode'    => array(false, lang_key('safe_mode'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['safe_mode'][0] === 'On'), lang_key('on'), lang_key('off')),
+	'short_open_tag'  => array(false, lang_key('short_open_tag'), (isset($phpinfo[$php_core_index]) && $phpinfo[$php_core_index]['short_open_tag'][0] === 'On'), lang_key('on'), lang_key('off')),
+	'session_support' => array(false, lang_key('session_support'), (isset($phpinfo['session']['Session Support']) && $phpinfo['session']['Session Support'] === 'enabled'), lang_key('enabled'), lang_key('disabled')),
 );
 /// $database_system_version = isset($phpinfo['mysql']) ? $phpinfo['mysql']['Client API version'] : "unknown";
 
@@ -155,7 +155,7 @@ if (EI_CHECK_DIRECTORIES_AND_FILES) {
 	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
-	if ($curr_lang_direction == 'rtl') {
+	if ($curr_lang_direction === 'rtl') {
 		echo '<link rel="stylesheet" type="text/css" href="templates/' . EI_TEMPLATE . '/css/rtl.css" />' . "\n";
 	}
 	?>
@@ -170,7 +170,7 @@ if (EI_CHECK_DIRECTORIES_AND_FILES) {
 		<h2 class="sub-title"><?php echo lang_key('sub_title_message'); ?></h2>
 
 		<div id="content">
-			<?php if ($installation_type == 'wizard') { ?>
+			<?php if ($installation_type === 'wizard') { ?>
 				<?php
 				draw_side_navigation(2);
 				?>
@@ -196,7 +196,7 @@ if (EI_CHECK_DIRECTORIES_AND_FILES) {
 								}
 							} else {
 								$content .= '<td>&#8226; ' . $val[1] . ': <i>' . (($val[2]) ? '<span class="found">' . $val[3] . '</span>' : '<span class="disabled">' . $val[4] . '</span>') . '</i></td>';
-								if ($val[0] == true && !$val[2]) {
+								if ($val[0] === true && !$val[2]) {
 									$is_error = true;
 									$error_mg[$key] = isset($val[5]) ? $val[5] : str_ireplace('_SETTINGS_NAME_', '<b>' . $key . '</b>', lang_key('error_server_requirements'));
 									$content .= '<td><span class="failed">' . lang_key('failed') . '!</span></td>';

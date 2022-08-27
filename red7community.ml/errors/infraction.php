@@ -34,7 +34,7 @@ $_end = $getInfractionEnd($_id);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>You have been <?php if ($_type == "Ban") { echo "banned"; } else { echo "warned"; } ?> - <?php echo htmlspecialchars($site_name); ?></title>
+	<title>You have been <?php if ($_type === "Ban") { echo "banned"; } else { echo "warned"; } ?> - <?php echo htmlspecialchars($site_name); ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="/assets/css/style.css">
@@ -49,10 +49,10 @@ $_end = $getInfractionEnd($_id);
 	<div class="page-content-wrapper">
 		<main class="col-md-9">
 			<div class="d-flex align-items-center border-bottom">
-				<h2>You have been <?php if ($_type == "Ban") { echo "banned"; } else { echo "warned"; } ?></h2>
+				<h2>You have been <?php if ($_type === "Ban") { echo "banned"; } else { echo "warned"; } ?></h2>
 			</div>
 
-			<p><b>You were <?php if ($_type == "Ban") { echo "banned"; } else { echo "warned"; } ?> on:</b> <?php echo $_start; ?></p>
+			<p><b>You were <?php if ($_type === "Ban") { echo "banned"; } else { echo "warned"; } ?> on:</b> <?php echo $_start; ?></p>
 			<?php if ($_type === "Ban") { echo '<p><b>You will be unbanned on:</b> '.$_end. '</p>'; } ?>
 			<p><b>Reason:</b> <?php echo $_reason; ?></p>
 

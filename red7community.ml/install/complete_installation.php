@@ -29,12 +29,12 @@ if ($passed_step >= 5) {
 	exit;
 }
 
-if (EI_MODE == 'debug') error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+if (EI_MODE === 'debug') error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
 $completed = false;
 $error_mg  = array();
 
-if ($passed_step == 5) {
+if ($passed_step === 5) {
 
 	$database_host		 = isset($_SESSION['database_host']) ? prepare_input($_SESSION['database_host']) : '';
 	$database_name		 = isset($_SESSION['database_name']) ? prepare_input($_SESSION['database_name']) : '';
@@ -48,9 +48,9 @@ if ($passed_step == 5) {
 	$admin_email 		 = isset($_SESSION['admin_email']) ? stripslashes($_SESSION['admin_email']) : '';
 	$password_encryption = isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 
-	if ($install_type == 'update') {
+	if ($install_type === 'update') {
 		$sql_dump_file = EI_SQL_DUMP_FILE_UPDATE;
-	} else if ($install_type == 'un-install') {
+	} else if ($install_type === 'un-install') {
 		$sql_dump_file = EI_SQL_DUMP_FILE_UN_INSTALL;
 	} else {
 		$sql_dump_file = EI_SQL_DUMP_FILE_CREATE;
@@ -62,15 +62,15 @@ if ($passed_step == 5) {
 	//if (empty($database_password)) $error_mg[] = lang_key('alert_db_password_empty');
 
 	if (empty($error_mg)) {
-		if (EI_MODE == 'demo') {
-			if ($database_host == 'localhost' && $database_name == 'db_name' && $database_username == 'test' && $database_password == 'test') {
+		if (EI_MODE === 'demo') {
+			if ($database_host === 'localhost' && $database_name === 'db_name' && $database_username === 'test' && $database_password === 'test') {
 				$completed = true;
 			} else {
 				$error_mg[] = lang_key('alert_wrong_testing_parameters');
 			}
 		} else {
 			$db = Database::GetInstance($database_host, $database_name, $database_username, $database_password, EI_DATABASE_TYPE, false, true);
-			if (EI_DATABASE_CREATE && ($install_type == 'create') && !$db->Create()) {
+			if (EI_DATABASE_CREATE && ($install_type === 'create') && !$db->Create()) {
 				$error_mg[] = $db->Error();
 			} else if ($db->Open()) {
 				if (EI_CHECK_DB_MINIMUM_VERSION && (version_compare($db->GetVersion(), EI_DB_MINIMUM_VERSION, '<'))) {
@@ -83,7 +83,7 @@ if ($passed_step == 5) {
 					// read sql dump file
 					$sql_dump = file_get_contents($sql_dump_file);
 					if ($sql_dump != '') {
-						if (false == ($db_error = apphp_db_install($sql_dump_file))) {
+						if (false === ($db_error = apphp_db_install($sql_dump_file))) {
 							if (EI_MODE != 'debug') $error_mg[] = lang_key('error_sql_executing');
 						} else {
 							// write additional operations here, like setting up system preferences etc.
@@ -109,7 +109,7 @@ if ($passed_step == 5) {
 								$error_mg[] = str_replace('_CONFIG_FILE_PATH_', EI_CONFIG_FILE_PATH, lang_key('error_can_not_open_config_file'));
 							}
 							fclose($f);
-							if ($install_type == 'un-install') unlink(EI_CONFIG_FILE_PATH);
+							if ($install_type === 'un-install') unlink(EI_CONFIG_FILE_PATH);
 							///@chmod('../'.EI_CONFIG_FILE_DIRECTORY, 0644);									
 						}
 					} else {
@@ -117,7 +117,7 @@ if ($passed_step == 5) {
 					}
 				}
 			} else {
-				if (EI_MODE == 'debug') {
+				if (EI_MODE === 'debug') {
 					$error_mg[] = str_replace('_ERROR_', '<br />Error: ' . $db->Error(), lang_key('error_check_db_connection'));
 				} else {
 					$error_mg[] = str_replace('_ERROR_', '', lang_key('error_check_db_connection'));
@@ -143,7 +143,7 @@ if ($passed_step == 5) {
 	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
-	if ($curr_lang_direction == 'rtl') {
+	if ($curr_lang_direction === 'rtl') {
 		echo '<link rel="stylesheet" type="text/css" href="templates/' . EI_TEMPLATE . '/css/rtl.css" />' . "\n";
 	}
 	?>
@@ -200,7 +200,7 @@ if ($passed_step == 5) {
 							<tr>
 								<td>&nbsp;</td>
 							</tr>
-							<?php if ($install_type == 'update') { ?>
+							<?php if ($install_type === 'update') { ?>
 								<tr>
 									<td>
 										<h4><?php echo lang_key('updating_completed'); ?></h4>
@@ -215,7 +215,7 @@ if ($passed_step == 5) {
 										<?php if (EI_APPLICATION_START_FILE != '') { ?><a href="<?php echo '../' . EI_APPLICATION_START_FILE; ?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
 									</td>
 								</tr>
-							<?php } else if ($install_type == 'un-install') { ?>
+							<?php } else if ($install_type === 'un-install') { ?>
 								<tr>
 									<td>
 										<h4><?php echo lang_key('uninstallation_completed'); ?></h4>

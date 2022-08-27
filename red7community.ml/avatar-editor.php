@@ -106,11 +106,11 @@ if (isset($_GET["page"])) {
 						$thingy = "";
 						$type = "1";
 
-						if (strtolower($row['type']) == "shirt") {
+						if (strtolower($row['type']) === "shirt") {
 							$type = $shirt;
-						} else if (strtolower($row['type']) == "pants") {
+						} else if (strtolower($row['type']) === "pants") {
 							$type = $pants;
-						} else if (strtolower($row['type']) == "face") {
+						} else if (strtolower($row['type']) === "face") {
 							$type = $face;
 						}
 

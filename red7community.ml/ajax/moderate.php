@@ -16,7 +16,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 $role = $getRole($_SESSION['id']);
 
-if ($role == 0) {
+if ($role === 0) {
 	header("HTTP/1.1 403 Forbidden");
 	exit;
 }
@@ -37,13 +37,13 @@ if ($role >= 1) {
 		$full_name = $getApplicationFullName($id);
 		$user = $getUserFromApplicationId($id);
 
-		if (htmlspecialchars($_POST['action']) == "acceptApplication") {
+		if (htmlspecialchars($_POST['action']) === "acceptApplication") {
 			$sql = "UPDATE users SET isVerified = 1 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE applications SET accepted = 1 WHERE id = '" . $_POST['id'] . "'";
 			$sendEmail($user, $ROOT_URL . "/verify.php", "verification-accepted", $full_name, "", $preferred_email, false);
-		} else if (htmlspecialchars($_POST['action']) == "denyApplication") {
+		} else if (htmlspecialchars($_POST['action']) === "denyApplication") {
 			$sql = "UPDATE users SET isVerified = 0 WHERE id = '" . $user. "'";
 			$result = mysqli_query($link, $sql);
 
@@ -57,7 +57,7 @@ if ($role >= 1) {
 }
 
 if ($role >= 2) {
-	if (htmlspecialchars($_POST['action']) == "infractUser") {
+	if (htmlspecialchars($_POST['action']) === "infractUser") {
 		$_id = $getActiveInfraction($_POST['id']);
 
 		if (isset($_id))
@@ -87,16 +87,16 @@ if ($role >= 2) {
 			// Prepare an insert statement
 			$sql = "INSERT INTO infractions (issued_by, user_id, `type`, reason, `start`, `end`, active) VALUES(". $_SESSION["id"].", ". $_POST["id"].", '". $_POST["type"]. "', '". $_POST["reason"]. "', '". $_POST["start"]. "', '". $_POST["end"]. "', 1);";
 		}
-	} else if (htmlspecialchars($_POST['action']) == "currencyChange") {
+	} else if (htmlspecialchars($_POST['action']) === "currencyChange") {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "displayNameChange") {
+	} else if (htmlspecialchars($_POST['action']) === "displayNameChange") {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET displayName = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "descriptionChange") {
+	} else if (htmlspecialchars($_POST['action']) === "descriptionChange") {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "banningClan") {
+	} else if (htmlspecialchars($_POST['action']) === "banningClan") {
 		if (isset($_POST['hasInfraction'])) {
 			// Prepare an insert statement
 			$sql = "UPDATE clans SET hasInfraction = 1 WHERE id = '" . $_POST['id'] . "'";
@@ -112,16 +112,16 @@ if ($role >= 2) {
 			// Prepare an insert statement
 			$sql = "UPDATE clans SET hasInfraction = 0 WHERE id = '" . $_POST['id'] . "'";
 		}
-	} else if (htmlspecialchars($_POST['action']) == "currencyChangeClan") {
+	} else if (htmlspecialchars($_POST['action']) === "currencyChangeClan") {
 		// Prepare an insert statement
 		$sql = "UPDATE clans SET currency = '" . htmlspecialchars($_POST["amount"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "displayNameChangeClan") {
+	} else if (htmlspecialchars($_POST['action']) === "displayNameChangeClan") {
 		// Prepare an insert statement
 		$sql = "UPDATE clans SET displayName = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "descriptionChangeClan") {
+	} else if (htmlspecialchars($_POST['action']) === "descriptionChangeClan") {
 		// Prepare an insert statement
 		$sql = "UPDATE clans SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
-	} else if (htmlspecialchars($_POST['action']) == "updateSiteSettings") {
+	} else if (htmlspecialchars($_POST['action']) === "updateSiteSettings") {
 		// Prepare an insert statement
 		$sql = "UPDATE site_info SET content = '" . $_POST["site_name"] . "' WHERE name = 'site_name'";
 		$result = mysqli_query($link, $sql);
@@ -161,7 +161,7 @@ if ($role >= 2) {
 			$sql = "UPDATE site_info SET content = 'off' WHERE name = 'maintenanceMode'";
 			$result = mysqli_query($link, $sql);
 		}
-	} else if (htmlspecialchars($_POST['action']) == "updateItemSettings") {
+	} else if (htmlspecialchars($_POST['action']) === "updateItemSettings") {
 		// Prepare an insert statement
 		$sql = "UPDATE items SET displayname = '" . $_POST["name"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
@@ -183,7 +183,7 @@ if ($role >= 2) {
 		// Prepare an insert statement
 		$sql = "UPDATE items SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
-	} else if (htmlspecialchars($_POST['action']) == "createNewItem") {
+	} else if (htmlspecialchars($_POST['action']) === "createNewItem") {
 		$creator = $getIdFromName($_POST['creator']);
 
 		$createdFormat = mktime(
@@ -196,19 +196,19 @@ if ($role >= 2) {
 		);
 		$created = date("Y-m-d H:i:s", $createdFormat);
 
-		if ($_POST["isLimited"] == "on") {
+		if ($_POST["isLimited"] === "on") {
 			$isLimited = 1;
 		} else {
 			$isLimited = 0;
 		}
 
-		if ($_POST["isEquippable"] == "on") {
+		if ($_POST["isEquippable"] === "on") {
 			$isEquippable = 1;
 		} else {
 			$isEquippable = 0;
 		}
 
-		if ($_POST["membershipRequired"] == "on") {
+		if ($_POST["membershipRequired"] === "on") {
 			$membershipRequired = "Premium";
 		} else {
 			$membershipRequired = "None";
@@ -219,15 +219,15 @@ if ($role >= 2) {
 	}
 }
 
-if ($role == 3) {
-	if (htmlspecialchars($_POST['action']) == "roleChange") {
-		if (htmlspecialchars($_POST["action"]) == "user") {
+if ($role === 3) {
+	if (htmlspecialchars($_POST['action']) === "roleChange") {
+		if (htmlspecialchars($_POST["action"]) === "user") {
 			$v = 0;
-		} else if (htmlspecialchars($_POST["action"]) == "moderator") {
+		} else if (htmlspecialchars($_POST["action"]) === "moderator") {
 			$v = 1;
-		} else if (htmlspecialchars($_POST["action"]) == "admin") {
+		} else if (htmlspecialchars($_POST["action"]) === "admin") {
 			$v = 2;
-		} else if (htmlspecialchars($_POST["action"]) == "super_admin") {
+		} else if (htmlspecialchars($_POST["action"]) === "super_admin") {
 			$v = 3;
 		}
 

@@ -21,7 +21,7 @@ $name = $displayname = "";
 $name_err = $displayname_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validate name
     if (empty(trim($_POST["name"]))) {
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     /* store result */
                     mysqli_stmt_store_result($stmt);
 
-                    if (mysqli_stmt_num_rows($stmt) == 1) {
+                    if (mysqli_stmt_num_rows($stmt) === 1) {
                         $name_err = "This name is already taken.";
                     } else {
                         $name = trim($_POST["name"]);
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php
         if (isset($maintenanceMode)) {
             
-                if ($maintenanceMode == "on") {
+                if ($maintenanceMode === "on") {
                     if (!$role >= 2)
                     {
                         echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";

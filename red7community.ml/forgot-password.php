@@ -7,9 +7,9 @@ $email = "";
 $email_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$email = htmlspecialchars($_POST['email']);
-	if ($email == null) {
+	if ($email === null) {
 		$email_err = "You didn't input an email!";
 	} else {
 		$result = mysqli_query($link, "SELECT * FROM users WHERE email='" . $email . "'");

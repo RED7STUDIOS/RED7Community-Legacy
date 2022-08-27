@@ -123,7 +123,7 @@ class CurlClient implements ClientInterface
             $opts = $this->defaultOptions;
         }
 
-        if ($method == 'get') {
+        if ($method === 'get') {
             if ($hasFile) {
                 throw new Error\Api(
                     "Issuing a GET request with a file parameter"
@@ -134,10 +134,10 @@ class CurlClient implements ClientInterface
                 $encoded = Util\Util::urlEncode($params);
                 $absUrl = "$absUrl?$encoded";
             }
-        } elseif ($method == 'post') {
+        } elseif ($method === 'post') {
             $opts[CURLOPT_POST] = 1;
             $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : Util\Util::urlEncode($params);
-        } elseif ($method == 'delete') {
+        } elseif ($method === 'delete') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
             if (count($params) > 0) {
                 $encoded = Util\Util::urlEncode($params);
@@ -149,7 +149,7 @@ class CurlClient implements ClientInterface
 
         // It is only safe to retry network failures on POST requests if we
         // add an Idempotency-Key header
-        if (($method == 'post') && (Stripe::$maxNetworkRetries > 0)) {
+        if (($method === 'post') && (Stripe::$maxNetworkRetries > 0)) {
             if (!isset($headers['Idempotency-Key'])) {
                 array_push($headers, 'Idempotency-Key: ' . $this->randomGenerator->uuid());
             }

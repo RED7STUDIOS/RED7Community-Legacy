@@ -23,7 +23,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
     $description = $json[0]['data'][0]['description'];
 
-    if ($description == "") {
+    if ($description === "") {
         $description = "This items item does not have a description.";
     }
 
@@ -138,7 +138,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                     <div class="col">
                         <div class="d-flex align-items-center border-bottom">
                             <?php
-                            if ($name == "Not Found") {
+                            if ($name === "Not Found") {
                                 echo "<h2>This item could not be found!</h2></div><p>This item could possibly not be found due to a bug/glitch or has been removed.";
                                 exit;
                             }
@@ -146,7 +146,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                             <!-- <img src="<?php echo $icon ?>" class="items-item-preview"></img> -->
 
 
-                            <?php if ($membershipRequired == "Premium") {
+                            <?php if ($membershipRequired === "Premium") {
                                 echo '<img class="premium-icon" src="' . $premiumIcon . '"</img>';
                             } ?>
                             &nbsp;
@@ -164,7 +164,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
                         <div>
                             <?php
-                            if ($limited == 1) {
+                            if ($limited === 1) {
                                 echo '<p><strong><i>LIMITED</i></strong></p>';
                             }
                             ?>
@@ -175,7 +175,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
                             <?php
                             if ($price != "-1") {
-                                if ($price == "0" || $price == 0) {
+                                if ($price === "0" || $price === 0) {
                                     echo '<p><strong>Price: </strong>Free</p>';
                                 } else {
                                     echo '<p><strong>Price: </strong>' . $price . ' ' . $currency_name . '</p>';
@@ -186,7 +186,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                             <p><strong>Type:</strong> <?php echo htmlspecialchars($type); ?></p>
 
                             <?php
-                            if ($limited == 1) {
+                            if ($limited === 1) {
                                 echo '<p><strong>Copies:</strong> ' . $copies . '</p>';
                             }
                             ?>
@@ -234,7 +234,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                                         $owner_name = $getUsername($owner_id);
                                         $owner_displayname = $getDisplayName($owner_id);
 
-                                        if ($owner_displayname == null || $owner_displayname == "") {
+                                        if ($owner_displayname === null || $owner_displayname === "") {
                                             $owner_f = htmlspecialchars($owner_name);
                                         } else {
                                             $owner_f = htmlspecialchars($owner_displayname);

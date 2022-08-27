@@ -3,8 +3,8 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Configuration Condition=" '$(Configuration)' === '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' === '' ">AnyCPU</Platform>
     <ProjectGuid>{05C54224-194F-44B4-9448-F6DF423E0313}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>RED7Community_Creator</RootNamespace>
@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' === 'Debug|AnyCPU' ">
     <DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' === 'Release|AnyCPU' ">
     <DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>

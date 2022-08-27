@@ -807,7 +807,7 @@ class SMTP
         }
 
         //Some servers shut down the SMTP service here (RFC 5321)
-        if (substr($this->helo_rply, 0, 3) == '421') {
+        if (substr($this->helo_rply, 0, 3) === '421') {
             return false;
         }
 
@@ -1153,12 +1153,12 @@ class SMTP
      * The method works in three ways, dependent on argument value and current state:
      *   1. HELO/EHLO has not been sent - returns null and populates $this->error.
      *   2. HELO has been sent -
-     *     $name == 'HELO': returns server name
-     *     $name == 'EHLO': returns boolean false
-     *     $name == any other string: returns null and populates $this->error
+     *     $name === 'HELO': returns server name
+     *     $name === 'EHLO': returns boolean false
+     *     $name === any other string: returns null and populates $this->error
      *   3. EHLO has been sent -
-     *     $name == 'HELO'|'EHLO': returns the server name
-     *     $name == any other string: if extension $name exists, returns True
+     *     $name === 'HELO'|'EHLO': returns the server name
+     *     $name === any other string: if extension $name exists, returns True
      *       or its options (e.g. AUTH mechanisms supported). Otherwise returns False.
      *
      * @param string $name Name of SMTP extension or 'HELO'|'EHLO'

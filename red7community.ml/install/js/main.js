@@ -41,8 +41,8 @@ function testDatabaseConnection() {
     },
     success: function (html) {
       var obj = jQuery.parseJSON(html);
-      if (obj.status == "1") {
-        if (obj.db_connection_status == "1") {
+      if (obj.status === "1") {
+        if (obj.db_connection_status === "1") {
           $("#notes_message").html(
             "<h4 class='success'>" +
               EasyInstaller._MSG["success"] +
@@ -86,7 +86,7 @@ function buttonEnable() {
 }
 
 function installTypeOnClick(val) {
-  if (val == "un-install") {
+  if (val === "un-install") {
     $("#line_admin_info").hide("fast");
     $("#line_admin_login").hide("fast");
     $("#line_admin_password").hide("fast");
