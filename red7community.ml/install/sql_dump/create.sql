@@ -96,11 +96,7 @@ CREATE TABLE `avatars` (
 LOCK TABLES `avatars` WRITE;
 /*!40000 ALTER TABLE `avatars` DISABLE KEYS */;
 INSERT INTO `avatars` VALUES
-(1,'[1]',9,8,5),
-(10,'[]',9,8,5),
-(11,'[]',9,8,5),
-(12,'[6,11,12]',9,8,5),
-(13,'[]',9,8,5);
+(1,'[]',9,8,5),
 /*!40000 ALTER TABLE `avatars` ENABLE KEYS */;
 UNLOCK TABLES;
 
