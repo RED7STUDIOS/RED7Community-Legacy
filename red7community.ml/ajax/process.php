@@ -102,36 +102,43 @@ if (htmlspecialchars($_POST['action']) === "changeDisplayName") {
     $price = $json[0]['data'][0]['price'];
     $owners = $json[0]['data'][0]['owners'];
 
-    if ($currency >= $price) {
-        $sql_query = "SELECT items FROM users WHERE id = '" . $your_id . "'";
-        $result_e = mysqli_query($link, $sql_query);
-
-        if (mysqli_num_rows($result_e) > 0) {
-            // output data of each row
-            while ($row = mysqli_fetch_assoc($result_e)) {
-                $your_items = $row["items"];
+    if ($price != -1)
+    {
+        if ($currency >= $price) {
+            $sql_query = "SELECT items FROM users WHERE id = '" . $your_id . "'";
+            $result_e = mysqli_query($link, $sql_query);
+    
+            if (mysqli_num_rows($result_e) > 0) {
+                // output data of each row
+                while ($row = mysqli_fetch_assoc($result_e)) {
+                    $your_items = $row["items"];
+                }
             }
+    
+            $items_before = json_decode($your_items, true);
+            $owners_before = json_decode($owners, true);
+    
+            array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["value"]))));
+            array_push($owners_before, $your_id);
+    
+            $items_final = json_encode($items_before);
+            $owners_final = json_encode($owners_before);
+    
+            $sql_items = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
+    
+            $result_items = mysqli_query($link, $sql_items);
+    
+            $sql_items = "UPDATE users SET currency = '" . ($currency - $price) . "' WHERE id = '" . $your_id . "'";
+    
+            $result_items = mysqli_query($link, $sql_items);
+    
+            $sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["value"]) . "'";
+        } else {
+            $sql = null;
         }
-
-        $items_before = json_decode($your_items, true);
-        $owners_before = json_decode($owners, true);
-
-        array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["value"]))));
-        array_push($owners_before, $your_id);
-
-        $items_final = json_encode($items_before);
-        $owners_final = json_encode($owners_before);
-
-        $sql_items = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
-
-        $result_items = mysqli_query($link, $sql_items);
-
-        $sql_items = "UPDATE users SET currency = '" . ($currency - $price) . "' WHERE id = '" . $your_id . "'";
-
-        $result_items = mysqli_query($link, $sql_items);
-
-        $sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["value"]) . "'";
-    } else {
+    }
+    else
+    {
         $sql = null;
     }
 } else if (htmlspecialchars($_POST['action']) === "redeemCode") {
