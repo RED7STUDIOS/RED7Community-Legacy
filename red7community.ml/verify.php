@@ -99,7 +99,7 @@ $requirements = 0;
                 </p>
                 <p><b>Status:</b> <?php if ($your_isVerified == 1) {
                                         echo "Verified";
-                                    } else if ($requirements != 0) {
+                                    } else if ($requirements !== 0) {
                                         echo "Ineligible";
                                     } else if ($your_isVerified != 1) {
                                         echo "Eligible";
@@ -109,7 +109,7 @@ $requirements = 0;
             <hr />
 
             <?php
-            if ($requirements === 0) {
+            if ($requirements === 0 && $your_isVerified == 0) {
             ?>
                 <form class="redeem-form text-center" action="verify.php" method="post">
                     <div class="elem-group">
