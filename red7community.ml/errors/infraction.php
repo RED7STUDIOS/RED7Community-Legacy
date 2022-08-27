@@ -37,6 +37,32 @@ $_end = $getInfractionEnd($_id);
 
 <body>
 	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
+	<script type="text/javascript">
+		var ajaxSubmit = function(formEl) {
+			// fetch the data for the form
+			var data = $(formEl).serializeArray();
+			var url = $(formEl).attr('action');
+
+			// setup the ajax request
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: data,
+				dataType: 'json',
+				success: function(d) {
+					if (d.success) {
+						document.location = document.location;
+					} else {
+						document.location = document.location;
+					}
+				}
+			});
+
+			// return false so the form does not actually
+			// submit to the page
+			return false;
+		}
+	</script>
 
 	<div class="page-content-wrapper">
 		<main class="col-md-9">

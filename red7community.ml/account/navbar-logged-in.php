@@ -88,15 +88,11 @@ if ($today_dt2 >= $expire_dt) {
 	}
 }
 
-
-
 $todayTime = date("Y-m-d H:i:s");
 
 $sql = "UPDATE users SET lastloginDate='" . $todayDate . "' WHERE id=" . $your_id;
 
 mysqli_query($link, $sql);
-
-
 
 if ($_SERVER["REQUEST_URI"] === "/errors/infraction.php")
 {
@@ -107,18 +103,19 @@ if ($_SERVER["REQUEST_URI"] === "/errors/infraction.php")
 else {
 	if ($your_hasInfraction === 1) {
 		$_id = $getActiveInfraction($_SESSION['id']);
+		$_type = $getInfractionType($_id);
 		$_start = $getInfractionStart($_id);
 		$_end = date($getInfractionEnd($_id));
 	
 		if ($_end < $todayTime)
 		{
-			$sql = "UPDATE infractions SET active=0 WHERE id=" . $_id;
-			mysqli_query($link, $sql);
+			if ($_type === "Ban")
+			{
+				$sql = "UPDATE infractions SET active=0 WHERE id=" . $_id;
+				mysqli_query($link, $sql);
+			}
 		}
-		else
-		{
-			echo "<script type='text/javascript'>location.href = '/errors/infraction.php';</script>";
-		}
+		echo "<script type='text/javascript'>location.href = '/errors/infraction.php';</script>";
 	}
 }
 
