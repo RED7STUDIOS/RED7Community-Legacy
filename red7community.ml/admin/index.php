@@ -72,7 +72,7 @@ if (!$role >= 2) {
         <div class="d-flex align-items-center border-bottom" style="display: inline;">
             <h2>Welcome&nbsp;
                 <h2><?php echo $getDisplayName($your_id); ?></h2>&nbsp;
-                <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_isBanned == 1) {
+                <small><b>(@<?php echo htmlspecialchars($your_username); ?>)</b></small><?php if ($your_hasInfraction == 1) {
                                                                                             echo '<p><strong style="color: red;">*BANNED*</strong></p>';
                                                                                         } ?>!
             </h2>

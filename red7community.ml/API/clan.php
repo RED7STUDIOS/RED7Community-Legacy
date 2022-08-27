@@ -42,7 +42,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['created_at'] = $row['created_at'];
 							$response[$i]['data'][0]['currency'] = $row['currency'];
 							$response[$i]['data'][0]['members'] = $row['members'];
-							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
+							$response[$i]['data'][0]['hasInfraction'] = $row['hasInfraction'];
 							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
@@ -83,7 +83,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['created_at'] = $row['created_at'];
 							$response[$i]['data'][0]['currency'] = $row['currency'];
 							$response[$i]['data'][0]['members'] = $row['members'];
-							$response[$i]['data'][0]['isBanned'] = $row['isBanned'];
+							$response[$i]['data'][0]['hasInfraction'] = $row['hasInfraction'];
 							$response[$i]['data'][0]['bannedReason'] = $row['bannedReason'];
 							$response[$i]['data'][0]['bannedDate'] = $row['bannedDate'];
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];

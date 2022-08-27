@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `badges` longtext,
   `items` longtext,
   `membership` enum('None','Premium450','Premium1000','Premium2200','PremiumDaily450','PremiumDaily1000','PremiumDaily2200') DEFAULT NULL,
-  `isBanned` int DEFAULT '0',
+  `hasInfraction` int DEFAULT '0',
   `bannedReason` text,
   `bannedDate` datetime DEFAULT NULL,
   `isVerified` int DEFAULT '0',
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 
-INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES
+INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `hasInfraction`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES
 	(1, '<USER_NAME>', '<USER_NAME>', NULL, <PASSWORD>, '', '2022-02-27 22:59:37', '2022-05-02', '2022-05-02 21:48:48', 1000000000000, '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g', 3);
 
 
@@ -203,7 +203,7 @@ CREATE TABLE `clans` (
   `icon` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `isBanned` int NOT NULL DEFAULT '0',
+  `hasInfraction` int NOT NULL DEFAULT '0',
   `isVerified` int NOT NULL DEFAULT '0',
   `bannedDate` datetime DEFAULT NULL,
   `bannedReason` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,

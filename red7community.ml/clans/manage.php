@@ -20,7 +20,7 @@ $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialch
 if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $json = json_decode($data, true);
 
-    $isBanned = $json[0]['data'][0]['isBanned'];
+    $hasInfraction = $json[0]['data'][0]['hasInfraction'];
 
     $id = htmlspecialchars($_GET['id']);
     $name = $json[0]['data'][0]['name'];
@@ -29,7 +29,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $real_description = $json[0]['data'][0]['description'];
     $currency = $json[0]['data'][0]['currency'];
 
-    if ($isBanned != 1) {
+    if ($hasInfraction != 1) {
         $displayname = $filterwords($json[0]['data'][0]['displayname']);
         $description = $filterwords($json[0]['data'][0]['description']);
         $icon = $json[0]['data'][0]['icon'];
@@ -151,7 +151,7 @@ if (htmlspecialchars($_SESSION['id']) != $owner) {
                                 echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
                             } ?>
                             <small style="font-size: 15px;"><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
-                            <?php if ($isBanned == 1) {
+                            <?php if ($hasInfraction == 1) {
                                 echo '<p><strong class="banned-text">*BANNED*</strong></p>';
                             } ?>
                             <span>

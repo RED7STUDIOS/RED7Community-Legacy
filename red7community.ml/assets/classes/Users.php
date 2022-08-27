@@ -119,19 +119,12 @@ $getMembership = function ($id) use ($link) {
 	}
 };
 
-$isBanned = function ($id) use ($link) {
-	include $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
+$hasInfraction = function ($id) use ($link) {
+	require $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 	if ($getActiveInfraction($id) !== null)
 	{
-		if ($getInfractionType($getActiveInfraction($id)) === "Ban")
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
+		return 1;
 	}
 	else
 	{

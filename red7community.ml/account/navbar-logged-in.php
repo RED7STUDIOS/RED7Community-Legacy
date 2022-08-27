@@ -30,7 +30,7 @@ $your_lastLoginDate = $getLastLoginDate($your_id);
 $your_currency = $getCurrencyFromId($_SESSION['id']);
 $your_badges = $getBadges($your_id);
 $your_membership = $getMembership($your_id);
-$your_isBanned = $isBanned($your_id);
+$your_hasInfraction = $hasInfraction($your_id);
 $your_role = $getRole($your_id);
 $your_isVerified = $isVerified($your_id);
 $your_clans = $getClans($your_id);
@@ -100,12 +100,12 @@ mysqli_query($link, $sql);
 
 if ($_SERVER["REQUEST_URI"] == "/errors/infraction.php")
 {
-	if ($your_isBanned !== 1) {
+	if ($your_hasInfraction !== 1) {
 		echo "<script type='text/javascript'>location.href = '/';</script>";
 	}
 }
 else {
-	if ($your_isBanned === 1) {
+	if ($your_hasInfraction === 1) {
 		$_id = $getActiveInfraction($_SESSION['id']);
 		$_start = $getInfractionStart($_id);
 		$_end = date($getInfractionEnd($_id));

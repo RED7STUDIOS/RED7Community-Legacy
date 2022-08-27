@@ -97,9 +97,9 @@ if ($role >= 2) {
 		// Prepare an insert statement
 		$sql = "UPDATE users SET description = '" . htmlspecialchars($_POST["value"]) . "' WHERE id = '" . $_POST['id'] . "'";
 	} else if (htmlspecialchars($_POST['action']) == "banningClan") {
-		if (isset($_POST['isBanned'])) {
+		if (isset($_POST['hasInfraction'])) {
 			// Prepare an insert statement
-			$sql = "UPDATE clans SET isBanned = 1 WHERE id = '" . $_POST['id'] . "'";
+			$sql = "UPDATE clans SET hasInfraction = 1 WHERE id = '" . $_POST['id'] . "'";
 			$result = mysqli_query($link, $sql);
 
 			$sql = "UPDATE clans SET bannedReason = '" . $_POST["banReason"] . "' WHERE id = '" . $_POST['id'] . "'";
@@ -110,7 +110,7 @@ if ($role >= 2) {
 			$result = mysqli_query($link, $sql);
 		} else {
 			// Prepare an insert statement
-			$sql = "UPDATE clans SET isBanned = 0 WHERE id = '" . $_POST['id'] . "'";
+			$sql = "UPDATE clans SET hasInfraction = 0 WHERE id = '" . $_POST['id'] . "'";
 		}
 	} else if (htmlspecialchars($_POST['action']) == "currencyChangeClan") {
 		// Prepare an insert statement

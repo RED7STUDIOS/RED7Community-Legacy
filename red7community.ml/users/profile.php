@@ -19,10 +19,10 @@ if (!isset($_SESSION)) {
 $id = htmlspecialchars($_GET['id']);
 
 if ($getUsername($id) !== null) {
-	$isBanned = $isBanned($id);
+	$hasInfraction = $hasInfraction($id);
 	$username = $getUsername($id);
 
-	if ($isBanned != 1) {
+	if ($hasInfraction != 1) {
 		$real_displayname = $getDisplayName($id);
 		$real_description = $getDescription($id);
 		$displayname = $filterwords($real_displayname);
@@ -218,7 +218,7 @@ $shownName = "";
 				&nbsp;
 				<h2><?php echo $usernameText; ?></h2>
 				<small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
-				<?php if ($isBanned === 1) {
+				<?php if ($hasInfraction === 1) {
 					echo '<p><strong class="banned-text">*BANNED*</strong></p>';
 				} ?>
 
@@ -315,7 +315,7 @@ $shownName = "";
 			</div>
 			<div>
 			<?php
-				if ($isBanned === 1) {
+				if ($hasInfraction === 1) {
 					echo '<h5>This user has been banned.</h5>';
 				}
 				?>

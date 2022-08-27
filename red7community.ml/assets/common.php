@@ -1,188 +1,47 @@
 <?php
-/*
-  File Name: common.php
-  Original Location: /assets/common.php
-  Description: Functions that are common.
-  Author: Mitchell (Creaous)
-  Copyright (C) RED7 STUDIOS 2022
-*/
-
-// Include the configuration file.
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
 
-// For custom session saving.
+require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Site.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php");
+
+$site_name = $site_name();
+$currency_name = $currency_name();
+$premiumIcon = $premiumIcon();
+$verifiedIcon = $verifiedIcon();
+$appealEmail = $appealEmail();
+$maintenanceMode = $maintenanceMode();
+$registration = $registration();
+$version = $version();
+$termsOfService = $termsOfService();
+$privacyPolicy = $privacyPolicy();
+$bannedWords = $bannedWords();
+
 if ($CUSTOM_SESSION_LOCATION == true) {
 	session_save_path($CSL_PATH);
 }
 
-// Shorten down numbers to make them look nicer :)
-// Usage: number_format_short(1000000);
 function number_format_short($n)
 {
-	// first strip any formatting;
 	$n = (0 + str_replace(",", "", $n));
-	// is this a number?
 	if (!is_numeric($n)) return false;
-	// now filter it;
 	if ($n > 1000000000000) return round(($n / 1000000000000), 2) . 'T+';
 	elseif ($n > 1000000000) return round(($n / 1000000000), 2) . 'B+';
 	elseif ($n > 1000000) return round(($n / 1000000), 2) . 'M+';
 	elseif ($n > 1000) return round(($n / 1000), 2) . 'K+';
-
 	return number_format($n);
 }
 
-// Add commas to big numbers to look nicer.
-// Usage: number_format_comma(1000000);
 function number_format_comma($n)
 {
 	$english_format_number = number_format($n);
 	return $english_format_number;
 }
 
-// Add the str_contains function.
-// Usage: str_contains("test", "test");
 if (!function_exists('str_contains')) {
 	function str_contains(string $haystack, string $needle): bool
 	{
 		return '' === $needle || false !== strpos($haystack, $needle);
-	}
-}
-
-/*
- *
- * SQL QUERIES FOR SETTINGS
- *
- */
-
-function resetSQLVariables()
-{
-	$_id = "";
-	$_name = "";
-	$_content = "";
-}
-
-require($_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Site.php");
-
-$site_name = $site_name();
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'currency'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$currency_name = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'premiumIcon'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$premiumIcon = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'verifiedIcon'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$verifiedIcon = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'appealEmail'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$appealEmail = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'maintenanceMode'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$maintenanceMode = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'registration'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$registration = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'version'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$version = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'termsOfService'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$termsOfService = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'privacyPolicy'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$privacyPolicy = $row["content"];
-	}
-}
-
-$sql_query = "SELECT id, name, content FROM site_info WHERE name = 'bannedWords'";
-$result = mysqli_query($link, $sql_query);
-
-resetSQLVariables();
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while ($row = mysqli_fetch_assoc($result)) {
-		$bannedWords = $row["content"];
 	}
 }
 

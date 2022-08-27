@@ -239,7 +239,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("`badges` longtext,");
                 writer.WriteLine("`items` longtext,");
                 writer.WriteLine("`membership` enum('None','Premium450','Premium1000','Premium2200','PremiumDaily450','PremiumDaily1000','PremiumDaily2200') DEFAULT NULL,");
-                writer.WriteLine("`isBanned` int DEFAULT '0',");
+                writer.WriteLine("`hasInfraction` int DEFAULT '0',");
                 writer.WriteLine("`bannedReason` text,");
                 writer.WriteLine("`bannedDate` datetime DEFAULT NULL,");
                 writer.WriteLine("`isAdmin` int DEFAULT '0',");
@@ -252,7 +252,7 @@ namespace RED7Community_Creator
                 writer.WriteLine("UNIQUE KEY `username` (`username`)");
                 writer.WriteLine(") ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");
                 writer.WriteLine("");
-                writer.WriteLine("INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `isBanned`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES");
+                writer.WriteLine("INSERT INTO `users` (`id`, `username`, `displayname`, `email`, `password`, `description`, `created_at`, `lastLoginDate`, `lastLogin`, `currency`, `badges`, `items`, `membership`, `hasInfraction`, `bannedReason`, `bannedDate`, `isAdmin`, `isVerified`, `followers`, `following`, `clans`, `icon`) VALUES");
                 writer.WriteLine("(1, '" + mu_username.Text + "', '" + mu_username.Text + "', NULL, '$2y$10$wpjoA7MtKAx01nMxmhCE.Ofj.v5Xb1.dQuq4q89AiSPA5KwxV0Lia', '', '2022-02-27 22:59:37', '2022-06-10', '2022-06-10 13:48:55', " + mu_currency.Text + ", '[1,2,3]', '[1]', 'PremiumDaily2200', 0, NULL, NULL, 1, 1, '[]', '[]', '[]', 'https://www.gravatar.com/avatar/?s=180&d=mp&r=g');");
                 writer.WriteLine("CREATE TABLE IF NOT EXISTS `transactions` (");
                 writer.WriteLine("  `id` int NOT NULL AUTO_INCREMENT,");

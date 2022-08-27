@@ -39,10 +39,10 @@ if (!empty($api_type)) {
 						while ($row = mysqli_fetch_assoc($result)) {
 							/* $_id = $getActiveInfraction($_GET['id']);
 							$_type = $getInfractionType($_id);
-							$_isBanned = 0;
+							$_hasInfraction = 0;
 
 							if ($_type === "Ban") {
-								$_isBanned = 1;
+								$_hasInfraction = 1;
 							}
 
 							$response[$i]['data'][0]['id'] = $row['id'];
@@ -55,7 +55,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];
-							$response[$i]['data'][0]['isBanned'] = $_isBanned;
+							$response[$i]['data'][0]['hasInfraction'] = $_hasInfraction;
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];
@@ -91,10 +91,10 @@ if (!empty($api_type)) {
 						while ($row = mysqli_fetch_assoc($result)) {
 							/* $_id = $getActiveInfraction($getIdFromName($_GET['name']));
 							$_type = $getInfractionType($_id);
-							$_isBanned = 0;
+							$_hasInfraction = 0;
 
 							if ($_type === "Ban") {
-								$_isBanned = 1;
+								$_hasInfraction = 1;
 							}
 
 							$response[$i]['data'][0]['id'] = $row['id'];
@@ -107,7 +107,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['badges'] = $row['badges'];
 							$response[$i]['data'][0]['items'] = $row['items'];
 							$response[$i]['data'][0]['membership'] = $row['membership'];
-							$response[$i]['data'][0]['isBanned'] = $_isBanned;
+							$response[$i]['data'][0]['hasInfraction'] = $_hasInfraction;
 							$response[$i]['data'][0]['isVerified'] = $row['isVerified'];
 							$response[$i]['data'][0]['followers'] = $row['followers'];
 							$response[$i]['data'][0]['following'] = $row['following'];

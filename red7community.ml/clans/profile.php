@@ -20,7 +20,7 @@ $data = file_get_contents($API_URL . '/clan.php?api=getbyid&id=' . htmlspecialch
 if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $json = json_decode($data, true);
 
-    $isBanned = $json[0]['data'][0]['isBanned'];
+    $hasInfraction = $json[0]['data'][0]['hasInfraction'];
 
     $id = htmlspecialchars($_GET['id']);
     $name = $json[0]['data'][0]['name'];
@@ -29,7 +29,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $real_description = $json[0]['data'][0]['description'];
     $currency = $getCurrencyFromId($_GET['id']);
 
-    if ($isBanned != 1) {
+    if ($hasInfraction != 1) {
         $displayname = $filterwords($json[0]['data'][0]['displayname']);
         $description = $filterwords($json[0]['data'][0]['description']);
         $icon = $json[0]['data'][0]['icon'];
@@ -180,7 +180,7 @@ if (isset($_GET["page"])) {
                         echo '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
                     } ?>
                     <small style="font-size: 15px;"><b>(@<?php echo htmlspecialchars($name); ?>)</b></small>
-                    <?php if ($isBanned == 1) {
+                    <?php if ($hasInfraction == 1) {
                         echo '<p><strong class="banned-text">*BANNED*</strong></p>';
                     } ?>
                     <span>
@@ -196,7 +196,7 @@ if (isset($_GET["page"])) {
             </div>
             <div>
                 <?php
-                if ($isBanned == 1) {
+                if ($hasInfraction == 1) {
                     if ($banDate == "" && $banReason == "") {
                         echo '<h3>Ban Information:</h3><p>This user was banned on: <strong>Unknown</strong> with the following reason: <strong>Unknown</strong></p><hr/>';
                     } else if ($banDate != "") {
@@ -306,7 +306,7 @@ if (isset($_GET["page"])) {
                             <hr/>
                             ';
 
-                        if ($isBanned == 1) {
+                        if ($hasInfraction == 1) {
                             $checked = 'checked';
                         } else {
                             $checked = "";
@@ -318,7 +318,7 @@ if (isset($_GET["page"])) {
                     <form method="post" action="/ajax/moderate.php"
                         onSubmit="return ajaxSubmit(this);">
                         <h5>Is Banned:</h5>
-                        <input type="checkbox" name="isBanned"' . htmlspecialchars($checked) . '/>
+                        <input type="checkbox" name="hasInfraction"' . htmlspecialchars($checked) . '/>
                         <h5>Ban Reason:</h5>
                         <input maxlength="69420" type="text" name="banReason" class="moderate-input" value="' . htmlspecialchars($banReason) . '"/>
                         <input hidden type="text" name="action" value="banningClan"/>
