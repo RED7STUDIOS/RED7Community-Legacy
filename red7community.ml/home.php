@@ -59,7 +59,7 @@ $shownName = "";
 		$shownName = $your_username;
 	}
 
-	if ($your_isVerified === 1) {
+	if ($your_isVerified == 1) {
 		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 	}
 

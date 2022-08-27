@@ -10,6 +10,13 @@
 $selected_page = $_SERVER['REQUEST_URI'];
 ?>
 
+<?php
+if ($maintenanceMode === "on")
+{
+	echo '<div class="alert alert-warning text-center" role="alert">The site is currently in maintenance, you are viewing the site as an admin.</div>';
+}
+?>
+
 <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/alert.php"; ?>
 
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
@@ -61,20 +68,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 ?>
 
 <?php
-$role = 0;
+$__role = 0;
 
 if (isset($_SESSION['id'])) {
-	$role = $getRole($_SESSION['id']);
+	$__role = $getRole($_SESSION['id']);
 }
 else
 {
-	$role = 0;
+	$__role = 0;
 }
 
 if (isset($maintenanceMode)) {
 	if ($maintenanceMode === "on") {
 		
-		if (!$role >= 2)
+		if (!$__role >= 2)
 		{
 			echo "<script type='text/javascript'>location.href = '/errors/maintenance.php';</script>";
 		}

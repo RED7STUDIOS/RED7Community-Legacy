@@ -15,27 +15,20 @@ if (!isset($_SESSION)) {
 	session_start();
 }
 
-$allowGifts = "";
+$user = $getIdFromName(htmlspecialchars($_POST['giftUser']));
+$your_currency = $getCurrencyFromId($_SESSION['id']);
+$your_membership = $getMembership($_SESSION['id']);
 
-$your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
-$your_json = json_decode($your_data, true);
-$your_currency = $your_json[0]['data'][0]['currency'];
-$your_membership = $your_json[0]['data'][0]['membership'];
+$allowGifts = 1;
 
 if ($_POST["giftUser"] === "" && empty($_POST["giftUser"])) {
 	$user = htmlspecialchars($_SESSION['id']);
 	$currencyAmount = $your_currency;
 	$membership = $your_membership;
-	$allowGifts = 1;
 } else {
-	$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["giftUser"]);
-
-	$json = json_decode($data, true);
-
-	$user = $json[0]['data'][0]['id'];
-	$currencyAmount = $json[0]['data'][0]['currency'];
-	$membership = $json[0]['data'][0]['membership'];
-	$allowGifts = $json[0]['data'][0]['allowGifts'];
+	$user = $getIdFromName(htmlspecialchars($_POST['giftUser']));
+	$currencyAmount = $getCurrencyFromId($user);
+	$membership = $getMembership($user);
 }
 
 if (!empty($_POST['stripeToken'])) {

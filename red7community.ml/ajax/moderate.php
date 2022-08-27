@@ -16,7 +16,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 $role = $getRole($_SESSION['id']);
 
-if ($role === 0) {
+if ($role == 0) {
 	header("HTTP/1.1 403 Forbidden");
 	exit;
 }
@@ -218,8 +218,8 @@ if ($role >= 2) {
 		$sql = "INSERT INTO items (name, displayname, description, created, membershipRequired, owners, price, type, isLimited, isEquippable, copies, creator, obj, mtl, texture, icon) VALUES ('" . $_POST["name"] . "', '" . htmlspecialchars($_POST["displayname"]) . "', '" . htmlspecialchars($_POST["description"]) . "', '" . $created . "', '" . $membershipRequired . "', '[]', " . $_POST["price"] . ", '" . $_POST["type"] . "', " . $isLimited . ", " . $isEquippable . ", " . $_POST["copies"] . ", " . $creator . ", '" . $_POST["obj"] . "', '" . $_POST["mtl"] . "', '" . $_POST["texture"] . "', '" . $_POST["icon"] . "')";
 	}
 }
-
-if ($role === 3) {
+$v = 0;
+if ($role == 3) {
 	if (htmlspecialchars($_POST['action']) === "roleChange") {
 		if (htmlspecialchars($_POST["action"]) === "user") {
 			$v = 0;

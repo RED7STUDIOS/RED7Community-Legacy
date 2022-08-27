@@ -41,7 +41,7 @@ if ($getUsername($id) !== null) {
 	$created_at = $getCreatedAt($id);
 	$membership = $getMembership($id);
 	$role = $getRole($id);
-	$isVerified = $isVerified($id);
+	$_isVerified = $isVerified($id);
 	$items = $getItems($id);
 	$clans = $getClans($id);
 	$badges = $getBadges($id);
@@ -62,16 +62,6 @@ if ($getUsername($id) !== null) {
 	$_end = $getInfractionEnd($_id);
 	$_issued_by_id = $getInfractionIssuer($_id);
 	$_issued_by = $getDisplayName($_issued_by_id);
-
-	if ($role === 0) {
-		$role = "User";
-	} else if ($role === 1) {
-		$role = "Moderator";
-	} else if ($role === 2) {
-		$role = "Admin";
-	} else if ($role === 3) {
-		$role = "Super Admin";
-	}
 } else {
 	$username = "Not Found";
 }
@@ -114,7 +104,7 @@ $shownName = "";
 </head>
 
 <body onload="init();">
-	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
+	<?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php"; ?>
 
 	<?php
 	if (str_contains($membership, "Premium")) {
@@ -125,13 +115,13 @@ $shownName = "";
 		$adminCSS = 'class="title-rainbow-lr"';
 	}
 
-	if ($displayname !== "" && $displayname !== "[]" && !empty($displayname)) {
+	if ($displayname != "" && $displayname != "[]" && !empty($displayname)) {
 		$shownName = htmlspecialchars($displayname);
 	} else {
 		$shownName = $username;
 	}
-
-	if ($isVerified === 1) {
+	
+	if ($_isVerified == 1) {
 		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 	}
 
@@ -484,7 +474,7 @@ $shownName = "";
 									<input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
 									<button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Change</button>
 								</form>';
-						if ($your_role === 3) {
+						if ($your_role == 3) {
 							echo '<form method="post" action="/ajax/moderate.php"
 									onSubmit="return ajaxSubmit(this);">
 									<label><b>Role:</b></label> <select name="value" id="value">

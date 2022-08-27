@@ -21,7 +21,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 if ($_POST) {
-    $sendApplication($_SESSION["id"], $_POST["reason"], $_POST["email"], $_POST["full_name"]);
+    $sendApplication(htmlspecialchars($_SESSION["id"]), htmlspecialchars($_POST["reason"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["full_name"]));
     $sendEmail($_SESSION["id"], $ROOT_URL . "/admin/applications/view.php?id=" . $getApplication($_SESSION["id"]), "verification-form", $_POST["full_name"], $_POST["reason"], $_POST["email"], true);
     echo '<div class="alert alert-success" style="margin-bottom: 0; border-radius: 0;" role="alert">
     Your application has been sent to our team and they will get back to you shortly.
@@ -48,8 +48,6 @@ $requirements = 0;
 
 <body>
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/account/navbar.php" ?>
-
-    
 
     <div class="page-content-wrapper">
         <div class="centered">
@@ -99,7 +97,7 @@ $requirements = 0;
                     } ?> |
                     Your account must be older than 1 month.
                 </p>
-                <p><b>Status:</b> <?php if ($your_isVerified === 1) {
+                <p><b>Status:</b> <?php if ($your_isVerified == 1) {
                                         echo "Verified";
                                     } else if ($requirements != 0) {
                                         echo "Ineligible";

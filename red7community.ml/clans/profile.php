@@ -47,7 +47,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $banReason = $json[0]['data'][0]['bannedReason'];
     $banDate = $json[0]['data'][0]['bannedDate'];
     $members = $json[0]['data'][0]['members'];
-    $isVerified = $json[0]['data'][0]['isVerified'];
+    $_isVerified = $json[0]['data'][0]['isVerified'];
     $isSpecial = $json[0]['data'][0]['isSpecial'];
     $owner = $json[0]['data'][0]['owner'];
 } else {
