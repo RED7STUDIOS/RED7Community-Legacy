@@ -251,7 +251,7 @@ if (isset($_GET["page"])) {
                                 $member_dsp = $getDisplayName($member_id);
 
                                 if ($member_dsp === null || $member_dsp === "") {
-                                    $member_f = htmlspecialchars($name);
+                                    $member_f = htmlspecialchars($member_name);
                                 } else {
                                     $member_f = htmlspecialchars($member_dsp);
                                 }
@@ -259,7 +259,7 @@ if (isset($_GET["page"])) {
                                 echo '<div class="col profile-list-card"><a class="profile-list" href="/users/profile.php?id=' . htmlspecialchars($member_id) . '"><div class="align-items-center card text-center"><img class="card-img-top user-img" src="' . $member_icon . '"><div class="card-body"><h6 class="card-title profile-list-title">' . htmlspecialchars($member_f) . '</h6> <small><b>(@<small class="profile-list-title">' . htmlspecialchars($member_name) . '</small>)</b></small></div></div></a></div>';
                             }
                         } else {
-                            echo '<p>This user has no members yet.</p>';
+                            echo '<p>This clan has no members yet.</p>';
                         }
                         ?>
                     </div>
