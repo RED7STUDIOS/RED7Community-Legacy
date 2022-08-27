@@ -27,7 +27,7 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
 
     $real_displayname = $json[0]['data'][0]['displayname'];
     $real_description = $json[0]['data'][0]['description'];
-    $currency = $getCurrencyFromId($_GET['id']);
+    $currency = $json[0]['data'][0]['currency'];
 
     if ($hasInfraction != 1) {
         $displayname = $filterwords($json[0]['data'][0]['displayname']);

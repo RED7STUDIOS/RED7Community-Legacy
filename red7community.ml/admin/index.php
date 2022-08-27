@@ -105,7 +105,7 @@ if (!$role >= 2) {
             </form>
         </fieldset>
 
-        <h3>Create a new items item:</h3>
+        <h3>Create a new shop item:</h3>
         <fieldset>
             <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
                 <h5>*Internal* Name:</h5>

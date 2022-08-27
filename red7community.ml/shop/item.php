@@ -282,6 +282,17 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
                         <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Update Item Settings</button>
                     </form>
                 </fieldset>';
+                echo '
+                <h3>Give user item:</h3>
+                <fieldset>
+                    <form method="post" action="/ajax/moderate.php" onSubmit="return ajaxSubmit2(this);">
+                        <input hidden type="text" name="action" value="giveItem" />
+						<input hidden type="text" name="id" value="' . htmlspecialchars($_GET['id']) . '"/>
+                        <h5>Username</h5>
+                        <input type="text" name="owner" value="' . $getUsername(htmlspecialchars($_SESSION['id'])) . '"/>
+                        <button class="btn btn-success" type="submit" name="form_submit" onclick="spin();"><i class="fa-solid fa-pen-to-square"></i> Submit</button>
+                    </form>
+                    </fieldset>';
                                 }
                             }
                             ?>

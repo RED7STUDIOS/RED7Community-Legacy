@@ -183,6 +183,38 @@ if ($role >= 2) {
 		// Prepare an insert statement
 		$sql = "UPDATE items SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
+	} else if (htmlspecialchars($_POST['action']) === "giveItem") {
+		$your_id = $getIdFromName(htmlspecialchars($_POST['owner']));
+	
+		$sql_query = "SELECT items FROM users WHERE id = '" . $your_id . "'";
+		$result_e = mysqli_query($link, $sql_query);
+
+		if (mysqli_num_rows($result_e) > 0) {
+			// output data of each row
+			while ($row = mysqli_fetch_assoc($result_e)) {
+				$your_items = $row["items"];
+			}
+		}
+
+		$data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["id"])));
+		$json = json_decode($data, true);
+		$price = $json[0]['data'][0]['price'];
+		$owners = $json[0]['data'][0]['owners'];
+
+		$items_before = json_decode($your_items, true);
+		$owners_before = json_decode($owners, true);
+
+		array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["id"]))));
+		array_push($owners_before, $your_id);
+
+		$items_final = json_encode($items_before);
+		$owners_final = json_encode($owners_before);
+
+		$sql_items = "UPDATE users SET items = '" . $items_final . "' WHERE id = '" . $your_id . "'";
+    
+		$result_items = mysqli_query($link, $sql_items);
+
+		$sql = "UPDATE items SET owners = '" . $owners_final . "' WHERE id = '" . htmlspecialchars($_POST["id"]) . "'";
 	} else if (htmlspecialchars($_POST['action']) === "createNewItem") {
 		$creator = $getIdFromName($_POST['creator']);
 
