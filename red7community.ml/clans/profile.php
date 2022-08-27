@@ -54,15 +54,8 @@ if (!str_contains($data, "This clan doesn't exist or has been deleted")) {
     $name = "Not Found";
 }
 
-$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($owner));
-
-// Decode the json response.
-if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-    $json = json_decode($data, true);
-
-    $id_owner = htmlspecialchars($_GET['id']);
-    $name_owner = $json[0]['data'][0]['username'];
-}
+$id_owner = $owner;
+$name_owner = $getUsername($owner);
 
 if (isset($_GET["page"])) {
     $page = htmlspecialchars($_GET["page"]);
@@ -252,14 +245,10 @@ if (isset($_GET["page"])) {
                         <?php
                         if ($members != "" && $members != "[]" && !empty($members)) {
                             foreach (json_decode($members) as $mydata) {
-                                $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $mydata);
-
-                                $json = json_decode($data, true);
-
-                                $member_id = $json[0]['data'][0]['id'];
-                                $member_name = $json[0]['data'][0]['username'];
-                                $member_icon = $json[0]['data'][0]['icon'];
-                                $member_dsp = $json[0]['data'][0]['displayname'];
+                                $member_id = $mydata;
+                                $member_name = $getUsername($member_id);
+                                $member_icon = $getIcon($member_id);
+                                $member_dsp = $getDisplayName($member_id);
 
                                 if ($member_dsp == null || $member_dsp == "") {
                                     $member_f = htmlspecialchars($name);

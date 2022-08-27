@@ -23,6 +23,54 @@ $getDisplayName = function ($id) use ($link) {
 	}
 };
 
+$getDescription = function ($id) use ($link) {
+	$sql_query = "SELECT description FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["description"];
+		}
+	}
+};
+
+$getCreatedAt = function ($id) use ($link) {
+	$sql_query = "SELECT created_at FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["created_at"];
+		}
+	}
+};
+
+$getLastLogin = function ($id) use ($link) {
+	$sql_query = "SELECT lastLogin FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["lastLogin"];
+		}
+	}
+};
+
+$getLastLoginDate = function ($id) use ($link) {
+	$sql_query = "SELECT lastLoginDate FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["lastLoginDate"];
+		}
+	}
+};
+
 $getEmail = function ($id) use ($link) {
 	$sql_query = "SELECT email FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
 	$result = mysqli_query($link, $sql_query);
@@ -31,6 +79,110 @@ $getEmail = function ($id) use ($link) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			return $row["email"];
+		}
+	}
+};
+
+$getBadges = function ($id) use ($link) {
+	$sql_query = "SELECT badges FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["badges"];
+		}
+	}
+};
+
+$getItems = function ($id) use ($link) {
+	$sql_query = "SELECT items FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["items"];
+		}
+	}
+};
+
+$getMembership = function ($id) use ($link) {
+	$sql_query = "SELECT membership FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["membership"];
+		}
+	}
+};
+
+$isBanned = function ($id) use ($link) {
+	include $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
+
+	if ($getActiveInfraction($id) !== null)
+	{
+		if ($getInfractionType($getActiveInfraction($id)) === "Ban")
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else
+	{
+		return 0;
+	}
+};
+
+$isVerified = function ($id) use ($link) {
+	$sql_query = "SELECT isVerified FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["isVerified"];
+		}
+	}
+};
+
+$getClans = function ($id) use ($link) {
+	$sql_query = "SELECT clans FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["clans"];
+		}
+	}
+};
+
+$getRole = function ($id) use ($link) {
+	$sql_query = "SELECT role FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["role"];
+		}
+	}
+};
+
+$getIcon = function ($id) use ($link) {
+	$sql_query = "SELECT icon FROM users WHERE id = '" . mysqli_real_escape_string($link, htmlspecialchars($id)). "'";
+	$result = mysqli_query($link, $sql_query);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			return $row["icon"];
 		}
 	}
 };
@@ -210,3 +362,15 @@ $getApplicationDeniedReason = function ($id) use ($link) {
 		}
 	}
 };
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,7 +8,8 @@
 	*/
 
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/config.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 // Detect if the session isn't set.
 if (!isset($_SESSION)) {
@@ -18,41 +19,23 @@ if (!isset($_SESSION)) {
 
 // START OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 
-$your_data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
-
-$your_json = json_decode($your_data, true);
-
 $your_id = htmlspecialchars($_SESSION['id']);
-$your_username = $your_json[0]['data'][0]['username'];
-$your_displayname = $your_json[0]['data'][0]['displayname'];
-
-$your_email = "";
-
-$sql = "SELECT email FROM users WHERE id=" . htmlspecialchars($_SESSION['id']);
-$result = mysqli_query($link, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-	while ($row = mysqli_fetch_assoc($result)) {
-		$your_email = $row['email'];
-	}
-}
-
-$your_description = $your_json[0]['data'][0]['description'];
-$your_created_at = $your_json[0]['data'][0]['created_at'];
-$your_lastLogin = $your_json[0]['data'][0]['lastLogin'];
-$your_lastLoginDate = $your_json[0]['data'][0]['lastLoginDate'];
+$your_username = $getUsername($your_id);
+$your_displayname = $getDisplayName($your_id);
+$your_email = $getEmail($your_id);
+$your_description = $getDescription($your_id);
+$your_created_at = $getCreatedAt($your_id);
+$your_lastLogin = $getLastLogin($your_id);
+$your_lastLoginDate = $getLastLoginDate($your_id);
 $your_currency = $getCurrencyFromId($_SESSION['id']);
-$your_badges = $your_json[0]['data'][0]['badges'];
-$your_membership = $your_json[0]['data'][0]['membership'];
-$your_isBanned = $your_json[0]['data'][0]['isBanned'];
-$your_role = $your_json[0]['data'][0]['role'];
-$your_isVerified = $your_json[0]['data'][0]['isVerified'];
-$your_followers = $your_json[0]['data'][0]['followers'];
-$your_following = $your_json[0]['data'][0]['following'];
-$your_clans = $your_json[0]['data'][0]['clans'];
-$your_items = $your_json[0]['data'][0]['items'];
-$your_icon = $your_json[0]['data'][0]['icon'];
-$your_role = $your_json[0]['data'][0]['role'];
+$your_badges = $getBadges($your_id);
+$your_membership = $getMembership($your_id);
+$your_isBanned = $isBanned($your_id);
+$your_role = $getRole($your_id);
+$your_isVerified = $isVerified($your_id);
+$your_clans = $getClans($your_id);
+$your_items = $getItems($your_id);
+$your_icon = $getIcon($your_id);
 
 // END OF SETTING DATA FOR LATER USE LIKE THE HOME PAGE
 
@@ -117,7 +100,7 @@ mysqli_query($link, $sql);
 
 if ($_SERVER["REQUEST_URI"] == "/errors/infraction.php")
 {
-	if ($your_isBanned != 1) {
+	if ($your_isBanned !== 1) {
 		echo "<script type='text/javascript'>location.href = '/';</script>";
 	}
 }

@@ -14,14 +14,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/common.php';
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
-$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
-
-// Decode the json response.
-if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-	$json = json_decode($data, true);
-
-	$role = $json[0]['data'][0]['role'];
-}
+$role = $getRole($_SESSION['id']);
 
 if ($role == 0) {
 	header("HTTP/1.1 403 Forbidden");
@@ -173,14 +166,7 @@ if ($role >= 2) {
 		$sql = "UPDATE items SET displayname = '" . $_POST["name"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 
-		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
-
-		// Decode the json response.
-		if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-			$json = json_decode($data, true);
-
-			$creator = $json[0]['data'][0]['displayname'];
-		}
+		$creator = $getIdFromName($_POST['creator']);
 
 		// Prepare an insert statement
 		$sql = "UPDATE items SET creator = " . $creator . " WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
@@ -198,14 +184,7 @@ if ($role >= 2) {
 		$sql = "UPDATE items SET type = '" . $_POST["type"] . "' WHERE id = '" . htmlspecialchars($_POST["id"]). "'";
 		$result = mysqli_query($link, $sql);
 	} else if (htmlspecialchars($_POST['action']) == "createNewItem") {
-		$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST['creator']);
-
-		// Decode the json response.
-		if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-			$json = json_decode($data, true);
-
-			$creator = $json[0]['data'][0]['id'];
-		}
+		$creator = $getIdFromName($_POST['creator']);
 
 		$createdFormat = mktime(
 			date("H"),

@@ -39,11 +39,7 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
     $obj = $json[0]['data'][0]['obj'];
     $mtl = $json[0]['data'][0]['mtl'];
 
-    $data_u = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $creator);
-
-    $json = json_decode($data_u, true);
-
-    $creator_name = $json[0]['data'][0]['username'];
+    $creator_name = $getUsername($creator);
 } else {
     $name = "Not Found";
 }
@@ -233,14 +229,10 @@ if (!str_contains($data, "This item doesn't exist or has been deleted")) {
 
                                 if ($owners != "" && $owners != "[]" && !empty($owners)) {
                                     foreach ($vals as $key => $mydata) {
-                                        $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $key);
-
-                                        $json = json_decode($data, true);
-
-                                        $owner_id = $json[0]['data'][0]['id'];
-                                        $owner_icon = $json[0]['data'][0]['icon'];
-                                        $owner_name = $json[0]['data'][0]['username'];
-                                        $owner_displayname = $json[0]['data'][0]['displayname'];
+                                        $owner_id = $key;
+                                        $owner_icon = $getIcon($owner_id);
+                                        $owner_name = $getUsername($owner_id);
+                                        $owner_displayname = $getDisplayName($owner_id);
 
                                         if ($owner_displayname == null || $owner_displayname == "") {
                                             $owner_f = htmlspecialchars($owner_name);

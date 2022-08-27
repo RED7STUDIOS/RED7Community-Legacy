@@ -64,13 +64,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 $role = 0;
 
 if (isset($_SESSION['id'])) {
-	$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
-
-	// Decode the json response.
-	if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-		$json = json_decode($data, true);
-	$role = $json[0]['data'][0]['role'];
-	}
+	$role = $getRole($_SESSION['id']);
+}
+else
+{
+	$role = 0;
 }
 
 if (isset($maintenanceMode)) {

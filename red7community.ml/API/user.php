@@ -37,7 +37,7 @@ if (!empty($api_type)) {
 						echo json_encode($response, JSON_PRETTY_PRINT);
 					} else {
 						while ($row = mysqli_fetch_assoc($result)) {
-							$_id = $getActiveInfraction($_GET['id']);
+							/* $_id = $getActiveInfraction($_GET['id']);
 							$_type = $getInfractionType($_id);
 							$_isBanned = 0;
 
@@ -61,7 +61,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['following'] = $row['following'];
 							$response[$i]['data'][0]['clans'] = $row['clans'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
-							$response[$i]['data'][0]['role'] = $row['role'];
+							$response[$i]['data'][0]['role'] = $row['role']; */
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);
@@ -89,7 +89,7 @@ if (!empty($api_type)) {
 						echo json_encode($response, JSON_PRETTY_PRINT);
 					} else {
 						while ($row = mysqli_fetch_assoc($result)) {
-							$_id = $getActiveInfraction($getIdFromName($_GET['name']));
+							/* $_id = $getActiveInfraction($getIdFromName($_GET['name']));
 							$_type = $getInfractionType($_id);
 							$_isBanned = 0;
 
@@ -113,7 +113,7 @@ if (!empty($api_type)) {
 							$response[$i]['data'][0]['following'] = $row['following'];
 							$response[$i]['data'][0]['clans'] = $row['clans'];
 							$response[$i]['data'][0]['icon'] = $row['icon'];
-							$response[$i]['data'][0]['role'] = $row['role'];
+							$response[$i]['data'][0]['role'] = $row['role']; */
 						}
 
 						echo json_encode($response, JSON_PRETTY_PRINT);

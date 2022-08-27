@@ -12,6 +12,7 @@ function post($key)
 }
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/config.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
@@ -53,9 +54,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $_POST["username"]);
-    $json = json_decode($data, true);
-    $id = $json[0]['data'][0]['id'];
+    $id = $getIdFromName($_POST["username"]);
     $currency_user = $getCurrencyFromId($id);
 
     if ($currency >= htmlspecialchars($_POST["amount"])) {
@@ -71,10 +70,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
     $json = json_decode($data, true);
     $currency = $json[0]['data'][0]['currency'];
 
-    $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_SESSION['id']));
-    $json = json_decode($data, true);
-    $id = $json[0]['data'][0]['id'];
-    $currency_user = $getCurrencyFromId($id);
+    $currency_user = $getCurrencyFromId($_SESSION['id']);
 
     if ($currency_user >= htmlspecialchars($_POST["amount"])) {
         $sql_c = "UPDATE users SET currency = " . ($currency_user - htmlspecialchars($_POST["amount"])) . " WHERE id = '" . $id. "'";
@@ -99,12 +95,9 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
 } else if (htmlspecialchars($_POST['action']) == "purchaseItem") {
     $your_id = htmlspecialchars($_SESSION['id']);
 
-    // Get the user so an interceptor cannot be used to modify currency.
-    $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
-    $json = json_decode($data, true);
     $currency = $getCurrencyFromId($your_id);
 
-    $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
+    $data = file_get_contents($API_URL . '/item.php?api=getitembyid&id=' . htmlspecialchars(htmlspecialchars($_POST["value"])));
     $json = json_decode($data, true);
     $price = $json[0]['data'][0]['price'];
     $owners = $json[0]['data'][0]['owners'];
@@ -123,7 +116,7 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
         $items_before = json_decode($your_items, true);
         $owners_before = json_decode($owners, true);
 
-        array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["action"]))));
+        array_push($items_before, intval(htmlspecialchars(htmlspecialchars($_POST["value"]))));
         array_push($owners_before, $your_id);
 
         $items_final = json_encode($items_before);
@@ -144,12 +137,9 @@ if (htmlspecialchars($_POST['action']) == "changeDisplayName") {
 } else if (htmlspecialchars($_POST['action']) == "redeemCode") {
     $your_id = htmlspecialchars($_SESSION['id']);
 
-    // Get the user so an interceptor cannot be used to modify currency.
-    $data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . $your_id);
-    $json = json_decode($data, true);
     $your_currency = $getCurrencyFromId($your_id);
 
-    $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . htmlspecialchars(htmlspecialchars($_POST["action"])));
+    $data = file_get_contents($API_URL . '/code.php?api=getbycode&code=' . htmlspecialchars(htmlspecialchars($_POST["value"])));
     $json = json_decode($data, true);
 
     $code_id = $json[0]['data'][0]['id'];

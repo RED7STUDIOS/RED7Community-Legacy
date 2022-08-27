@@ -7,31 +7,27 @@
   Copyright (C) RED7 STUDIOS 2022
 */
 
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/common.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (!isset($_SESSION)) {
 	// Initialize the session
 	session_start();
 }
 
-$data = file_get_contents($API_URL . '/user.php?api=getbyid&id=' . htmlspecialchars($_GET['id']));
+$id = htmlspecialchars($_GET['id']);
 
-// Decode the json response.
-if (!str_contains($data, "This user doesn't exist or has been deleted")) {
-	$json = json_decode($data, true);
-
-	$isBanned = $json[0]['data'][0]['isBanned'];
-
-	$id = htmlspecialchars($_GET['id']);
-	$username = $json[0]['data'][0]['username'];
+if ($getUsername($id) !== null) {
+	$isBanned = $isBanned($id);
+	$username = $getUsername($id);
 
 	if ($isBanned != 1) {
-		$real_displayname = $json[0]['data'][0]['displayname'];
-		$real_description = $json[0]['data'][0]['description'];
+		$real_displayname = $getDisplayName($id);
+		$real_description = $getDescription($id);
 		$displayname = $filterwords($real_displayname);
 		$description = $filterwords($real_description);
-		$icon = $json[0]['data'][0]['icon'];
+		$icon = $getIcon($id);
 	} else {
 		$displayname = "[ CONTENT REMOVED ]";
 		$description = "[ CONTENT REMOVED ]";
@@ -42,15 +38,15 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
 		$description = "This user has not set a description.";
 	}
 
-	$created_at = $json[0]['data'][0]['created_at'];
-	$membership = $json[0]['data'][0]['membership'];
-	$role = $json[0]['data'][0]['role'];
-	$isVerified = $json[0]['data'][0]['isVerified'];
-	$items = $json[0]['data'][0]['items'];
-	$clans = $json[0]['data'][0]['clans'];
-	$badges = $json[0]['data'][0]['badges'];
+	$created_at = $getCreatedAt($id);
+	$membership = $getMembership($id);
+	$role = $getRole($id);
+	$isVerified = $isVerified($id);
+	$items = $getItems($id);
+	$clans = $getClans($id);
+	$badges = $getBadges($id);
 
-	$data_avatar = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . htmlspecialchars($_GET['id']));
+	$data_avatar = file_get_contents($API_URL . '/avatar.php?api=getbyid&id=' . $id);
 
 	$json_avatar = json_decode($data_avatar, true);
 
@@ -59,9 +55,7 @@ if (!str_contains($data, "This user doesn't exist or has been deleted")) {
 	$pants = $json_avatar[0]['data'][0]['pants'];
 	$face = $json_avatar[0]['data'][0]['face'];
 
-	$role = $json[0]['data'][0]['role'];
-
-	$_id = $getActiveInfraction($_GET['id']);
+	$_id = $getActiveInfraction($id);
 	$_type = $getInfractionType($_id);
 	$_reason = $getInfractionReason($_id);
 	$_start = $getInfractionStart($_id);
@@ -131,13 +125,13 @@ $shownName = "";
 		$adminCSS = 'class="title-rainbow-lr"';
 	}
 
-	if ($displayname != "" && $displayname != "[]" && !empty($displayname)) {
+	if ($displayname !== "" && $displayname !== "[]" && !empty($displayname)) {
 		$shownName = htmlspecialchars($displayname);
 	} else {
 		$shownName = $username;
 	}
 
-	if ($isVerified == 1) {
+	if ($isVerified === 1) {
 		$verified = '<img src="' . $verifiedIcon . '" class="verified-icon"></img>';
 	}
 
@@ -224,7 +218,7 @@ $shownName = "";
 				&nbsp;
 				<h2><?php echo $usernameText; ?></h2>
 				<small><b>(@<?php echo htmlspecialchars($username); ?>)</b></small>
-				<?php if ($isBanned == 1) {
+				<?php if ($isBanned === 1) {
 					echo '<p><strong class="banned-text">*BANNED*</strong></p>';
 				} ?>
 
@@ -321,7 +315,7 @@ $shownName = "";
 			</div>
 			<div>
 			<?php
-				if ($isBanned == 1) {
+				if ($isBanned === 1) {
 					echo '<h5>This user has been banned.</h5>';
 				}
 				?>
@@ -377,14 +371,10 @@ $shownName = "";
 							foreach ($users as $id => $name) {
 								if (isset($friends['f'][$id])) {
 									$friends_amt = $friends_amt + 1;
-									$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $name);
-
-									$json = json_decode($data, true);
-
-									$friend_id = $json[0]['data'][0]['id'];
-									$friend_name = $json[0]['data'][0]['username'];
-									$friend_icon = $json[0]['data'][0]['icon'];
-									$friend_dsp = $json[0]['data'][0]['displayname'];
+									$friend_id = $getIdFromName($name);
+									$friend_name = $name;
+									$friend_icon = $getIcon($friend_id);
+									$friend_dsp = $getDisplayName($friend_id);
 
 									if ($friend_dsp == null || $friend_dsp == "") {
 										$friend_f = htmlspecialchars($name);

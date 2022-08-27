@@ -93,9 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			// Attempt to execute the prepared statement
 			if (mysqli_stmt_execute($stmt)) {
-				$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $username);
-				$json = json_decode($data, true);
-				$id = $json[0]['data'][0]['id'];
+				$id = $getIdFromName($username);
 
 				// Prepare an insert statement
 				$sql = 'INSERT INTO avatars (ownerid, items, shirt, pants, face) VALUES (' . $id . ', "[]", 9, 8, 5)';

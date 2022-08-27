@@ -88,14 +88,10 @@ $shownName = "";
 				foreach ($users as $id => $name) {
 					if (isset($friends['f'][$id])) {
 						$friends_amt = $friends_amt + 1;
-						$data = file_get_contents($API_URL . '/user.php?api=getbyname&name=' . $name);
-
-						$json = json_decode($data, true);
-
-						$friend_id = $json[0]['data'][0]['id'];
-						$friend_name = $json[0]['data'][0]['username'];
-						$friend_icon = $json[0]['data'][0]['icon'];
-						$friend_dsp = $json[0]['data'][0]['displayname'];
+						$friend_id = $getIdFromName($name);
+						$friend_name = $getUsername($friend_id);
+						$friend_icon = $getIcon($friend_id);
+						$friend_dsp = $getDisplayName($friend_id);
 
 						if ($friend_dsp == null || $friend_dsp == "") {
 							$friend_f = htmlspecialchars($name);
