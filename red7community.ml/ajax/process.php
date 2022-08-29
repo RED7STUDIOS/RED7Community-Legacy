@@ -16,7 +16,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Users.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/classes/Infractions.php";
 
 if (htmlspecialchars($_POST['action']) === "changeDisplayName") {
-    if (strlen(htmlspecialchars($_POST["action"])) > 14) {
+    if (strlen(htmlspecialchars($_POST["action"])) > 25) {
         $sql = null;
     } else {
         // Prepare an insert statement

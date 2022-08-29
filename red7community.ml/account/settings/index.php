@@ -91,7 +91,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <legend>Settings:</legend>
                 <a href="/account/settings/change-password.php" class="btn btn-dark" role="button"><i class="fas fa-key"></i> Change Password</a>
             <a href="/account/settings/2fa.php" class="btn btn-dark" role="button"><i class="fas fa-mobile"></i> Add/Change/Remove 2FA</a>
-            <a href="/account/settings/api.php" class="btn btn-dark" role="button"><i class="fa-solid fa-cloud"></i> API Keys</a>
 
             <form method="post" action="/ajax/process.php" onSubmit="return ajaxSubmit(this);">
                 <input hidden type="text" name="value" value="<?php echo get_gravatar($your_email, 180) ?>" />
