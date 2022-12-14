@@ -1,3 +1,5 @@
+### This repo has been put in archival state. A new remake of RED7Community is in the works and when completed will be available [here](https://github.com/RED7Studios/RED7Community-v2).
+
 # RED7Community
 #### :warning: Keep in mind that RED7Community is still in development. Please report any bugs that occur. :warning:
 RED7Community is an in-progress open source community software.
